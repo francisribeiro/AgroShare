@@ -1,53 +1,62 @@
 import React, { Component } from 'react'
-import { StyleSheet, Image, Dimensions, StatusBar } from 'react-native'
+import { StyleSheet, Image, Dimensions, StatusBar, TouchableOpacity } from 'react-native'
 import { Container, Content, Item, Input, Icon, Button, Text, View } from 'native-base'
+import { StackNavigator } from 'react-navigation'
 import { scale, scaleModerate, scaleVertical } from '../../utils/scale'
 
 export default class Login extends Component {
+  static navigationOptions = { title: 'Login', header: null }
 
   renderImage() {
-    let contentHeight = scaleModerate(300, 1);
+    let contentHeight = scaleModerate(345, 1);
     let height = Dimensions.get('window').height - contentHeight;
     let width = Dimensions.get('window').width;
     let image = <Image
-      style={[styles.image, { height, width }]}
-      source={require('../../assets/images/login-screen.jpg')} />
+      style={{ height, width }}
+      source={require('../../assets/images/login-screen.png')} />
 
     return image
   }
 
   render() {
     let image = this.renderImage()
+    const { navigate } = this.props.navigation
 
     return (
       <Container>
 
         <StatusBar backgroundColor='#38a226' />
 
-        <Content>
+        <Content style={styles.tela}>
           {image}
 
           <View style={styles.container}>
-            <Item rounded style={styles.input}>
+            <Item rounded style={styles.emailInput}>
               <Icon active name='mail' />
-              <Input placeholder='Email' style={styles.txt} />
+              <Input placeholder='Email' style={{ fontSize: 20, marginTop: 8 }} />
             </Item>
 
-            <Item rounded style={styles.input}>
+            <Item rounded style={styles.senhaInput}>
               <Icon active name='lock' />
-              <Input placeholder='Senha' style={styles.txt} secureTextEntry={true} />
+              <Input placeholder='Senha' style={{ fontSize: 20, marginTop: 8 }} secureTextEntry={true} />
             </Item>
-          </View>
 
-          <View style={styles.container}>
+            <View style={styles.esqueceuSenha}>
+              <TouchableOpacity onPress={() => navigate('PasswordRecovery')}>
+                <Text style={{ fontSize: 15, fontWeight: 'bold', textAlign: 'right' }}>Esqueceu a senha?</Text>
+              </TouchableOpacity>
+            </View>
+
             <Button large block rounded success>
-              <Text style={styles.txt}>Login</Text>
+              <Text style={{ fontSize: 20 }}>Login</Text>
             </Button>
 
-            <View style={styles.link}>
-              <Text style={styles.txt2}>Não tem uma conta?
-              <Text style={styles.negrito}> Cadastre-se agora</Text>
-              </Text>
+            <View style={styles.cadastro}>
+              <TouchableOpacity onPress={() => navigate('Register')}>
+                <Text style={{ fontSize: 15 }}>Não tem uma conta?
+                  <Text style={{ fontSize: 15, fontWeight: 'bold' }}> Cadastre-se agora</Text>
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </Content>
@@ -57,33 +66,30 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-    paddingLeft: 15,
-    paddingRight: 15,
-    backgroundColor: '#fff',
+  tela: {
+    flex: 1,
+    backgroundColor: '#fff'
   },
-  input: {
-    padding: 4,
+  container: {
+    paddingTop: 10,
+    paddingLeft: 15,
+    paddingRight: 15
+  },
+  emailInput: {
+    paddingLeft: 15,
     marginBottom: 15
   },
-  txt: {
-    fontSize: 20
+  senhaInput: {
+    paddingLeft: 15
   },
-  link: {
+  cadastro: {
     paddingTop: 10,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  txt2: {
-    fontSize: 15
-  },
-  negrito: {
-    fontSize: 15,
-    fontWeight: 'bold'
-  },
-  image: {
-    resizeMode: 'cover',
+  esqueceuSenha: {
+    marginTop: 3,
+    marginRight: 10,
+    marginBottom: 40
   }
 }) 

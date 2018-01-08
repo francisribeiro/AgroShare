@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Login from './screens/login/login'
+import { StackNavigator } from 'react-navigation'
+import Routes from './config/navigation/routes'
 
 export default class App extends Component {
   render() {
     return (
-      <Login />
+      <Routes />
     )
   }
 }
