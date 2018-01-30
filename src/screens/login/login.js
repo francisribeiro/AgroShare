@@ -33,12 +33,12 @@ export default class Login extends Component {
           <View style={styles.container}>
             <Item rounded style={styles.emailInput}>
               <Icon active name='mail' />
-              <Input placeholder='Email' style={{ fontSize: 20, marginTop: 8 }} />
+              <Input placeholder='Email' style={{ fontSize: 20 }} />
             </Item>
 
             <Item rounded style={styles.senhaInput}>
               <Icon active name='lock' />
-              <Input placeholder='Senha' style={{ fontSize: 20, marginTop: 8 }} secureTextEntry={true} />
+              <Input placeholder='Senha' style={{ fontSize: 20 }} secureTextEntry={true} />
             </Item>
 
             <View style={styles.esqueceuSenha}>

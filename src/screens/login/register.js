@@ -7,7 +7,7 @@ export default class Register extends Component {
     static navigationOptions = { title: 'Register', header: null }
 
     render() {
-        const { goBack } = this.props.navigation
+        const { goBack, navigate } = this.props.navigation
 
         return (
             <Container>
@@ -24,22 +24,22 @@ export default class Register extends Component {
 
                     <View style={styles.inputContainer}>
                         <Item rounded style={styles.input}>
-                            <Input placeholder='Nome' style={{ fontSize: 20, marginTop: 6 }} />
+                            <Input placeholder='Nome' style={{ fontSize: 20 }} />
                         </Item>
 
                         <Item rounded style={styles.input}>
-                            <Input placeholder='Email' style={{ fontSize: 20, marginTop: 6 }} />
+                            <Input placeholder='Email' style={{ fontSize: 20 }} />
                         </Item>
 
                         <Item rounded style={styles.input}>
-                            <Input placeholder='Senha' style={{ fontSize: 20, marginTop: 6 }} secureTextEntry={true} />
+                            <Input placeholder='Senha' style={{ fontSize: 20 }} secureTextEntry={true} />
                         </Item>
 
                         <Item rounded style={styles.input}>
-                            <Input placeholder='Repita a Senha' style={{ fontSize: 20, marginTop: 6 }} secureTextEntry={true} />
+                            <Input placeholder='Repita a Senha' style={{ fontSize: 20 }} secureTextEntry={true} />
                         </Item>
                         <View style={{ paddingTop: 20 }}>
-                            <Button large block rounded success onPress={() => goBack()}>
+                            <Button large block rounded success onPress={() => navigate('Welcome')}>
                                 <Text style={{ fontSize: 20 }}>Cadastrar</Text>
                             </Button>
                         </View>

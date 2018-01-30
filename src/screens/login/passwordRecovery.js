@@ -3,7 +3,7 @@ import { StyleSheet, Image, StatusBar } from 'react-native'
 import { Container, Content, Item, Input, Icon, Button, Text, View } from 'native-base'
 import { StackNavigator } from 'react-navigation'
 
-export default class Register extends Component {
+export default class PasswordRecovery extends Component {
     static navigationOptions = { title: 'PasswordRecovery', header: null }
 
     render() {
@@ -25,7 +25,7 @@ export default class Register extends Component {
                     <View style={styles.inputContainer}>
                         <Item rounded style={styles.input}>
                             <Icon active name='mail' />
-                            <Input placeholder='Email' style={{ fontSize: 20, marginTop: 8 }} />
+                            <Input placeholder='Email' style={{ fontSize: 20 }} />
                         </Item>
 
                         <View style={styles.mensagem}>
