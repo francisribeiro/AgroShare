@@ -47,7 +47,7 @@ export default class Login extends Component {
               </TouchableOpacity>
             </View>
 
-            <Button large block rounded success>
+            <Button large block rounded success onPress={() => navigate('Home')}>
               <Text style={{ fontSize: 20 }}>Login</Text>
             </Button>
 
