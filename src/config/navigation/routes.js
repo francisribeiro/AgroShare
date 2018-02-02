@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
 
 //Login
+import Start from '../../screens/login/start'
 import Login from '../../screens/login/login'
 import Register from '../../screens/login/register'
 import PasswordRecovery from '../../screens/login/passwordRecovery'
@@ -9,7 +10,6 @@ import Welcome from '../../screens/login/welcome'
 
 //Home
 import Home from '../../screens/home/home'
-
 
 export default class Routes extends Component {
     render() {
@@ -21,6 +21,7 @@ export default class Routes extends Component {
 
 const _Routes = StackNavigator({
     // Login routes
+    Start: { screen: Start },
     Login: { screen: Login },
     Register: { screen: Register },
     PasswordRecovery: { screen: PasswordRecovery },
