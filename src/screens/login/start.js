@@ -39,7 +39,7 @@ export default class Start extends Component {
                     <Row size={2} style={{ backgroundColor: "#237C4E", paddingTop: 20, paddingBottom: 40 }}>
                         <Content>
                             <View style={styles.center}>
-                                <Image style={styles.img} source={require('../../assets/images/as.png')} />
+                                <Image style={styles.img} source={require('../../assets/images/logo.png')} />
                             </View>
                         </Content>
                     </Row>
