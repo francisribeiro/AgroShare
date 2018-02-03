@@ -17,9 +17,9 @@ export default class Start extends Component {
 
         return (
             <Container>
-                <StatusBar backgroundColor='#388E3C' />
+                <StatusBar backgroundColor='#237C4E' />
 
-                <Header style={{ backgroundColor: '#388E3C' }}>
+                <Header style={{ backgroundColor: '#237C4E' }}>
                     <Left>
                         <Button transparent onPress={() => this.exitApp()}>
                             <Icon name='close' />
@@ -34,25 +34,25 @@ export default class Start extends Component {
                 </Header>
 
                 <Grid>
-                    <Row size={2} style={{ backgroundColor: "#388E3C" }} />
-
-                    <Row size={2} style={{ backgroundColor: "#388E3C" }}>
-                        <View style={{ paddingLeft: 20 }}>
-                            <Text style={{ fontSize: 30, color: '#fff' }}>Bem-vindo(a) ao AgroShare.</Text>
-                        </View>
+                    <Row size={2} style={{ backgroundColor: "#237C4E", paddingTop: 20, paddingBottom: 40 }}>
+                        <Content>
+                            <View style={styles.center}>
+                                <Image style={styles.img} source={require('../../assets/images/as.png')} />
+                            </View>
+                        </Content>
                     </Row>
 
-                    <Row size={2} style={{ backgroundColor: "#388E3C" }}>
+                    <Row size={2} style={{ backgroundColor: "#237C4E", paddingTop: 20 }}>
                         <Content>
                             <View style={styles.buttonPadder}>
                                 <Button block rounded light onPress={() => navigate('Register')}>
-                                    <Text style={{ fontSize: 20, color: "#388E3C" }}>Criar uma Conta</Text>
+                                    <Text style={{ fontSize: 20, color: "#237C4E" }}>Criar uma Conta</Text>
                                 </Button>
                             </View>
                         </Content>
                     </Row>
 
-                    <Row size={2} style={{ backgroundColor: "#388E3C" }}>
+                    <Row size={2} style={{ backgroundColor: "#237C4E" }}>
                         <Content>
                             <View style={styles.buttonPadder}>
                                 <Text style={{ color: '#fff', fontSize: 16 }}>
@@ -81,5 +81,13 @@ const styles = StyleSheet.create({
         color: '#fff',
         textDecorationLine: 'underline',
         fontWeight: 'bold'
+    },
+    img: {
+        width: 210,
+        height: 154
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

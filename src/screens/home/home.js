@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StatusBar } from 'react-native'
+import { StatusBar, Keyboard } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import {
     Container, Header,
@@ -22,6 +22,7 @@ export default class Home extends Component {
     toggleTab2() { this.setState({ tab1: false, tab2: true, tab3: false, tab4: false }) }
     toggleTab3() { this.setState({ tab1: false, tab2: false, tab3: true, tab4: false }) }
     toggleTab4() { this.setState({ tab1: false, tab2: false, tab3: false, tab4: true }) }
+
 
     render() {
         return (

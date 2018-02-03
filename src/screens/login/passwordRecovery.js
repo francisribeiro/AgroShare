@@ -1,77 +1,58 @@
-import React, { Component } from 'react'
-import { StyleSheet, Image, StatusBar } from 'react-native'
-import { Container, Content, Item, Input, Icon, Button, Text, View } from 'native-base'
+import React, { Component } from "react"
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from "native-base"
+import { StatusBar, View, Keyboard } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
+// Tava bebado quando escrevi isso daqui, REVER isso depois
 export default class PasswordRecovery extends Component {
     static navigationOptions = { title: 'PasswordRecovery', header: null }
 
     render() {
-        const { goBack } = this.props.navigation
+        const { navigate } = this.props.navigation
 
         return (
-            <Container>
+            <Container style={{ backgroundColor: '#237C4E' }}>
 
-                <StatusBar backgroundColor='#38a226' />
+                <StatusBar backgroundColor='#237C4E' />
 
-                <Content style={styles.tela}>
-                    <View style={styles.logo}>
-                        <Image
-                            style={{ height: 128, width: 128 }}
-                            source={require('../../assets/images/logo.png')} />
-                        <Text style={styles.logoTxt}>Recuperar Senha</Text>
+                <Header style={{ backgroundColor: '#237C4E' }}>
+                    <Left>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Icon name="arrow-back" />
+                        </Button>
+                    </Left>
+                    <Right />
+                </Header>
+
+                <Content style={{ padding: 10 }}>
+                    <View style={{ paddingLeft: 15, paddingBottom: 20 }}>
+                        <Text style={{ fontSize: 32, color: '#fff', fontWeight: 'bold' }}>Esqueceu a sua senha?</Text>
                     </View>
 
-                    <View style={styles.inputContainer}>
-                        <Item rounded style={styles.input}>
-                            <Icon active name='mail' />
-                            <Input placeholder='Email' style={{ fontSize: 20 }} />
-                        </Item>
+                    <Text style={{ paddingLeft: 15, paddingBottom: 25, color: '#fff', fontSize: 18 }}>
+                        Insira seu email para encontra a sua conta.
+                    </Text>
 
-                        <View style={styles.mensagem}>
-                            <Text style={{ fontSize: 12, color: '#b2b2b2', textAlign: 'center' }}>
-                                Entre com seu email acima para receber as instruções para recuperar a sua senha
-                            </Text>
+                    <Form>
+                        <View style={{ paddingRight: 15 }}>
+                            <Item stackedLabel>
+                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>ENDEREÇO DE EMAIL</Label>
+                                <Input keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={{ color: '#fff', fontSize: 25 }} />
+                            </Item>
                         </View>
-
-                        <View style={{ paddingTop: 130, paddingBottom: 10 }}>
-                            <Button large block rounded success onPress={() => goBack()}>
-                                <Text style={{ fontSize: 20 }}>Enviar</Text>
-                            </Button>
-                        </View>
-                    </View>
+                    </Form>
                 </Content>
-            </Container>
+
+                <View>
+                    <Fab active={false} style={{ backgroundColor: '#fff' }} position='bottomRight'
+                        onPress={() => {
+                            Keyboard.dismiss()
+                            navigate('Login')
+                        }}>
+                        <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
+                    </Fab>
+                </View>
+            </Container >
         )
     }
 }
-
-const styles = StyleSheet.create({
-    tela: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-    logo: {
-        flex: 2,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    logoTxt: {
-        fontSize: 30,
-        paddingBottom: 10
-    },
-    inputContainer: {
-        flex: 2,
-        paddingTop: 130,
-        paddingLeft: 15,
-        paddingRight: 15
-    },
-    input: {
-        paddingLeft: 15,
-        marginBottom: 2
-    },
-    mensagem: {
-        paddingLeft: 10,
-        paddingRight: 10
-    }
-})

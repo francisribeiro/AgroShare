@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from "native-base"
-import { StatusBar, View } from 'react-native'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from "native-base"
+import { StatusBar, View, Keyboard } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 export default class Login extends Component {
@@ -10,11 +10,11 @@ export default class Login extends Component {
     const { navigate } = this.props.navigation
 
     return (
-      <Container style={{ backgroundColor: '#388E3C' }}>
+      <Container style={{ backgroundColor: '#237C4E' }}>
 
-        <StatusBar backgroundColor='#388E3C' />
+        <StatusBar backgroundColor='#237C4E' />
 
-        <Header style={{ backgroundColor: '#388E3C' }}>
+        <Header style={{ backgroundColor: '#237C4E' }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name="arrow-back" />
@@ -37,7 +37,7 @@ export default class Login extends Component {
             <View style={{ paddingRight: 15 }}>
               <Item stackedLabel>
                 <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>ENDEREÇO DE EMAIL</Label>
-                <Input keyboardType='email-address' returnKeyType='next' autoFocus selectionColor='#fff' style={{ color: '#fff', fontSize: 25 }} />
+                <Input keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={{ color: '#fff', fontSize: 25 }} />
               </Item>
 
               <Item style={{ paddingTop: 20 }} stackedLabel>
@@ -46,12 +46,18 @@ export default class Login extends Component {
               </Item>
             </View>
           </Form>
-          
-          <Button block rounded light onPress={() => navigate('Home')} style={{ margin: 15, marginTop: 50 }}>
-            <Text style={{ fontSize: 20, color: "#388E3C" }}>Entrar</Text>
-          </Button>
         </Content>
-      </Container>
+
+        <View>
+          <Fab active={false} style={{ backgroundColor: '#fff' }} position='bottomRight'
+            onPress={() => {
+              Keyboard.dismiss()
+              navigate('Home')
+            }}>
+            <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
+          </Fab>
+        </View>
+      </Container >
     )
   }
 }
