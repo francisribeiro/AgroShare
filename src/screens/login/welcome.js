@@ -4,9 +4,13 @@ import { Container, Content, Item, Input, Icon, Button, Text, View } from 'nativ
 import { StackNavigator } from 'react-navigation'
 
 export default class Welcome extends Component {
+
+    // StackNavigator Header configurations
     static navigationOptions = { title: 'Welcome', header: null }
 
+    // Welcome screen
     render() {
+        // StackNavigator props
         const { navigate } = this.props.navigation
 
         return (
@@ -39,6 +43,7 @@ export default class Welcome extends Component {
     }
 }
 
+// Screen styles
 const styles = StyleSheet.create({
     tela: {
         flex: 1,

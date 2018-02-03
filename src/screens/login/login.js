@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from "native-base"
-import { StatusBar, View, Keyboard } from 'react-native'
+import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 export default class Login extends Component {
@@ -12,9 +12,7 @@ export default class Login extends Component {
     return (
       <Container style={{ backgroundColor: '#237C4E' }}>
 
-        <StatusBar backgroundColor='#237C4E' />
-
-        <Header style={{ backgroundColor: '#237C4E' }}>
+        <Header noShadow androidStatusBarColor='#237C4E' style={{ backgroundColor: 'transparent' }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name="arrow-back" />
@@ -48,16 +46,25 @@ export default class Login extends Component {
           </Form>
         </Content>
 
-        <View>
-          <Fab active={false} style={{ backgroundColor: '#fff' }} position='bottomRight'
-            onPress={() => {
-              Keyboard.dismiss()
-              navigate('Home')
-            }}>
-            <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
-          </Fab>
-        </View>
+        <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Home'); Keyboard.dismiss() }}>
+          <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
+        </TouchableOpacity>
       </Container >
     )
   }
 }
+
+// Screen styles
+const styles = StyleSheet.create({
+  floatingButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#ffff',
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

@@ -1,25 +1,27 @@
 import React, { Component } from "react"
 import { Container, Header, Title, Content, Button, Left, Right, Body, Text, Icon } from "native-base"
-import { StyleSheet, View, BackHandler, Image, StatusBar } from 'react-native'
+import { StyleSheet, View, BackHandler, Image } from 'react-native'
 import { Grid, Row } from 'react-native-easy-grid'
 import { StackNavigator } from 'react-navigation'
 
 export default class Start extends Component {
+
+    // StackNavigator Header configurations
     static navigationOptions = { title: 'Start', header: null }
 
-    // Fechar o App
+    // Minimiza o App
     exitApp() {
         BackHandler.exitApp()
     }
 
+    // Start screen
     render() {
+        // StackNavigator props
         const { navigate } = this.props.navigation
 
         return (
             <Container>
-                <StatusBar backgroundColor='#237C4E' />
-
-                <Header style={{ backgroundColor: '#237C4E' }}>
+                <Header noShadow androidStatusBarColor='#237C4E' style={{ backgroundColor: '#237C4E' }}>
                     <Left>
                         <Button transparent onPress={() => this.exitApp()}>
                             <Icon name='close' />
@@ -71,6 +73,7 @@ export default class Start extends Component {
     }
 }
 
+// Screen styles
 const styles = StyleSheet.create({
     buttonPadder: {
         paddingLeft: 20,

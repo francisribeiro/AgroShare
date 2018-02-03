@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import { StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native'
 import { Container, Content, Item, Input, Icon, Button, Text, View } from 'native-base'
+import { StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 export default class Register extends Component {
+
+    // StackNavigator Header configurations
     static navigationOptions = { title: 'Register', header: null }
 
+    //Register screen
     render() {
+        //StackNavigator props
         const { goBack, navigate } = this.props.navigation
 
         return (
@@ -58,6 +62,7 @@ export default class Register extends Component {
     }
 }
 
+// Screen styles
 const styles = StyleSheet.create({
     tela: {
         flex: 1,
