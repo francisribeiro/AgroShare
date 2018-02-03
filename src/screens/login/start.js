@@ -47,7 +47,7 @@ export default class Start extends Component {
                     <Row size={2} style={{ backgroundColor: "#237C4E", paddingTop: 20 }}>
                         <Content>
                             <View style={styles.buttonPadder}>
-                                <Button block rounded light onPress={() => navigate('Register')}>
+                                <Button block rounded light onPress={() => navigate('Register_1')}>
                                     <Text style={{ fontSize: 20, color: "#237C4E" }}>Criar uma Conta</Text>
                                 </Button>
                             </View>
@@ -61,8 +61,8 @@ export default class Start extends Component {
                                     Ao clicar em Criar Conta,
                                     eu aceito os <Text style={styles.underline}>Termos de Serviço</Text>
                                     , os <Text style={styles.underline}>Termos de Serviço de Pagamentos</Text>
-                                    , a <Text style={styles.underline}>Política de Privacidade</Text> e a
-                                     <Text style={styles.underline}>Politica de Não Discriminação</Text> do AgroShare.
+                                    , a <Text style={styles.underline}>Política de Privacidade</Text> e 
+                                    a <Text style={styles.underline}>Politica de Não Discriminação</Text> do AgroShare.
                                 </Text>
                             </View>
                         </Content>

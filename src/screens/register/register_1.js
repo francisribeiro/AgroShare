@@ -1,15 +1,14 @@
 import React, { Component } from "react"
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from "native-base"
-import { View, Keyboard, StyleSheet, TouchableOpacity } from 'react-native'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from "native-base"
+import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
-// Tava bebado quando escrevi isso daqui, REVER isso depois
-export default class PasswordRecovery extends Component {
+export default class Register_1 extends Component {
 
     // StackNavigator Header configurations
-    static navigationOptions = { title: 'PasswordRecovery', header: null }
+    static navigationOptions = { title: 'Register_1', header: null }
 
-    // PasswordRecovery screen
+    // Register_1 screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
@@ -23,30 +22,32 @@ export default class PasswordRecovery extends Component {
                             <Icon name="arrow-back" />
                         </Button>
                     </Left>
+
                     <Right />
                 </Header>
 
                 <Content style={{ padding: 10 }}>
-                    <View style={{ paddingLeft: 15, paddingBottom: 20 }}>
-                        <Text style={{ fontSize: 32, color: '#fff', fontWeight: 'bold' }}>Esqueceu a sua senha?</Text>
+                    <View style={{ paddingLeft: 15, paddingBottom: 32 }}>
+                        <Text style={{ fontSize: 32, color: '#fff', fontWeight: 'bold' }}>Qual o seu nome?</Text>
                     </View>
-
-                    <Text style={{ paddingLeft: 15, paddingBottom: 25, color: '#fff', fontSize: 19 }}>
-                        Insira seu email para encontra a sua conta.
-                    </Text>
 
                     <Form>
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
-                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>ENDEREÇO DE EMAIL</Label>
-                                <Input keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }} />
+                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>NOME</Label>
+                                <Input returnKeyType='next' selectionColor='#fff' style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }} />
+                            </Item>
+
+                            <Item style={{ paddingTop: 20 }} stackedLabel>
+                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>SOBRENOME</Label>
+                                <Input selectionColor='#fff' style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }} secureTextEntry />
                             </Item>
                         </View>
                     </Form>
                 </Content>
 
-                <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Login'); Keyboard.dismiss() }}>
-                    <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
+                <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Register_2'); Keyboard.dismiss() }}>
+                    <Icon style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
                 </TouchableOpacity>
             </Container >
         )

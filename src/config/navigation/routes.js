@@ -4,12 +4,18 @@ import { StackNavigator } from 'react-navigation'
 //Login
 import Start from '../../screens/login/start'
 import Login from '../../screens/login/login'
-import Register from '../../screens/login/register'
 import PasswordRecovery from '../../screens/login/passwordRecovery'
 import Welcome from '../../screens/login/welcome'
 
+// Register
+import Register_1 from '../../screens/register/register_1'
+import Register_2 from '../../screens/register/register_2'
+import Register_3 from '../../screens/register/register_3'
+import Register_4 from '../../screens/register/register_4'
+
 //Home
 import Home from '../../screens/home/home'
+
 
 export default class Routes extends Component {
     render() {
@@ -19,14 +25,20 @@ export default class Routes extends Component {
     }
 }
 
+// Routes path
 const _Routes = StackNavigator({
     // Login routes
     Start: { screen: Start },
     Login: { screen: Login },
-    Register: { screen: Register },
     PasswordRecovery: { screen: PasswordRecovery },
     Welcome: { screen: Welcome },
 
-    //Home routes
+    // Register routes
+    Register_1: { screen: Register_1 },
+    Register_2: { screen: Register_2 },
+    Register_3: { screen: Register_3 },
+    Register_4: { screen: Register_4 },
+
+    // Home routes
     Home: { screen: Home }
 })
