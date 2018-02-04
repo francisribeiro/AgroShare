@@ -49,7 +49,7 @@ export default class Register_1 extends Component {
                 <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Register_2'); Keyboard.dismiss() }}>
                     <Icon style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
                 </TouchableOpacity>
-            </Container >
+            </Container>
         )
     }
 }

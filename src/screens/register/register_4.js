@@ -2,13 +2,25 @@ import React, { Component } from "react"
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from "native-base"
 import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
 import { StackNavigator } from 'react-navigation'
+import DateTimePicker from 'react-native-modal-datetime-picker'
 
 export default class Register_4 extends Component {
 
     // StackNavigator Header configurations
     static navigationOptions = { title: 'Register_4', header: null }
 
-    // Register_3 screen
+    // Class start state
+    constructor(props) {
+        super(props)
+        this.state = { isDateTimePickerVisible: false }
+    }
+
+    // DatePicker helpers
+    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
+    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
+    _handleDatePicked = (date) => { this._hideDateTimePicker() }
+
+    // Register_4 screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
@@ -37,18 +49,37 @@ export default class Register_4 extends Component {
 
                     <Form>
                         <View style={{ paddingRight: 15 }}>
-                            <Item stackedLabel>
-                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>ANIVERSÁRIO</Label>
-                                <Input secureTextEntry returnKeyType='next' selectionColor='#fff' style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }} />
-                            </Item>
+
+                            <TouchableOpacity onPress={() => this._showDateTimePicker()}>
+                                <View pointerEvents='none'>
+                                    <Item stackedLabel>
+                                        <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>ANIVERSÁRIO</Label>
+                                        <Input
+                                            placeholder='      /      /'
+                                            placeholderTextColor='#fff'
+                                            disabled
+                                            returnKeyType='next'
+                                            selectionColor='#fff'
+                                            style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }}
+                                        />
+                                    </Item>
+                                </View>
+                            </TouchableOpacity>
+
+                            <DateTimePicker
+                                isVisible={this.state.isDateTimePickerVisible}
+                                onConfirm={this._handleDatePicked}
+                                onCancel={this._hideDateTimePicker}
+                            />
                         </View>
+
                     </Form>
                 </Content>
 
                 <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Home'); Keyboard.dismiss() }}>
                     <Icon style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
                 </TouchableOpacity>
-            </Container >
+            </Container>
         )
     }
 }
