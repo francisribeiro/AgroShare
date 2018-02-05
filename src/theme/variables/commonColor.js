@@ -123,7 +123,7 @@ export default {
   footerPaddingBottom: isIphoneX ? 34 : 0,
 
   // FooterTab
-  tabBarTextColor: platform === "ios" ? "#A9A9A9" : "#A9A9A9", //Lembrei da Geowana aqui!
+  tabBarTextColor: platform === "ios" ? "#A9A9A9" : "#A9A9A9", 
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: platform === "ios" ? "#007aff" : "#fff",
   sTabBarActiveTextColor: "#38a226",
