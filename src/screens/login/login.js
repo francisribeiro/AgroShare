@@ -50,7 +50,7 @@ export default class Login extends Component {
           </Form>
         </Content>
 
-        <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Home'); Keyboard.dismiss() }}>
+        <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Anuncios'); Keyboard.dismiss() }}>
           <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
         </TouchableOpacity>
       </Container>

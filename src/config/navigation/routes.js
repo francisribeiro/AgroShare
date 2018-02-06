@@ -13,8 +13,8 @@ import Register_2 from '../../screens/register/register_2'
 import Register_3 from '../../screens/register/register_3'
 import Register_4 from '../../screens/register/register_4'
 
-//Home
-import Home from '../../screens/home/home'
+// Anúncios
+import Anuncios from '../../screens/anuncio/anuncios'
 
 
 export default class Routes extends Component {
@@ -39,6 +39,6 @@ const _Routes = StackNavigator({
     Register_3: { screen: Register_3 },
     Register_4: { screen: Register_4 },
 
-    // Home routes
-    Home: { screen: Home }
+    // Anúncios
+    Anuncios: { screen: Anuncios },
 })
