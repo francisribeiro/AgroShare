@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from "native-base"
 import { View, Keyboard, StyleSheet, TouchableOpacity } from 'react-native'
-import { StackNavigator } from 'react-navigation'
 
 // Tava bebado quando escrevi isso daqui, REVER isso depois
 export default class PasswordRecovery extends Component {

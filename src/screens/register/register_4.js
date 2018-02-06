@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from "native-base"
 import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
-import { StackNavigator } from 'react-navigation'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 
 export default class Register_4 extends Component {
@@ -76,7 +75,7 @@ export default class Register_4 extends Component {
                     </Form>
                 </Content>
 
-                <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Home'); Keyboard.dismiss() }}>
+                <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Anuncios'); Keyboard.dismiss() }}>
                     <Icon style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
                 </TouchableOpacity>
             </Container>

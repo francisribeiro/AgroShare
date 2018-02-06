@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from "native-base"
 import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
-import { StackNavigator } from 'react-navigation'
 
 export default class Login extends Component {
 
@@ -50,7 +49,7 @@ export default class Login extends Component {
           </Form>
         </Content>
 
-        <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Anuncios'); Keyboard.dismiss() }}>
+        <TouchableOpacity style={styles.floatingButton} onPress={() => { Keyboard.dismiss(); navigate('Anuncios') }}>
           <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
         </TouchableOpacity>
       </Container>

@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { Container, Header, Title, Content, Button, Left, Right, Body, Text, Icon } from "native-base"
 import { StyleSheet, View, BackHandler, Image } from 'react-native'
 import { Grid, Row } from 'react-native-easy-grid'
-import { StackNavigator } from 'react-navigation'
 
 export default class Start extends Component {
 

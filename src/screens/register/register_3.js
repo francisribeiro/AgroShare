@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from "native-base"
 import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
-import { StackNavigator } from 'react-navigation'
 
 export default class Register_3 extends Component {
 

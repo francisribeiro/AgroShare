@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Image, StatusBar } from 'react-native'
 import { Container, Content, Item, Input, Icon, Button, Text, View } from 'native-base'
-import { StackNavigator } from 'react-navigation'
 
 export default class Welcome extends Component {
 

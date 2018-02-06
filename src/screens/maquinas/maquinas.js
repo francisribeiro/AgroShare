@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body } from "native-base"
 import { View } from 'react-native'
 
-export default class Anuncios extends Component {
+export default class Maquinas extends Component {
 
     // StackNavigator Header configurations
-    static navigationOptions = { title: 'Anuncios', header: null }
+    static navigationOptions = { title: 'Maquinas', header: null }
 
     // Home screen
     render() {
@@ -33,7 +33,7 @@ export default class Anuncios extends Component {
                                     color: '#fff',
                                     borderColor: '#fff',
                                     borderStyle: 'solid'
-                                }}>Novo Anúncio</Text>
+                                }}>Nova Máquina</Text>
                             </View>
                         </Button>
                     </Body>

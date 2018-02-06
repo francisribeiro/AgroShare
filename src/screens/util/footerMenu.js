@@ -16,15 +16,18 @@ export default class FooterMenu extends Component {
 
     // FooterTab screen
     render() {
+        // TabNavigator props
+        const { goBack, navigate } = this.props.navigation
+
         return (
             <Footer>
                 <FooterTab>
-                    <Button active={this.state.tab1} onPress={() => { this.toggleTab1() }}>
+                    <Button active={this.state.tab1} onPress={() => { this.toggleTab1(); navigate('Anuncios') }}>
                         <Icon active={this.state.tab1} name="home" />
                         <Text>Anúncios</Text>
                     </Button>
 
-                    <Button active={this.state.tab2} onPress={() => this.toggleTab2()}>
+                    <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Maquinas') }}>
                         <Icon active={this.state.tab2} name="train" />
                         <Text>Máquinas</Text>
                     </Button>
