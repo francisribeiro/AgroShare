@@ -45,7 +45,7 @@ const _Routes = StackNavigator(
     }, {
         transitionConfig: () => ({
             transitionSpec: {
-                duration: 450,
+                duration: 550,
                 easing: Easing.out(Easing.poly(4)),
                 timing: Animated.timing,
                 useNativeDriver: true
@@ -63,7 +63,7 @@ const _Routes = StackNavigator(
 
                 const opacity = position.interpolate({
                     inputRange: [thisSceneIndex - 1, thisSceneIndex],
-                    outputRange: [0.7, 1],
+                    outputRange: [0.8, 1],
                 })
 
                 return { opacity, transform: [{ translateX }] }
