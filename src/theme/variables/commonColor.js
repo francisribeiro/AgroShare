@@ -123,12 +123,12 @@ export default {
   footerPaddingBottom: isIphoneX ? 34 : 0,
 
   // FooterTab
-  tabBarTextColor: platform === "ios" ? "#A9A9A9" : "#A9A9A9", 
+  tabBarTextColor: platform === "ios" ? "#707070" : "#707070", 
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: platform === "ios" ? "#007aff" : "#fff",
   sTabBarActiveTextColor: "#38a226",
   tabBarActiveTextColor: platform === "ios" ? "#237C4E" : "#237C4E",
-  tabActiveBgColor: platform === "ios" ? "#fff" : "#fff",
+  tabActiveBgColor: platform === "ios" ? "#f9f9f9" : "#f9f9f9",
 
   // Header
   toolbarBtnColor: platform === "ios" ? "#007aff" : "#fff",

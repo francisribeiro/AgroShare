@@ -70,7 +70,9 @@ export default (variables = variable) => {
     flexDirection: "row",
     justifyContent: "space-between",
     flex: 1,
-    alignSelf: "stretch"
+    alignSelf: "stretch",
+    borderTopWidth: 0.5,
+    borderTopColor: '#DDD',
   };
 
   return footerTabTheme;
