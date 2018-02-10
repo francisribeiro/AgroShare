@@ -14,9 +14,9 @@ export default class PasswordRecovery extends Component {
         const { goBack, navigate } = this.props.navigation
 
         return (
-            <Container style={{ backgroundColor: '#237C4E' }}>
+            <Container style={{ backgroundColor: '#018163' }}>
 
-                <Header noShadow androidStatusBarColor='#237C4E' style={{ backgroundColor: 'transparent' }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: 'transparent' }}>
                     <Left>
                         <Button transparent onPress={() => goBack()}>
                             <Icon name="arrow-back" />
@@ -45,7 +45,7 @@ export default class PasswordRecovery extends Component {
                 </Content>
 
                 <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Login'); Keyboard.dismiss() }}>
-                    <IconNB style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
+                    <IconNB style={{ color: '#018163', fontSize: 30 }} name="ios-arrow-forward" />
                 </TouchableOpacity>
             </Container >
         )

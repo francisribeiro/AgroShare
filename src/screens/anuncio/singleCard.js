@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 
 const cardImage = require('../../assets/images/drawer-cover.jpg')
@@ -9,11 +9,11 @@ export default class SingleCard extends Component {
     // Card Component
     render() {
         return (
-            <Card>
+            <Card noShadow>
                 <CardItem>
                     <Left>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Trator 6100E</Text>
-                        <Text note>John Deere</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Trator 8600</Text>
+                        <Text note>Massey Ferguson</Text>
                     </Left>
                     <Right>
                         <Icon name='ios-heart' />
@@ -34,11 +34,11 @@ export default class SingleCard extends Component {
 
                 <CardItem style={{ paddingVertical: 0 }}>
                     <Left>
-                        <Icon name='ios-star' style={{ fontSize: 20, color: '#237C4E' }} />
-                        <Icon name='ios-star' style={{ fontSize: 20, color: '#237C4E' }} />
-                        <Icon name='ios-star' style={{ fontSize: 20, color: '#237C4E' }} />
-                        <Icon name='ios-star-half' style={{ fontSize: 20, color: '#237C4E' }} />
-                        <Icon name='ios-star-outline' style={{ fontSize: 20, color: '#237C4E' }} />
+                        <Icon name='ios-star' style={styles.star} />
+                        <Icon name='ios-star' style={styles.star} />
+                        <Icon name='ios-star' style={styles.star} />
+                        <Icon name='ios-star-half' style={styles.star} />
+                        <Icon name='ios-star-outline' style={styles.star} />
                     </Left>
                     <Body>
                         <Text style={{ fontSize: 14 }}>99 Comentários</Text>
@@ -51,3 +51,10 @@ export default class SingleCard extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    star: {
+        fontSize: 20,
+        color: '#FFA500'
+    }
+})

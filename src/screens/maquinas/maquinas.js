@@ -13,7 +13,7 @@ export default class Maquinas extends Component {
 
         return (
             <Container>
-                <Header noShadow androidStatusBarColor='#237C4E' style={{ backgroundColor: '#237C4E', height: 70 }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: '#018163', height: 82 }}>
                     <Body>
                         
                     </Body>

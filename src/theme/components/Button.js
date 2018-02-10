@@ -385,7 +385,7 @@ export default (variables = variable) => {
     },
 
     '.large': {
-      height: 60,
+      height: 50, // old 60
       'NativeBase.Text': {
         fontSize: 22,
         lineHeight: 32,

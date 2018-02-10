@@ -15,9 +15,9 @@ export default class Anuncios extends Component {
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header noShadow androidStatusBarColor='#237C4E' style={{ backgroundColor: '#237C4E', height: 70 }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: '#018163', height: 82 }}>
                     <Body>
-                        <Button iconRight full success onPress={() => navigate('PasswordRecovery')}>
+                        <Button iconRight full large success onPress={() => navigate('PasswordRecovery')}>
                             <Icon name='ios-add-circle-outline' style={{ fontSize: 30, textAlign: 'left' }} />
                             <View><Text style={{
                                 fontSize: 18,
@@ -30,12 +30,14 @@ export default class Anuncios extends Component {
                     </Body>
                 </Header>
 
-                <Content style={{ marginHorizontal: 14, paddingTop: 14 }}>
-                    <SingleCard />
-                    <SingleCard />
-                    <SingleCard />
-                    <SingleCard />
-                    <SingleCard />
+                <Content>
+                    <View style={{ padding: 14 }}>
+                        <SingleCard />
+                        <SingleCard />
+                        <SingleCard />
+                        <SingleCard />
+                        <SingleCard />
+                    </View>
                 </Content>
             </Container>
         )

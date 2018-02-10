@@ -23,12 +23,12 @@ export default class FooterMenu extends Component {
             <Footer>
                 <FooterTab>
                     <Button active={this.state.tab1} onPress={() => { this.toggleTab1(); navigate('Anuncios') }} vertical>
-                        <Icon active={this.state.tab1} name="ios-home" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab1} name="ios-home-outline" style={{ fontSize: 26 }} />
                         <Text>Anúncios</Text>
                     </Button>
 
                     <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Maquinas') }} vertical>
-                        <Icon active={this.state.tab2} name="ios-train" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab2} name="ios-train-outline" style={{ fontSize: 26 }} />
                         <Text>Máquinas</Text>
                     </Button>
 
@@ -36,12 +36,12 @@ export default class FooterMenu extends Component {
                         <Badge>
                             <Text>2</Text>
                         </Badge>
-                        <Icon active={this.state.tab3} name="ios-chatboxes" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab3} name="ios-chatboxes-outline" style={{ fontSize: 26 }} />
                         <Text>Mensagens</Text>
                     </Button>
 
                     <Button active={this.state.tab4} onPress={() => this.toggleTab4()} vertical>
-                        <Icon active={this.state.tab4} name="ios-person" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab4} name="ios-person-outline" style={{ fontSize: 26 }} />
                         <Text>Perfil</Text>
                     </Button>
                 </FooterTab>

@@ -9,7 +9,6 @@ import TabRoutes from './tabRoutes'
 import Start from '../../screens/login/start'
 import Login from '../../screens/login/login'
 import PasswordRecovery from '../../screens/login/passwordRecovery'
-import Welcome from '../../screens/login/welcome'
 
 // Register
 import Register_1 from '../../screens/register/register_1'
@@ -32,7 +31,6 @@ const _Routes = StackNavigator(
         Start: { screen: Start },
         Login: { screen: Login },
         PasswordRecovery: { screen: PasswordRecovery },
-        Welcome: { screen: Welcome },
 
         // Register routes
         Register_1: { screen: Register_1 },
