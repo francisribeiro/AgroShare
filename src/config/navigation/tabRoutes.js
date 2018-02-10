@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { TabNavigator } from 'react-navigation'
 
-import FooterMenu from '../../screens/util/footerMenu'
+import FooterMenu from '../../screens/common/footerMenu'
 
 // Anúncios
 import Anuncios from '../../screens/anuncio/anuncios'

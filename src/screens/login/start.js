@@ -1,7 +1,10 @@
-import React, { Component } from "react"
-import { Container, Header, Title, Content, Button, Left, Right, Body, Text, Icon } from "native-base"
+import React, { Component } from 'react'
+import { Container, Header, Title, Content, Button, Left, Right, Body, Text, Icon } from 'native-base'
 import { StyleSheet, View, BackHandler, Image } from 'react-native'
 import { Grid, Row } from 'react-native-easy-grid'
+
+// Global Styles
+import globalStyles from '../common/globalStyles'
 
 export default class Start extends Component {
 
@@ -20,7 +23,7 @@ export default class Start extends Component {
 
         return (
             <Container>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: '#018163' }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg }}>
                     <Left>
                         <Button transparent onPress={() => this.exitApp()}>
                             <Icon name='close' />
@@ -35,7 +38,7 @@ export default class Start extends Component {
                 </Header>
 
                 <Grid>
-                    <Row size={2} style={{ backgroundColor: "#018163", paddingTop: 20, paddingBottom: 40 }}>
+                    <Row size={2} style={{ backgroundColor: globalStyles.bg, paddingTop: 20, paddingBottom: 40 }}>
                         <Content>
                             <View style={styles.center}>
                                 <Image style={styles.img} source={require('../../assets/images/logo.png')} />
@@ -43,17 +46,17 @@ export default class Start extends Component {
                         </Content>
                     </Row>
 
-                    <Row size={2} style={{ backgroundColor: "#018163", paddingTop: 20 }}>
+                    <Row size={2} style={{ backgroundColor: globalStyles.bg, paddingTop: 20 }}>
                         <Content>
                             <View style={styles.buttonPadder}>
                                 <Button block rounded bordered light onPress={() => navigate('Register_1')}>
-                                    <Text style={{ fontSize: 20, color: "#fff" }}>Criar uma Conta</Text>
+                                    <Text style={{ fontSize: 20, color: '#fff' }}>Criar uma Conta</Text>
                                 </Button>
                             </View>
                         </Content>
                     </Row>
 
-                    <Row size={2} style={{ backgroundColor: "#018163" }}>
+                    <Row size={2} style={{ backgroundColor: globalStyles.bg }}>
                         <Content>
                             <View style={styles.buttonPadder}>
                                 <Text style={{ color: '#fff', fontSize: 16 }}>

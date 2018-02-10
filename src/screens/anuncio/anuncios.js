@@ -3,6 +3,9 @@ import { Container, Content, Header, Left, Right, Button, Text, Body, Icon } fro
 import { View } from 'react-native'
 import SingleCard from './singleCard'
 
+// Global Styles
+import globalStyles from '../common/globalStyles'
+
 export default class Anuncios extends Component {
 
     // StackNavigator Header configurations
@@ -15,7 +18,7 @@ export default class Anuncios extends Component {
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: '#018163', height: 82 }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 82 }}>
                     <Body>
                         <Button iconRight full large success onPress={() => navigate('PasswordRecovery')}>
                             <Icon name='ios-add-circle-outline' style={{ fontSize: 30, textAlign: 'left' }} />

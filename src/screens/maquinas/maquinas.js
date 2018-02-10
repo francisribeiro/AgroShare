@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Content, Header, Left, Right, Button, Text, Body } from "native-base"
+import { Container, Content, Header, Left, Right, Button, Text, Body } from 'native-base'
+
+// Global Styles
+import globalStyles from '../common/globalStyles'
 
 export default class Maquinas extends Component {
 
@@ -13,7 +16,7 @@ export default class Maquinas extends Component {
 
         return (
             <Container>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: '#018163', height: 82 }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 82 }}>
                     <Body>
                         
                     </Body>

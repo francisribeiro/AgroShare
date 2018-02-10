@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image } from 'react-native'
 import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
+
+// Global Styles
+import globalStyles from '../common/globalStyles'
 
 const cardImage = require('../../assets/images/drawer-cover.jpg')
 
@@ -34,11 +37,11 @@ export default class SingleCard extends Component {
 
                 <CardItem style={{ paddingVertical: 0 }}>
                     <Left>
-                        <Icon name='ios-star' style={styles.star} />
-                        <Icon name='ios-star' style={styles.star} />
-                        <Icon name='ios-star' style={styles.star} />
-                        <Icon name='ios-star-half' style={styles.star} />
-                        <Icon name='ios-star-outline' style={styles.star} />
+                        <Icon name='ios-star' style={globalStyles.star} />
+                        <Icon name='ios-star' style={globalStyles.star} />
+                        <Icon name='ios-star' style={globalStyles.star} />
+                        <Icon name='ios-star-half' style={globalStyles.star} />
+                        <Icon name='ios-star-outline' style={globalStyles.star} />
                     </Left>
                     <Body>
                         <Text style={{ fontSize: 14 }}>99 Comentários</Text>
@@ -51,10 +54,3 @@ export default class SingleCard extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    star: {
-        fontSize: 20,
-        color: '#FFA500'
-    }
-})

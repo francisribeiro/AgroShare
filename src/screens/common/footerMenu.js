@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Header, Title, Content, Button, Footer, FooterTab, Text, Body, Left, Right, Icon, Badge } from "native-base"
+import { Container, Header, Title, Content, Button, Footer, FooterTab, Text, Body, Left, Right, Icon, Badge } from 'native-base'
+
+// Global Styles
+import globalStyles from '../common/globalStyles'
 
 export default class FooterMenu extends Component {
     // Class start state
@@ -23,12 +26,12 @@ export default class FooterMenu extends Component {
             <Footer>
                 <FooterTab>
                     <Button active={this.state.tab1} onPress={() => { this.toggleTab1(); navigate('Anuncios') }} vertical>
-                        <Icon active={this.state.tab1} name="ios-home-outline" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab1} name="ios-home-outline" style={globalStyles.footerIcon} />
                         <Text>Anúncios</Text>
                     </Button>
 
                     <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Maquinas') }} vertical>
-                        <Icon active={this.state.tab2} name="ios-train-outline" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab2} name="ios-train-outline" style={globalStyles.footerIcon} />
                         <Text>Máquinas</Text>
                     </Button>
 
@@ -36,12 +39,12 @@ export default class FooterMenu extends Component {
                         <Badge>
                             <Text>2</Text>
                         </Badge>
-                        <Icon active={this.state.tab3} name="ios-chatboxes-outline" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab3} name="ios-chatboxes-outline" style={globalStyles.footerIcon} />
                         <Text>Mensagens</Text>
                     </Button>
 
                     <Button active={this.state.tab4} onPress={() => this.toggleTab4()} vertical>
-                        <Icon active={this.state.tab4} name="ios-person-outline" style={{ fontSize: 26 }} />
+                        <Icon active={this.state.tab4} name="ios-person-outline" style={globalStyles.footerIcon} />
                         <Text>Perfil</Text>
                     </Button>
                 </FooterTab>
