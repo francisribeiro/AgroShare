@@ -45,6 +45,10 @@ export default {
         fontSize: 30
     },
 
+    footerTxt: {
+        fontSize: 10
+    },
+
     footerIcon: {
         fontSize: 26
     },
@@ -52,5 +56,11 @@ export default {
     star: {
         fontSize: 20,
         color: '#FFA500'
+    },
+
+    fullButtonHeader: {
+        backgroundColor: '#009975',
+        elevation: 0,
+        borderRadius: 4
     }
 }

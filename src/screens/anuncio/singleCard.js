@@ -5,21 +5,19 @@ import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, 
 // Global Styles
 import globalStyles from '../common/globalStyles'
 
-const cardImage = require('../../assets/images/drawer-cover.jpg')
-
 export default class SingleCard extends Component {
 
     // Card Component
     render() {
         return (
-            <Card noShadow>
-                <CardItem>
+            <Card style={{ elevation: 0, marginBottom: 15 }}>
+                <CardItem cardBody style={{ paddingTop: 12, paddingBottom: 12, paddingRight: 15 }}>
                     <Left>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Trator 8600</Text>
-                        <Text note>Massey Ferguson</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{this.props.tipo} {this.props.modelo}</Text>
+                        <Text numberOfLines={1} note>{this.props.marca}</Text>
                     </Left>
                     <Right>
-                        <Icon name='ios-heart' />
+                        <Icon name='ios-notifications' style={{ fontSize: 24 }} />
                     </Right>
                 </CardItem>
 
@@ -31,7 +29,7 @@ export default class SingleCard extends Component {
                             height: 200,
                             flex: 1
                         }}
-                        source={cardImage}
+                        source={this.props.thumb}
                     />
                 </CardItem>
 
@@ -44,10 +42,10 @@ export default class SingleCard extends Component {
                         <Icon name='ios-star-outline' style={globalStyles.star} />
                     </Left>
                     <Body>
-                        <Text style={{ fontSize: 14 }}>99 Comentários</Text>
+                        <Text style={{ fontSize: 14 }}>{this.props.comments} Comentários</Text>
                     </Body>
                     <Right>
-                        <Text style={{ fontWeight: 'bold' }}>R$155/h</Text>
+                        <Text style={{ fontWeight: 'bold' }}>R${this.props.preco}/h</Text>
                     </Right>
                 </CardItem>
             </Card>
