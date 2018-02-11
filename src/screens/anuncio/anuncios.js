@@ -26,7 +26,7 @@ export default class Anuncios extends Component {
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 82 }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 85 }}>
                     <Body>
                         <Button iconRight full large onPress={() => navigate('PasswordRecovery')} style={globalStyles.fullButtonHeader}>
                             <Icon name='ios-add-circle-outline' style={{ fontSize: 30, textAlign: 'left' }} />
@@ -40,7 +40,7 @@ export default class Anuncios extends Component {
                 </Header>
 
                 <Content>
-                    <View style={{ padding: 14 }}>
+                    <View style={{ paddingHorizontal: 10, paddingTop: 16 }}>
                         <SingleCard tipo='Trator' modelo='BH 180' marca='Valtra' thumb={cardImage3} preco='170' comments='12' />
                         <SingleCard tipo='Trator' modelo='8600' marca='Massey Ferguson' thumb={cardImage1} preco='155' comments='23' />
                         <SingleCard tipo='Trator' modelo='8030' marca='New Holland' thumb={cardImage2} preco='145' comments='42' />

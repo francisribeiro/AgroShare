@@ -39,11 +39,11 @@ export default class ListMaquinas extends Component {
                 renderRow={data =>
                     <TouchableOpacity >
                         <View pointerEvents='none'>
-                            <ListItem thumbnail>
+                            <ListItem thumbnail style={{ borderBottomColor: '#c9c9c9', borderBottomWidth: 0.7 }}>
                                 <Left>
                                     <Thumbnail square size={5} source={data.img} />
                                 </Left>
-                                <Body>
+                                <Body style={{ borderBottomColor: '#fff' }}>
                                     <Text>
                                         {data.text}
                                     </Text>
@@ -51,7 +51,7 @@ export default class ListMaquinas extends Component {
                                         {data.note}
                                     </Text>
                                 </Body>
-                                <Right>
+                                <Right style={{ borderBottomColor: '#fff' }}>
                                     <Icon name='ios-arrow-forward' style={{ color: globalStyles.bg, fontSize: 28, paddingRight: 12 }} />
                                 </Right>
                             </ListItem>

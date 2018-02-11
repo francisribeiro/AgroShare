@@ -20,7 +20,7 @@ export default class Maquinas extends Component {
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 82 }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 85 }}>
                     <Body>
                         <Button iconRight full large onPress={() => navigate('PasswordRecovery')} style={globalStyles.fullButtonHeader}>
                             <Icon name='ios-add-circle-outline' style={{ fontSize: 30, textAlign: 'left' }} />

@@ -10,42 +10,39 @@ export default class SingleCard extends Component {
     // Card Component
     render() {
         return (
-            <Card style={{ elevation: 0, marginBottom: 15 }}>
-                <CardItem cardBody style={{ paddingTop: 12, paddingBottom: 12, paddingRight: 15 }}>
+            <Card style={{ elevation: 0, marginBottom: 25, borderColor: '#fff' }}>
+
+                <CardItem cardBody style={{ paddingHorizontal: 12 }}>
+                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={this.props.thumb} />
+                </CardItem>
+
+                <CardItem cardBody style={{ paddingTop: 5, paddingRight: 12 }}>
                     <Left>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{this.props.tipo} {this.props.modelo}</Text>
-                        <Text numberOfLines={1} note>{this.props.marca}</Text>
+                        <Body>
+                            <Text numberOfLines={1} style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                {this.props.tipo} {this.props.modelo}
+                            </Text>
+                            <Text numberOfLines={1} note>{this.props.marca}</Text>
+                        </Body>
                     </Left>
+
                     <Right>
                         <Icon name='ios-notifications' style={{ fontSize: 24 }} />
                     </Right>
                 </CardItem>
 
-                <CardItem cardBody>
-                    <Image
-                        style={{
-                            resizeMode: 'cover',
-                            width: null,
-                            height: 200,
-                            flex: 1
-                        }}
-                        source={this.props.thumb}
-                    />
-                </CardItem>
-
-                <CardItem style={{ paddingVertical: 0 }}>
+                <CardItem cardBody style={{ paddingLeft: 8, paddingRight: 12, paddingBottom: 20 }}>
                     <Left>
                         <Icon name='ios-star' style={globalStyles.star} />
                         <Icon name='ios-star' style={globalStyles.star} />
                         <Icon name='ios-star' style={globalStyles.star} />
                         <Icon name='ios-star-half' style={globalStyles.star} />
                         <Icon name='ios-star-outline' style={globalStyles.star} />
+                        <Text style={{ fontSize: 12 }}>{this.props.comments} Comentários</Text>
                     </Left>
-                    <Body>
-                        <Text style={{ fontSize: 14 }}>{this.props.comments} Comentários</Text>
-                    </Body>
+
                     <Right>
-                        <Text style={{ fontWeight: 'bold' }}>R${this.props.preco}/h</Text>
+                        <Text style={{ fontWeight: 'bold', color: globalStyles.bg }}>R${this.props.preco}/h</Text>
                     </Right>
                 </CardItem>
             </Card>

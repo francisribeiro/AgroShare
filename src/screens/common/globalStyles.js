@@ -54,7 +54,7 @@ export default {
     },
 
     star: {
-        fontSize: 20,
+        fontSize: 15,
         color: '#FFA500'
     },
 
