@@ -123,12 +123,12 @@ export default {
   footerPaddingBottom: isIphoneX ? 34 : 0,
 
   // FooterTab
-  tabBarTextColor: platform === "ios" ? "#A9A9A9" : "#A9A9A9", 
+  tabBarTextColor: platform === "ios" ? "#404040" : "#404040",
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: platform === "ios" ? "#007aff" : "#fff",
   sTabBarActiveTextColor: "#38a226",
-  tabBarActiveTextColor: platform === "ios" ? "#237C4E" : "#237C4E",
-  tabActiveBgColor: platform === "ios" ? "#fff" : "#fff",
+  tabBarActiveTextColor: platform === "ios" ? "#009975" : "#009975",
+  tabActiveBgColor: platform === "ios" ? "#f9f9f9" : "#f9f9f9",
 
   // Header
   toolbarBtnColor: platform === "ios" ? "#007aff" : "#fff",
@@ -141,7 +141,7 @@ export default {
   searchBarInputHeight: platform === "ios" ? 30 : 50,
   toolbarInverseBg: "#222",
   toolbarTextColor: platform === "ios" ? "#000" : "#fff",
-  iosStatusbar: "dark-content",
+  iosStatusbar: "light-content",  // old dark
   toolbarDefaultBorder: platform === "ios" ? "#a7a6ab" : "#3F51B5",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();

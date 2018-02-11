@@ -1,7 +1,9 @@
-import React, { Component } from "react"
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from "native-base"
-import { View, Keyboard, TouchableOpacity, StyleSheet } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import React, { Component } from 'react'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
+import { View, Keyboard, TouchableOpacity } from 'react-native'
+
+// Global Styles
+import globalStyles from '../common/globalStyles'
 
 export default class Register_1 extends Component {
 
@@ -14,12 +16,12 @@ export default class Register_1 extends Component {
         const { goBack, navigate } = this.props.navigation
 
         return (
-            <Container style={{ backgroundColor: '#237C4E' }}>
+            <Container style={{ backgroundColor: globalStyles.bg }}>
 
-                <Header noShadow androidStatusBarColor='#237C4E' style={{ backgroundColor: 'transparent' }}>
+                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: 'transparent' }}>
                     <Left>
                         <Button transparent onPress={() => goBack()}>
-                            <Icon name="arrow-back" />
+                            <Icon name='arrow-back' />
                         </Button>
                     </Left>
 
@@ -28,43 +30,28 @@ export default class Register_1 extends Component {
 
                 <Content style={{ padding: 10 }}>
                     <View style={{ paddingLeft: 15, paddingBottom: 32 }}>
-                        <Text style={{ fontSize: 32, color: '#fff', fontWeight: 'bold' }}>Qual o seu nome?</Text>
+                        <Text style={globalStyles.pagTitulo}>Qual o seu nome?</Text>
                     </View>
 
                     <Form>
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
-                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>NOME</Label>
-                                <Input returnKeyType='next' selectionColor='#fff' style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }} />
+                                <Label style={globalStyles.inputLabel}>NOME</Label>
+                                <Input returnKeyType='next' selectionColor='#fff' style={globalStyles.input} />
                             </Item>
 
                             <Item style={{ paddingTop: 20 }} stackedLabel>
-                                <Label style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>SOBRENOME</Label>
-                                <Input selectionColor='#fff' style={{ color: '#fff', fontSize: 28, padding: 7, marginTop: 5 }} secureTextEntry />
+                                <Label style={globalStyles.inputLabel}>SOBRENOME</Label>
+                                <Input selectionColor='#fff' style={globalStyles.input} secureTextEntry />
                             </Item>
                         </View>
                     </Form>
                 </Content>
 
-                <TouchableOpacity style={styles.floatingButton} onPress={() => { navigate('Register_2'); Keyboard.dismiss() }}>
-                    <Icon style={{ color: '#237C4E', fontSize: 30 }} name="ios-arrow-forward" />
+                <TouchableOpacity style={globalStyles.floatingButton} onPress={() => { navigate('Register_2'); Keyboard.dismiss() }}>
+                    <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
                 </TouchableOpacity>
             </Container>
         )
     }
 }
-
-// Screen styles
-const styles = StyleSheet.create({
-    floatingButton: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: '#ffff',
-        position: 'absolute',
-        bottom: 30,
-        right: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
