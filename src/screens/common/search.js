@@ -15,7 +15,7 @@ export default class Search extends Component {
                 <View searchBar rounded>
                     <Item rounded style={{ backgroundColor: '#fff', borderColor: '#fff', height: 40 }}>
                         <Icon active name='ios-search-outline' style={{ color: '#A9A9A9'}} />
-                        <Input rounded placeholder={this.props.placeholder} selectionColor='#A9A9A9' placeholderTextColor='#A9A9A9' style={{ color: '#404040', fontSize: 15 }} />
+                        <Input autoFocus rounded placeholder={this.props.placeholder} selectionColor='#A9A9A9' placeholderTextColor='#A9A9A9' style={{ color: '#404040', fontSize: 15 }} />
                         <Icon active name='ios-close' style={{ color: '#A9A9A9', paddingRight: 15, fontSize: 30 }} />
                     </Item>
                 </View>
