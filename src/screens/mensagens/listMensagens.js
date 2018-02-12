@@ -56,7 +56,7 @@ export default class ListMensagens extends Component {
                                         </Text>
                                     </Body>
                                     <Right style={{ borderBottomColor: '#fff', marginBottom: 20 }}>
-                                        <Text numberOfLines={1} note>
+                                        <Text numberOfLines={1} note style={{ fontSize: 12 }}>
                                             {data.time}
                                         </Text>
                                     </Right>
