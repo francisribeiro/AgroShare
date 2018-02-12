@@ -9,11 +9,15 @@ import Anuncios from '../../screens/anuncio/anuncios'
 // Máquinas
 import Maquinas from '../../screens/maquinas/maquinas'
 
+// Mensagens
+import Mensagens from '../../screens/mensagens/mensagens'
+
 // TabRoutes path
 const _TabRoutes = TabNavigator(
     {
         Anuncios: { screen: Anuncios },
-        Maquinas: { screen: Maquinas }
+        Maquinas: { screen: Maquinas },
+        Mensagens: { screen: Mensagens }
     }, {
         tabBarComponent: FooterMenu,
         tabBarPosition: 'bottom',

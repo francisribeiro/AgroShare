@@ -25,10 +25,6 @@ export default class SingleCard extends Component {
                             <Text numberOfLines={1} note>{this.props.marca}</Text>
                         </Body>
                     </Left>
-
-                    <Right>
-                        <Icon name='ios-notifications' style={{ fontSize: 24 }} />
-                    </Right>
                 </CardItem>
 
                 <CardItem cardBody style={{ paddingLeft: 8, paddingRight: 12, paddingBottom: 20 }}>

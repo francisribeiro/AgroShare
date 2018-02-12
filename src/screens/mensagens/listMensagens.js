@@ -6,30 +6,33 @@ import { TouchableOpacity, View } from 'react-native'
 import globalStyles from '../common/globalStyles'
 
 // Imagens das máquinas
-const img1 = require('../../assets/images/drawer-cover3.jpg')
-const img2 = require('../../assets/images/drawer-cover1.jpg')
-const img3 = require('../../assets/images/drawer-cover2.jpg')
+const avatar1 = require('../../assets/images/avatar1.png')
+const avatar2 = require('../../assets/images/avatar2.png')
+const avatar3 = require('../../assets/images/avatar3.png')
 
 // Dados das máquinas
 const datas = [
     {
-        img: img1,
-        text: 'Trator BH 189',
-        note: 'Valtra'
+        img: avatar1,
+        nome: 'Iskra Lawrence',
+        msg: 'Achei muito legal seu anúncio',
+        time: '11:08 AM'
     },
     {
-        img: img2,
-        text: 'Trator 8600',
-        note: "Massey Ferguson "
+        img: avatar2,
+        nome: 'Kendrick Lamar',
+        msg: 'Esse valor é negociável?',
+        time: '9:17 AM'
     },
     {
-        img: img3,
-        text: 'Trator 8030',
-        note: "New Holland"
+        img: avatar3,
+        nome: 'Eva Green',
+        msg: 'Já realizei o pagamento, pode conferir?',
+        time: '07:42 AM'
     }
 ]
 
-export default class ListMaquinas extends Component {
+export default class ListMensagens extends Component {
 
     // List item component
     render() {
@@ -42,23 +45,25 @@ export default class ListMaquinas extends Component {
                             <View pointerEvents='none'>
                                 <ListItem thumbnail>
                                     <Left>
-                                        <Thumbnail square size={5} source={data.img} />
+                                        <Thumbnail source={data.img} />
                                     </Left>
                                     <Body style={{ borderBottomColor: '#fff' }}>
                                         <Text>
-                                            {data.text}
+                                            {data.nome}
                                         </Text>
                                         <Text numberOfLines={1} note>
-                                            {data.note}
+                                            {data.msg}
                                         </Text>
                                     </Body>
-                                    <Right style={{ borderBottomColor: '#fff' }}>
-                                        <Icon name='ios-arrow-forward' style={{ color: globalStyles.bg, fontSize: 28, paddingRight: 12 }} />
+                                    <Right style={{ borderBottomColor: '#fff', marginBottom: 20 }}>
+                                        <Text numberOfLines={1} note>
+                                            {data.time}
+                                        </Text>
                                     </Right>
                                 </ListItem>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </ View>
                 }
             />
         )

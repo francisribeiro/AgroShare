@@ -36,12 +36,12 @@ export default class FooterMenu extends Component {
                         <Text style={globalStyles.footerTxt}>Máquinas</Text>
                     </Button>
 
-                    <Button active={this.state.tab3} onPress={() => { this.toggleTab3()}} vertical>
+                    <Button active={this.state.tab3} onPress={() => { this.toggleTab3() }} vertical>
                         <Icon active={this.state.tab3} name="ios-basket-outline" style={globalStyles.footerIcon} />
                         <Text style={globalStyles.footerTxt}>Locações</Text>
                     </Button>
 
-                    <Button active={this.state.tab4} onPress={() => this.toggleTab4()} vertical badge>
+                    <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
                         <Badge>
                             <Text>2</Text>
                         </Badge>

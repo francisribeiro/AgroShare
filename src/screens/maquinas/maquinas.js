@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body, Icon } from 'native-base'
 import { View } from 'react-native'
 
+// Search
+import Search from '../common/search'
+
 // List Component
 import ListMaquinas from './listMaquinas'
 
@@ -13,7 +16,7 @@ export default class Maquinas extends Component {
     // StackNavigator Header configurations
     static navigationOptions = { title: 'Maquinas', header: null }
 
-    // Home screen
+    // Maquinas screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
@@ -33,7 +36,8 @@ export default class Maquinas extends Component {
                     </Body>
                 </Header>
 
-                <Content style={{ paddingTop: 8 }}>
+                <Content>
+                    <Search placeholder='Encontrar uma máquina' />
                     <ListMaquinas />
                 </Content>
             </Container>
