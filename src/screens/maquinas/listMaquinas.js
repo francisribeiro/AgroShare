@@ -53,7 +53,7 @@ export default class ListMaquinas extends Component {
                                         </Text>
                                     </Body>
                                     <Right style={{ borderBottomColor: '#fff' }}>
-                                        <Icon name='ios-arrow-forward' style={{ color: globalStyles.bg, fontSize: 28, paddingRight: 12 }} />
+                                        <Icon name='ios-arrow-forward' style={{ color: '#c9c9c9', fontSize: 28, paddingRight: 12 }} />
                                     </Right>
                                 </ListItem>
                             </View>

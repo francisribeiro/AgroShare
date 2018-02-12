@@ -25,6 +25,9 @@ export default class SingleCard extends Component {
                             <Text numberOfLines={1} note>{this.props.marca}</Text>
                         </Body>
                     </Left>
+                    <Right style={{ paddingTop: 20 }}>
+                        <Text style={{ fontWeight: 'bold', color: globalStyles.bg, fontSize: 16 }}>R${this.props.preco}/h</Text>
+                    </Right>
                 </CardItem>
 
                 <CardItem cardBody style={{ paddingLeft: 8, paddingRight: 12, paddingBottom: 20 }}>
@@ -36,10 +39,6 @@ export default class SingleCard extends Component {
                         <Icon name='ios-star-outline' style={globalStyles.star} />
                         <Text style={{ fontSize: 12 }}>{this.props.comments} Comentários</Text>
                     </Left>
-
-                    <Right>
-                        <Text style={{ fontWeight: 'bold', color: globalStyles.bg }}>R${this.props.preco}/h</Text>
-                    </Right>
                 </CardItem>
             </Card>
         )

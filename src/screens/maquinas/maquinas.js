@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body, Icon } from 'native-base'
 import { View } from 'react-native'
 
-// Search
-import Search from '../common/search'
-
 // List Component
 import ListMaquinas from './listMaquinas'
 
@@ -37,7 +34,6 @@ export default class Maquinas extends Component {
                 </Header>
 
                 <Content>
-                    <Search placeholder='Encontrar uma máquina' />
                     <ListMaquinas />
                 </Content>
             </Container>
