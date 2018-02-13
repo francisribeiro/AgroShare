@@ -13,7 +13,7 @@ export default class Locacoes extends Component {
         return (
             <Container>
                 <Header hasTabs androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
-                    <Body style={{ paddingLeft: 8, paddingTop: 10 }}>
+                    <Body style={{ paddingLeft: 13, paddingTop: 10 }}>
                         <Title style={{ fontSize: 20 }}>Minhas locações</Title>
                     </Body>
                     

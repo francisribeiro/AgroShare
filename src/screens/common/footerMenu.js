@@ -56,9 +56,9 @@ export default class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Locações</Text>
                         </Button>
 
-                        <Button active={this.state.tab3} onPress={() => { this.toggleTab3(); navigate('Atividades') }} vertical>
+                        <Button active={this.state.tab3} onPress={() => { this.toggleTab3(); navigate('Atividade') }} vertical>
                             <Icon active={this.state.tab3} name='ios-analytics-outline' style={globalStyles.footerIcon} />
-                            <Text style={globalStyles.footerTxt}>Atividades</Text>
+                            <Text style={globalStyles.footerTxt}>Atividade</Text>
                         </Button>
 
                         <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
@@ -69,7 +69,7 @@ export default class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Mensagens</Text>
                         </Button>
 
-                        <Button active={this.state.tab5} onPress={() => this.toggleTab5()} vertical>
+                        <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} vertical>
                             <Icon active={this.state.tab5} name='ios-person-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Perfil</Text>
                         </Button>

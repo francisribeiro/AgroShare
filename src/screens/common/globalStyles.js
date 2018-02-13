@@ -88,5 +88,14 @@ export default {
         backgroundColor: '#cc0000',
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+
+    //AgroShare Analytics
+    AAView: { paddingLeft: 20, paddingTop: 20, paddingRight: 20 },
+    AAView2: { paddingTop: 10, paddingRight: 20 },
+    AATitle: { color: '#484848', fontSize: 26, fontWeight: 'bold' },
+    AABorder: { borderBottomColor: '#eaeaea', borderBottomWidth: 1 },
+    AAText: { color: '#585858', fontSize: 16 },
+    AAText2: { color: '#585858', fontSize: 17 },
+    AAStarInline: { paddingTop: 10, flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' }
 }
