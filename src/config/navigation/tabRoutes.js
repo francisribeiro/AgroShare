@@ -16,8 +16,8 @@ import Mensagens from '../../screens/mensagens/mensagens'
 const _TabRoutes = TabNavigator(
     {
         Anuncios: { screen: Anuncios },
-        Maquinas: { screen: Maquinas },
-        Mensagens: { screen: Mensagens }
+        Mensagens: { screen: Mensagens },
+        Maquinas: { screen: Maquinas }
     }, {
         tabBarComponent: FooterMenu,
         tabBarPosition: 'bottom',

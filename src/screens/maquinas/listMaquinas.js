@@ -42,7 +42,7 @@ export default class ListMaquinas extends Component {
                             <View pointerEvents='none'>
                                 <ListItem thumbnail>
                                     <Left>
-                                        <Thumbnail square size={5} source={data.img} />
+                                        <Thumbnail size={5} source={data.img} />
                                     </Left>
                                     <Body style={{ borderBottomColor: '#fff' }}>
                                         <Text>
