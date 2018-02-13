@@ -67,7 +67,7 @@ export default {
     },
 
     footerIcon: {
-        fontSize: 26
+        fontSize: 28
     },
 
     star: {
@@ -79,5 +79,14 @@ export default {
         backgroundColor: '#009975',
         elevation: 0,
         borderRadius: 4
+    },
+
+    tabBadge: {
+        width: 22,
+        height: 22,
+        borderRadius: 11,
+        backgroundColor: '#cc0000',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 }

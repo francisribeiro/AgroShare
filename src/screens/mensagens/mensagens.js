@@ -44,9 +44,9 @@ export default class Mensagens extends Component {
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header androidStatusBarColor='#018163' style={{ backgroundColor: '#018163', height: 70 }}>
+                <Header androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body style={{ paddingLeft: 5 }}>
-                        <Title style={{ fontSize: 20, width: 187 }}> Lista de mensagens</Title>
+                        <Title style={{ fontSize: 20, width: 187 }}>Lista de mensagens</Title>
                     </Body>
 
                     <Right>
@@ -56,11 +56,15 @@ export default class Mensagens extends Component {
 
                         <Button transparent>
                             <IconBadge
-                                MainElement={<Icon name='ios-notifications-outline' style={{ color: '#fff', fontSize: 32, paddingRight: 5 }} />}
+                                MainElement={<Icon name='ios-notifications-outline' style={{ color: '#fff', fontSize: 32 }} />}
                                 BadgeElement={<Text style={{ color: '#FFFFFF', fontSize: 12 }}>2</Text>}
                                 IconBadgeStyle={{ marginRight: 0, backgroundColor: '#cc0000', height: 18, width: 18 }}
                                 Hidden={false}
                             />
+                        </Button>
+
+                        <Button transparent>
+                            <Icon name='md-more' style={{ fontSize: 28, paddingRight: 5 }} />
                         </Button>
                     </Right>
                 </Header>

@@ -28,13 +28,13 @@ export default class Anuncios extends Component {
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body>
-                        <Button iconRight full large onPress={() => navigate('PasswordRecovery')} style={globalStyles.fullButtonHeader}>
-                            <Icon name='ios-add-circle-outline' style={{ fontSize: 30, textAlign: 'left' }} />
+                        <Button iconLeft full large onPress={() => navigate('PasswordRecovery')} style={globalStyles.fullButtonHeader}>
                             <View><Text style={{
                                 fontSize: 17,
                                 color: '#fff',
                                 paddingBottom: 10
                             }}>Tem uma máquina? Anuncie aqui.</Text></View>
+                            <Icon name='ios-add-circle-outline' style={{ fontSize: 30, textAlign: 'left' }} />
                         </Button>
                     </Body>
                 </Header>

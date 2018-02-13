@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Container, Header, Title, Content, Button, Footer, FooterTab, Text, Body, Left, Right, Icon, Badge } from 'native-base'
 import { Keyboard } from 'react-native'
 
-
 // Global Styles
 import globalStyles from '../common/globalStyles'
 
@@ -46,30 +45,33 @@ export default class FooterMenu extends Component {
                 <Footer>
                     <FooterTab>
                         <Button active={this.state.tab1} onPress={() => { this.toggleTab1(); navigate('Anuncios') }} vertical>
-                            <Icon active={this.state.tab1} name="ios-home-outline" style={globalStyles.footerIcon} />
+                            <Icon active={this.state.tab1} name='ios-home-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Anúncios</Text>
                         </Button>
 
-                        <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Maquinas') }} vertical>
-                            <Icon active={this.state.tab2} name="ios-train-outline" style={globalStyles.footerIcon} />
-                            <Text style={globalStyles.footerTxt}>Máquinas</Text>
+                        <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Locacoes') }} vertical badge>
+                            <Badge>
+                                <Text>1</Text>
+                            </Badge>
+                            <Icon active={this.state.tab2} name='ios-calendar-outline' style={globalStyles.footerIcon} />
+                            <Text style={globalStyles.footerTxt}>Locações</Text>
                         </Button>
 
                         <Button active={this.state.tab3} onPress={() => { this.toggleTab3() }} vertical>
-                            <Icon active={this.state.tab3} name="ios-basket-outline" style={globalStyles.footerIcon} />
-                            <Text style={globalStyles.footerTxt}>Locações</Text>
+                            <Icon active={this.state.tab3} name='ios-analytics-outline' style={globalStyles.footerIcon} />
+                            <Text style={globalStyles.footerTxt}>Atividade</Text>
                         </Button>
 
                         <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
                             <Badge>
                                 <Text>2</Text>
                             </Badge>
-                            <Icon active={this.state.tab4} name="ios-chatboxes-outline" style={globalStyles.footerIcon} />
+                            <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Mensagens</Text>
                         </Button>
 
                         <Button active={this.state.tab5} onPress={() => this.toggleTab5()} vertical>
-                            <Icon active={this.state.tab5} name="ios-person-outline" style={globalStyles.footerIcon} />
+                            <Icon active={this.state.tab5} name='ios-person-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Perfil</Text>
                         </Button>
                     </FooterTab>

@@ -15,6 +15,7 @@ export default (variables = variable) => {
       minWidth: platform === "android" ? undefined : 60
     },
     "NativeBase.Text": {
+      fontWeight: 'bold', // Essa linha não existia
       color: variables.topTabBarTextColor,
       marginHorizontal: 7
     },

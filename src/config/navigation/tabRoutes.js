@@ -6,18 +6,18 @@ import FooterMenu from '../../screens/common/footerMenu'
 // Anúncios
 import Anuncios from '../../screens/anuncio/anuncios'
 
-// Máquinas
-import Maquinas from '../../screens/maquinas/maquinas'
-
 // Mensagens
 import Mensagens from '../../screens/mensagens/mensagens'
+
+// Locações
+import Locacoes from '../../screens/locacoes/locacoes'
 
 // TabRoutes path
 const _TabRoutes = TabNavigator(
     {
         Anuncios: { screen: Anuncios },
         Mensagens: { screen: Mensagens },
-        Maquinas: { screen: Maquinas }
+        Locacoes: { screen: Locacoes }
     }, {
         tabBarComponent: FooterMenu,
         tabBarPosition: 'bottom',
