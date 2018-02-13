@@ -71,8 +71,8 @@ export default (variables = variable) => {
     justifyContent: "space-between",
     flex: 1,
     alignSelf: "stretch",
-    borderTopWidth: 0.5,
-    borderTopColor: '#DDD',
+    borderTopWidth: 0.7,
+    borderTopColor: '#eaeaea'
   };
 
   return footerTabTheme;

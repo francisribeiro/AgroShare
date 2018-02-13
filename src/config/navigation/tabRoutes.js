@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { TabNavigator } from 'react-navigation'
 
-import FooterMenu from '../../screens/common/footerMenu'
-
-// Anúncios
-import Anuncios from '../../screens/anuncio/anuncios'
-
-// Máquinas
-import Maquinas from '../../screens/maquinas/maquinas'
+import FooterMenu from '../../screens/common/footerMenu' //Toolbar
+import Anuncios from '../../screens/anuncio/anuncios'// Anúncios
+import Mensagens from '../../screens/mensagens/mensagens'// Mensagens
+import Locacoes from '../../screens/locacoes/locacoes'// Locações
+import Atividades from '../../screens/atividades/atividade' // Atividades
 
 // TabRoutes path
 const _TabRoutes = TabNavigator(
     {
         Anuncios: { screen: Anuncios },
-        Maquinas: { screen: Maquinas }
+        Mensagens: { screen: Mensagens },
+        Locacoes: { screen: Locacoes },
+        Atividades: { screen: Atividades }
     }, {
         tabBarComponent: FooterMenu,
         tabBarPosition: 'bottom',

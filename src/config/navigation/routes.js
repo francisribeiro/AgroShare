@@ -44,7 +44,7 @@ const _Routes = StackNavigator(
         transitionConfig: () => ({
             transitionSpec: {
                 duration: 550,
-                easing: Easing.out(Easing.poly(4)),
+                easing: Easing.out(Easing.poly(3)),
                 timing: Animated.timing,
                 useNativeDriver: true
             },
