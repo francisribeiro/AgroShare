@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Header, Title, Button, Icon, Tabs, Tab, Right, Left, Body, Text, TabHeading } from 'native-base'
+import { Container, Header, Title, Button, Icon, Tabs, Tab, Right, Body, Text, TabHeading } from 'native-base'
 import { View } from 'react-native'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Locacoes extends Component {
     // StackNavigator Header configurations
@@ -13,13 +12,14 @@ export default class Locacoes extends Component {
     render() {
         return (
             <Container>
-                <Header hasTabs androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
-                    <Body style={{ paddingLeft: 8 }}>
+                <Header hasTabs androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
+                    <Body style={{ paddingLeft: 8, paddingTop: 10 }}>
                         <Title style={{ fontSize: 20 }}>Minhas locações</Title>
                     </Body>
+                    
                     <Right>
-                        <Button transparent>
-                            <Icon name='md-more' style={{ fontSize: 28 }} />
+                        <Button transparent style={{ paddingTop: 15 }}>
+                            <Icon name='md-more' style={{ fontSize: 28}} />
                         </Button>
                     </Right>
                 </Header>

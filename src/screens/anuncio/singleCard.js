@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Image } from 'react-native'
-import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
+import { Icon, Card, CardItem, Text, Left, Body } from 'native-base'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class SingleCard extends Component {
 
@@ -11,7 +10,6 @@ export default class SingleCard extends Component {
     render() {
         return (
             <Card style={{ elevation: 0, marginBottom: 25, borderColor: '#fff' }}>
-
                 <CardItem cardBody style={{ paddingHorizontal: 12 }}>
                     <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={this.props.thumb} />
                 </CardItem>
@@ -20,7 +18,7 @@ export default class SingleCard extends Component {
                     <Left>
                         <Body>
                             <Text numberOfLines={1} style={{ fontSize: 18, fontWeight: 'bold' }}>
-                            R${this.props.preco}/h <Icon name='ios-flash' style={{ fontSize: 20 }} /> {this.props.tipo} {this.props.modelo}
+                                R${this.props.preco}/h <Icon name='ios-flash' style={{ fontSize: 20 }} /> {this.props.tipo} {this.props.modelo}
                             </Text>
                             <Text numberOfLines={1} note>{this.props.marca}</Text>
                         </Body>

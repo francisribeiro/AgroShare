@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Header, Title, Content, Button, Footer, FooterTab, Text, Body, Left, Right, Icon, Badge } from 'native-base'
+import { Button, Footer, FooterTab, Text, Icon, Badge } from 'native-base'
 import { Keyboard } from 'react-native'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class FooterMenu extends Component {
     // Class start state
@@ -38,7 +37,7 @@ export default class FooterMenu extends Component {
     // FooterTab screen
     render() {
         // TabNavigator props
-        const { goBack, navigate } = this.props.navigation
+        const { navigate } = this.props.navigation
 
         if (this.state.isVisible)
             return (
@@ -57,9 +56,9 @@ export default class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Locações</Text>
                         </Button>
 
-                        <Button active={this.state.tab3} onPress={() => { this.toggleTab3() }} vertical>
+                        <Button active={this.state.tab3} onPress={() => { this.toggleTab3(); navigate('Atividades') }} vertical>
                             <Icon active={this.state.tab3} name='ios-analytics-outline' style={globalStyles.footerIcon} />
-                            <Text style={globalStyles.footerTxt}>Atividade</Text>
+                            <Text style={globalStyles.footerTxt}>Atividades</Text>
                         </Button>
 
                         <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>

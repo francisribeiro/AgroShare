@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
+import { List, ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 import { TouchableOpacity, View } from 'react-native'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 // Imagens das máquinas
 const avatar1 = require('../../assets/images/avatar1.png')
@@ -47,6 +46,7 @@ export default class ListMensagens extends Component {
                                     <Left>
                                         <Thumbnail source={data.img} />
                                     </Left>
+
                                     <Body style={{ borderBottomColor: '#fff' }}>
                                         <Text>
                                             {data.nome}
@@ -55,6 +55,7 @@ export default class ListMensagens extends Component {
                                             {data.msg}
                                         </Text>
                                     </Body>
+                                    
                                     <Right style={{ borderBottomColor: '#fff', marginBottom: 20 }}>
                                         <Text numberOfLines={1} note style={{ fontSize: 12 }}>
                                             {data.time}

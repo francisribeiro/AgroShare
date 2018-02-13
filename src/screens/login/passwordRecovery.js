@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Fab, IconNB } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 // Tava bebado quando escrevi isso daqui, REVER isso depois
 export default class PasswordRecovery extends Component {

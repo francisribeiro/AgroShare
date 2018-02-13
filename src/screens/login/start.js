@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Container, Header, Title, Content, Button, Left, Right, Body, Text, Icon } from 'native-base'
+import { Container, Header, Content, Button, Left, Right, Text, Icon } from 'native-base'
 import { StyleSheet, View, BackHandler, Image } from 'react-native'
 import { Grid, Row } from 'react-native-easy-grid'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Start extends Component {
 
@@ -12,9 +11,7 @@ export default class Start extends Component {
     static navigationOptions = { title: 'Start', header: null }
 
     // Minimiza o App
-    exitApp() {
-        BackHandler.exitApp()
-    }
+    exitApp() { BackHandler.exitApp() }
 
     // Start screen
     render() {
@@ -63,7 +60,7 @@ export default class Start extends Component {
                                     Ao clicar em Criar Conta,
                                     eu aceito os <Text style={styles.underline}>Termos de Serviço</Text>
                                     , os <Text style={styles.underline}>Termos de Serviço de Pagamentos</Text>
-                                    , a <Text style={styles.underline}>Política de Privacidade</Text> e 
+                                    , a <Text style={styles.underline}>Política de Privacidade</Text> e
                                     a <Text style={styles.underline}>Politica de Não Discriminação</Text> do AgroShare.
                                 </Text>
                             </View>

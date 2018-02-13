@@ -3,8 +3,7 @@ import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Ic
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 
-// Global Styles
-import globalStyles from '../common/globalStyles'
+import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Register_4 extends Component {
 
