@@ -42,15 +42,6 @@ export default class Mensagens extends Component {
                         </Button>
 
                         <Button transparent>
-                            <IconBadge
-                                MainElement={<Icon name='ios-notifications-outline' style={{ color: '#fff', fontSize: 32, paddingRight: 5 }} />}
-                                BadgeElement={<Text style={{ color: '#FFFFFF', fontSize: 12 }}>2</Text>}
-                                IconBadgeStyle={{ marginRight: 0, backgroundColor: '#cc0000', height: 18, width: 18 }}
-                                Hidden={false}
-                            />
-                        </Button>
-
-                        <Button transparent>
                             <Icon name='md-more' style={{ fontSize: 28 }} />
                         </Button>
                     </Right>

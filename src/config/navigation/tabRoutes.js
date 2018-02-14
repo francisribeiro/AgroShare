@@ -12,9 +12,9 @@ import Perfil from '../../screens/perfil/perfil' // Perfil
 const _TabRoutes = TabNavigator(
     {
         Anuncios: { screen: Anuncios },
-        Mensagens: { screen: Mensagens },
         Locacoes: { screen: Locacoes },
         Atividade: { screen: Atividade },
+        Mensagens: { screen: Mensagens },
         Perfil: { screen: Perfil }
     }, {
         tabBarComponent: FooterMenu,

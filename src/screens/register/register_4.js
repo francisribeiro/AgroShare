@@ -77,7 +77,7 @@ export default class Register_4 extends Component {
                     </Form>
                 </Content>
 
-                <TouchableOpacity style={globalStyles.floatingButton} onPress={() => { navigate('Anuncios'); Keyboard.dismiss() }}>
+                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { navigate('Anuncios'); Keyboard.dismiss() }}>
                     <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
                 </TouchableOpacity>
             </Container>

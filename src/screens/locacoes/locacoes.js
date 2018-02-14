@@ -40,8 +40,8 @@ export default class Locacoes extends Component {
                         heading={
                             <TabHeading style={{ backgroundColor: globalStyles.bg }}>
                                 <Text style={{ fontSize: 14 }}>AGUARDANDO</Text>
-                                <View style={globalStyles.tabBadge}>
-                                    <Text style={{ fontSize: 14, color: '#fff', fontWeight: 'bold' }}>1</Text>
+                                <View style={globalStyles.tabBadgeWhite}>
+                                    <Text style={{ fontSize: 14, color: '#018163', fontWeight: 'bold' }}>1</Text>
                                 </View>
                             </TabHeading>}>
                         <View style={{ padding: 20 }}>

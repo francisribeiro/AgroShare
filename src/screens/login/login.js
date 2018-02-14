@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB } from 'native-base'
-import { View, Keyboard, TouchableOpacity} from 'react-native'
+import { View, Keyboard, TouchableOpacity } from 'react-native'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 
@@ -51,7 +51,7 @@ export default class Login extends Component {
           </Form>
         </Content>
 
-        <TouchableOpacity style={globalStyles.floatingButton} onPress={() => { Keyboard.dismiss(); navigate('Anuncios') }}>
+        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { Keyboard.dismiss(); navigate('Anuncios') }}>
           <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
         </TouchableOpacity>
       </Container>

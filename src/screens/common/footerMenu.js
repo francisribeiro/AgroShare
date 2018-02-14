@@ -57,19 +57,22 @@ export default class FooterMenu extends Component {
                         </Button>
 
                         <Button active={this.state.tab3} onPress={() => { this.toggleTab3(); navigate('Atividade') }} vertical>
-                            <Icon active={this.state.tab3} name='ios-analytics-outline' style={globalStyles.footerIcon} />
+                            <Icon active={this.state.tab3} name='ios-stats-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Atividade</Text>
                         </Button>
 
                         <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
                             <Badge>
-                                <Text>2</Text>
+                                <Text>3</Text>
                             </Badge>
                             <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Mensagens</Text>
                         </Button>
 
-                        <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} vertical>
+                        <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} badge vertical>
+                            <Badge>
+                                <Text>2</Text>
+                            </Badge>
                             <Icon active={this.state.tab5} name='ios-person-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Perfil</Text>
                         </Button>

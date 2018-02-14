@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 
-// Imagens das máquinas
+// Imagens dos avatares
 const avatar1 = require('../../assets/images/avatar1.png')
 const avatar2 = require('../../assets/images/avatar2.png')
 const avatar3 = require('../../assets/images/avatar3.png')
@@ -40,7 +40,7 @@ export default class ListMensagens extends Component {
                 dataArray={datas}
                 renderRow={data =>
                     <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
-                        <TouchableOpacity >
+                        <TouchableOpacity activeOpacity={0.5}>
                             <View pointerEvents='none'>
                                 <ListItem thumbnail>
                                     <Left>
@@ -55,11 +55,14 @@ export default class ListMensagens extends Component {
                                             {data.msg}
                                         </Text>
                                     </Body>
-                                    
-                                    <Right style={{ borderBottomColor: '#fff', marginBottom: 20 }}>
-                                        <Text numberOfLines={1} note style={{ fontSize: 12 }}>
+
+                                    <Right style={{ borderBottomColor: '#fff' }}>
+                                        <Text numberOfLines={1} note style={{ fontSize: 12, paddingBottom: 5 }}>
                                             {data.time}
                                         </Text>
+                                        <View style={globalStyles.tabBadgeGreen}>
+                                            <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>1</Text>
+                                        </View>
                                     </Right>
                                 </ListItem>
                             </View>
