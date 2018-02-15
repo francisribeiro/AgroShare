@@ -3,6 +3,8 @@ import { Container, Header, Title, Button, Icon, Tabs, Tab, Right, Body, Text, T
 import { View } from 'react-native'
 
 import globalStyles from '../common/globalStyles' // Global Styles
+import EmAndamento from './emAndamento' // Em Andamento Component
+import Aguardando from './aguardando' // Aguardando Component
 
 export default class Locacoes extends Component {
     // StackNavigator Header configurations
@@ -11,15 +13,15 @@ export default class Locacoes extends Component {
     // Locações screen
     render() {
         return (
-            <Container>
+            <Container style={{ backgroundColor: '#fff' }}>
                 <Header hasTabs androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
                     <Body style={{ paddingLeft: 13, paddingTop: 10 }}>
                         <Title style={{ fontSize: 20 }}>Minhas locações</Title>
                     </Body>
-                    
+
                     <Right>
                         <Button transparent style={{ paddingTop: 15 }}>
-                            <Icon name='md-more' style={{ fontSize: 28}} />
+                            <Icon name='md-more' style={{ fontSize: 28 }} />
                         </Button>
                     </Right>
                 </Header>
@@ -31,9 +33,7 @@ export default class Locacoes extends Component {
                         textStyle={{ color: 'rgba(255, 255, 255, 0.6)', fontWeight: 'bold', fontSize: 14 }}
                         activeTabStyle={{ backgroundColor: globalStyles.bg }}
                         activeTextStyle={{ fontSize: 14 }}>
-                        <View style={{ padding: 20 }}>
-                            <Text style={{ fontSize: 18 }}>Não tem nada aqui, passe para o lado...</Text>
-                        </View>
+                        <EmAndamento />
                     </Tab>
 
                     <Tab
@@ -44,12 +44,10 @@ export default class Locacoes extends Component {
                                     <Text style={{ fontSize: 14, color: '#018163', fontWeight: 'bold' }}>1</Text>
                                 </View>
                             </TabHeading>}>
-                        <View style={{ padding: 20 }}>
-                            <Text style={{ fontSize: 18 }}>Também não tem nada aqui não!</Text>
-                        </View>
+                        <Aguardando />
                     </Tab>
                 </Tabs>
-            </Container >
+            </Container>
         )
     }
 }
