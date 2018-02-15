@@ -91,9 +91,9 @@ export default {
     },
 
     tabBadgeGreen: {
-        width: 22,
-        height: 22,
-        borderRadius: 11,
+        width: 20,
+        height: 20,
+        borderRadius: 10,
         backgroundColor: '#009975',
         justifyContent: 'center',
         alignItems: 'center'
@@ -112,6 +112,9 @@ export default {
     // Perfil
     itemMenu: { paddingVertical: 20, marginLeft: 25, marginRight: 25, flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row', borderBottomColor: '#eaeaea', borderBottomWidth: 1 },
     titleMenu: { fontSize: 19, color: '#484848', paddingTop: 6 },
-    iconMenu: { fontSize: 38, paddingRight: 5 }
+    iconMenu: { fontSize: 38, paddingRight: 5 },
+
+    //Alinha Itens
+    itemAlign: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' }
 
 }

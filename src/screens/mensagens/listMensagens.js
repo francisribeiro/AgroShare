@@ -48,18 +48,16 @@ export default class ListMensagens extends Component {
                                     </Left>
 
                                     <Body style={{ borderBottomColor: '#fff' }}>
-                                        <Text>
+                                        <Text style={{ fontWeight: 'bold' }}>
                                             {data.nome}
                                         </Text>
-                                        <Text numberOfLines={1} note>
-                                            {data.msg}
-                                        </Text>
+                                        <View style={{ paddingTop: 5 }}>
+                                            <Text numberOfLines={1} note>{data.msg}</Text>
+                                        </View>
                                     </Body>
 
                                     <Right style={{ borderBottomColor: '#fff' }}>
-                                        <Text numberOfLines={1} note style={{ fontSize: 12, paddingBottom: 5 }}>
-                                            {data.time}
-                                        </Text>
+                                        <Text numberOfLines={1} note style={{ fontSize: 12, paddingBottom: 5 }}>{data.time}</Text>
                                         <View style={globalStyles.tabBadgeGreen}>
                                             <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>1</Text>
                                         </View>
