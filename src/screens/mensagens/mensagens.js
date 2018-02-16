@@ -32,22 +32,13 @@ export default class Mensagens extends Component {
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
-                    <Body style={{ paddingLeft: 5 }}>
+                    <Body style={{ paddingLeft: 10 }}>
                         <Title style={{ fontSize: 20, width: 187 }}>Lista de mensagens</Title>
                     </Body>
 
                     <Right>
                         <Button transparent onPress={this.toggle}>
                             <Icon name='ios-search-outline' style={{ fontSize: 28, color: '#fff' }} />
-                        </Button>
-
-                        <Button transparent>
-                            <IconBadge
-                                MainElement={<Icon name='ios-notifications-outline' style={{ color: '#fff', fontSize: 32, paddingRight: 5 }} />}
-                                BadgeElement={<Text style={{ color: '#FFFFFF', fontSize: 12 }}>2</Text>}
-                                IconBadgeStyle={{ marginRight: 0, backgroundColor: '#cc0000', height: 18, width: 18 }}
-                                Hidden={false}
-                            />
                         </Button>
 
                         <Button transparent>

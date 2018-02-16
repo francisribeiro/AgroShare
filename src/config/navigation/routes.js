@@ -66,6 +66,6 @@ const _Routes = StackNavigator(
 
                 return { opacity, transform: [{ translateX }] }
             },
-        }),
+        })
     }
 )

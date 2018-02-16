@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { Container, Header, Title, Button, Icon, Tabs, Tab, Right, Body, Text, TabHeading } from 'native-base'
+import { Container, Header, Title, Button, Icon, Right, Body } from 'native-base'
 import { View } from 'react-native'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import globalStyles from '../common/globalStyles' // Global Styles
+import EmAndamento from './emAndamento' // Em Andamento Component
+import Aguardando from './aguardando' // Aguardando Component
+import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 
 export default class Locacoes extends Component {
     // StackNavigator Header configurations
@@ -11,45 +15,31 @@ export default class Locacoes extends Component {
     // Locações screen
     render() {
         return (
-            <Container>
+            <Container style={{ backgroundColor: '#fff' }}>
                 <Header hasTabs androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
-                    <Body style={{ paddingLeft: 8, paddingTop: 10 }}>
+                    <Body style={{ paddingLeft: 13, paddingTop: 10 }}>
                         <Title style={{ fontSize: 20 }}>Minhas locações</Title>
                     </Body>
-                    
+
                     <Right>
                         <Button transparent style={{ paddingTop: 15 }}>
-                            <Icon name='md-more' style={{ fontSize: 28}} />
+                            <Icon name='md-more' style={{ fontSize: 28 }} />
                         </Button>
                     </Right>
                 </Header>
-
-                <Tabs tabBarUnderlineStyle={{ backgroundColor: '#fff', borderBottomColor: '#eaeaea', borderBottomWidth: 0.9 }}>
-                    <Tab
-                        heading='EM ANDAMENTO'
-                        tabStyle={{ backgroundColor: globalStyles.bg }}
-                        textStyle={{ color: 'rgba(255, 255, 255, 0.6)', fontWeight: 'bold', fontSize: 14 }}
-                        activeTabStyle={{ backgroundColor: globalStyles.bg }}
-                        activeTextStyle={{ fontSize: 14 }}>
-                        <View style={{ padding: 20 }}>
-                            <Text style={{ fontSize: 18 }}>Não tem nada aqui, passe para o lado...</Text>
-                        </View>
-                    </Tab>
-
-                    <Tab
-                        heading={
-                            <TabHeading style={{ backgroundColor: globalStyles.bg }}>
-                                <Text style={{ fontSize: 14 }}>AGUARDANDO</Text>
-                                <View style={globalStyles.tabBadge}>
-                                    <Text style={{ fontSize: 14, color: '#fff', fontWeight: 'bold' }}>1</Text>
-                                </View>
-                            </TabHeading>}>
-                        <View style={{ padding: 20 }}>
-                            <Text style={{ fontSize: 18 }}>Também não tem nada aqui não!</Text>
-                        </View>
-                    </Tab>
-                </Tabs>
-            </Container >
+                <ScrollableTabView
+                    initialPage={0}
+                    prerenderingSiblingsNumber={1}
+                    tabBarTextStyle={{ fontWeight: 'bold', fontSize: 14 }}
+                    tabBarActiveTextColor='#ffffff'
+                    tabBarInactiveTextColor='rgba(255,255,255,0.6)'
+                    tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
+                    tabBarBackgroundColor='#018163'
+                    renderTabBar={() => <DefaultTabBar notifications={1} />}>
+                    <EmAndamento tabLabel='EM ANDAMENTO' />
+                    <Aguardando tabLabel='AGUARDANDO' />
+                </ScrollableTabView>
+            </Container>
         )
     }
 }
