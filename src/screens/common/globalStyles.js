@@ -1,32 +1,10 @@
 export default {
     bg: '#018163',
 
-    pagTitulo: {
-        fontSize: 31,
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-
-    txtDescription: {
-        paddingLeft: 15,
-        paddingRight: 12,
-        paddingBottom: 25,
-        color: '#fff',
-        fontSize: 19
-    },
-
-    input: {
-        color: '#fff',
-        fontSize: 28,
-        padding: 7,
-        marginTop: 5
-    },
-
-    inputLabel: {
-        color: '#fff',
-        fontSize: 14,
-        fontWeight: 'bold'
-    },
+    pagTitulo: { fontSize: 31, color: '#fff', fontWeight: 'bold' },
+    txtDescription: { paddingLeft: 15, paddingRight: 12, paddingBottom: 25, color: '#fff', fontSize: 19 },
+    input: { color: '#fff', fontSize: 28, padding: 7, marginTop: 5 },
+    inputLabel: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
 
     floatingButton: {
         width: 60,
@@ -52,34 +30,12 @@ export default {
         alignItems: 'center'
     },
 
-    floatingButtonIcon: {
-        color: '#018163',
-        fontSize: 30
-    },
-
-    floatingButtonIcon2: {
-        color: '#fff',
-        fontSize: 30
-    },
-
-    footerTxt: {
-        fontSize: 10
-    },
-
-    footerIcon: {
-        fontSize: 28
-    },
-
-    star: {
-        fontSize: 15,
-        color: '#FFA500'
-    },
-
-    fullButtonHeader: {
-        backgroundColor: '#009975',
-        elevation: 0,
-        borderRadius: 4
-    },
+    floatingButtonIcon: { color: '#018163', fontSize: 30 },
+    floatingButtonIcon2: { color: '#fff', fontSize: 30 },
+    footerTxt: { fontSize: 10 },
+    footerIcon: { fontSize: 28 },
+    star: { fontSize: 15, color: '#FFA500' },
+    fullButtonHeader: { backgroundColor: '#009975', elevation: 0, borderRadius: 4 },
 
     tabBadgeWhite: {
         width: 20,
@@ -101,13 +57,9 @@ export default {
 
 
     // Atividade
-    AAView: { paddingLeft: 20, paddingTop: 20, paddingRight: 20 },
-    AAView2: { paddingTop: 10, paddingRight: 20 },
-    AATitle: { color: '#484848', fontSize: 26, fontWeight: 'bold' },
-    AABorder: { borderBottomColor: '#eaeaea', borderBottomWidth: 1 },
-    AAText: { color: '#585858', fontSize: 16 },
-    AAText2: { color: '#585858', fontSize: 17 },
-    AAStarInline: { paddingTop: 10, flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' },
+    atvTitle: { color: '#484848', fontSize: 19 },
+    atvBorder: { borderWidth: 0.7, borderColor: '#eaeaea', marginTop: 15, marginLeft: 15, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' },
+    atvIcon: { fontSize: 40 },
 
     // Perfil
     itemMenu: { paddingVertical: 16, marginLeft: 25, marginRight: 25, flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row', borderBottomColor: '#eaeaea', borderBottomWidth: 1 },
