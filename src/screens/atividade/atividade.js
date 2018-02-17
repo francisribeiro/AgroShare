@@ -56,7 +56,17 @@ export default class Atividade extends Component {
                             </TouchableOpacity>
                         </Row>
 
-                        <Row style={[globalStyles.atvBorder, { marginBottom: 15, borderColor: '#fff' }]}></Row>
+                        <Row style={[globalStyles.atvBorder, { marginBottom: 15 }]}>
+                            <TouchableOpacity activeOpacity={0.4} style={globalStyles.atvCenter}>
+                                <Title style={globalStyles.atvTitle}>Comentários</Title>
+                                <View style={[globalStyles.itemAlign, { paddingTop: 10 }]}>
+                                    <Icon name='ios-text-outline' style={globalStyles.atvIcon} />
+                                    <View style={{ marginTop: 6, marginLeft: 8 }}>
+                                        <Text style={{ fontSize: 19, color: '#2E2E2E' }}>77</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        </Row>
                     </Col>
                     <Col>
                         <Row style={[globalStyles.atvBorder, { marginRight: 15 }]}>
@@ -83,7 +93,17 @@ export default class Atividade extends Component {
                             </TouchableOpacity>
                         </Row>
 
-                        <Row style={[globalStyles.atvBorder, { marginRight: 15, marginBottom: 15, borderColor: '#fff' }]}></Row>
+                        <Row style={[globalStyles.atvBorder, { marginRight: 15, marginBottom: 15}]}>
+                            <TouchableOpacity activeOpacity={0.4} style={globalStyles.atvCenter}>
+                                <Title style={globalStyles.atvTitle}>Perguntas</Title>
+                                <View style={[globalStyles.itemAlign, { paddingTop: 10 }]}>
+                                    <Icon name='ios-help-circle-outline' style={globalStyles.atvIcon} />
+                                    <View style={{ marginTop: 6, marginLeft: 8 }}>
+                                        <Text style={{ fontSize: 19, color: '#2E2E2E' }}>13</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        </Row>
                     </Col>
                 </Grid>
             </Container >

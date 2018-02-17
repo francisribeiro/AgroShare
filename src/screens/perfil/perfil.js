@@ -44,7 +44,7 @@ export default class Perfil extends Component {
                                 <IconBadge
                                     MainElement={<Icon name='ios-notifications-outline' style={globalStyles.iconMenu} />}
                                     BadgeElement={<Text style={{ color: '#FFFFFF', fontSize: 11 }}>2</Text>}
-                                    IconBadgeStyle={{ height: 20, width: 18, backgroundColor:'#cc0000' }}
+                                    IconBadgeStyle={{ height: 20, width: 18, backgroundColor:'#ff4444' }}
                                     Hidden={false}
                                 />
                             </Right>

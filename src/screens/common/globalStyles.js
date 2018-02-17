@@ -20,6 +20,7 @@ export default {
 
     floatingButtonIcon: { color: '#00695c', fontSize: 30 }, //old #018163
     footerTxt: { fontSize: 10 },
+    footerBadge:{backgroundColor:'#ff4444'},
     footerIcon: { fontSize: 28 },
     star: { fontSize: 15, color: '#FFA500' },
     fullButtonHeader: { backgroundColor: '#00796b', elevation: 0, borderRadius: 4 }, //old #009975
