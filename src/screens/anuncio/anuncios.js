@@ -22,7 +22,7 @@ export default class Anuncios extends Component {
 
          return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
+                <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body>
                         <Button iconLeft full large onPress={() => navigate('PasswordRecovery')} style={globalStyles.fullButtonHeader}>
                             <View>

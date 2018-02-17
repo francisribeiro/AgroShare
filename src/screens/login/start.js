@@ -20,7 +20,7 @@ export default class Start extends Component {
 
         return (
             <Container>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg }}>
+                <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg }}>
                     <Left>
                         <Button transparent onPress={() => this.exitApp()}>
                             <Icon name='close' />

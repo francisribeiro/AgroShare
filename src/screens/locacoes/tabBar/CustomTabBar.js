@@ -31,7 +31,7 @@ const DefaultTabBar = createReactClass({
     if (name === 'AGUARDANDO' && number > 0)
       return (
         <View style={[GlobalStyles.tabBadgeWhite, { paddingRight: 4, marginLeft: 5, backgroundColor: bgColor }]}>
-          <Text style={{ fontSize: 14, color: '#018163', fontWeight: 'bold' }}> {number}</Text>
+          <Text style={{ fontSize: 14, color: '#00695c', fontWeight: 'bold' }}> {number}</Text>
         </View>
       )
 

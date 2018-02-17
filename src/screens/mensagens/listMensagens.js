@@ -5,27 +5,27 @@ import { TouchableOpacity, View } from 'react-native'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 // Imagens dos avatares
-const avatar1 = require('../../assets/images/avatar1.png')
-const avatar2 = require('../../assets/images/avatar2.png')
-const avatar3 = require('../../assets/images/avatar3.png')
+const avatar1 = require('../../assets/images/avatar1.jpg')
+const avatar2 = require('../../assets/images/avatar2.jpg')
+const avatar3 = require('../../assets/images/avatar3.jpg')
 
 // Dados das máquinas
 const datas = [
     {
         img: avatar1,
-        nome: 'Iskra Lawrence',
+        nome: 'Harry Potter',
         msg: 'Achei muito legal seu anúncio',
         time: '11:08 AM'
     },
     {
         img: avatar2,
-        nome: 'Kendrick Lamar',
+        nome: 'Hermione Granger',
         msg: 'Esse valor é negociável?',
         time: '9:17 AM'
     },
     {
         img: avatar3,
-        nome: 'Eva Green',
+        nome: 'Ronald Weasley',
         msg: 'Já realizei o pagamento, pode conferir?',
         time: '07:42 AM'
     }
