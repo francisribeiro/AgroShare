@@ -8,10 +8,6 @@ import ListMensagens from './listMensagens' // List Component
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Mensagens extends Component {
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Mensagens', header: null }
-
-
     // Mensagens screen
     render() {
         return (

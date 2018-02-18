@@ -16,16 +16,15 @@ import Register_2 from '../../screens/register/register_2'
 import Register_3 from '../../screens/register/register_3'
 import Register_4 from '../../screens/register/register_4'
 
+// Anuncios
+import ProfileMaq from '../../screens/anuncio/profileMaq'
+
 export default class Routes extends Component {
-    render() {
-        return (
-            <_Routes />
-        )
-    }
+    render() { return (<_Routes />) }
 }
 
 // Routes path
-const _Routes = StackNavigator(
+const _Main = StackNavigator(
     {
         // Login routes
         Start: { screen: Start },
@@ -36,11 +35,10 @@ const _Routes = StackNavigator(
         Register_1: { screen: Register_1 },
         Register_2: { screen: Register_2 },
         Register_3: { screen: Register_3 },
-        Register_4: { screen: Register_4 },
+        Register_4: { screen: Register_4 }
 
-        // Tabs
-        Tab: { screen: TabRoutes },
     }, {
+        headerMode: 'none',
         transitionConfig: () => ({
             transitionSpec: {
                 duration: 550,
@@ -65,7 +63,41 @@ const _Routes = StackNavigator(
                 })
 
                 return { opacity, transform: [{ translateX }] }
-            },
+            }
         })
     }
 )
+
+const _Routes = StackNavigator(
+    {
+        Start: { screen: _Main },
+        TabRoutes: { screen: TabRoutes }, // Tabs
+        ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
+    }, {
+        headerMode: 'none',
+        transitionConfig: () => ({
+            transitionSpec: {
+                duration: 350,
+                easing: Easing.out(Easing.poly(3)),
+                timing: Animated.timing,
+                useNativeDriver: true
+            },
+            screenInterpolator: sceneProps => {
+                const { position, layout, scene, index, scenes } = sceneProps
+                const toIndex = index
+                const thisSceneIndex = scene.index
+                const height = layout.initHeight
+                const width = layout.initWidth
+
+                const translateX = position.interpolate({
+                    inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+                    outputRange: [width, 0, 0]
+                })
+
+                return { transform: [{ translateX }] }
+            }
+        })
+    }
+
+)
+

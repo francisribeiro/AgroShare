@@ -5,10 +5,6 @@ import { View, Keyboard, TouchableOpacity } from 'react-native'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Login extends Component {
-
-  // StackNavigator Header configurations
-  static navigationOptions = { title: 'Login', header: null }
-
   // Login screen
   render() {
     // StackNavigator props

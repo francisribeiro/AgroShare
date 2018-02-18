@@ -9,9 +9,6 @@ import Aguardando from './aguardando' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 
 export default class Locacoes extends Component {
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Locacoes', header: null }
-
     // Locações screen
     render() {
         return (

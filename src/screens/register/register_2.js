@@ -5,10 +5,6 @@ import { View, Keyboard, TouchableOpacity } from 'react-native'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Register_2 extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Register_2', header: null }
-
     // Register_2 screen
     render() {
         // StackNavigator props

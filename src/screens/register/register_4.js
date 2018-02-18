@@ -6,10 +6,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Register_4 extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Register_4', header: null }
-
     // Class start state
     constructor(props) {
         super(props)

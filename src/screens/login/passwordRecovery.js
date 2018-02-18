@@ -6,10 +6,6 @@ import globalStyles from '../common/globalStyles' // Global Styles
 
 // Tava bebado quando escrevi isso daqui, REVER isso depois
 export default class PasswordRecovery extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'PasswordRecovery', header: null }
-
     // PasswordRecovery screen
     render() {
         // StackNavigator props
@@ -46,7 +42,7 @@ export default class PasswordRecovery extends Component {
                     </Form>
                 </Content>
 
-                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { navigate('Login'); Keyboard.dismiss() }}>
+                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { goBack(); Keyboard.dismiss() }}>
                     <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
                 </TouchableOpacity>
             </Container >

@@ -32,7 +32,6 @@ const datas = [
 ]
 
 export default class ListMensagens extends Component {
-
     // List item component
     render() {
         return (

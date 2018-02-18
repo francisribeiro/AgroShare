@@ -6,10 +6,6 @@ import { Grid, Row } from 'react-native-easy-grid'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Start extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Start', header: null }
-
     // Minimiza o App
     exitApp() { BackHandler.exitApp() }
 

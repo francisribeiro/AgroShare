@@ -6,10 +6,6 @@ import { Grid, Row, Col } from 'react-native-easy-grid'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Atividade extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { Text: 'Atividade', header: null }
-
     // Atividade screen
     render() {
         return (
