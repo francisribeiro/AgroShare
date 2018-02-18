@@ -19,7 +19,7 @@ export default {
   btnUppercaseAndroidText: true,
 
   // Badge
-  badgeBg: "#ED1727",
+  badgeBg: "#cc0000",
   badgeColor: "#fff",
   badgePadding: platform === "ios" ? 3 : 0,
 
@@ -123,11 +123,11 @@ export default {
   footerPaddingBottom: isIphoneX ? 34 : 0,
 
   // FooterTab
-  tabBarTextColor: platform === "ios" ? "#404040" : "#404040",
+  tabBarTextColor: platform === "ios" ? "#2E2E2E" : "#2E2E2E",
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: platform === "ios" ? "#007aff" : "#fff",
   sTabBarActiveTextColor: "#38a226",
-  tabBarActiveTextColor: platform === "ios" ? "#009975" : "#009975",
+  tabBarActiveTextColor: platform === "ios" ? "#00796b" : "#00796b",
   tabActiveBgColor: platform === "ios" ? "#fff" : "#fff",
 
   // Header

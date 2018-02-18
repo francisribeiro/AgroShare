@@ -11,10 +11,6 @@ const cardImage2 = require('../../assets/images/drawer-cover2.jpg')
 const cardImage3 = require('../../assets/images/drawer-cover3.jpg')
 
 export default class Anuncios extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Anuncios', header: null }
-
     // Anúncios screen
     render() {
         // StackNavigator props
@@ -22,9 +18,9 @@ export default class Anuncios extends Component {
 
          return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
+                <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body>
-                        <Button iconLeft full large onPress={() => navigate('PasswordRecovery')} style={globalStyles.fullButtonHeader}>
+                        <Button iconLeft full large onPress={() => navigate('ProfileMaq')} style={globalStyles.fullButtonHeader}>
                             <View>
                                 <Text style={{ fontSize: 18, color: '#fff', paddingBottom: 10 }}>Tem uma máquina? Anuncie aqui.</Text>
                             </View>

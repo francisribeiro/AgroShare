@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TabNavigator } from 'react-navigation'
 
 import FooterMenu from '../../screens/common/footerMenu' //Toolbar
-import Anuncios from '../../screens/anuncio/anuncios'// Anúncios
+import Anuncios from '../../screens/anuncio/anuncios' // Anúncios
 import Mensagens from '../../screens/mensagens/mensagens'// Mensagens
 import Locacoes from '../../screens/locacoes/locacoes'// Locações
 import Atividade from '../../screens/atividade/atividade' // Atividades

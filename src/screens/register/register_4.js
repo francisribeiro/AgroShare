@@ -6,10 +6,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Register_4 extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Register_4', header: null }
-
     // Class start state
     constructor(props) {
         super(props)
@@ -29,7 +25,7 @@ export default class Register_4 extends Component {
         return (
             <Container style={{ backgroundColor: globalStyles.bg }}>
 
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: 'transparent' }}>
+                <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: 'transparent' }}>
                     <Left>
                         <Button transparent onPress={() => goBack()}>
                             <Icon name='arrow-back' />

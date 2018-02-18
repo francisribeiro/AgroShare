@@ -9,14 +9,11 @@ import Aguardando from './aguardando' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 
 export default class Locacoes extends Component {
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Locacoes', header: null }
-
     // Locações screen
     render() {
         return (
             <Container style={{ backgroundColor: '#fff' }}>
-                <Header hasTabs androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
+                <Header hasTabs androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
                     <Body style={{ paddingLeft: 13, paddingTop: 10 }}>
                         <Title style={{ fontSize: 20 }}>Minhas locações</Title>
                     </Body>
@@ -34,7 +31,7 @@ export default class Locacoes extends Component {
                     tabBarActiveTextColor='#ffffff'
                     tabBarInactiveTextColor='rgba(255,255,255,0.6)'
                     tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
-                    tabBarBackgroundColor='#018163'
+                    tabBarBackgroundColor='#00695c'
                     renderTabBar={() => <DefaultTabBar notifications={1} />}>
                     <EmAndamento tabLabel='EM ANDAMENTO' />
                     <Aguardando tabLabel='AGUARDANDO' />

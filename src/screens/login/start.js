@@ -6,10 +6,6 @@ import { Grid, Row } from 'react-native-easy-grid'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Start extends Component {
-
-    // StackNavigator Header configurations
-    static navigationOptions = { title: 'Start', header: null }
-
     // Minimiza o App
     exitApp() { BackHandler.exitApp() }
 
@@ -20,7 +16,7 @@ export default class Start extends Component {
 
         return (
             <Container>
-                <Header noShadow androidStatusBarColor='#018163' style={{ backgroundColor: globalStyles.bg }}>
+                <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg }}>
                     <Left>
                         <Button transparent onPress={() => this.exitApp()}>
                             <Icon name='close' />

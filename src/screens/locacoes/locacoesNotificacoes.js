@@ -19,7 +19,7 @@ export default class LocacoesNotificacoes extends Component {
                                     </Text>
                                 </View>
                                 <View style={globalStyles.itemAlign}>
-                                    <Icon name='ios-calendar-outline' style={{ color: '#cc0000' }} />
+                                    <Icon name='ios-calendar-outline' style={{ color: '#ff4444' }} />
                                     <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                         <Text numberOfLines={1} note>
                                             {this.props.inicio} até {this.props.fim}
