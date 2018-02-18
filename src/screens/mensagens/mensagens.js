@@ -8,6 +8,9 @@ import ListMensagens from './listMensagens' // List Component
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Mensagens extends Component {
+    // Hide the header
+    static navigationOptions = { header: null }
+    
     // Mensagens screen
     render() {
         return (

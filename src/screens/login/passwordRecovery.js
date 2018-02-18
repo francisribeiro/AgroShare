@@ -6,6 +6,9 @@ import globalStyles from '../common/globalStyles' // Global Styles
 
 // Tava bebado quando escrevi isso daqui, REVER isso depois
 export default class PasswordRecovery extends Component {
+    // Hide the header
+    static navigationOptions = { header: null }
+    
     // PasswordRecovery screen
     render() {
         // StackNavigator props

@@ -9,6 +9,9 @@ import globalStyles from '../common/globalStyles' // Global Styles
 const profile = require('../../assets/images/profile.jpeg')
 
 export default class Perfil extends Component {
+    // Hide the header
+    static navigationOptions = { header: null }
+
     // Atividades screen
     render() {
         return (
