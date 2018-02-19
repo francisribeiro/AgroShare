@@ -6,6 +6,9 @@ import { Grid, Row, Col } from 'react-native-easy-grid'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Atividade extends Component {
+    // Hide the header
+    static navigationOptions = { header: null }
+
     // Atividade screen
     render() {
         return (
@@ -89,7 +92,7 @@ export default class Atividade extends Component {
                             </TouchableOpacity>
                         </Row>
 
-                        <Row style={[globalStyles.atvBorder, { marginRight: 15, marginBottom: 15}]}>
+                        <Row style={[globalStyles.atvBorder, { marginRight: 15, marginBottom: 15 }]}>
                             <TouchableOpacity activeOpacity={0.4} style={globalStyles.atvCenter}>
                                 <Title style={globalStyles.atvTitle}>Perguntas</Title>
                                 <View style={[globalStyles.itemAlign, { paddingTop: 10 }]}>

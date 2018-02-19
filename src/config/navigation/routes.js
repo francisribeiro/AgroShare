@@ -74,7 +74,7 @@ const _Routes = StackNavigator(
         TabRoutes: { screen: TabRoutes }, // Tabs
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
     }, {
-        headerMode: 'none',
+        headerMode: 'float',
         transitionConfig: () => ({
             transitionSpec: {
                 duration: 350,
@@ -94,7 +94,12 @@ const _Routes = StackNavigator(
                     outputRange: [width, 0, 0]
                 })
 
-                return { transform: [{ translateX }] }
+                const opacity = position.interpolate({
+                    inputRange: [thisSceneIndex - 1, thisSceneIndex],
+                    outputRange: [0.8, 1],
+                })
+
+                return { opacity, transform: [{ translateX }] }
             }
         })
     }

@@ -9,6 +9,9 @@ import Aguardando from './aguardando' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 
 export default class Locacoes extends Component {
+    // Hide the header
+    static navigationOptions = { header: null }
+    
     // Locações screen
     render() {
         return (
