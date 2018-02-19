@@ -33,7 +33,7 @@ export default class ProfileMaq extends Component {
                     </View>
 
                     <View style={{ borderColor: '#eaeaea', borderWidth: 0.7, paddingVertical: 10, marginVertical: 20 }}>
-                        <View style={{ paddingHorizontal: 20, paddingBottom: 5 }}>
+                        <View style={{ paddingHorizontal: 20, paddingBottom: 6 }}>
                             <Text style={{ fontSize: 18, color: '#484848', fontWeight: 'bold' }}>Benefícios</Text>
                         </View>
                         <View style={[globalStyles.itemAlign, { paddingHorizontal: 30 }]}>
@@ -81,7 +81,7 @@ export default class ProfileMaq extends Component {
                     </Left>
 
                     <Right style={{ paddingBottom: 20, paddingRight: 20 }}>
-                        <Button style={{ backgroundColor: '#00796b' }}>
+                        <Button elevation={0} style={{ backgroundColor: '#00796b' }}>
                             <View style={{ paddingHorizontal: 16, paddingBottom: 5 }}>
                                 <Text style={{ fontSize: 18 }}>Alterar anúncio</Text>
                             </View>
