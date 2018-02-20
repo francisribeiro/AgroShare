@@ -19,6 +19,9 @@ import Register_4 from '../../screens/register/register_4'
 // Anuncios
 import ProfileMaq from '../../screens/anuncio/profileMaq'
 
+//Chat
+import Chat from '../../screens/mensagens/chat'
+
 export default class Routes extends Component {
     render() { return (<_Routes />) }
 }
@@ -73,6 +76,7 @@ const _Routes = StackNavigator(
         Start: { screen: _Main },
         TabRoutes: { screen: TabRoutes }, // Tabs
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
+        Chat: { screen: Chat } //Chat
     }, {
         headerMode: 'float',
         transitionConfig: () => ({

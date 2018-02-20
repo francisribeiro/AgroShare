@@ -34,12 +34,15 @@ const datas = [
 export default class ListMensagens extends Component {
     // List item component
     render() {
+        // StackNavigator props
+        const { navigate } = this.props.nav
+
         return (
             <List
                 dataArray={datas}
                 renderRow={data =>
                     <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
-                        <TouchableOpacity activeOpacity={0.5}>
+                        <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('Chat')}>
                             <View pointerEvents='none'>
                                 <ListItem thumbnail>
                                     <Left>
