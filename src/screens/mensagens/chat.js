@@ -125,13 +125,13 @@ export default class Chat extends Component {
 
     renderInputToolbar(props) {
         return (
-            <InputToolbar {...props} containerStyle={{ borderTopColor: '#eaeaea', backgroundColor: '#eaeaea' }} />
+            <InputToolbar {...props} containerStyle={{ borderTopWidth:0, backgroundColor: '#fff' }} />
         )
     }
 
     renderComposer(props) {
         return (
-            <Composer {...props} textInputStyle={{ paddingLeft: 20, marginRight: 10, marginTop: 4, marginBottom: 4, backgroundColor: '#fff', borderRadius: 50, fontSize: 16 }} />
+            <Composer {...props} textInputStyle={{ borderColor: '#eaeaea', borderWidth:1, paddingLeft: 20, marginRight: 10, marginTop: 4, marginBottom: 6, backgroundColor: '#fff', borderRadius: 30, fontSize: 16 }} />
         )
     }
 
