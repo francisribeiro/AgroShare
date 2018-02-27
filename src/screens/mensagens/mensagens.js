@@ -10,7 +10,7 @@ import globalStyles from '../common/globalStyles' // Global Styles
 export default class Mensagens extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-    
+
     // Mensagens screen
     render() {
         return (
@@ -46,7 +46,7 @@ export default class Mensagens extends Component {
                 </Header>
 
                 <Content>
-                    <ListMensagens />
+                    <ListMensagens nav={this.props.navigation} />
                 </Content>
             </Container >
         )
