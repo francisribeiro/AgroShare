@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
+import { modificaEmail, modificaSenha, autenticarUsuario } from '../../actions/AutenticacaoAction'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 
-export default class Login extends Component {
+class Login extends Component {
   // Hide the header
   static navigationOptions = { header: null }
-  
+
+  _autenticarUsuario() {
+    const { email, senha } = this.props
+    this.props.autenticarUsuario({ email, senha })
+  }
+
   // Login screen
   render() {
     // StackNavigator props
@@ -39,21 +46,31 @@ export default class Login extends Component {
             <View style={{ paddingRight: 15 }}>
               <Item stackedLabel>
                 <Label style={globalStyles.inputLabel}>ENDEREÇO DE EMAIL</Label>
-                <Input keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={globalStyles.input} />
+                <Input autoCapitalize='none' keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaEmail(texto)} />
               </Item>
 
               <Item style={{ paddingTop: 20 }} stackedLabel>
                 <Label style={globalStyles.inputLabel}>SENHA</Label>
-                <Input selectionColor='#fff' style={globalStyles.input} secureTextEntry />
+                <Input autoCapitalize='none' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaSenha(texto)} secureTextEntry />
               </Item>
             </View>
           </Form>
+          <Text style={{ color: '#ff0000', fontSize: 18 }}>{this.props.erroLogin}</Text>
+
         </Content>
 
-        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { Keyboard.dismiss(); navigate('Anuncios') }}>
+        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { Keyboard.dismiss(); this._autenticarUsuario()}}>
           <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
         </TouchableOpacity>
       </Container>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  email: state.AutenticacaoReducer.email,
+  senha: state.AutenticacaoReducer.senha,
+  erroLogin: state.AutenticacaoReducer.erroLogin
+})
+
+export default connect(mapStateToProps, { modificaEmail, modificaSenha, autenticarUsuario })(Login)
