@@ -4,8 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase'
 import ReduxThunk from 'redux-thunk'
-
-import Routes from './config/navigation/routes'
+import AppWithNavigationState from './config/navigation/routes'
 import reducers from './reducers'
 
 export default class App extends Component {
@@ -16,7 +15,7 @@ export default class App extends Component {
 
   componentWillMount() {
     // Initialize Firebase
-    let config = {
+    var config = {
       apiKey: "AIzaSyDaVLZRM0zxMyZike9vqWWtOLrD2hDIDsE",
       authDomain: "agroshare-17942.firebaseapp.com",
       databaseURL: "https://agroshare-17942.firebaseio.com",
@@ -31,7 +30,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
-        <Routes />
+        <AppWithNavigationState />
       </Provider>
     )
   }
