@@ -1,25 +1,40 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
+import { connect } from 'react-redux'
 
+import { modificaIdade, cadastrarUsuario } from '../../actions/CadastroUsuarioAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
-export default class Register_4 extends Component {
+class Register_4 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-    
+
     // Class start state
     constructor(props) {
         super(props)
-        this.state = { isDateTimePickerVisible: false }
+        this.state = { isDateTimePickerVisible: false, date: '' }
     }
 
     // DatePicker helpers
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
-    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
-    _handleDatePicked = (date) => { this._hideDateTimePicker() }
+    _hideDateTimePicker = (date) => {this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) });alert(this.props.idade)}
+    _handleDatePicked = (date) => { this._hideDateTimePicker(date) }
+    _dateFormat = (date) => { return (date.getDate() + ' / ' + (parseInt(date.getMonth()) + 1).toString() + ' / ' + date.getFullYear()) }
 
+    _cadastrarUsuario() {
+        const { nome, sobrenome, email, senha, idade } = this.props
+        this.props.cadastrarUsuario({ nome, sobrenome, email, senha, idade })
+
+        if (this.props.erroCadastro.length > 0)
+            this._aviso(this.props.erroCadastro)
+    }
+
+    _aviso(msg) {
+        if (msg != '')
+            Toast.show({ text: msg, position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+    }
     // Register_4 screen
     render() {
         // StackNavigator props
@@ -61,6 +76,8 @@ export default class Register_4 extends Component {
                                             returnKeyType='next'
                                             selectionColor='#fff'
                                             style={globalStyles.input}
+                                            value={this.state.date}
+                                            onChangeText={this.props.modificaIdade(this.state.date)} 
                                         />
                                     </Item>
                                 </View>
@@ -74,12 +91,24 @@ export default class Register_4 extends Component {
                         </View>
 
                     </Form>
+                    <Text>{this.props.erroCadastro}</Text>
                 </Content>
 
-                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { navigate('Anuncios'); Keyboard.dismiss() }}>
+                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._cadastrarUsuario() }}>
                     <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
                 </TouchableOpacity>
             </Container>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    nome: state.CadastroUsuarioReducer.nome,
+    sobrenome: state.CadastroUsuarioReducer.sobrenome,
+    email: state.CadastroUsuarioReducer.email,
+    senha: state.CadastroUsuarioReducer.senha,
+    idade: state.CadastroUsuarioReducer.idade,
+    erroCadastro: state.CadastroUsuarioReducer.erroCadastro
+})
+
+export default connect(mapStateToProps, { modificaIdade, cadastrarUsuario })(Register_4)

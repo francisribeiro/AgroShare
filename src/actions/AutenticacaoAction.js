@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
+import { Keyboard } from 'react-native'
 
 export const modificaEmail = (texto) => {
     return { type: 'modifica_email', payload: texto }
@@ -19,6 +20,7 @@ export const autenticarUsuario = ({ email, senha }) => {
 }
 
 const loginUsuarioSuccesso = (dispatch) => {
+    Keyboard.dismiss()
     dispatch({ type: 'sucesso_login' })
     dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
@@ -26,16 +28,16 @@ const loginUsuarioSuccesso = (dispatch) => {
 const loginUsuarioErro = (dispatch, erro) => {
     switch (erro.code) {
         case 'auth/invalid-email':
-            erro.message = 'Email inválido!'
+            erro.message = 'ERRO: Email inválido!'
             break
         case 'auth/user-disabled':
-            erro.message = 'Usuário desativado!'
+            erro.message = 'ERRO: Usuário desativado!'
             break
         case 'auth/user-not-found':
-            erro.message = 'Usuário inexistente!'
+            erro.message = 'ERRO: Usuário inexistente!'
             break
         case 'auth/wrong-password':
-            erro.message = 'Senha inválida!'
+            erro.message = 'ERRO: Senha inválida!'
             break
         default:
             erro.message = ''

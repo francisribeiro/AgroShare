@@ -1,12 +1,31 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 
+import { modificaEmail } from '../../actions/CadastroUsuarioAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
-export default class Register_2 extends Component {
+class Register_2 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
+
+    _validarEmail() {
+        const { email } = this.props
+        let regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+        if (regexEmail.test(String(email).toLowerCase())) {
+            Keyboard.dismiss()
+            this.props.navigation.navigate('Register_3')
+        } else
+            this._aviso('ERRO: Insira um email válido!')
+
+    }
+
+    _aviso(msg) {
+        if (msg != '')
+            Toast.show({ text: msg, position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 2000 })
+    }
 
     // Register_2 screen
     render() {
@@ -35,16 +54,22 @@ export default class Register_2 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Label style={globalStyles.inputLabel}>ENDEREÇO DE EMAIL</Label>
-                                <Input keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={globalStyles.input} />
+                                <Input autoCapitalize='none' keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaEmail(texto)} />
                             </Item>
                         </View>
                     </Form>
                 </Content>
 
-                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { navigate('Register_3'); Keyboard.dismiss() }}>
+                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._validarEmail() }}>
                     <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
                 </TouchableOpacity>
             </Container>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    email: state.CadastroUsuarioReducer.email,
+})
+
+export default connect(mapStateToProps, { modificaEmail })(Register_2)

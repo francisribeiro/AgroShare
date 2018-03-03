@@ -5,14 +5,16 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-    if (action.type == 'modifica_email')
-        return { ...state, email: action.payload }
-
-    if (action.type == 'modifica_senha')
-        return { ...state, senha: action.payload }
-
-    if (action.type == 'erro_login')
-        return { ...state, erroLogin: action.payload }
-
-    return state
+    switch (action.type) {  
+        case 'modifica_email':
+            return { ...state, email: action.payload }
+        case 'modifica_senha':
+            return { ...state, senha: action.payload }
+        case 'erro_login':
+            return { ...state, erroLogin: action.payload }
+        case 'sucesso_login':
+            return { ...state, email: '', senha: '' }
+        default:
+            return state
+    }
 }

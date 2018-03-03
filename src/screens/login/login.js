@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB, Toast } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { modificaEmail, modificaSenha, autenticarUsuario } from '../../actions/AutenticacaoAction'
 
+import { modificaEmail, modificaSenha, autenticarUsuario } from '../../actions/AutenticacaoAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 class Login extends Component {
@@ -12,7 +12,19 @@ class Login extends Component {
 
   _autenticarUsuario() {
     const { email, senha } = this.props
-    this.props.autenticarUsuario({ email, senha })
+    let regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (regexEmail.test(String(email).toLowerCase())) {
+      if (senha.length == 0)
+        this._aviso('ERRO: Insira uma senha!')
+      else if (senha.length < 8)
+        this._aviso('ERRO: Insira uma senha válida! ')
+      else {
+        this.props.autenticarUsuario({ email, senha })
+        this._aviso(this.props.erroLogin)
+      }
+    } else
+      this._aviso('ERRO: Insira um email válido!')
   }
 
   _aviso(msg) {
@@ -62,7 +74,7 @@ class Login extends Component {
           </Form>
 
         </Content>
-        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario(); Keyboard.dismiss(); this._aviso(this.props.erroLogin) }}>
+        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario() }}>
           <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
         </TouchableOpacity>
       </Container>
