@@ -72,7 +72,7 @@ const _Main = StackNavigator(
 
 export const _Routes = StackNavigator(
     {
-        Start: { screen: Start },
+        //Start: { screen: Start },
         Main: { screen: _Main },
         TabRoutes: { screen: TabRoutes }, // Tabs
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile

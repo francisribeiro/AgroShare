@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB, Toast } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../../actions/AutenticacaoAction'
@@ -13,6 +13,11 @@ class Login extends Component {
   _autenticarUsuario() {
     const { email, senha } = this.props
     this.props.autenticarUsuario({ email, senha })
+  }
+
+  _aviso(msg) {
+    if (msg != '')
+      Toast.show({ text: msg, position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 2000 })
   }
 
   // Login screen
@@ -55,11 +60,9 @@ class Login extends Component {
               </Item>
             </View>
           </Form>
-          <Text style={{ color: '#ff0000', fontSize: 18 }}>{this.props.erroLogin}</Text>
 
         </Content>
-
-        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { Keyboard.dismiss(); this._autenticarUsuario()}}>
+        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario(); Keyboard.dismiss(); this._aviso(this.props.erroLogin) }}>
           <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
         </TouchableOpacity>
       </Container>

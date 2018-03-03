@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
+import { Root } from 'native-base'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase'
@@ -30,7 +31,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
-        <AppWithNavigationState />
+        <Root>
+          <AppWithNavigationState />
+        </Root>
       </Provider>
     )
   }
