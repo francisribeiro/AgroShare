@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/firestore'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 import { Keyboard } from 'react-native'

@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/firestore'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 
@@ -23,17 +24,23 @@ export const modificaIdade = (texto) => {
 }
 
 export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
-    console.log({ nome, sobrenome, email, senha, idade })
+    alert({ nome, sobrenome, email, senha, idade })
     return dispatch => {
-        firebase.auth().createUserWithEmailAndPassword(email, senha)
-            .then(user => {
-                let emailB64 = b64.encode(email)
-                firebase.database().ref(`/contatos/${emailB64}`)
-                    .push({ nome, sobrenome, email, idade })
-                    .then(value => cadastraUsuarioSuccesso(dispatch))
-            })
-            .catch(erro => cadastraUsuarioErro(dispatch, erro))
+        firebase.firestore().collection('users').add({
+            nome: 'francis',
+            idade: '28'
+        })
     }
+    // return dispatch => {
+    //     firebase.auth().createUserWithEmailAndPassword(email, senha)
+    //         .then(user => {
+    //             let emailB64 = b64.encode(email)
+    //             firebase.database().ref(`/contatos/${emailB64}`)
+    //                 .push({ nome, sobrenome, email, idade })
+    //                 .then(value => cadastraUsuarioSuccesso(dispatch))
+    //         })
+    //         .catch(erro => cadastraUsuarioErro(dispatch, erro))
+    // }
 }
 
 const cadastraUsuarioSuccesso = (dispatch) => {
