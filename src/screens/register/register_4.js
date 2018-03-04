@@ -19,7 +19,7 @@ class Register_4 extends Component {
 
     // DatePicker helpers
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
-    _hideDateTimePicker = (date) => {this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) });alert(this.props.idade)}
+    _hideDateTimePicker = (date) => { this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) }); this.props.modificaIdade(this._dateFormat(date).replace(/\s/gi, '')) }
     _handleDatePicked = (date) => { this._hideDateTimePicker(date) }
     _dateFormat = (date) => { return (date.getDate() + ' / ' + (parseInt(date.getMonth()) + 1).toString() + ' / ' + date.getFullYear()) }
 
@@ -77,7 +77,6 @@ class Register_4 extends Component {
                                             selectionColor='#fff'
                                             style={globalStyles.input}
                                             value={this.state.date}
-                                            onChangeText={this.props.modificaIdade(this.state.date)} 
                                         />
                                     </Item>
                                 </View>
@@ -89,9 +88,7 @@ class Register_4 extends Component {
                                 onCancel={this._hideDateTimePicker}
                             />
                         </View>
-
                     </Form>
-                    <Text>{this.props.erroCadastro}</Text>
                 </Content>
 
                 <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._cadastrarUsuario() }}>
