@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { StackNavigator, TabNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation'
-import { Easing, Animated, BackHandler } from 'react-native'
+import { BackHandler } from 'react-native'
+
 import { addListener } from '../../utils/redux'
+import { t1, t2 } from './transitions'
 // Tabs
 import TabRoutes from './tabRoutes'
 
@@ -24,6 +26,9 @@ import ProfileMaq from '../../screens/anuncio/profileMaq'
 //Chat
 import Chat from '../../screens/mensagens/chat'
 
+//Cadastro 
+import Cadastro_1 from '../../screens/anuncio/novoAnuncio/cadastro_1'
+
 
 // Routes path
 const _Main = StackNavigator(
@@ -41,32 +46,7 @@ const _Main = StackNavigator(
 
     }, {
         headerMode: 'none',
-        transitionConfig: () => ({
-            transitionSpec: {
-                duration: 550,
-                easing: Easing.out(Easing.poly(3)),
-                timing: Animated.timing,
-                useNativeDriver: true
-            },
-            screenInterpolator: sceneProps => {
-                const { layout, position, scene } = sceneProps
-
-                const thisSceneIndex = scene.index
-                const width = layout.initWidth
-
-                const translateX = position.interpolate({
-                    inputRange: [thisSceneIndex - 1, thisSceneIndex],
-                    outputRange: [width, 0],
-                })
-
-                const opacity = position.interpolate({
-                    inputRange: [thisSceneIndex - 1, thisSceneIndex],
-                    outputRange: [0.8, 1],
-                })
-
-                return { opacity, transform: [{ translateX }] }
-            }
-        })
+        transitionConfig: t1
     }
 )
 
@@ -76,36 +56,11 @@ export const _Routes = StackNavigator(
         Main: { screen: _Main },
         TabRoutes: { screen: TabRoutes }, // Tabs
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
-        Chat: { screen: Chat } //Chat
+        Chat: { screen: Chat }, //Chat
+        Cadastro_1: { screen: Cadastro_1 },
     }, {
         headerMode: 'float',
-        transitionConfig: () => ({
-            transitionSpec: {
-                duration: 350,
-                easing: Easing.out(Easing.poly(3)),
-                timing: Animated.timing,
-                useNativeDriver: true
-            },
-            screenInterpolator: sceneProps => {
-                const { position, layout, scene, index, scenes } = sceneProps
-                const toIndex = index
-                const thisSceneIndex = scene.index
-                const height = layout.initHeight
-                const width = layout.initWidth
-
-                const translateX = position.interpolate({
-                    inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-                    outputRange: [width, 0, 0]
-                })
-
-                const opacity = position.interpolate({
-                    inputRange: [thisSceneIndex - 1, thisSceneIndex],
-                    outputRange: [0.8, 1],
-                })
-
-                return { opacity, transform: [{ translateX }] }
-            }
-        })
+        transitionConfig: t2
     }
 
 )

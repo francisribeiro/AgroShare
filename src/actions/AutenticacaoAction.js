@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import { auth } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 import { Keyboard } from 'react-native'
@@ -13,7 +13,7 @@ export const modificaSenha = (texto) => {
 
 export const autenticarUsuario = ({ email, senha }) => {
     return dispatch => {
-        firebase.auth().signInWithEmailAndPassword(email, senha)
+        auth.doSignInWithEmailAndPassword(email, senha)
             .then(value => loginUsuarioSuccesso(dispatch))
             .catch(erro => loginUsuarioErro(dispatch, erro))
     }

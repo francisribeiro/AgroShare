@@ -23,7 +23,7 @@ export default class Anuncios extends Component {
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body>
-                        <Button iconLeft full large onPress={() => false} style={globalStyles.fullButtonHeader}>
+                        <Button iconLeft full large onPress={() => navigate('Cadastro_1')} style={globalStyles.fullButtonHeader}>
                             <View>
                                 <Text style={{ fontSize: 18, color: '#fff', paddingBottom: 10 }}>Tem uma máquina? Anuncie aqui.</Text>
                             </View>

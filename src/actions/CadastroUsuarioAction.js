@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import {auth, firebase} from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 
@@ -24,10 +24,10 @@ export const modificaIdade = (texto) => {
 
 export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
     return dispatch => {
-        firebase.auth().createUserWithEmailAndPassword(email, senha)
+        auth.doCreateUserWithEmailAndPassword(email, senha)
             .then(user => {
                 let emailB64 = b64.encode(email)
-                firebase.database().ref(`/users/${emailB64}`)
+                firebase.db.ref(`/users/${emailB64}`)
                     .push({ nome, sobrenome, email, idade })
                     .then(value => cadastraUsuarioSuccesso(dispatch))
             })

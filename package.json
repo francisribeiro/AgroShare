@@ -9,6 +9,7 @@
   "dependencies": {
     "base-64": "^0.1.0",
     "firebase": "^4.10.1",
+    "lodash": "^4.17.5",
     "native-base": "^2.3.6",
     "react": "16.0.0",
     "react-native": "0.51.0",
