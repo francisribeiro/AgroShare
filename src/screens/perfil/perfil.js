@@ -3,7 +3,6 @@ import { Container, Content, Header, Left, Right, Button, Text, Body, Icon, Titl
 import { View, TouchableOpacity } from 'react-native'
 import IconBadge from 'react-native-icon-badge'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import { auth, firebase } from '../../config/firebase'
 import { getUserData } from '../../actions/AppAction'
@@ -17,31 +16,17 @@ class Perfil extends Component {
     static navigationOptions = { header: null }
 
     componentWillMount() {
-        console.log(this.props.getUserData())
-        this.criaFonteDeDados(this.props.contatos)
-
-        // var users = firebase.db.ref('users')
-        // users.on('value', (ss)=>{
-        //     console.log(ss.val())
-        // })
+        this.props.getUserData()
     }
-
-    componentWillReceiveProps(nextProps) {
-        this.criaFonteDeDados(nextProps.contatos)
-    }
-
-    criaFonteDeDados(contatos) {
-        this.fonteDeDados = contatos
-    }
-
 
     // Atividades screen
     render() {
+        const {nome, sobrenome} = this.props
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body style={{ paddingLeft: 10 }}>
-                        <Title style={{ fontSize: 20, width: 144 }}>{contato.nome}</Title>
+                        <Title style={{ fontSize: 20, width: 144 }}>{nome} {sobrenome}</Title>
                     </Body>
 
                     <Right>
@@ -76,7 +61,17 @@ class Perfil extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-
+                    <View style={globalStyles.itemMenu}>
+                        <TouchableOpacity onPress={() => false}>
+                            <View style={globalStyles.alignMenu}>
+                                <Title style={globalStyles.titleMenu}>Quero alugar uma máquina</Title>
+                                <Right>
+                                    <Icon name='ios-swap-outline' style={globalStyles.iconMenu} />
+                                </Right>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    
                     <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
@@ -127,11 +122,9 @@ class Perfil extends Component {
     }
 }
 
-mapStateToProps = state => {
-    const contatos = _.map(state.ListaContatosReducer, (val, uid) => {
-        return { ...val, uid }
-    })
-    return { contatos }
-}
+const mapStateToProps = state => ({ 
+    nome: state.AppReducer.nome,
+    sobrenome: state.AppReducer.sobrenome
+})
 
 export default connect(mapStateToProps, { getUserData })(Perfil)

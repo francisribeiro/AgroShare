@@ -11,10 +11,10 @@ import AppReducer from './AppReducer'
 const initialNavState = null
 
 // firebase.auth.onAuthStateChanged(function (user) {
-    if (true)
-        initialNavState = _Routes.router.getStateForAction(NavigationActions.navigate({ routeName: 'Anuncios' }))
+    if (false)
+        initialNavState = _Routes.router.getStateForAction(NavigationActions.navigate({ routeName: 'Start' }))
     else
-        initialNavState = _Routes.router.getStateForAction(NavigationActions.navigate({ routeName: 'Anuncios' }))
+        initialNavState = _Routes.router.getStateForAction(NavigationActions.navigate({ routeName: 'Start' }))
 // })
 
 function nav(state = initialNavState, action) {
@@ -25,7 +25,7 @@ function nav(state = initialNavState, action) {
 
 export default combineReducers({
     nav,
+    AppReducer,
     AutenticacaoReducer,
     CadastroUsuarioReducer,
-    AppReducer
 })
