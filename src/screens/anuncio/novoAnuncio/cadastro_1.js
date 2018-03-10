@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 
 export default class Cadastro_1 extends Component {
-    // Hide the header
-    static navigationOptions = { header: null }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerStyle: { backgroundColor: 'transparent', top: 0, right: 0, left: 0, position: 'absolute' },
+            headerTintColor: '#00695c'
+        }
+    }
 
     // Register_1 screen
     render() {
@@ -14,41 +18,26 @@ export default class Cadastro_1 extends Component {
         const { navigate, goBack } = this.props.navigation
 
         return (
-            <Container style={{ backgroundColor: globalStyles.bg }}>
+            <Container style={{ backgroundColor: "#fff" }}>
 
-                <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: 'transparent' }}>
-                    <Left>
-                        <Button transparent onPress={() => goBack()}>
-                            <Icon name='arrow-back' />
-                        </Button>
-                    </Left>
-
-                    <Right />
-                </Header>
-
-                <Content style={{ padding: 10 }}>
+                <Content style={{ padding: 10, paddingTop: 60 }}>
                     <View style={{ paddingLeft: 15, paddingBottom: 32 }}>
-                        <Text style={globalStyles.pagTitulo}>Qual o seu nome?</Text>
+                        <Text style={globalStyles.pagTitulo2}>Vamos preparar sua máquina para ser alugada.</Text>
                     </View>
 
-                    <Form>
-                        <View style={{ paddingRight: 15 }}>
-                            <Item stackedLabel>
-                                <Label style={globalStyles.inputLabel}>NOME</Label>
-                                <Input returnKeyType='next' selectionColor='#fff' style={globalStyles.input} />
-                            </Item>
+                    <Text style={globalStyles.txtDescription2}>
+                        Agora passaremos por diversos passos, onde em cada passo serão solicitadas informações referentes
+                        a sua máquina, localização, preço, etc...
+                    </Text>
 
-                            <Item style={{ paddingTop: 20 }} stackedLabel>
-                                <Label style={globalStyles.inputLabel}>SOBRENOME</Label>
-                                <Input selectionColor='#fff' style={globalStyles.input} />
-                            </Item>
-                        </View>
-                    </Form>
                 </Content>
 
-                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { false }}>
-                    <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
-                </TouchableOpacity>
+                <View style={globalStyles.floatingButton2}>
+                    <Button rounded onPress={() => navigate('Cadastro_2')} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                        <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Continuar</Text>
+                        <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
+                    </Button>
+                </View>
             </Container>
         )
     }

@@ -197,12 +197,9 @@ export default {
 
   // Radio Button
   radioBtnSize: platform === "ios" ? 25 : 23,
-  radioSelectedColorAndroid: "#5067FF",
+  radioSelectedColorAndroid: "#fff",
   radioBtnLineHeight: platform === "ios" ? 29 : 24,
-  radioColor: "#7e7e7e",
-  get radioSelectedColor() {
-    return color(this.radioColor).darken(0.2).hex();
-  },
+  radioColor: "#fff",
 
   // Spinner
   defaultSpinnerColor: "#45D56E",

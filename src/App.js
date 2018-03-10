@@ -7,6 +7,9 @@ import ReduxThunk from 'redux-thunk'
 import AppWithNavigationState from './config/navigation/routes'
 import reducers from './reducers'
 
+// desativa os warnings
+console.disableYellowBox = true;
+
 export default class App extends Component {
 
   constructor(props) {

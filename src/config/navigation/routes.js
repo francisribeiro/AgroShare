@@ -28,7 +28,14 @@ import Chat from '../../screens/mensagens/chat'
 
 //Cadastro 
 import Cadastro_1 from '../../screens/anuncio/novoAnuncio/cadastro_1'
-
+import Cadastro_2 from '../../screens/anuncio/novoAnuncio/cadastro_2'
+import Cadastro_3 from '../../screens/anuncio/novoAnuncio/cadastro_3'
+import Cadastro_4 from '../../screens/anuncio/novoAnuncio/cadastro_4'
+import Cadastro_5 from '../../screens/anuncio/novoAnuncio/cadastro_5'
+import Cadastro_6 from '../../screens/anuncio/novoAnuncio/cadastro_6'
+import Cadastro_7 from '../../screens/anuncio/novoAnuncio/cadastro_7'
+import Cadastro_8 from '../../screens/anuncio/novoAnuncio/cadastro_8'
+import Cadastro_9 from '../../screens/anuncio/novoAnuncio/cadastro_9'
 
 // Routes path
 const _Main = StackNavigator(
@@ -58,6 +65,14 @@ export const _Routes = StackNavigator(
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
         Chat: { screen: Chat }, //Chat
         Cadastro_1: { screen: Cadastro_1 },
+        Cadastro_2: { screen: Cadastro_2 },
+        Cadastro_3: { screen: Cadastro_3 },
+        Cadastro_4: { screen: Cadastro_4 },
+        Cadastro_5: { screen: Cadastro_5 },
+        Cadastro_6: { screen: Cadastro_6 },
+        Cadastro_7: { screen: Cadastro_7 },
+        Cadastro_8: { screen: Cadastro_8 },
+        Cadastro_9: { screen: Cadastro_9 },
     }, {
         headerMode: 'float',
         transitionConfig: t2
