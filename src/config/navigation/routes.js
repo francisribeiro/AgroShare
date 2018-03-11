@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { StackNavigator, TabNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation'
-import { BackHandler } from 'react-native'
+import { Platform, BackHandler } from 'react-native'
 
 import { addListener } from '../../utils/redux'
-import { t1, t2 } from './transitions'
+import { t1, t2, t3 } from './transitions'
 // Tabs
 import TabRoutes from './tabRoutes'
 
@@ -57,13 +57,8 @@ const _Main = StackNavigator(
     }
 )
 
-export const _Routes = StackNavigator(
+const _addMaq = StackNavigator(
     {
-        //Start: { screen: Start },
-        Main: { screen: _Main },
-        TabRoutes: { screen: TabRoutes }, // Tabs
-        ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
-        Chat: { screen: Chat }, //Chat
         Cadastro_1: { screen: Cadastro_1 },
         Cadastro_2: { screen: Cadastro_2 },
         Cadastro_3: { screen: Cadastro_3 },
@@ -73,6 +68,19 @@ export const _Routes = StackNavigator(
         Cadastro_7: { screen: Cadastro_7 },
         Cadastro_8: { screen: Cadastro_8 },
         Cadastro_9: { screen: Cadastro_9 },
+    }, {
+        headerMode: 'none',
+        transitionConfig: t3
+    }
+)
+
+export const _Routes = StackNavigator(
+    {
+        Main: { screen: _Main },
+        TabRoutes: { screen: TabRoutes }, // Tabs
+        ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
+        Chat: { screen: Chat }, //Chat
+        addMaq: { screen: _addMaq }
     }, {
         headerMode: 'float',
         transitionConfig: t2
@@ -86,21 +94,19 @@ class AppWithNavigationState extends Component {
         nav: PropTypes.object.isRequired
     }
 
-    componentDidMount() {
-        BackHandler.addEventListener("hardwareBackPress", this.onBackPress)
+    componentWillMount() {
+        if (Platform.OS !== 'android') return
+
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            const { dispatch, nav } = this.props
+            if (nav.routes.length === 1 && (nav.routes[0].routeName === 'Start' || nav.routes[0].routeName === 'Start')) return false
+            dispatch({ type: 'Navigation/BACK' })
+            return true
+        })
     }
 
     componentWillUnmount() {
-        BackHandler.removeEventListener("hardwareBackPress", this.onBackPress)
-    }
-
-    onBackPress = () => {
-        const { dispatch, nav } = this.props
-        if (nav.index === 0)
-            return false
-
-        dispatch(NavigationActions.back())
-        return true
+        if (Platform.OS === 'android') BackHandler.removeEventListener('hardwareBackPress')
     }
 
     render() {
@@ -109,8 +115,7 @@ class AppWithNavigationState extends Component {
             <_Routes
                 navigation={addNavigationHelpers({
                     dispatch,
-                    state: nav,
-                    addListener
+                    state: nav
                 })}
             />
         )

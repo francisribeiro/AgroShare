@@ -6,12 +6,8 @@ import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
 export default class Cadastro_3 extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            headerStyle: { backgroundColor: 'transparent', top: 0, right: 0, left: 0, position: 'absolute' },
-            headerTintColor: '#00695c'
-        }
-    }
+    // Hide the header
+    static navigationOptions = { header: null }
 
     constructor(props) {
         super(props)
@@ -28,9 +24,19 @@ export default class Cadastro_3 extends Component {
         const { goBack, navigate } = this.props.navigation
 
         return (
-            <Container style={{ backgroundColor: '#fff' }}>
+            <Container style={{ backgroundColor: "#fff" }}>
 
-                <Content style={{ padding: 10, paddingTop: 60 }}>
+                <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: '#fff' }}>
+                    <Left>
+                        <Button transparent onPress={() => goBack(null)}>
+                            <Icon name='arrow-back' style={{ color: globalStyles.bg }} />
+                        </Button>
+                    </Left>
+
+                    <Right />
+                </Header>
+
+                <Content style={{ padding: 10 }}>
                     <View style={{ paddingLeft: 15, paddingBottom: 32 }}>
                         <Text style={globalStyles.pagTitulo2}>Qual a marca do #MÁQUINA que você está alugando?</Text>
                     </View>

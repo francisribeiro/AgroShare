@@ -5,12 +5,8 @@ import { View, Keyboard, TouchableOpacity } from 'react-native'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
 export default class Cadastro_1 extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            headerStyle: { backgroundColor: 'transparent', top: 0, right: 0, left: 0, position: 'absolute' },
-            headerTintColor: '#00695c'
-        }
-    }
+    // Hide the header
+    static navigationOptions = { header: null }
 
     // Register_1 screen
     render() {
@@ -20,7 +16,17 @@ export default class Cadastro_1 extends Component {
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
-                <Content style={{ padding: 10, paddingTop: 60 }}>
+                <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: '#fff' }}>
+                    <Left>
+                        <Button transparent onPress={() => goBack(null)}>
+                            <Icon name='arrow-back' style={{ color: globalStyles.bg }} />
+                        </Button>
+                    </Left>
+
+                    <Right />
+                </Header>
+
+                <Content style={{ padding: 10 }}>
                     <View style={{ paddingLeft: 15, paddingBottom: 32 }}>
                         <Text style={globalStyles.pagTitulo2}>Vamos preparar sua máquina para ser alugada.</Text>
                     </View>
