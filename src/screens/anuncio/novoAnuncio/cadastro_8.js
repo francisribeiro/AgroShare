@@ -2,21 +2,14 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
+import { connect } from 'react-redux'
 
+import { modificaTitulo } from '../../../actions/CadastroAnuncioAction'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-export default class Cadastro_8 extends Component {
+class Cadastro_8 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-
-    constructor(props) {
-        super(props)
-        this.state = { value: '' }
-    }
-
-    onSelect(index, value) {
-        this.setState({ value })
-    }
 
     // Cadastro_2 screen
     render() {
@@ -45,7 +38,7 @@ export default class Cadastro_8 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Input multiline={true} numberOfLines={2} placeholder='Escreva um título curto, porém chamativo.'
-                                    placeholderTextColor='rgba(88,88,88,0.8)' selectionColor='#585858' style={globalStyles.txtDescription2} />
+                                    placeholderTextColor='rgba(88,88,88,0.8)' selectionColor='#585858' style={globalStyles.txtDescription2} onChangeText={(texto) => this.props.modificaTitulo(texto)} />
                             </Item>
                         </View>
                     </Form>
@@ -60,3 +53,9 @@ export default class Cadastro_8 extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    titulo: state.CadastroAnuncioReducer.titulo
+})
+
+export default connect(mapStateToProps, { modificaTitulo })(Cadastro_8)

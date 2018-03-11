@@ -2,21 +2,15 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
+import { connect } from 'react-redux'
+
+import { modificaMarca } from '../../../actions/CadastroAnuncioAction'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-export default class Cadastro_3 extends Component {
+class Cadastro_3 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-
-    constructor(props) {
-        super(props)
-        this.state = { value: '' }
-    }
-
-    onSelect(index, value) {
-        this.setState({ value })
-    }
 
     // Cadastro_2 screen
     render() {
@@ -38,7 +32,7 @@ export default class Cadastro_3 extends Component {
 
                 <Content style={{ padding: 10 }}>
                     <View style={{ paddingLeft: 15, paddingBottom: 32 }}>
-                        <Text style={globalStyles.pagTitulo2}>Qual a marca do #MÁQUINA que você está alugando?</Text>
+                        <Text style={globalStyles.pagTitulo2}>Qual a marca do {this.props.tipo} que você está alugando?</Text>
                     </View>
 
                     <Form>
@@ -47,25 +41,25 @@ export default class Cadastro_3 extends Component {
                                 size={30}
                                 thickness={2}
                                 color='#585858'
-                                onSelect={(index, value) => this.onSelect(index, value)}
+                                onSelect={(index, value) => this.props.modificaMarca(value)}
                             >
-                                <RadioButton value={'Trator'} color={globalStyles.bg}>
+                                <RadioButton value={'John Deere'} color={globalStyles.bg}>
                                     <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>John Deere</Text>
                                 </RadioButton>
 
-                                <RadioButton value={'Roçadeira'} color={globalStyles.bg}>
+                                <RadioButton value={'Massey Ferguson'} color={globalStyles.bg}>
                                     <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>Massey Ferguson</Text>
                                 </RadioButton>
 
-                                <RadioButton value={'Colheitadeira'} color={globalStyles.bg}>
+                                <RadioButton value={'New Holland'} color={globalStyles.bg}>
                                     <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>New Holland</Text>
                                 </RadioButton>
 
-                                <RadioButton value={'Ensilhadeira'} color={globalStyles.bg}>
+                                <RadioButton value={'Valtra'} color={globalStyles.bg}>
                                     <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>Valtra</Text>
                                 </RadioButton>
 
-                                <RadioButton value={'Adubadeira'} color={globalStyles.bg}>
+                                <RadioButton value={'Yanmar'} color={globalStyles.bg}>
                                     <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>Yanmar</Text>
                                 </RadioButton>
 
@@ -84,3 +78,10 @@ export default class Cadastro_3 extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    tipo: state.CadastroAnuncioReducer.tipo,
+    marca: state.CadastroAnuncioReducer.marca
+})
+
+export default connect(mapStateToProps, { modificaMarca })(Cadastro_3)

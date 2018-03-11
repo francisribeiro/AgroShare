@@ -2,22 +2,20 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
+import { connect } from 'react-redux'
 
+import { modificaCidade, modificaEstado } from '../../../actions/CadastroAnuncioAction'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-export default class Cadastro_5 extends Component {
+class Cadastro_5 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
-    constructor(props) {
-        super(props)
-    }
 
     // Cadastro_2 screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
-
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
@@ -40,12 +38,12 @@ export default class Cadastro_5 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>CIDADE</Label>
-                                <Input placeholder='ex. Piranguçu' placeholderTextColor='rgba(88,88,88,0.6)' returnKeyType='next' selectionColor='#585858' style={globalStyles.input2} />
+                                <Input placeholder='ex. Piranguçu' placeholderTextColor='rgba(88,88,88,0.6)' returnKeyType='next' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaCidade(texto)} />
                             </Item>
 
                             <Item style={{ paddingTop: 20 }} stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>ESTADO</Label>
-                                <Input placeholder='ex. MG' placeholderTextColor='rgba(88,88,88,0.6)' keyboardType='numeric' selectionColor='#585858' style={globalStyles.input2} />
+                                <Input placeholder='ex. MG' placeholderTextColor='rgba(88,88,88,0.6)' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaEstado(texto)} />
                             </Item>
                         </View>
                     </Form>
@@ -61,3 +59,10 @@ export default class Cadastro_5 extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    cidade: state.CadastroAnuncioReducer.cidade,
+    estado: state.CadastroAnuncioReducer.estado,
+})
+
+export default connect(mapStateToProps, { modificaCidade, modificaEstado })(Cadastro_5)

@@ -2,20 +2,18 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
+import { connect } from 'react-redux'
 
+import { modificaPreco, cadastrarAnuncio } from '../../../actions/CadastroAnuncioAction'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-export default class Cadastro_6 extends Component {
+class Cadastro_9 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
-    constructor(props) {
-        super(props)
-        this.state = { value: '' }
-    }
-
-    onSelect(index, value) {
-        this.setState({ value })
+    _cadastrarAnuncio() {
+        const { tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco } = this.props
+        this.props.cadastrarAnuncio({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco })
     }
 
     // Cadastro_2 screen
@@ -49,13 +47,13 @@ export default class Cadastro_6 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>PREÇO POR HORA</Label>
-                                <Input placeholder='R$' placeholderTextColor='rgba(88,88,88,0.6)' keyboardType='numeric' selectionColor='#585858' style={globalStyles.input2} />
+                                <Input placeholder='R$' placeholderTextColor='rgba(88,88,88,0.6)' keyboardType='numeric' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaPreco(texto)} />
                             </Item>
                         </View>
                     </Form>
                 </Content>
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Anuncios')} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded onPress={() => this._cadastrarAnuncio()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Finalizar Anúncio</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>
@@ -64,3 +62,17 @@ export default class Cadastro_6 extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    tipo: state.CadastroAnuncioReducer.tipo,
+    marca: state.CadastroAnuncioReducer.marca,
+    modelo: state.CadastroAnuncioReducer.modelo,
+    ano: state.CadastroAnuncioReducer.ano,
+    cidade: state.CadastroAnuncioReducer.cidade,
+    estado: state.CadastroAnuncioReducer.estado,
+    descricao: state.CadastroAnuncioReducer.descricao,
+    titulo: state.CadastroAnuncioReducer.titulo,
+    preco: state.CadastroAnuncioReducer.preco
+})
+
+export default connect(mapStateToProps, { modificaPreco, cadastrarAnuncio })(Cadastro_9)
