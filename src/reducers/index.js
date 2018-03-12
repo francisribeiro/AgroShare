@@ -8,6 +8,7 @@ import AutenticacaoReducer from './AutenticacaoReducer'
 import CadastroUsuarioReducer from './CadastroUsuarioReducer'
 import AppReducer from './AppReducer'
 import CadastroAnuncioReducer from './CadastroAnuncioReducer'
+import AnunciosListaReducer from './AnunciosListaReducer'
 
 const initialNavState = null
 
@@ -30,4 +31,5 @@ export default combineReducers({
     AutenticacaoReducer,
     CadastroUsuarioReducer,
     CadastroAnuncioReducer,
+    AnunciosListaReducer,
 })
