@@ -33,7 +33,7 @@ class Anuncios extends Component {
 
     renderRow(anuncio, navigate) {
         return (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('ProfileMaq')}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('ProfileMaq', { anuncio })}>
                 <SingleCard tipo={anuncio.tipo} modelo={anuncio.modelo} marca={anuncio.marca} thumb={cardImage2} preco={anuncio.preco} comments='42' />
             </TouchableOpacity>
         )

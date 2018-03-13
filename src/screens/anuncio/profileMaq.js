@@ -20,6 +20,13 @@ export default class ProfileMaq extends Component {
     render() {
         // StackNavigator props
         const { navigate, goBack } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const tipo = params ? params.anuncio.tipo : null
+        const marca = params ? params.anuncio.marca : null
+        const modelo = params ? params.anuncio.modelo : null
+        const titulo = params ? params.anuncio.titulo : null
+        const descricao = params ? params.anuncio.descricao : null
+        const preco = params ? params.anuncio.preco : null
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -29,7 +36,7 @@ export default class ProfileMaq extends Component {
                     </View>
 
                     <View style={{ padding: 20, paddingBottom: 15 }}>
-                        <Title numberOfLines={4} style={{ textAlign: 'left', color: '#484848', fontSize: 32, fontWeight: 'bold' }}>TRATOR VALTRA BH 180 - COM ARADO DE DISCO REVERSÍVEL</Title>
+                        <Title numberOfLines={4} style={{ textAlign: 'left', color: '#484848', fontSize: 32, fontWeight: 'bold' }}>{tipo.toUpperCase()} {marca.toUpperCase()} {modelo.toUpperCase()} - {titulo.toUpperCase()}</Title>
                     </View>
 
                     <View style={{ borderColor: '#eaeaea', borderWidth: 0.7, paddingVertical: 10, marginVertical: 20 }}>
@@ -65,12 +72,12 @@ export default class ProfileMaq extends Component {
                     </View>
 
                     <View style={{ paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20 }}>
-                        <Text style={{ color: '#585858' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet magna fermentum, lacinia risus ut, condimentum neque. Nulla facilisi. Mauris condimentum felis et sem volutpat consequat. Duis laoreet dui mauris, non gravida dolor lobortis non. Orci varius natoque penatibus et magnis dis parturient montes.</Text>
+                        <Text style={{ color: '#585858' }}>{descricao}</Text>
                     </View>
                 </Content>
                 <Footer style={{ height: 65, paddingTop: 20, borderTopColor: '#eaeaea', borderTopWidth: 0.7 }}>
                     <Left style={{ paddingBottom: 20, paddingLeft: 20 }}>
-                        <Text style={{ fontWeight: 'bold', color: '#484848', fontSize: 18 }}>R$170/H</Text>
+                        <Text style={{ fontWeight: 'bold', color: '#484848', fontSize: 18 }}>R${preco}/H</Text>
                         <View style={globalStyles.itemAlign}>
                             <Icon name='ios-star' style={globalStyles.star} />
                             <Icon name='ios-star' style={globalStyles.star} />
