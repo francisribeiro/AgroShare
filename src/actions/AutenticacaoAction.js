@@ -13,6 +13,7 @@ export const modificaSenha = (texto) => {
 
 export const autenticarUsuario = ({ email, senha }) => {
     return dispatch => {
+        dispatch({ type: 'login_user' })
         auth.doSignInWithEmailAndPassword(email, senha)
             .then(value => loginUsuarioSuccesso(dispatch))
             .catch(erro => loginUsuarioErro(dispatch, erro))

@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
     email: 'teste@teste.com',
     senha: '$Francis123',
-    erroLogin: ''
+    erroLogin: '',
+    loading: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,10 +11,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, email: action.payload }
         case 'modifica_senha':
             return { ...state, senha: action.payload }
+        case 'login_user':
+            return { ...state, loading: true, erroLogin: '' }
         case 'erro_login':
-            return { ...state, erroLogin: action.payload }
+            return { ...state, erroLogin: action.payload, loading: false }
         case 'sucesso_login':
-            return { ...state, email: '', senha: '' }
+            return { ...state, ...INITIAL_STATE }
         default:
             return state
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB, Toast } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB, Toast, Spinner } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -30,6 +30,21 @@ class Login extends Component {
   _aviso(msg) {
     if (msg != '')
       Toast.show({ text: msg, position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 2000 })
+  }
+
+  renderIcon() {
+    if (this.props.loading)
+      return (
+        <TouchableOpacity activeOpacity={1} style={globalStyles.floatingButton} onPress={() => { false }}>
+          <Spinner color={globalStyles.bg} />
+        </TouchableOpacity>
+      )
+
+    return (
+      <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario() }}>
+        <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
+      </TouchableOpacity>
+    )
   }
 
   // Login screen
@@ -74,9 +89,7 @@ class Login extends Component {
           </Form>
 
         </Content>
-        <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario() }}>
-          <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
-        </TouchableOpacity>
+        {this.renderIcon()}
       </Container>
     )
   }
@@ -85,7 +98,8 @@ class Login extends Component {
 const mapStateToProps = state => ({
   email: state.AutenticacaoReducer.email,
   senha: state.AutenticacaoReducer.senha,
-  erroLogin: state.AutenticacaoReducer.erroLogin
+  erroLogin: state.AutenticacaoReducer.erroLogin,
+  loading: state.AutenticacaoReducer.loading
 })
 
 export default connect(mapStateToProps, { modificaEmail, modificaSenha, autenticarUsuario })(Login)
