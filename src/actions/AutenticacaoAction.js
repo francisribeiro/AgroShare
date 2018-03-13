@@ -23,7 +23,10 @@ export const autenticarUsuario = ({ email, senha }) => {
 const loginUsuarioSuccesso = (dispatch) => {
     Keyboard.dismiss()
     dispatch({ type: 'sucesso_login' })
-    dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
+    // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
 
 const loginUsuarioErro = (dispatch, erro) => {
