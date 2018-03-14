@@ -1,6 +1,7 @@
 import { firebase } from '../config/firebase'
 import { NavigationActions } from 'react-navigation'
 import b64 from 'base-64'
+import { Keyboard } from 'react-native'
 
 export const modificaTipo = (texto) => { return { type: 'modifica_tipo', payload: texto } }
 export const modificaMarca = (texto) => { return { type: 'modifica_marca', payload: texto } }
@@ -15,6 +16,8 @@ export const modificaPreco = (texto) => { return { type: 'modifica_preco', paylo
 
 export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }) => {
     return dispatch => {
+        dispatch({ type: 'cadastrar_anuncio' })
+
         let userId = b64.encode(firebase.auth.currentUser.email)
 
         firebase.db.ref(`/Anuncios/${userId}/`)
@@ -25,8 +28,12 @@ export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, des
 }
 
 const cadastraAnuncioSuccesso = (dispatch) => {
+    Keyboard.dismiss()
     dispatch({ type: 'sucesso_cadastro' })
-    dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
+    // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
 
 const cadastraAnuncioErro = (dispatch, erro) => {

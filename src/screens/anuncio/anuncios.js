@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Content, Header, Button, Text, Body, Icon } from 'native-base'
+import { Container, Content, Header, Button, Text, Body, Icon, Spinner } from 'native-base'
 import { View, TouchableOpacity, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -17,16 +17,27 @@ class Anuncios extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    constructor() {
+        super()
+        this.state = { loading: false }
+    }
+
+    renderHeader() {
+        return this.state.loading ? <Spinner color={globalStyles.bg} /> : null
+    }
+
     componentWillMount() {
+        this.setState({ loading: true })
         this.props.anunciosFetch()
         this.createDataSource(this.props.anuncios)
+            .then(this.setState({ loading: false }))
     }
 
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps.anuncios)
     }
 
-    createDataSource(anuncios) {
+    async createDataSource(anuncios) {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
         this.dataSource = ds.cloneWithRows(anuncios)
     }
@@ -63,6 +74,7 @@ class Anuncios extends Component {
                         <ListView
                             enableEmptySections
                             dataSource={this.dataSource}
+                            renderHeader={this.renderHeader.bind(this)}
                             renderRow={(data) => this.renderRow(data, navigate)}
                         />
                     </View>

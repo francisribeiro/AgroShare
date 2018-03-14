@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast, Spinner } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
@@ -35,6 +35,22 @@ class Register_4 extends Component {
         if (msg != '')
             Toast.show({ text: msg, position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
     }
+
+    renderIcon() {
+        if (this.props.loading)
+            return (
+                <TouchableOpacity activeOpacity={1} style={globalStyles.floatingButton} onPress={() => { false }}>
+                    <Spinner color={globalStyles.bg} />
+                </TouchableOpacity >
+            )
+
+        return (
+            <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._cadastrarUsuario() }}>
+                <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
+            </TouchableOpacity>
+        )
+    }
+
     // Register_4 screen
     render() {
         // StackNavigator props
@@ -91,9 +107,7 @@ class Register_4 extends Component {
                     </Form>
                 </Content>
 
-                <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._cadastrarUsuario() }}>
-                    <Icon style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
-                </TouchableOpacity>
+                {this.renderIcon()}
             </Container>
         )
     }
@@ -105,7 +119,8 @@ const mapStateToProps = state => ({
     email: state.CadastroUsuarioReducer.email,
     senha: state.CadastroUsuarioReducer.senha,
     idade: state.CadastroUsuarioReducer.idade,
-    erroCadastro: state.CadastroUsuarioReducer.erroCadastro
+    erroCadastro: state.CadastroUsuarioReducer.erroCadastro,
+    loading: state.CadastroUsuarioReducer.loading
 })
 
 export default connect(mapStateToProps, { modificaIdade, cadastrarUsuario })(Register_4)

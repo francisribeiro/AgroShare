@@ -1,6 +1,7 @@
-import {auth, firebase} from '../config/firebase'
+import { auth, firebase } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
+import { Keyboard } from 'react-native'
 
 export const modificaNome = (texto) => {
     return { type: 'modifica_nome', payload: texto }
@@ -24,6 +25,8 @@ export const modificaIdade = (texto) => {
 
 export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
     return dispatch => {
+        dispatch({ type: 'cadastrar_usuario' })
+
         auth.doCreateUserWithEmailAndPassword(email, senha)
             .then(user => {
                 let emailB64 = b64.encode(email)
@@ -36,8 +39,11 @@ export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
 }
 
 const cadastraUsuarioSuccesso = (dispatch) => {
+    Keyboard.dismiss()
     dispatch({ type: 'sucesso_cadastro' })
-    dispatch(NavigationActions.navigate({ routeName: 'Login' }))
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'Main' })]
+    }))
 }
 
 const cadastraUsuarioErro = (dispatch, erro) => {

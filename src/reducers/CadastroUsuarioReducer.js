@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     senha: '',
     idade: '',
     erroCadastro: '',
+    loading: false,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,10 +20,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, senha: action.payload }
         case 'modifica_idade':
             return { ...state, idade: action.payload }
+        case 'cadastrar_usuario':
+            return { ...state, loading: true, erroCadastro: '' }
         case 'erro_cadastro':
-            return { ...state, erroCadastro: action.payload }
+            return { ...state, erroCadastro: action.payload, loading: false }
         case 'sucesso_cadastro':
-            return { ...state, nome: '', sobrenome: '', email: '', senha: '', idade: '' }
+            return { ...state, ...INITIAL_STATE }
         default:
             return state
     }

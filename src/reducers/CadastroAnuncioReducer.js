@@ -1,5 +1,15 @@
 const INITIAL_STATE = {
-    tipo: 'Trator', marca: 'Valtra', modelo: 'BH180', ano: '2014', cidade: 'Piranguçu', estado: 'MG', descricao: 'asdasd asda d asda dasd', titulo: 'vcxvzxccx zxcz xczxc', preco: '25'
+    tipo: 'Trator',
+    marca: 'Valtra',
+    modelo: 'BH180',
+    ano: '2014',
+    cidade: 'Piranguçu',
+    estado: 'MG',
+    descricao: 'asdasd asda d asda dasd',
+    titulo: 'vcxvzxccx zxcz xczxc',
+    preco: '25',
+    erroCadastro: '',
+    loading: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,10 +32,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, titulo: action.payload }
         case 'modifica_preco':
             return { ...state, preco: action.payload }
+        case 'cadastrar_anuncio':
+            return { ...state, loading: true, erroCadastro: '' }
         case 'erro_cadastro':
-            return { ...state, erroCadastro: action.payload }
+            return { ...state, erroCadastro: action.payload, loading: false }
         case 'sucesso_cadastro':
-            return { ...state, tipo: '', marca: '', modelo: '', ano: '', cidade: '', estado: '', descricao: '', titulo: '', preco: '' }
+            return { ...state, ...INITIAL_STATE }
         default:
             return state
     }
