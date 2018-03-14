@@ -3,6 +3,7 @@ import { Container, Content, Header, Left, Right, Button, Text, Body, Icon, Titl
 import { View, TouchableOpacity } from 'react-native'
 import IconBadge from 'react-native-icon-badge'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
 import { auth, firebase } from '../../config/firebase'
 import { getUserData } from '../../actions/AppAction'
@@ -19,9 +20,16 @@ class Perfil extends Component {
         this.props.getUserData()
     }
 
+    reset() {
+        this.props.navigation.dispatch(NavigationActions.reset({
+            index: 0,
+            key: null,
+            actions: [NavigationActions.navigate({ routeName: 'Main' })]
+        }))
+    }
     // Atividades screen
     render() {
-        const {nome, sobrenome} = this.props
+        const { nome, sobrenome } = this.props
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
@@ -71,7 +79,7 @@ class Perfil extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-                    
+
                     <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
@@ -107,7 +115,7 @@ class Perfil extends Component {
                     </View>
 
                     <View style={globalStyles.itemMenu}>
-                        <TouchableOpacity onPress={() => auth.doSignOut().then(() => this.props.navigation.navigate('Start'))}>
+                        <TouchableOpacity onPress={() => auth.doSignOut().then(() => this.reset())}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Sair</Title>
                                 <Right>
@@ -122,7 +130,7 @@ class Perfil extends Component {
     }
 }
 
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
     nome: state.AppReducer.nome,
     sobrenome: state.AppReducer.sobrenome
 })
