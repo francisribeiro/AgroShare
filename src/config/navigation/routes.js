@@ -8,6 +8,7 @@ import { addListener } from '../../utils/redux'
 import { t1, t2, t3 } from './transitions'
 // Tabs
 import TabRoutes from './tabRoutes'
+import TabRoutes_2 from './tabRoutes_2'
 
 // Login
 import Start from '../../screens/login/start'
@@ -36,6 +37,9 @@ import Cadastro_6 from '../../screens/anuncio/novoAnuncio/cadastro_6'
 import Cadastro_7 from '../../screens/anuncio/novoAnuncio/cadastro_7'
 import Cadastro_8 from '../../screens/anuncio/novoAnuncio/cadastro_8'
 import Cadastro_9 from '../../screens/anuncio/novoAnuncio/cadastro_9'
+
+//Loading
+import Loading from '../../screens/common/loading'
 
 // Routes path
 const _Main = StackNavigator(
@@ -74,13 +78,24 @@ const _addMaq = StackNavigator(
     }
 )
 
+const load = StackNavigator(
+    {
+        Loading: { screen: Loading }
+    }, {
+        headerMode: 'none',
+        transitionConfig: t2
+    }
+)
+
 export const _Routes = StackNavigator(
     {
         Main: { screen: _Main },
         TabRoutes: { screen: TabRoutes }, // Tabs
+        TabRoutes_2: { screen: TabRoutes_2 }, // Tabs
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
         Chat: { screen: Chat }, //Chat
-        addMaq: { screen: _addMaq }
+        addMaq: { screen: _addMaq },
+        load: { screen: load }
     }, {
         headerMode: 'float',
         transitionConfig: t2

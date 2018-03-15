@@ -5,12 +5,12 @@ import IconBadge from 'react-native-icon-badge'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
-import { auth, firebase } from '../../config/firebase'
-import { getUserData } from '../../actions/AppAction'
-import globalStyles from '../common/globalStyles' // Global Styles
+import { auth, firebase } from '../../../config/firebase'
+import { getUserData } from '../../../actions/AppAction'
+import globalStyles from '../../common/globalStyles' // Global Styles
 
 // Profile Image
-const profile = require('../../assets/images/profile.jpeg')
+const profile = require('../../../assets/images/profile.jpeg')
 
 class Perfil extends Component {
     // Hide the header
@@ -27,11 +27,11 @@ class Perfil extends Component {
             actions: [NavigationActions.navigate({ routeName: 'Main' })]
         }))
     }
-
     // Atividades screen
     render() {
         const { nome, sobrenome } = this.props
         const { navigate } = this.props.navigation
+
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
@@ -72,9 +72,9 @@ class Perfil extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={globalStyles.itemMenu}>
-                        <TouchableOpacity onPress={() => navigate('load', { troca: 1 })}>
+                        <TouchableOpacity onPress={() => navigate('load', { troca: 0 })}>
                             <View style={globalStyles.alignMenu}>
-                                <Title style={globalStyles.titleMenu}>Quero alugar uma máquina</Title>
+                                <Title style={globalStyles.titleMenu}>Quero alugar minha máquina</Title>
                                 <Right>
                                     <Icon name='ios-swap-outline' style={globalStyles.iconMenu} />
                                 </Right>
