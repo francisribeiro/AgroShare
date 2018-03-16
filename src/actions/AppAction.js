@@ -20,3 +20,11 @@ export const anunciosFetch = () => {
         })
     }
 }
+
+export const todosAnunciosFetch = () => {
+    return dispatch => {
+        firebase.db.ref('Anuncios').on('value', (snapshot) => {
+            dispatch({ type: 'todos_anuncios', payload: snapshot.val() })
+        })
+    }
+}

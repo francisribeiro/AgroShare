@@ -31,11 +31,11 @@ export default class Loading extends Component {
 
     render() {
         return (
-            <Container style={{ backgroundColor: '#fff' }}>
+            <Container style={{ backgroundColor: globalStyles.bg }}>
                 <Content style={{ paddingTop: 200 }}>
-                    <Spinner color={globalStyles.bg} />
+                    <Spinner color='#fff' />
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 20, color: '#585858' }}>Aguarde um momento...</Text>
+                        <Text style={{ fontSize: 20, color: '#fff' }}>Aguarde um momento...</Text>
                     </View>
                 </Content>
             </Container >

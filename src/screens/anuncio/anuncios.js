@@ -17,8 +17,8 @@ class Anuncios extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = { loading: false }
     }
 
