@@ -23,6 +23,7 @@ import Register_4 from '../../screens/register/register_4'
 
 // Anuncios
 import ProfileMaq from '../../screens/anuncio/profileMaq'
+import ProfileMaq_2 from '../../screens/switchProfile/explorar/profileMaq_2'
 
 //Chat
 import Chat from '../../screens/mensagens/chat'
@@ -37,6 +38,13 @@ import Cadastro_6 from '../../screens/anuncio/novoAnuncio/cadastro_6'
 import Cadastro_7 from '../../screens/anuncio/novoAnuncio/cadastro_7'
 import Cadastro_8 from '../../screens/anuncio/novoAnuncio/cadastro_8'
 import Cadastro_9 from '../../screens/anuncio/novoAnuncio/cadastro_9'
+
+
+//Alugar
+import Alugar_1 from '../../screens/switchProfile/explorar/alugar_1'
+import Alugar_2 from '../../screens/switchProfile/explorar/alugar_2'
+import Alugar_3 from '../../screens/switchProfile/explorar/alugar_3'
+import Alugar_4 from '../../screens/switchProfile/explorar/alugar_4'
 
 //Loading
 import Loading from '../../screens/common/loading'
@@ -78,6 +86,19 @@ const _addMaq = StackNavigator(
     }
 )
 
+const _alugar = StackNavigator(
+    {
+        ProfileMaq_2: { screen: ProfileMaq_2 }, // Explorer profile
+        Alugar_1: { screen: Alugar_1 },
+        Alugar_2: { screen: Alugar_2 },
+        Alugar_3: { screen: Alugar_3 },
+        Alugar_4: { screen: Alugar_4 }
+    }, {
+        headerMode: 'none',
+        transitionConfig: t3
+    }
+)
+
 const load = StackNavigator(
     {
         Loading: { screen: Loading }
@@ -95,7 +116,8 @@ export const _Routes = StackNavigator(
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
         Chat: { screen: Chat }, //Chat
         addMaq: { screen: _addMaq },
-        load: { screen: load }
+        load: { screen: load },
+        alugar: { screen: _alugar }
     }, {
         headerMode: 'float',
         transitionConfig: t2

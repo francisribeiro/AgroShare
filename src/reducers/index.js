@@ -9,6 +9,7 @@ import CadastroUsuarioReducer from './CadastroUsuarioReducer'
 import AppReducer from './AppReducer'
 import CadastroAnuncioReducer from './CadastroAnuncioReducer'
 import AnunciosListaReducer from './AnunciosListaReducer'
+import CadastroAluguelReducer from './CadastroAluguelReducer'
 
 const initialNavState = null
 
@@ -32,4 +33,5 @@ export default combineReducers({
     CadastroUsuarioReducer,
     CadastroAnuncioReducer,
     AnunciosListaReducer,
+    CadastroAluguelReducer,
 })

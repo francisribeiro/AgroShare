@@ -38,7 +38,7 @@ class Explorar extends Component {
 
     renderRow(anuncio, navigate) {
         return (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => false}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('alugar', { anuncio })}>
                 <SingleCard tipo={anuncio.tipo} modelo={anuncio.modelo} marca={anuncio.marca} thumb={cardImage2} preco={anuncio.preco} comments='42' />
             </TouchableOpacity>
         )
