@@ -1,8 +1,8 @@
 const INITIAL_STATE = {
-    dataInicial: '',
-    dataFinal: '',
+    dataInicial: '22/05/2018',
+    dataFinal: '03/06/2018',
     erroCadastro: '',
-    formaPagamento: '',
+    formaPagamento: 'Dinheiro',
     loading: false
 }
 

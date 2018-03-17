@@ -17,6 +17,31 @@ class Alugar_4 extends Component {
         this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento })
     }
 
+
+    subtractDate() {
+        let dateI = this.props.dataInicial.split('/')
+        let dateF = this.props.dataFinal.split('/')
+
+        let newDateI = `${dateI[1]}/${dateI[0]}/${dateI[2]}`
+        let newDateF = `${dateF[1]}/${dateF[0]}/${dateF[2]}`
+
+        let timeDiff = Math.abs(new Date(newDateI).getTime() - new Date(newDateF).getTime())
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
+
+        return diffDays
+    }
+
+    days() {
+        return (<Text style={globalStyles.confirmRent}>{this.subtractDate()}</Text>)
+    }
+
+    _preco(preco) {
+        let total = this.subtractDate() * preco
+
+        return (<Text style={{ color: '#cc0000', fontWeight: 'bold', fontSize: 20 }}>R$ {total},00 </Text>)
+    }
+
+
     renderIcon() {
         if (this.props.loading)
             return (
@@ -39,7 +64,8 @@ class Alugar_4 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
-
+        const { params } = this.props.navigation.state
+        const { tipo, marca, preco } = params
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -59,10 +85,12 @@ class Alugar_4 extends Component {
                         <Text style={globalStyles.pagTitulo2}>Leia atentamente as informações abaixo:</Text>
                     </View>
 
-                    <Text style={globalStyles.txtDescription2}>
-                        Você confirma o aluguel da máquina iniciando em
-                        <Text style={{ fontWeight: 'bold' }}> {this.props.dataInicial} </Text>
-                        até o dia <Text style={{ fontWeight: 'bold' }}>{this.props.dataFinal} </Text>.
+                    <Text style={[globalStyles.txtDescription2, { fontSize: 20 }]}>
+                        Você confirma a solicitação de aluguel do <Text style={globalStyles.confirmRent}>{tipo} - {marca}</Text> por um período de
+                        <Text style={globalStyles.confirmRent}> {this.days()} dias</Text>, iniciando no dia
+                        <Text style={globalStyles.confirmRent}> {this.props.dataInicial} </Text>
+                        até o dia <Text style={globalStyles.confirmRent}>{this.props.dataFinal}</Text>. Pelo preço de {this._preco(preco)}
+                        pagando com <Text style={globalStyles.confirmRent}>{this.props.formaPagamento}</Text>?
                     </Text>
 
                     <Form>
@@ -82,7 +110,7 @@ const mapStateToProps = state => ({
     dataInicial: state.CadastroAluguelReducer.dataInicial,
     dataFinal: state.CadastroAluguelReducer.dataFinal,
     formaPagamento: state.CadastroAluguelReducer.formaPagamento,
-    loading: state.cadastrarAluguel.loading
+    loading: state.CadastroAluguelReducer.loading
 })
 
 export default connect(mapStateToProps, { cadastrarAluguel })(Alugar_4)

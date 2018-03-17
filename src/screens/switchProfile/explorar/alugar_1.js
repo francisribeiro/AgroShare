@@ -29,7 +29,8 @@ class Alugar_1 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
-
+        const { params } = this.props.navigation.state
+        const { tipo, marca, preco } = params
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -79,7 +80,7 @@ class Alugar_1 extends Component {
                 </Content>
 
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Alugar_2')} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded onPress={() => navigate('Alugar_2', { tipo, marca, preco })} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>

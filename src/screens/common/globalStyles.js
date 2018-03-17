@@ -9,6 +9,7 @@ export default {
     input2: { color: '#585858', fontSize: 28, padding: 7, marginTop: 5 },
     inputLabel: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
     inputLabel2: { color: '#585858', fontSize: 14, fontWeight: 'bold' },
+    confirmRent: { fontWeight: 'bold', color: '#00695c', fontSize: 20 },
 
     floatingButton: {
         width: 60,
@@ -32,7 +33,7 @@ export default {
     footerTxt: { fontSize: 10 },
     footerBadge: { backgroundColor: '#ff4444' },
     footerIcon: { fontSize: 28 },
-    star: { fontSize: 17, color: '#FFA500'},
+    star: { fontSize: 17, color: '#FFA500' },
     fullButtonHeader: { backgroundColor: '#00796b', elevation: 0, borderRadius: 4 }, //old #009975
 
     tabBadgeWhite: {

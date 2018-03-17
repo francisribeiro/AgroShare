@@ -88,7 +88,7 @@ export default class ProfileMaq extends Component {
                     </Left>
 
                     <Right style={{ paddingBottom: 20, paddingRight: 20 }}>
-                        <Button elevation={0} style={{ backgroundColor: '#00796b' }} onPress={()=>navigate('Alugar_1')}>
+                        <Button elevation={0} style={{ backgroundColor: '#00796b' }} onPress={() => navigate('Alugar_1', { tipo, marca, preco })}>
                             <View style={{ paddingHorizontal: 16, paddingBottom: 5 }}>
                                 <Text style={{ fontSize: 18, paddingBottom: 6 }}>Quero Alugar</Text>
                             </View>

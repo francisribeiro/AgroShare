@@ -9,8 +9,9 @@ export const modificaFormaPagamento = (texto) => { return { type: 'modifica_form
 
 export const cadastrarAluguel = ({ dataInicial, dataFinal, formaPagamento }) => {
     return dispatch => {
-        dispatch({ type: 'cadastrar_aluguel' })
-        alert(`${dataInicial} até ${dataFinal} pagando com ${formaPagamento}`)
+        // dispatch({ type: 'cadastrar_aluguel' })
+
+        // alert(`${dataInicial} até ${dataFinal} pagando com ${formaPagamento}`)
 
         //         let userId = b64.encode(firebase.auth.currentUser.email)
 
