@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body, Icon, Title, Thumbnail, Spinner } from 'native-base'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Image } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import globalStyles from './globalStyles'
 
@@ -32,10 +32,13 @@ export default class Loading extends Component {
     render() {
         return (
             <Container style={{ backgroundColor: globalStyles.bg }}>
-                <Content style={{ paddingTop: 200 }}>
+                <Content style={{ paddingTop: 120 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', paddingBottom: 20 }}>
+                        <Image style={{ width: 210, height: 154 }} source={require('../../assets/images/logo.png')} />
+                    </View>
                     <Spinner color='#fff' />
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 20, color: '#fff' }}>Aguarde um momento...</Text>
+                        <Text style={{ fontSize: 17, color: '#fff' }}>Aguarde um momento...</Text>
                     </View>
                 </Content>
             </Container >
