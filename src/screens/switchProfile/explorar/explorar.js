@@ -28,12 +28,19 @@ class Explorar extends Component {
 
     createDataSource(todosAnuncios) {
 
-        const result = todosAnuncios.reduce((a, c) => {
-            return a.concat(Object.values(c));
+        const result2 = todosAnuncios.reduce((b, myObj) => {
+
+            var newObj = Object.keys(myObj).reduce((c, v) => {
+                if (typeof myObj[v] === 'object') c = Object.assign(c, { maquina: v }, myObj[v]);
+                else c[v] = myObj[v];
+                return c;
+            }, {});
+
+            return b.concat(newObj)
         }, []);
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
-        this.dataSource = ds.cloneWithRows(result)
+        this.dataSource = ds.cloneWithRows(result2)
     }
 
     renderRow(anuncio, navigate) {
@@ -52,7 +59,7 @@ class Explorar extends Component {
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header searchBar rounded androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Item style={{ height: 46 }}>
-                        <Icon active name="" />
+                        <Icon active name="ios-train-outline" />
                         <Input placeholder="Encontre uma máquina..." placeholderTextColor='rgba(88,88,88,0.8)' />
                         <Icon active name="ios-search-outline" />
                     </Item>
@@ -73,8 +80,8 @@ class Explorar extends Component {
 }
 
 const mapStateToProps = state => {
-    const todosAnuncios = _.map(state.AnunciosListaReducer, (val) => {
-        return { ...val }
+    const todosAnuncios = _.map(state.AnunciosListaReducer, (val, locador) => {
+        return { ...val, locador }
     })
 
     return { todosAnuncios }

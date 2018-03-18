@@ -39,11 +39,11 @@ export default class ProfileMaq extends Component {
                         <Title numberOfLines={4} style={{ textAlign: 'left', color: '#484848', fontSize: 32, fontWeight: 'bold' }}>{tipo.toUpperCase()} {marca.toUpperCase()} {modelo.toUpperCase()} - {titulo.toUpperCase()}</Title>
                     </View>
 
-                    <View style={{ borderColor: '#eaeaea', borderWidth: 0.7, paddingVertical: 10, marginVertical: 20 }}>
-                        <View style={{ paddingHorizontal: 20, paddingBottom: 6 }}>
+                    {/* <View style={{ borderColor: '#eaeaea', borderWidth: 0.7, paddingVertical: 10, marginVertical: 20 }}> */}
+                        {/* <View style={{ paddingHorizontal: 20, paddingBottom: 6 }}>
                             <Text style={{ fontSize: 18, color: '#484848', fontWeight: 'bold' }}>Benefícios</Text>
-                        </View>
-                        <View style={[globalStyles.itemAlign, { paddingHorizontal: 30 }]}>
+                        </View> */}
+                        {/* <View style={[globalStyles.itemAlign, { paddingHorizontal: 30 }]}>
                             <View style={{ justifyContent: 'center', alignItems: 'center', paddingRight: 37 }}>
                                 <Icon name='ios-build-outline' style={{ fontSize: 40, color: '#585858' }} />
                                 <Text style={{ color: '#585858', fontSize: 12 }}>chave</Text>
@@ -64,8 +64,8 @@ export default class ProfileMaq extends Component {
                                 <Icon name='ios-color-fill-outline' style={{ fontSize: 40, color: '#585858' }} />
                                 <Text style={{ color: '#585858', fontSize: 12 }}>Oléo</Text>
                             </View>
-                        </View>
-                    </View>
+                        </View> */}
+                    {/* </View> */}
 
                     <View style={{ paddingHorizontal: 20, paddingVertical: 5 }}>
                         <Text style={{ fontSize: 18, color: '#484848', fontWeight: 'bold' }}>Sobre esta máquina</Text>
