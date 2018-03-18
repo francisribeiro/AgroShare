@@ -1,8 +1,11 @@
 const INITIAL_STATE = {
     dataInicial: '22/05/2018',
     dataFinal: '03/06/2018',
-    erroCadastro: '',
     formaPagamento: 'Dinheiro',
+    locador: '',
+    maquina: '',
+    ativo: false,
+    erroCadastro: '',
     loading: false
 }
 
@@ -14,6 +17,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, dataFinal: action.payload }
         case 'modifica_formaPagamento':
             return { ...state, formaPagamento: action.payload }
+        case 'modifica_locador':
+            return { ...state, locador: action.payload }
+        case 'modifica_maquina':
+            return { ...state, maquina: action.payload }
+        case 'modifica_ativo':
+            return { ...state, ativo: action.payload }
         case 'cadastrar_aluguel':
             return { ...state, loading: true, erroCadastro: '' }
         case 'erro_cadastro':

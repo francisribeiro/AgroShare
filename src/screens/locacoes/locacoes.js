@@ -11,9 +11,11 @@ import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 export default class Locacoes extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-    
+
     // Locações screen
     render() {
+        const { navigate } = this.props.navigation
+
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header hasTabs androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 60 }}>
@@ -36,8 +38,8 @@ export default class Locacoes extends Component {
                     tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
                     tabBarBackgroundColor='#00695c'
                     renderTabBar={() => <DefaultTabBar notifications={1} />}>
-                    <EmAndamento tabLabel='EM ANDAMENTO' />
-                    <Aguardando tabLabel='AGUARDANDO' />
+                    <EmAndamento tabLabel='EM ANDAMENTO' navigate={navigate} />
+                    <Aguardando tabLabel='AGUARDANDO' navigate={navigate} />
                 </ScrollableTabView>
             </Container>
         )

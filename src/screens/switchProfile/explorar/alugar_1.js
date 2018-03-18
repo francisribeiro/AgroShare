@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-import { modificaDataInicial } from '../../../actions/CadastroAluguelAction'
+import { modificaDataInicial, modificaLocador, modificaMaquina, modificaAtivo } from '../../../actions/CadastroAluguelAction'
 
 class Alugar_1 extends Component {
     // Hide the header
@@ -16,6 +16,12 @@ class Alugar_1 extends Component {
     constructor(props) {
         super(props)
         this.state = { isDateTimePickerVisible: false, date: '' }
+    }
+
+    setBasicInfo(locador, maquina) {
+        this.props.modificaLocador(locador)
+        this.props.modificaMaquina(maquina)
+        this.props.modificaAtivo(false)
     }
 
     // DatePicker helpers
@@ -30,7 +36,8 @@ class Alugar_1 extends Component {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
-        const { tipo, marca, preco } = params
+        const { tipo, marca, preco, locador, maquina } = params
+        this.setBasicInfo(locador, maquina)
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -80,7 +87,7 @@ class Alugar_1 extends Component {
                 </Content>
 
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Alugar_2', { tipo, marca, preco })} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded onPress={() => navigate('Alugar_2', { tipo, marca, preco, locador, maquina })} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>
@@ -91,7 +98,10 @@ class Alugar_1 extends Component {
 }
 
 const mapStateToProps = state => ({
-    dataInicial: state.CadastroAluguelReducer.dataInicial
+    dataInicial: state.CadastroAluguelReducer.dataInicial,
+    locador: state.CadastroAluguelReducer.locador,
+    maquina: state.CadastroAluguelReducer.maquina,
+    ativo: state.CadastroAluguelReducer.ativo,
 })
 
-export default connect(mapStateToProps, { modificaDataInicial })(Alugar_1)
+export default connect(mapStateToProps, { modificaDataInicial, modificaLocador, modificaMaquina, modificaAtivo })(Alugar_1)

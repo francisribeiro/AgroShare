@@ -13,8 +13,8 @@ class Alugar_4 extends Component {
     static navigationOptions = { header: null }
 
     _cadastrarAluguel() {
-        const { dataInicial, dataFinal, formaPagamento } = this.props
-        this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento })
+        const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo } = this.props
+        this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo })
     }
 
 
@@ -65,7 +65,7 @@ class Alugar_4 extends Component {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
-        const { tipo, marca, preco } = params
+        const { tipo, marca, preco, locador, maquina } = params
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -92,6 +92,8 @@ class Alugar_4 extends Component {
                         até o dia <Text style={globalStyles.confirmRent}>{this.props.dataFinal}</Text>. Pelo preço de {this._preco(preco)}
                         pagando com <Text style={globalStyles.confirmRent}>{this.props.formaPagamento}</Text>?
                     </Text>
+                    {/* <Text>locador: {locador}</Text>
+                    <Text>maquina: {maquina}</Text> */}
 
                     <Form>
                         <View style={{ paddingRight: 15 }}>
@@ -110,6 +112,9 @@ const mapStateToProps = state => ({
     dataInicial: state.CadastroAluguelReducer.dataInicial,
     dataFinal: state.CadastroAluguelReducer.dataFinal,
     formaPagamento: state.CadastroAluguelReducer.formaPagamento,
+    locador: state.CadastroAluguelReducer.locador,
+    maquina: state.CadastroAluguelReducer.maquina,
+    ativo: state.CadastroAluguelReducer.ativo,
     loading: state.CadastroAluguelReducer.loading
 })
 

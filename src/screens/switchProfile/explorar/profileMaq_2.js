@@ -71,8 +71,6 @@ export default class ProfileMaq extends Component {
 
                     <View style={{ paddingHorizontal: 20, paddingVertical: 5 }}>
                         <Text style={{ fontSize: 18, color: '#484848', fontWeight: 'bold' }}>Sobre esta máquina</Text>
-                        <Text>locador: {locador}</Text>
-                        <Text>maquina: {maquina}</Text>
                     </View>
 
                     <View style={{ paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20 }}>
@@ -92,7 +90,7 @@ export default class ProfileMaq extends Component {
                     </Left>
 
                     <Right style={{ paddingBottom: 20, paddingRight: 20 }}>
-                        <Button elevation={0} style={{ backgroundColor: '#00796b' }} onPress={() => navigate('Alugar_1', { tipo, marca, preco })}>
+                        <Button elevation={0} style={{ backgroundColor: '#00796b' }} onPress={() => navigate('Alugar_1', { tipo, marca, preco, locador, maquina })}>
                             <View style={{ paddingHorizontal: 16, paddingBottom: 5 }}>
                                 <Text style={{ fontSize: 18, paddingBottom: 6 }}>Quero Alugar</Text>
                             </View>

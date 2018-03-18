@@ -7,9 +7,12 @@ import { _Routes } from '../config/navigation/routes'
 import AutenticacaoReducer from './AutenticacaoReducer'
 import CadastroUsuarioReducer from './CadastroUsuarioReducer'
 import AppReducer from './AppReducer'
+
 import CadastroAnuncioReducer from './CadastroAnuncioReducer'
-import AnunciosListaReducer from './AnunciosListaReducer'
 import CadastroAluguelReducer from './CadastroAluguelReducer'
+
+import AnunciosListaReducer from './AnunciosListaReducer'
+import AlugueisListaReducer from './AlugueisListaReducer'
 
 const initialNavState = null
 
@@ -30,8 +33,11 @@ export default combineReducers({
     nav,
     AppReducer,
     AutenticacaoReducer,
+
     CadastroUsuarioReducer,
     CadastroAnuncioReducer,
-    AnunciosListaReducer,
     CadastroAluguelReducer,
+    
+    AnunciosListaReducer,
+    AlugueisListaReducer,
 })
