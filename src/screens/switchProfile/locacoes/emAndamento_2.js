@@ -4,19 +4,19 @@ import { ListView, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { AlugueisFetch } from '../../actions/AppAction'
+import { AlugueisFetch } from '../../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
 // Imagem do trator
-const thumb3 = require('../../assets/images/drawer-cover3.jpg')
+const thumb3 = require('../../../assets/images/drawer-cover3.jpg')
 
-class EmAndamento extends Component {
+class EmAndamento_2 extends Component {
 
     constructor(props) {
         super(props)
         this.state = { flag: false }
     }
-    
+
     componentWillMount() {
         this.props.AlugueisFetch()
         this.createDataSource(this.props.alugueis)
@@ -84,4 +84,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { AlugueisFetch })(EmAndamento)
+export default connect(mapStateToProps, { AlugueisFetch })(EmAndamento_2)

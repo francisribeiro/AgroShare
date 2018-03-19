@@ -11,6 +11,10 @@ import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notifica
 const thumb3 = require('../../assets/images/drawer-cover3.jpg')
 
 class Aguardando extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { flag: false }
+    }
 
     componentWillMount() {
         this.props.AlugueisFetch()
@@ -24,6 +28,9 @@ class Aguardando extends Component {
     createDataSource(alugueis) {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
         this.dataSource = ds.cloneWithRows(alugueis)
+
+        if (alugueis.length === 0)
+            this.setState({ flag: true })
     }
 
     renderRow(aluguel) {
@@ -41,13 +48,28 @@ class Aguardando extends Component {
         )
     }
 
+
+    renderMsg(flag) {
+        if (flag)
+            return (
+                <View style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
+                    <Text style={{ fontSize: 18, color: '#585858' }}>Você não possuí nenhuma solicitação de aluguel :)</Text>
+                </View>
+            )
+
+        return null
+    }
+
     render() {
         return (
-            <ListView
-                enableEmptySections
-                dataSource={this.dataSource}
-                renderRow={(data) => this.renderRow(data)}
-            />
+            <View>
+                {this.renderMsg(this.state.flag)}
+                <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={(data) => this.renderRow(data)}
+                />
+            </View>
         )
     }
 }

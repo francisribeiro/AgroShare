@@ -4,19 +4,18 @@ import { ListView, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { AlugueisFetch } from '../../actions/AppAction'
+import { AlugueisFetch } from '../../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
 // Imagem do trator
-const thumb3 = require('../../assets/images/drawer-cover3.jpg')
+const thumb3 = require('../../../assets/images/drawer-cover3.jpg')
 
-class EmAndamento extends Component {
-
+class Aguardando_2 extends Component {
     constructor(props) {
         super(props)
         this.state = { flag: false }
     }
-    
+
     componentWillMount() {
         this.props.AlugueisFetch()
         this.createDataSource(this.props.alugueis)
@@ -35,7 +34,7 @@ class EmAndamento extends Component {
     }
 
     renderRow(aluguel) {
-        if (aluguel.ativo)
+        if (!aluguel.ativo)
             return (
                 <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('Chat')}>
                     <LocacoesNotificacoes img={thumb3} msg='{data.msg}' inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
@@ -44,7 +43,7 @@ class EmAndamento extends Component {
 
         return (
             <View style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
-                <Text style={{ fontSize: 18, color: '#585858' }}>Você ainda não possuí nenhum aluguel em andamento...</Text>
+                <Text style={{ fontSize: 18, color: '#585858' }}>Você não possuí nenhuma solicitação de aluguel :)</Text>
             </View>
         )
     }
@@ -53,7 +52,7 @@ class EmAndamento extends Component {
         if (flag)
             return (
                 <View style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
-                    <Text style={{ fontSize: 18, color: '#585858' }}>Você ainda não possuí nenhum aluguel em andamento...</Text>
+                    <Text style={{ fontSize: 18, color: '#585858' }}>Você não possuí nenhuma solicitação de aluguel :)</Text>
                 </View>
             )
 
@@ -84,4 +83,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { AlugueisFetch })(EmAndamento)
+export default connect(mapStateToProps, { AlugueisFetch })(Aguardando_2)

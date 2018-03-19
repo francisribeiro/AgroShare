@@ -48,7 +48,7 @@ export default class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Explorar</Text>
                         </Button>
 
-                        <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); }} vertical badge>
+                        <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Locacoes_2') }} vertical badge>
                             <Badge style={globalStyles.footerBadge}>
                                 <Text>1</Text>
                             </Badge>
