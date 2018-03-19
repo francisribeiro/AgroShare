@@ -49,6 +49,10 @@ import Alugar_4 from '../../screens/switchProfile/explorar/alugar_4'
 //Loading
 import Loading from '../../screens/common/loading'
 
+//Locações Profile
+import locacoesPerfil_2 from '../../screens/switchProfile/locacoes/locacoesPerfil_2'
+
+
 // Routes path
 const _Main = StackNavigator(
     {
@@ -117,7 +121,8 @@ export const _Routes = StackNavigator(
         Chat: { screen: Chat }, //Chat
         addMaq: { screen: _addMaq },
         load: { screen: load },
-        alugar: { screen: _alugar }
+        alugar: { screen: _alugar },
+        locacoesPerfil_2: { screen: locacoesPerfil_2 },
     }, {
         headerMode: 'float',
         transitionConfig: t2

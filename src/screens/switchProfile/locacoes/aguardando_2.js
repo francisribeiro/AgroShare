@@ -50,7 +50,7 @@ class Aguardando_2 extends Component {
 
         if (!aluguel.ativo && aluguel.locatario == userId)
             return (
-                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('Chat')}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('locacoesPerfil_2')}>
                     <LocacoesNotificacoes img={thumb3} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
                 </TouchableOpacity >
             )
