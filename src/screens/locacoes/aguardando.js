@@ -36,7 +36,7 @@ class Aguardando extends Component {
 
         return (
             <View style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
-                <Text style={{ fontSize: 18, color: '#888' }}>Você não possuí nenhuma solicitação de aluguel :)</Text>
+                <Text style={{ fontSize: 18, color: '#585858' }}>Você não possuí nenhuma solicitação de aluguel :)</Text>
             </View>
         )
     }

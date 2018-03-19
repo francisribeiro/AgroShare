@@ -1,36 +1,65 @@
 import React, { Component } from 'react'
-import { List, Container } from 'native-base'
+import { List, Container, Text } from 'native-base'
+import { ListView, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
+import { AlugueisFetch } from '../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
-// Imagens dos tratores
-const thumb1 = require('../../assets/images/drawer-cover1.jpg')
-const thumb2 = require('../../assets/images/drawer-cover2.jpg')
+// Imagem do trator
+const thumb3 = require('../../assets/images/drawer-cover3.jpg')
 
-// Dados das máquinas
-const datas = [
-    {
-        img: thumb1,
-        msg: 'Aluguel do Trator 8600',
-        inicio: '15/02/2018',
-        fim: '25/02/2017'
-    },
-    {
-        img: thumb2,
-        msg: 'Aluguel do Trator 8030',
-        inicio: '20/02/2018',
-        fim: '25/02/2017'
+class EmAndamento extends Component {
+
+    componentWillMount() {
+        this.props.AlugueisFetch()
+        this.createDataSource(this.props.alugueis)
     }
-]
 
-export default class EmAndamento extends Component {
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps.alugueis)
+    }
+
+    createDataSource(alugueis) {
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
+        this.dataSource = ds.cloneWithRows(alugueis)
+    }
+
+    renderRow(aluguel) {
+        if (aluguel.ativo)
+            return (
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('Chat')}>
+                    <LocacoesNotificacoes img={thumb3} msg='{data.msg}' inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
+                </TouchableOpacity >
+            )
+
+        return (
+            <View style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
+                <Text style={{ fontSize: 18, color: '#585858' }}>Você ainda não possuí nenhum aluguel em andamento...</Text>
+            </View>
+        )
+    }
+
     render() {
         return (
-            <List
-                dataArray={datas}
-                renderRow={data =>
-                    <LocacoesNotificacoes img={data.img} msg={data.msg} inicio={data.inicio} fim={data.fim} />
-                } />
+            <ListView
+                enableEmptySections
+                dataSource={this.dataSource}
+                renderRow={(data) => this.renderRow(data)}
+            />
         )
     }
 }
+
+const mapStateToProps = state => {
+    const alugueis = _.map(state.AlugueisListaReducer, (val) => {
+        return { ...val }
+    })
+
+    return {
+        alugueis
+    }
+}
+
+export default connect(mapStateToProps, { AlugueisFetch })(EmAndamento)

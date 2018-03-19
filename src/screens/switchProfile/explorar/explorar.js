@@ -3,10 +3,13 @@ import { Container, Content, Header, Button, Text, Body, Icon, Input, Item } fro
 import { View, TouchableOpacity, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import b64 from 'base-64'
 
+import { firebase } from '../../../config/firebase'
 import { todosAnunciosFetch } from '../../../actions/AppAction'
 import SingleCard from '../../anuncio/singleCard' // Card Component
 import globalStyles from '../../common/globalStyles' // Global Styles
+
 // Imagens das máquinas
 const cardImage1 = require('../../../assets/images/drawer-cover1.jpg')
 const cardImage2 = require('../../../assets/images/drawer-cover2.jpg')
@@ -44,11 +47,16 @@ class Explorar extends Component {
     }
 
     renderRow(anuncio, navigate) {
-        return (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('alugar', { anuncio })}>
-                <SingleCard tipo={anuncio.tipo} modelo={anuncio.modelo} marca={anuncio.marca} thumb={cardImage2} preco={anuncio.preco} comments='42' />
-            </TouchableOpacity>
-        )
+        let userId = b64.encode(firebase.auth.currentUser.email)
+
+        if (anuncio.locador != userId)
+            return (
+                <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('alugar', { anuncio })}>
+                    <SingleCard tipo={anuncio.tipo} modelo={anuncio.modelo} marca={anuncio.marca} thumb={cardImage2} preco={anuncio.preco} comments='42' />
+                </TouchableOpacity>
+            )
+
+        return null
     }
     // Explorar screen
     render() {

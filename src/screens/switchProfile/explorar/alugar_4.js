@@ -13,8 +13,8 @@ class Alugar_4 extends Component {
     static navigationOptions = { header: null }
 
     _cadastrarAluguel() {
-        const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo } = this.props
-        this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo })
+        const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo, locatario } = this.props
+        this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo, locatario })
     }
 
 
@@ -113,6 +113,7 @@ const mapStateToProps = state => ({
     dataFinal: state.CadastroAluguelReducer.dataFinal,
     formaPagamento: state.CadastroAluguelReducer.formaPagamento,
     locador: state.CadastroAluguelReducer.locador,
+    locatario: state.CadastroAluguelReducer.locatario,
     maquina: state.CadastroAluguelReducer.maquina,
     ativo: state.CadastroAluguelReducer.ativo,
     loading: state.CadastroAluguelReducer.loading

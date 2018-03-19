@@ -9,16 +9,17 @@ export const modificaFormaPagamento = (texto) => { return { type: 'modifica_form
 export const modificaLocador = (texto) => { return { type: 'modifica_locador', payload: texto } }
 export const modificaMaquina = (texto) => { return { type: 'modifica_maquina', payload: texto } }
 export const modificaAtivo = (texto) => { return { type: 'modifica_ativo', payload: texto } }
+export const modificaLocatario = (texto) => { return { type: 'modifica_locatario', payload: texto } }
 
-export const cadastrarAluguel = ({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }) => {
+export const cadastrarAluguel = ({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo, locatario }) => {
     return dispatch => {
-        alert(dataInicial + ', ' + dataFinal + ', ' + formaPagamento + ', ' + locador + ', ' + maquina + ', ' + ativo)
+        // alert(dataInicial + ', ' + dataFinal + ', ' + formaPagamento + ', ' + locador + ', ' + maquina + ', ' + ativo + ', ' + locatario)
         dispatch({ type: 'cadastrar_aluguel' })
 
         let userId = b64.encode(firebase.auth.currentUser.email)
 
         firebase.db.ref(`/Alugueis/${userId}/`)
-            .push({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo })
+            .push({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo, locatario })
             .then(value => cadastraAluguelSuccesso(dispatch))
             .catch(erro => cadastraAluguelErro(dispatch, erro))
     }

@@ -3,10 +3,12 @@ import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Ic
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
+import b64 from 'base-64'
 
+import { firebase } from '../../../config/firebase'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-import { modificaDataInicial, modificaLocador, modificaMaquina, modificaAtivo } from '../../../actions/CadastroAluguelAction'
+import { modificaDataInicial, modificaLocador, modificaMaquina, modificaAtivo, modificaLocatario } from '../../../actions/CadastroAluguelAction'
 
 class Alugar_1 extends Component {
     // Hide the header
@@ -20,6 +22,7 @@ class Alugar_1 extends Component {
 
     setBasicInfo(locador, maquina) {
         this.props.modificaLocador(locador)
+        this.props.modificaLocatario(b64.encode(firebase.auth.currentUser.email))
         this.props.modificaMaquina(maquina)
         this.props.modificaAtivo(false)
     }
@@ -100,8 +103,9 @@ class Alugar_1 extends Component {
 const mapStateToProps = state => ({
     dataInicial: state.CadastroAluguelReducer.dataInicial,
     locador: state.CadastroAluguelReducer.locador,
+    locatario: state.CadastroAluguelReducer.locatario,
     maquina: state.CadastroAluguelReducer.maquina,
     ativo: state.CadastroAluguelReducer.ativo,
 })
 
-export default connect(mapStateToProps, { modificaDataInicial, modificaLocador, modificaMaquina, modificaAtivo })(Alugar_1)
+export default connect(mapStateToProps, { modificaDataInicial, modificaLocador, modificaMaquina, modificaAtivo, modificaLocatario })(Alugar_1)
