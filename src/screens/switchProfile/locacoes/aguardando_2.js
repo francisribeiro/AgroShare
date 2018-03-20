@@ -42,15 +42,17 @@ class Aguardando_2 extends Component {
         let userId = b64.encode(firebase.auth.currentUser.email)
         let tipo = ''
         let marca = ''
+        let preco = 0
 
         firebase.db.ref(`Anuncios/${aluguel.locador}/${aluguel.maquina}`).on('value', (snapshot) => {
             tipo = snapshot.val().tipo
             marca = snapshot.val().marca
+            preco = snapshot.val().preco
         })
 
         if (!aluguel.ativo && aluguel.locatario == userId)
             return (
-                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('locacoesPerfil_2')}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('SolicitacaoAluguel_2', { aluguel, tipo, marca, preco })}>
                     <LocacoesNotificacoes img={thumb3} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
                 </TouchableOpacity >
             )

@@ -89,7 +89,7 @@ class Alugar_4 extends Component {
                         Você confirma a solicitação de aluguel do <Text style={globalStyles.confirmRent}>{tipo} - {marca}</Text> por um período de
                         <Text style={globalStyles.confirmRent}> {this.days()} dias</Text>, iniciando no dia
                         <Text style={globalStyles.confirmRent}> {this.props.dataInicial} </Text>
-                        até o dia <Text style={globalStyles.confirmRent}>{this.props.dataFinal}</Text>. Pelo preço de {this._preco(preco)}
+                        até o dia <Text style={globalStyles.confirmRent}>{this.props.dataFinal}</Text>. Pelo preço de {this._preco(25)}
                         pagando com <Text style={globalStyles.confirmRent}>{this.props.formaPagamento}</Text>?
                     </Text>
                     {/* <Text>locador: {locador}</Text>

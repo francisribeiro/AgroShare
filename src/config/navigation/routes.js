@@ -50,7 +50,8 @@ import Alugar_4 from '../../screens/switchProfile/explorar/alugar_4'
 import Loading from '../../screens/common/loading'
 
 //Locações Profile
-import locacoesPerfil_2 from '../../screens/switchProfile/locacoes/locacoesPerfil_2'
+import SolicitacaoAluguel_2 from '../../screens/switchProfile/locacoes/SolicitacaoAluguel_2'
+import SolicitacaoAluguel from '../../screens/locacoes/SolicitacaoAluguel'
 
 
 // Routes path
@@ -122,7 +123,8 @@ export const _Routes = StackNavigator(
         addMaq: { screen: _addMaq },
         load: { screen: load },
         alugar: { screen: _alugar },
-        locacoesPerfil_2: { screen: locacoesPerfil_2 },
+        SolicitacaoAluguel_2: { screen: SolicitacaoAluguel_2 },
+        SolicitacaoAluguel: { screen: SolicitacaoAluguel },
     }, {
         headerMode: 'float',
         transitionConfig: t2
