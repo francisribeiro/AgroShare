@@ -2,15 +2,21 @@ import React, { Component } from 'react'
 import { Container, Header, Title, Button, Icon, Right, Body } from 'native-base'
 import { View } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
+import { connect } from 'react-redux'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 import EmAndamento from './emAndamento_2' // Em Andamento Component
 import Aguardando from './aguardando_2' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
+import { NotificacaoAguardandoLocatario } from '../../../actions/AppAction'
 
-export default class Locacoes extends Component {
+class Locacoes_2 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
+
+    componentWillMount() {
+        this.props.NotificacaoAguardandoLocatario()
+    } 
 
     // Locações screen
     render() {
@@ -37,7 +43,7 @@ export default class Locacoes extends Component {
                     tabBarInactiveTextColor='rgba(255,255,255,0.6)'
                     tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
                     tabBarBackgroundColor='#00695c'
-                    renderTabBar={() => <DefaultTabBar notifications={1} />}>
+                    renderTabBar={() => <DefaultTabBar notifications={this.props.quantidadeLocatario} />}>
                     <EmAndamento tabLabel='EM ANDAMENTO' navigate={navigate} />
                     <Aguardando tabLabel='AGUARDANDO' navigate={navigate} />
                 </ScrollableTabView>
@@ -45,3 +51,9 @@ export default class Locacoes extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    quantidadeLocatario: state.NotificacaoAguardandoReducer.quantidadeLocatario,
+})
+
+export default connect(mapStateToProps, { NotificacaoAguardandoLocatario })(Locacoes_2)

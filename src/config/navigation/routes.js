@@ -52,6 +52,8 @@ import Loading from '../../screens/common/loading'
 //Locações Profile
 import SolicitacaoAluguel_2 from '../../screens/switchProfile/locacoes/SolicitacaoAluguel_2'
 import SolicitacaoAluguel from '../../screens/locacoes/SolicitacaoAluguel'
+import MeusAlugueis_2 from '../../screens/switchProfile/locacoes/MeusAlugueis_2'
+import MeusAlugueis from '../../screens/locacoes/MeusAlugueis'
 
 
 // Routes path
@@ -125,6 +127,8 @@ export const _Routes = StackNavigator(
         alugar: { screen: _alugar },
         SolicitacaoAluguel_2: { screen: SolicitacaoAluguel_2 },
         SolicitacaoAluguel: { screen: SolicitacaoAluguel },
+        MeusAlugueis_2: { screen: MeusAlugueis_2 },
+        MeusAlugueis: { screen: MeusAlugueis },
     }, {
         headerMode: 'float',
         transitionConfig: t2

@@ -12,8 +12,6 @@ import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notifica
 // Imagem do trator
 const thumb3 = require('../../assets/images/drawer-cover3.jpg')
 
-let ativo = false
-
 class EmAndamento extends Component {
 
     componentWillMount() {
@@ -45,15 +43,17 @@ class EmAndamento extends Component {
         let userId = b64.encode(firebase.auth.currentUser.email)
         let tipo = ''
         let marca = ''
+        let preco = 0
 
         firebase.db.ref(`Anuncios/${aluguel.locador}/${aluguel.maquina}`).on('value', (snapshot) => {
             tipo = snapshot.val().tipo
             marca = snapshot.val().marca
+            preco = snapshot.val().preco
         })
 
         if (aluguel.ativo && aluguel.locador == userId)
             return (
-                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('Chat')}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('MeusAlugueis', { aluguel, tipo, marca, preco })}>
                     <LocacoesNotificacoes img={thumb3} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
                 </TouchableOpacity >
             )
