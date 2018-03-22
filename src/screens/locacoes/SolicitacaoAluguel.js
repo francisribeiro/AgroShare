@@ -5,7 +5,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
 
 import globalStyles from '../common/globalStyles' // Global Styles
-
+import { AceitarAluguel } from '../../actions/AppAction'
 
 class SolicitacaoAluguel extends Component {
     // Hide the header
@@ -32,6 +32,10 @@ class SolicitacaoAluguel extends Component {
         let total = this.subtractDate(i, f) * preco
 
         return (<Text style={{ color: '#000', fontWeight: '400', fontSize: 20 }}>R$ {total},00 </Text>)
+    }
+
+    _aceitarAluguel(locatario, aluguel) {
+        this.props.AceitarAluguel(locatario, aluguel)
     }
 
     // ProfileMaq screen
@@ -80,7 +84,7 @@ class SolicitacaoAluguel extends Component {
                         </Button>
                     </Left>
                     <Right>
-                        <Button rounded large onPress={() => false} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
+                        <Button rounded large onPress={() => this._aceitarAluguel(aluguel.locatario, aluguel.aluguel)} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
                             <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Aceitar</Text>
                         </Button>
                     </Right>
@@ -94,4 +98,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, {})(SolicitacaoAluguel)
+export default connect(mapStateToProps, { AceitarAluguel })(SolicitacaoAluguel)

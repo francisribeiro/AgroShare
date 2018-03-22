@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import globalStyles from '../../common/globalStyles' // Global Styles
 import { NotificacaoAguardandoLocatario } from '../../../actions/AppAction'
 
-class FooterMenu extends Component {
+class FooterMenu_2 extends Component {
     // Class start state
     constructor(props) {
         super(props)
@@ -102,4 +102,4 @@ const mapStateToProps = state => ({
     quantidadeLocatario: state.NotificacaoAguardandoReducer.quantidadeLocatario,
 })
 
-export default connect(mapStateToProps, { NotificacaoAguardandoLocatario })(FooterMenu)
+export default connect(mapStateToProps, { NotificacaoAguardandoLocatario })(FooterMenu_2)

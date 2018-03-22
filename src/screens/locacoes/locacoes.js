@@ -3,19 +3,22 @@ import { Container, Header, Title, Button, Icon, Right, Body } from 'native-base
 import { View } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import { connect } from 'react-redux'
+import b64 from 'base-64'
 
+import { firebase } from '../../config/firebase'
 import globalStyles from '../common/globalStyles' // Global Styles
 import EmAndamento from './emAndamento' // Em Andamento Component
 import Aguardando from './aguardando' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
-import { NotificacaoAguardandoLocatario } from '../../actions/AppAction'
+import { NotificacaoAguardandoLocador } from '../../actions/AppAction'
 
 class Locacoes extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
     componentWillMount() {
-        this.props.NotificacaoAguardandoLocatario()
+        let locador = b64.encode(firebase.auth.currentUser.email)
+        this.props.NotificacaoAguardandoLocador(locador)
     } 
 
     // Locações screen
@@ -43,7 +46,7 @@ class Locacoes extends Component {
                     tabBarInactiveTextColor='rgba(255,255,255,0.6)'
                     tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
                     tabBarBackgroundColor='#00695c'
-                    renderTabBar={() => <DefaultTabBar notifications={this.props.quantidadeLocatario} />}>
+                    renderTabBar={() => <DefaultTabBar notifications={this.props.quantidadeLocador} />}>
                     <EmAndamento tabLabel='EM ANDAMENTO' navigate={navigate} />
                     <Aguardando tabLabel='AGUARDANDO' navigate={navigate} />
                 </ScrollableTabView>
@@ -53,7 +56,7 @@ class Locacoes extends Component {
 }
 
 const mapStateToProps = state => ({
-    quantidadeLocatario: state.NotificacaoAguardandoReducer.quantidadeLocatario,
+    quantidadeLocador: state.NotificacaoAguardandoReducer.quantidadeLocador,
 })
 
-export default connect(mapStateToProps, { NotificacaoAguardandoLocatario })(Locacoes)
+export default connect(mapStateToProps, { NotificacaoAguardandoLocador })(Locacoes)

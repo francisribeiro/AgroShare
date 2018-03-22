@@ -5,6 +5,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
 
 import globalStyles from '../common/globalStyles' // Global Styles
+import { SolicitarCancelamento } from '../../actions/AppAction'
 
 class MeusAlugueis extends Component {
     // Hide the header
@@ -33,6 +34,10 @@ class MeusAlugueis extends Component {
         return (<Text style={{ color: '#000', fontWeight: '400', fontSize: 20 }}>R$ {total},00 </Text>)
     }
 
+
+    _solicitarCancelamento(locatario, aluguel) {
+        this.props.SolicitarCancelamento(locatario, aluguel)
+    }
     // ProfileMaq screen
     render() {
         // StackNavigator props
@@ -74,7 +79,7 @@ class MeusAlugueis extends Component {
 
                 </Content>
                 <View style={{ padding: 10, height: 95 }}>
-                    <Button rounded large block onPress={() => false} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
+                    <Button rounded large block onPress={() => this._solicitarCancelamento(aluguel.locatario, aluguel.aluguel) } style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Solicitar Cancelamento</Text>
                     </Button>
                 </View>
@@ -87,4 +92,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, {})(MeusAlugueis)
+export default connect(mapStateToProps, {SolicitarCancelamento})(MeusAlugueis)

@@ -1,5 +1,6 @@
 import { firebase } from '../config/firebase'
 import b64 from 'base-64'
+import { NavigationActions } from 'react-navigation'
 
 export const getUserData = () => {
     return dispatch => {
@@ -54,4 +55,61 @@ export const NotificacaoAguardandoLocatario = () => {
             dispatch({ type: 'quantidade_aguardando_locatario', payload: qtd })
         })
     }
+}
+
+
+export const NotificacaoAguardandoLocador = (locador) => {
+    return dispatch => {
+
+        let qtd = 0
+
+        firebase.db.ref(`Alugueis`).on('value', (snapshot) => {
+
+            const alugueis = _.map(snapshot.val(), (val, locatario) => {
+                return { ...val, locatario }
+            })
+
+            const result2 = alugueis.reduce((b, myObj) => {
+
+                var newObj = Object.keys(myObj).reduce((c, v) => {
+                    if (typeof myObj[v] === 'object') c = Object.assign(c, { aluguel: v }, myObj[v])
+                    else c[v] = myObj[v];
+                    return c;
+                }, {})
+
+                return b.concat(newObj)
+            }, [])
+
+
+            result2.forEach(element => {
+                if (element.locador == locador)
+                    if (element.ativo == false)
+                        qtd++
+                    else
+                        qtd--
+            })
+
+            dispatch({ type: 'quantidade_aguardando_locador', payload: qtd })
+        })
+    }
+}
+
+export const AceitarAluguel = (locatario, aluguel) => {
+    return dispatch => {
+        firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).update({ ativo: true })
+            .then(value => AceitarAluguelSuccesso(dispatch))
+    }
+}
+
+export const SolicitarCancelamento = (locatario, aluguel) => {
+    return dispatch => {
+        firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).update({ ativo: false })
+            .then(value => AceitarAluguelSuccesso(dispatch))
+    }
+}
+
+const AceitarAluguelSuccesso = (dispatch) => {
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
 }
