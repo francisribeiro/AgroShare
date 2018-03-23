@@ -108,8 +108,21 @@ export const SolicitarCancelamento = (locatario, aluguel) => {
     }
 }
 
+export const CancelarSolicitacao = (locatario, aluguel) => {
+    return dispatch => {
+        firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).remove()
+            .then(value => AceitarAluguelSuccesso2(dispatch))
+    }
+}
+
 const AceitarAluguelSuccesso = (dispatch) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
+}
+
+const AceitarAluguelSuccesso2 = (dispatch) => {
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes_2' })]
     }))
 }

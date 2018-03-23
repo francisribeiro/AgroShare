@@ -3,6 +3,7 @@ import { Container, Header, Content, Body, Title, Button, Item, Label, Input, Le
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 import { AceitarAluguel } from '../../actions/AppAction'
@@ -10,6 +11,23 @@ import { AceitarAluguel } from '../../actions/AppAction'
 class SolicitacaoAluguel extends Component {
     // Hide the header
     static navigationOptions = { header: null }
+
+    constructor(props) {
+        super(props)
+        this.state = { showAlertRejeitar: false, showAlertAceitar: false, showLoading: false }
+    }
+
+    showAlertRejeitar = () => { this.setState({ showAlertRejeitar: true }) }
+    showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
+    showLoading = () => { this.setState({ showLoading: true }) }
+
+    async hideAlert() {
+        this.setState({
+            showAlertRejeitar: false,
+            showAlertAceitar: false,
+            showLoading: false
+        })
+    }
 
     subtractDate(i, f) {
         let dateI = i.split('/')
@@ -44,6 +62,7 @@ class SolicitacaoAluguel extends Component {
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
         const { tipo, marca, preco, aluguel } = params
+        const { showAlertRejeitar, showAlertAceitar, showLoading } = this.state
 
         console.log(aluguel)
 
@@ -79,16 +98,95 @@ class SolicitacaoAluguel extends Component {
                 </Content>
                 <Footer style={{ padding: 15, height: 100 }}>
                     <Left>
-                        <Button rounded large onPress={() => false} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
+                        <Button rounded large onPress={() => this.showAlertRejeitar()} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
                             <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Rejeitar</Text>
                         </Button>
                     </Left>
                     <Right>
-                        <Button rounded large onPress={() => this._aceitarAluguel(aluguel.locatario, aluguel.aluguel)} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
+                        <Button rounded large onPress={() => this.showAlertAceitar()} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
                             <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Aceitar</Text>
                         </Button>
                     </Right>
                 </Footer>
+
+                <AwesomeAlert
+                    show={showAlertRejeitar}
+                    showProgress={false}
+
+                    title="Deseja realmente rejeitar essa solicitação de aluguel?"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={true}
+                    showConfirmButton={true}
+
+                    cancelText="Não, cancele isso"
+                    confirmText="Sim, eu quero"
+
+                    confirmButtonColor="#00695c"
+                    cancelButtonColor="#e53935"
+
+                    cancelButtonTextStyle={{ fontSize: 16 }}
+                    confirmButtonTextStyle={{ fontSize: 16 }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+
+                    onCancelPressed={() => {
+                        this.hideAlert()
+                    }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert()
+                    }}
+                />
+
+                <AwesomeAlert
+                    show={showAlertAceitar}
+                    showProgress={false}
+
+                    title="Deseja realmente aceitar essa solicitação de aluguel?"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={true}
+                    showConfirmButton={true}
+
+                    cancelText="Não, cancele isso"
+                    confirmText="Sim, eu quero"
+
+                    confirmButtonColor="#00695c"
+                    cancelButtonColor="#e53935"
+
+                    cancelButtonTextStyle={{ fontSize: 16 }}
+                    confirmButtonTextStyle={{ fontSize: 16 }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+
+                    onCancelPressed={() => {
+                        this.hideAlert()
+                    }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert().then(this.showLoading())
+                        setTimeout(() => this._aceitarAluguel(aluguel.locatario, aluguel.aluguel), 500)
+                    }}
+                />
+
+                <AwesomeAlert
+                    show={showLoading}
+                    closeOnTouchOutside={false}
+                    closeOnHardwareBackPress={false}
+                    showProgress={true}
+                    progressSize={40}
+                    progressColor='#00695c'
+                    message='Aguarde um momento...'
+                    messageStyle={{ color: '#585858' }}
+                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                />
             </Container>
         )
     }

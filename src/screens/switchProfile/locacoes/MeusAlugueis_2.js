@@ -73,11 +73,11 @@ class MeusAlugueis_2 extends Component {
                     </Button>
 
                 </Content>
-                <View style={{ padding: 10, height: 95 }}>
+                {/* <View style={{ padding: 10, height: 95 }}>
                     <Button rounded large block onPress={() => false} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Solicitar Cancelamento</Text>
                     </Button>
-                </View>
+                </View> */}
             </Container >
         )
     }
