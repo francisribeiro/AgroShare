@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB, Toast, Spinner } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../../actions/AutenticacaoAction'
 import globalStyles from '../common/globalStyles' // Global Styles
