@@ -21,9 +21,9 @@ export default class Start extends Component {
             <Container>
                 <Header noShadow androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg }}>
                     <Left>
-                        <Button transparent onPress={() => this.exitApp()}>
+                        {/* <Button transparent onPress={() => this.exitApp()}>
                             <Icon name='close' />
-                        </Button>
+                        </Button> */}
                     </Left>
 
                     <Right>

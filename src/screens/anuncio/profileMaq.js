@@ -12,7 +12,7 @@ export default class ProfileMaq extends Component {
         return {
             headerStyle: { backgroundColor: 'transparent', top: 0, right: 0, left: 0, position: 'absolute' },
             headerTintColor: '#00695c',
-            headerRight: (<Icon name='md-more' style={{ color: '#00695c', fontSize: 28, paddingRight: 15 }} />)
+            // headerRight: (<Icon name='md-more' style={{ color: '#00695c', fontSize: 28, paddingRight: 15 }} />)
         }
     }
 
@@ -78,13 +78,13 @@ export default class ProfileMaq extends Component {
                 <Footer style={{ height: 65, paddingTop: 20, borderTopColor: '#eaeaea', borderTopWidth: 0.7 }}>
                     <Left style={{ paddingBottom: 20, paddingLeft: 20 }}>
                         <Text style={{ fontWeight: 'bold', color: '#484848', fontSize: 18 }}>R${preco}/H</Text>
-                        <View style={globalStyles.itemAlign}>
+                        {/* <View style={globalStyles.itemAlign}>
                             <Icon name='ios-star' style={globalStyles.star} />
                             <Icon name='ios-star' style={globalStyles.star} />
                             <Icon name='ios-star' style={globalStyles.star} />
                             <Icon name='ios-star-half' style={globalStyles.star} />
                             <Icon name='ios-star-outline' style={globalStyles.star} />
-                        </View>
+                        </View> */}
                     </Left>
 
                     <Right style={{ paddingBottom: 20, paddingRight: 20 }}>

@@ -24,7 +24,7 @@ export default class SingleCard extends Component {
                     </Left>
                 </CardItem>
 
-                <CardItem cardBody style={{ paddingLeft: 8, paddingRight: 12, paddingBottom: 10 }}>
+                {/* <CardItem cardBody style={{ paddingLeft: 8, paddingRight: 12, paddingBottom: 10 }}>
                     <Left>
                         <Icon name='ios-star' style={globalStyles.star} />
                         <Icon name='ios-star' style={globalStyles.star} />
@@ -33,7 +33,7 @@ export default class SingleCard extends Component {
                         <Icon name='ios-star-outline' style={globalStyles.star} />
                         <Text style={{ fontSize: 12 }}>{this.props.comments} Comentários</Text>
                     </Left>
-                </CardItem>
+                </CardItem> */}
             </Card>
         )
     }

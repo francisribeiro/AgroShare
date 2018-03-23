@@ -63,9 +63,9 @@ class Login extends Component {
           </Left>
 
           <Right>
-            <Button transparent onPress={() => navigate('PasswordRecovery')}>
+            {/* <Button transparent onPress={() => navigate('PasswordRecovery')}>
               <Text style={{ fontSize: 12 }}>Esqueceu a senha?</Text>
-            </Button>
+            </Button> */}
           </Right>
         </Header>
 

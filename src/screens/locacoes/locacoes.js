@@ -32,11 +32,11 @@ class Locacoes extends Component {
                         <Title style={{ fontSize: 20 }}>Minhas locações</Title>
                     </Body>
 
-                    <Right>
+                    {/* <Right>
                         <Button transparent style={{ paddingTop: 15 }}>
                             <Icon name='md-more' style={{ fontSize: 28 }} />
                         </Button>
-                    </Right>
+                    </Right> */}
                 </Header>
                 <ScrollableTabView
                     initialPage={0}

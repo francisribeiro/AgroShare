@@ -94,7 +94,7 @@ class Perfil extends Component {
                     </View>
 
 
-                    <View style={globalStyles.itemMenu}>
+                    {/* <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Precisa de ajuda?</Title>
@@ -103,9 +103,9 @@ class Perfil extends Component {
                                 </Right>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
-                    <View style={globalStyles.itemMenu}>
+                    {/* <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Envie um feedback</Title>
@@ -114,7 +114,7 @@ class Perfil extends Component {
                                 </Right>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
                     <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => auth.doSignOut().then(() => this.reset())}>
