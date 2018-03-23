@@ -9,7 +9,7 @@ export default class LocacoesNotificacoes extends Component {
     render() {
         return (
             <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
-                <TouchableOpacity activeOpacity={0.5}>
+                {/* <TouchableOpacity activeOpacity={0.5}> */}
                     <View pointerEvents='none'>
                         <ListItem thumbnail>
                             <Body style={{ borderBottomColor: '#fff' }}>
@@ -33,7 +33,7 @@ export default class LocacoesNotificacoes extends Component {
                             </Right>
                         </ListItem>
                     </View>
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
             </ View>
         )
     }

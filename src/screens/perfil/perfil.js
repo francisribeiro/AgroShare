@@ -2,23 +2,41 @@ import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body, Icon, Title, Thumbnail } from 'native-base'
 import { View, TouchableOpacity } from 'react-native'
 import IconBadge from 'react-native-icon-badge'
+import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
+import { auth, firebase } from '../../config/firebase'
+import { getUserData } from '../../actions/AppAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 // Profile Image
 const profile = require('../../assets/images/profile.jpeg')
 
-export default class Perfil extends Component {
+class Perfil extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    componentWillMount() {
+        this.props.getUserData()
+    }
+
+    reset() {
+        this.props.navigation.dispatch(NavigationActions.reset({
+            index: 0,
+            key: null,
+            actions: [NavigationActions.navigate({ routeName: 'Main' })]
+        }))
+    }
+
     // Atividades screen
     render() {
+        const { nome, sobrenome } = this.props
+        const { navigate } = this.props.navigation
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body style={{ paddingLeft: 10 }}>
-                        <Title style={{ fontSize: 20, width: 144 }}>Luna Lovegood</Title>
+                        <Title style={{ fontSize: 20, width: 144 }}>{nome} {sobrenome}</Title>
                     </Body>
 
                     <Right>
@@ -53,6 +71,16 @@ export default class Perfil extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
+                    <View style={globalStyles.itemMenu}>
+                        <TouchableOpacity onPress={() => navigate('load', { troca: 1 })}>
+                            <View style={globalStyles.alignMenu}>
+                                <Title style={globalStyles.titleMenu}>Quero alugar uma máquina</Title>
+                                <Right>
+                                    <Icon name='ios-swap-outline' style={globalStyles.iconMenu} />
+                                </Right>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
@@ -66,7 +94,7 @@ export default class Perfil extends Component {
                     </View>
 
 
-                    <View style={globalStyles.itemMenu}>
+                    {/* <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Precisa de ajuda?</Title>
@@ -75,14 +103,25 @@ export default class Perfil extends Component {
                                 </Right>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
-                    <View style={globalStyles.itemMenu}>
+                    {/* <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Envie um feedback</Title>
                                 <Right>
                                     <Icon name='ios-mail-outline' style={globalStyles.iconMenu} />
+                                </Right>
+                            </View>
+                        </TouchableOpacity>
+                    </View> */}
+
+                    <View style={globalStyles.itemMenu}>
+                        <TouchableOpacity onPress={() => auth.doSignOut().then(() => this.reset())}>
+                            <View style={globalStyles.alignMenu}>
+                                <Title style={globalStyles.titleMenu}>Sair</Title>
+                                <Right>
+                                    <Icon name='ios-undo-outline' style={globalStyles.iconMenu} />
                                 </Right>
                             </View>
                         </TouchableOpacity>
@@ -92,3 +131,10 @@ export default class Perfil extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    nome: state.AppReducer.nome,
+    sobrenome: state.AppReducer.sobrenome
+})
+
+export default connect(mapStateToProps, { getUserData })(Perfil)

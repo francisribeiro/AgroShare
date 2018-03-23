@@ -16,7 +16,7 @@ export default class Mensagens extends Component {
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
-                    <SearchBar
+                    {/* <SearchBar
                         ref={(ref) => this.searchBar = ref}
                         placeholder='Pesquisar...'
                         backgroundColor='#fff'
@@ -28,20 +28,20 @@ export default class Mensagens extends Component {
                         heightAdjust={8}
                         animate={false}
                         fontFamily='Roboto'
-                    />
+                    /> */}
 
                     <Body style={{ paddingLeft: 10 }}>
                         <Title style={{ fontSize: 20, width: 187 }}>Lista de mensagens</Title>
                     </Body>
 
                     <Right>
-                        <Button transparent onPress={() => this.searchBar.show()}>
+                        {/* <Button transparent onPress={() => this.searchBar.show()}>
                             <Icon name='ios-search-outline' style={{ fontSize: 28, color: '#fff' }} />
-                        </Button>
+                        </Button> */}
 
-                        <Button transparent>
+                        {/* <Button transparent>
                             <Icon name='md-more' style={{ fontSize: 28 }} />
-                        </Button>
+                        </Button> */}
                     </Right>
                 </Header>
 

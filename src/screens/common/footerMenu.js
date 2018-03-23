@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Button, Footer, FooterTab, Text, Icon, Badge } from 'native-base'
 import { Keyboard } from 'react-native'
+import { connect } from 'react-redux'
+import b64 from 'base-64'
 
-import globalStyles from '../common/globalStyles' // Global Styles
+import { firebase } from '../../config/firebase'
+import globalStyles from './globalStyles' // Global Styles
+import { NotificacaoAguardandoLocador } from '../../actions/AppAction'
 
-export default class FooterMenu extends Component {
+class FooterMenu extends Component {
     // Class start state
     constructor(props) {
         super(props)
@@ -22,6 +26,8 @@ export default class FooterMenu extends Component {
 
     // Métodos para esconder o footer quando o teclado estiver ativo
     componentWillMount() {
+        let locador = b64.encode(firebase.auth.currentUser.email)
+        this.props.NotificacaoAguardandoLocador(locador)
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow)
         this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardWillHide)
     }
@@ -34,6 +40,26 @@ export default class FooterMenu extends Component {
     keyboardWillShow = event => { this.setState({ isVisible: false }) }
     keyboardWillHide = event => { this.setState({ isVisible: true }) }
 
+
+    renderLocacoes(navigate, qtd) {
+        if (qtd > 0)
+            return (
+                <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Locacoes') }} vertical badge>
+                    <Badge style={globalStyles.footerBadge}>
+                        <Text>{qtd}</Text>
+                    </Badge>
+                    <Icon active={this.state.tab2} name='ios-calendar-outline' style={globalStyles.footerIcon} />
+                    <Text style={globalStyles.footerTxt}>Locações</Text>
+                </Button>
+            )
+
+        return (
+            <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Locacoes') }} vertical>
+                <Icon active={this.state.tab2} name='ios-calendar-outline' style={globalStyles.footerIcon} />
+                <Text style={globalStyles.footerTxt}>Locações</Text>
+            </Button>
+        )
+    }
     // FooterTab screen
     render() {
         // TabNavigator props
@@ -48,18 +74,12 @@ export default class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Anúncios</Text>
                         </Button>
 
-                        <Button active={this.state.tab2} onPress={() => { this.toggleTab2(); navigate('Locacoes') }} vertical badge>
-                            <Badge style={globalStyles.footerBadge}>
-                                <Text>1</Text>
-                            </Badge>
-                            <Icon active={this.state.tab2} name='ios-calendar-outline' style={globalStyles.footerIcon} />
-                            <Text style={globalStyles.footerTxt}>Locações</Text>
-                        </Button>
+                        {this.renderLocacoes(navigate, this.props.quantidadeLocador)}
 
-                        <Button active={this.state.tab3} onPress={() => { this.toggleTab3(); navigate('Atividade') }} vertical>
+                        {/* <Button active={this.state.tab3} onPress={() => { this.toggleTab3(); navigate('Atividade') }} vertical>
                             <Icon active={this.state.tab3} name='ios-stats-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Atividade</Text>
-                        </Button>
+                        </Button> */}
 
                         <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
                             <Badge style={globalStyles.footerBadge}>
@@ -84,3 +104,8 @@ export default class FooterMenu extends Component {
             return null
     }
 }
+const mapStateToProps = state => ({
+    quantidadeLocador: state.NotificacaoAguardandoReducer.quantidadeLocador,
+})
+
+export default connect(mapStateToProps, { NotificacaoAguardandoLocador })(FooterMenu)

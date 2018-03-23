@@ -1,29 +1,84 @@
 import React, { Component } from 'react'
-import { List, Container } from 'native-base'
+import { List, Container, Text } from 'native-base'
+import { ListView, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux'
+import _ from 'lodash'
+import b64 from 'base-64'
 
+import { firebase } from '../../config/firebase'
+import { AlugueisFetch } from '../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
 // Imagem do trator
 const thumb3 = require('../../assets/images/drawer-cover3.jpg')
 
-// Dados das máquinas
-const datas = [
-    {
-        img: thumb3,
-        msg: 'Aluguel do Trator BH 180',
-        inicio: '12/03/2018',
-        fim: '22/03/2018'
+class Aguardando extends Component {
+    componentWillMount() {
+        this.props.AlugueisFetch()
+        this.createDataSource(this.props.alugueis)
     }
-]
 
-export default class Aguardando extends Component {
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps.alugueis)
+    }
+
+    createDataSource(alugueis) {
+        const result2 = alugueis.reduce((b, myObj) => {
+
+            var newObj = Object.keys(myObj).reduce((c, v) => {
+                if (typeof myObj[v] === 'object') c = Object.assign(c, { aluguel: v }, myObj[v]);
+                else c[v] = myObj[v];
+                return c;
+            }, {});
+
+            return b.concat(newObj)
+        }, []);
+
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
+        this.dataSource = ds.cloneWithRows(result2)
+    }
+
+    renderRow(aluguel) {
+        let userId = b64.encode(firebase.auth.currentUser.email)
+        let tipo = ''
+        let marca = ''
+        let preco = 0
+
+        firebase.db.ref(`Anuncios/${aluguel.locador}/${aluguel.maquina}`).on('value', (snapshot) => {
+            tipo = snapshot.val().tipo
+            marca = snapshot.val().marca
+            preco = snapshot.val().preco
+        })
+
+        if (!aluguel.ativo && aluguel.locador == userId)
+            return (
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('SolicitacaoAluguel', { aluguel, tipo, marca, preco })}>
+                    <LocacoesNotificacoes img={thumb3} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
+                </TouchableOpacity >
+            )
+
+        return null
+    }
+
     render() {
         return (
-            <List
-                dataArray={datas}
-                renderRow={data =>
-                    <LocacoesNotificacoes img={data.img} msg={data.msg} inicio={data.inicio} fim={data.fim} />
-                } />
+            <ListView
+                enableEmptySections
+                dataSource={this.dataSource}
+                renderRow={(data) => this.renderRow(data)}
+            />
         )
     }
 }
+
+const mapStateToProps = state => {
+    const alugueis = _.map(state.AlugueisListaReducer, (val, locatario) => {
+        return { ...val, locatario }
+    })
+
+    return {
+        alugueis
+    }
+}
+
+export default connect(mapStateToProps, { AlugueisFetch })(Aguardando)
