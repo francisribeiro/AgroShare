@@ -71,7 +71,6 @@ export const NotificacaoAguardandoLocador = (locador) => {
                 var t = Object.keys(myObj).forEach(e => {
                     if (typeof myObj[e] === 'object') {
                         if (myObj[e].locador == locador) {
-                            console.log(myObj[e])
                             if (!myObj[e].ativo)
                                 qtd++
                         }
