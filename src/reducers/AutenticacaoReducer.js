@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    email: 'teste@teste.com',
+    email: 'pk@hotmail.com',
     senha: '$Francis123',
     erroLogin: '',
     loading: false
