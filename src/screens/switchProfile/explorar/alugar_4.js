@@ -3,6 +3,7 @@ import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Ic
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 
@@ -14,7 +15,7 @@ class Alugar_4 extends Component {
 
     _cadastrarAluguel() {
         const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo } = this.props
-        this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo })
+        setTimeout(() => this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }), 500)
     }
 
 
@@ -45,9 +46,17 @@ class Alugar_4 extends Component {
     renderIcon() {
         if (this.props.loading)
             return (
-                <TouchableOpacity activeOpacity={1} style={[globalStyles.floatingButton, { backgroundColor: globalStyles.bg }]} onPress={() => { false }}>
-                    <Spinner color='#fff' />
-                </TouchableOpacity >
+                <AwesomeAlert
+                    show={true}
+                    closeOnTouchOutside={false}
+                    closeOnHardwareBackPress={false}
+                    showProgress={true}
+                    progressSize={70}
+                    progressColor='#00695c'
+                    message='Aguarde um momento...'
+                    messageStyle={{ color: '#585858', fontSize: 23 }}
+                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                />
             )
 
         return (

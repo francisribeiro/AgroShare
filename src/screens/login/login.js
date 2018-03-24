@@ -36,9 +36,17 @@ class Login extends Component {
   renderIcon() {
     if (this.props.loading)
       return (
-        <TouchableOpacity activeOpacity={1} style={globalStyles.floatingButton} onPress={() => { false }}>
-          <Spinner color={globalStyles.bg} />
-        </TouchableOpacity>
+        <AwesomeAlert
+          show={true}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+          showProgress={true}
+          progressSize={40}
+          progressColor='#00695c'
+          message='Aguarde um momento...'
+          messageStyle={{ color: '#585858' }}
+          overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+        />
       )
 
     return (

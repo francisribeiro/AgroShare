@@ -62,8 +62,6 @@ class MeusAlugueis extends Component {
         const { tipo, marca, preco, aluguel } = params
         const { showAlertAceitar, showLoading } = this.state
 
-        console.log(aluguel)
-
         return (
             <Container style={{ backgroundColor: '#fff' }}>
 
