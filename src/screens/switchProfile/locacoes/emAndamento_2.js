@@ -23,24 +23,24 @@ class EmAndamento_2 extends Component {
     }
 
     createDataSource(alugueis) {
+        var arr = []
+
         const result2 = alugueis.reduce((b, myObj) => {
 
-            var newObj = Object.keys(myObj).reduce((c, v) => {
-                if (typeof myObj[v] === 'object') c = Object.assign(c, { aluguel: v }, myObj[v]);
-                else c[v] = myObj[v];
-                return c;
-            }, {});
+            var t = Object.keys(myObj).forEach(e => {
+                // console.log[myObj[e]]
+                if (typeof myObj[e] === 'object') {
+                    myObj[e].locatario = myObj.locatario
+                    myObj[e].aluguel = e
+                    arr.push(myObj[e])
+                }
+            })
 
-            return b.concat(newObj)
+            return null
         }, []);
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
-        this.dataSource = ds.cloneWithRows(result2)
-
-        if (alugueis.length == 0)
-            this.setState({ flag: true })
-        else
-            this.setState({ flag: false })
+        this.dataSource = ds.cloneWithRows(arr)
     }
 
     renderRow(aluguel) {
@@ -78,7 +78,7 @@ class EmAndamento_2 extends Component {
 
 const mapStateToProps = state => {
     const alugueis = _.map(state.AlugueisListaReducer, (val, locatario) => {
-        return { ...val, locatario }
+        return { locatario, ...val }
     })
 
     return {
