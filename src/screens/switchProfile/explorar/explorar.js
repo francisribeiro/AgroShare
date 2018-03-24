@@ -30,20 +30,30 @@ class Explorar extends Component {
     }
 
     createDataSource(todosAnuncios) {
+        let arr = [];
 
         const result2 = todosAnuncios.reduce((b, myObj) => {
+            
+            var t = Object.keys(myObj).forEach(e => {
+                if (typeof myObj[e] === 'object') {
+                    myObj[e].locador = myObj.locador
+                    myObj[e].maquina = e
+                    arr.push(myObj[e])
+                }
+            })
+            
+            // var newObj = Object.keys(myObj).reduce((c, v) => {
+            //     if (typeof myObj[v] === 'object') c = Object.assign(c, { maquina: v }, myObj[v]);
+            //     else c[v] = myObj[v];
+            //     return c;
+            // }, {});
 
-            var newObj = Object.keys(myObj).reduce((c, v) => {
-                if (typeof myObj[v] === 'object') c = Object.assign(c, { maquina: v }, myObj[v]);
-                else c[v] = myObj[v];
-                return c;
-            }, {});
-
-            return b.concat(newObj)
+            // return b.concat(newObj)
+            return null
         }, []);
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
-        this.dataSource = ds.cloneWithRows(result2)
+        this.dataSource = ds.cloneWithRows(arr)
     }
 
     renderRow(anuncio, navigate) {
@@ -89,7 +99,7 @@ class Explorar extends Component {
 
 const mapStateToProps = state => {
     const todosAnuncios = _.map(state.AnunciosListaReducer, (val, locador) => {
-        return { ...val, locador }
+        return { locador, ...val }
     })
 
     return { todosAnuncios }

@@ -54,8 +54,8 @@ class Cadastro_2 extends Component {
                                     <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>Colheitadeira</Text>
                                 </RadioButton>
 
-                                <RadioButton value={'Ensilhadeira'} color={globalStyles.bg}>
-                                    <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>Ensilhadeira</Text>
+                                <RadioButton value={'Ensiladeira'} color={globalStyles.bg}>
+                                    <Text style={{ color: '#585858', fontSize: 18, paddingLeft: 8, marginBottom: 5 }}>Ensiladeira</Text>
                                 </RadioButton>
 
                                 <RadioButton value={'Adubadeira'} color={globalStyles.bg}>

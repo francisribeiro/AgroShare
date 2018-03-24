@@ -41,15 +41,14 @@ export const AlugueisFetch = () => {
 export const NotificacaoAguardandoLocatario = () => {
     return dispatch => {
         let userId = b64.encode(firebase.auth.currentUser.email)
-        let qtd = 0
 
         firebase.db.ref(`Alugueis/${userId}`).on('value', (snapshot) => {
+            let qtd = 0
+
             if (snapshot.val() != null)
                 Object.keys(snapshot.val()).map(function (objectKey, index) {
                     if (snapshot.val()[objectKey].ativo == false)
                         qtd++
-                    else
-                        qtd--
                 })
 
             dispatch({ type: 'quantidade_aguardando_locatario', payload: qtd })
@@ -61,33 +60,26 @@ export const NotificacaoAguardandoLocatario = () => {
 export const NotificacaoAguardandoLocador = (locador) => {
     return dispatch => {
 
-        let qtd = 0
-
         firebase.db.ref(`Alugueis`).on('value', (snapshot) => {
+            let qtd = 0
 
             const alugueis = _.map(snapshot.val(), (val, locatario) => {
                 return { ...val, locatario }
             })
 
             const result2 = alugueis.reduce((b, myObj) => {
+                var t = Object.keys(myObj).forEach(e => {
+                    if (typeof myObj[e] === 'object') {
+                        if (myObj[e].locador == locador) {
+                            console.log(myObj[e])
+                            if (!myObj[e].ativo)
+                                qtd++
+                        }
+                    }
+                })
 
-                var newObj = Object.keys(myObj).reduce((c, v) => {
-                    if (typeof myObj[v] === 'object') c = Object.assign(c, { aluguel: v }, myObj[v])
-                    else c[v] = myObj[v];
-                    return c;
-                }, {})
-
-                return b.concat(newObj)
+                return null
             }, [])
-
-
-            result2.forEach(element => {
-                if (element.locador == locador)
-                    if (element.ativo == false)
-                        qtd++
-                    else
-                        qtd--
-            })
 
             dispatch({ type: 'quantidade_aguardando_locador', payload: qtd })
         })

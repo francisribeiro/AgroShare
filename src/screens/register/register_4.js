@@ -3,6 +3,7 @@ import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Ic
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { modificaIdade, cadastrarUsuario } from '../../actions/CadastroUsuarioAction'
 import globalStyles from '../common/globalStyles' // Global Styles
@@ -39,9 +40,17 @@ class Register_4 extends Component {
     renderIcon() {
         if (this.props.loading)
             return (
-                <TouchableOpacity activeOpacity={1} style={globalStyles.floatingButton} onPress={() => { false }}>
-                    <Spinner color={globalStyles.bg} />
-                </TouchableOpacity >
+                <AwesomeAlert
+                    show={true}
+                    closeOnTouchOutside={false}
+                    closeOnHardwareBackPress={false}
+                    showProgress={true}
+                    progressSize={40}
+                    progressColor='#00695c'
+                    message='Aguarde um momento...'
+                    messageStyle={{ color: '#585858' }}
+                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                />
             )
 
         return (

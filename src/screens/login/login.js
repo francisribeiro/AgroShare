@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, IconNB, Toast, Spinner } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../../actions/AutenticacaoAction'
 import globalStyles from '../common/globalStyles' // Global Styles
@@ -35,9 +36,17 @@ class Login extends Component {
   renderIcon() {
     if (this.props.loading)
       return (
-        <TouchableOpacity activeOpacity={1} style={globalStyles.floatingButton} onPress={() => { false }}>
-          <Spinner color={globalStyles.bg} />
-        </TouchableOpacity>
+        <AwesomeAlert
+          show={true}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+          showProgress={true}
+          progressSize={40}
+          progressColor='#00695c'
+          message='Aguarde um momento...'
+          messageStyle={{ color: '#585858' }}
+          overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+        />
       )
 
     return (
