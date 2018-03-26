@@ -117,3 +117,37 @@ const AceitarAluguelSuccesso2 = (dispatch) => {
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes_2' })]
     }))
 }
+
+export const adicionaContato = email => {
+    
+    return dispatch => {
+    
+        firebase.db.ref(`/users/${email}`)
+            .once('value')
+            .then(snapshot => {
+                if(snapshot.val()) 
+                console.log(snapshot.val())
+                //     //email do contato que queremos adicionar
+                //     const dadosUsuario = _.first(_.values(snapshot.val()));
+                //     console.log(dadosUsuario);
+                    
+                //     //email do usuário autenticado
+                //     const { currentUser } = firebase.auth();
+                //     let emailUsuarioB64 = b64.encode(currentUser.email);
+
+                //     firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
+                //         .push({ email, nome: dadosUsuario.nome })
+                //         .then(() => adicionaContatoSucesso(dispatch))
+                //         .catch(erro => adicionaContatoErro(erro.message, dispatch))
+
+                // } else {
+                //     dispatch(
+                //         { 
+                //             type: ADICIONA_CONTATO_ERRO, 
+                //             payload: 'E-mail informado não corresponde a um usuário válido!'
+                //         }
+                //     )
+                // }
+            })
+    }
+}

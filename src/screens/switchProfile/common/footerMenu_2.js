@@ -74,7 +74,7 @@ class FooterMenu_2 extends Component {
 
                         {this.renderLocacoes(navigate, this.props.quantidadeLocatario)}
 
-                        <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); }} vertical badge>
+                        <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens_2') }} vertical badge>
                             <Badge style={globalStyles.footerBadge}>
                                 <Text>3</Text>
                             </Badge>

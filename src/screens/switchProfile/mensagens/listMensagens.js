@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { List, ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 import { TouchableOpacity, View } from 'react-native'
 
-import globalStyles from '../common/globalStyles' // Global Styles
+import globalStyles from '../../common/globalStyles' // Global Styles
 
 // Imagens dos avatares
-const avatar1 = require('../../assets/images/avatar1.jpg')
-
+const avatar1 = require('../../../assets/images/avatar1.jpg')
 // Dados das máquinas
 const datas = [
     {
