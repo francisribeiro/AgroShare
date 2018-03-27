@@ -88,16 +88,18 @@ class MeusAlugueis extends Component {
                         <Text style={globalStyles.confirmRent}>Forma de Pagamento: </Text>{aluguel.formaPagamento}{`\n\n`}
                         <Text style={globalStyles.confirmRent}>Dias Restantes: </Text>{this.days(aluguel.dataInicial, aluguel.dataFinal)} dias{`\n\n`}
                     </Text>
-                    <Button rounded bordered large block onPress={() => false} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
-                        <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locatário</Text>
-                    </Button>
 
                 </Content>
                 <View style={{ padding: 10, height: 95 }}>
+                    <Button rounded bordered large block onPress={() => false} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
+                        <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locatário</Text>
+                    </Button>
+                </View>
+                {/* <View style={{ padding: 10, height: 95 }}>
                     <Button rounded large block onPress={() => this.showAlertAceitar()} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Solicitar Cancelamento</Text>
                     </Button>
-                </View>
+                </View> */}
 
                 <AwesomeAlert
                     show={showAlertAceitar}

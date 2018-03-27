@@ -125,13 +125,13 @@ export default class Chat extends Component {
 
     renderInputToolbar(props) {
         return (
-            <InputToolbar {...props} containerStyle={{ borderTopWidth:0, backgroundColor: '#fff' }} />
+            <InputToolbar {...props} containerStyle={{ borderTopWidth: 0, backgroundColor: '#fff' }} />
         )
     }
 
     renderComposer(props) {
         return (
-            <Composer {...props} textInputStyle={{ borderColor: '#eaeaea', borderWidth:1, paddingLeft: 20, marginRight: 10, marginTop: 4, marginBottom: 6, backgroundColor: '#fff', borderRadius: 30, fontSize: 16 }} />
+            <Composer {...props} textInputStyle={{ borderColor: '#eaeaea', borderWidth: 1, paddingLeft: 20, marginRight: 10, marginTop: 4, marginBottom: 6, backgroundColor: '#fff', borderRadius: 30, fontSize: 16 }} />
         )
     }
 
@@ -139,6 +139,8 @@ export default class Chat extends Component {
     render() {
         // StackNavigator props
         const { navigate, goBack } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const { nome, sobrenome, email } = params
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -150,8 +152,8 @@ export default class Chat extends Component {
                     </Left>
 
                     <Body style={{ paddingLeft: 40, justifyContent: 'center', alignItems: 'center' }}>
-                        <Title style={{ fontSize: 20, width: 144 }}>Harry Potter</Title>
-                        <Text note style={{ color: 'rgba(255, 255, 255, 0.7)' }}>online</Text>
+                        <Title style={{ fontSize: 20, width: 144 }}>{nome} {sobrenome}</Title>
+                        {/* <Text note style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{email}</Text> */}
                     </Body>
 
                     <Right>

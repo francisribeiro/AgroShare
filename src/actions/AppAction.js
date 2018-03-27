@@ -6,7 +6,7 @@ export const getUserData = () => {
     return dispatch => {
         let userId = b64.encode(firebase.auth.currentUser.email)
 
-        firebase.db.ref(`users/${userId}`).on('value', (snapshot) => {
+        firebase.db.ref(`Usuarios/${userId}`).on('value', (snapshot) => {
             dispatch({ type: 'dados_usuario_logado', payload: snapshot.val() })
         })
     }
@@ -119,35 +119,55 @@ const AceitarAluguelSuccesso2 = (dispatch) => {
 }
 
 export const adicionaContato = email => {
-    
+
     return dispatch => {
-    
-        firebase.db.ref(`/users/${email}`)
+
+        firebase.db.ref(`/Usuarios/${email}`)
             .once('value')
             .then(snapshot => {
-                if(snapshot.val()) 
-                console.log(snapshot.val())
-                //     //email do contato que queremos adicionar
-                //     const dadosUsuario = _.first(_.values(snapshot.val()));
-                //     console.log(dadosUsuario);
-                    
-                //     //email do usuário autenticado
-                //     const { currentUser } = firebase.auth();
-                //     let emailUsuarioB64 = b64.encode(currentUser.email);
+                if (snapshot.val()) {
+                    //email do contato que queremos adicionar
+                    //email do usuário autenticado
+                    let emailUsuarioB64 = b64.encode(firebase.auth.currentUser.email);
 
-                //     firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
-                //         .push({ email, nome: dadosUsuario.nome })
-                //         .then(() => adicionaContatoSucesso(dispatch))
-                //         .catch(erro => adicionaContatoErro(erro.message, dispatch))
+                    firebase.db.ref(`/Contatos/${emailUsuarioB64}`)
+                        .push({ email, nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome })
+                        .then(() => adicionaContatoSucesso(dispatch, snapshot.val().nome, snapshot.val().sobrenome, email))
+                        .catch(erro => adicionaContatoErro(erro.message, dispatch))
 
-                // } else {
-                //     dispatch(
-                //         { 
-                //             type: ADICIONA_CONTATO_ERRO, 
-                //             payload: 'E-mail informado não corresponde a um usuário válido!'
-                //         }
-                //     )
-                // }
+                } else {
+                    dispatch(
+                        {
+                            type: 'ADICIONA_CONTATO_ERRO',
+                            payload: 'E-mail informado não corresponde a um usuário válido!'
+                        }
+                    )
+                }
+            })
+    }
+}
+
+const adicionaContatoErro = (erro, dispatch) => (
+    dispatch(
+        {
+            type: 'ADICIONA_CONTATO_ERRO',
+            payload: erro
+        }
+    )
+)
+
+const adicionaContatoSucesso = (dispatch, nome, sobrenome, email) => {
+    dispatch({ type: 'ADICIONA_CONTATO_SUCESSO', payload: true })
+    dispatch(NavigationActions.navigate({ routeName: 'Chat_2', params: { nome, sobrenome, email } }))
+}
+
+export const contatosUsuarioFetch = () => {
+    return (dispatch) => {
+        let emailUsuarioB64 = b64.encode(firebase.auth.currentUser.email);
+
+        firebase.db.ref(`/Contatos/${emailUsuarioB64}`)
+            .on("value", snapshot => {
+                dispatch({ type: 'LISTA_CONTATO_USUARIO', payload: snapshot.val() })
             })
     }
 }
