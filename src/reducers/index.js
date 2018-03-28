@@ -18,6 +18,8 @@ import NotificacaoAguardandoReducer from './NotificacaoAguardandoReducer'
 
 import AdicionaContatoReducer from './AdicionaContatoReducer'
 import ListaContatosLocatarioReducer from './ListaContatosLocatarioReducer'
+import ListaConversaReducer from './ListaConversaReducer'
+
 
 const initialNavState = null
 
@@ -50,4 +52,5 @@ export default combineReducers({
 
     AdicionaContatoReducer,
     ListaContatosLocatarioReducer,
+    ListaConversaReducer,
 })

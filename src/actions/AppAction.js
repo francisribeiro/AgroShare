@@ -171,3 +171,60 @@ export const contatosUsuarioFetch = () => {
             })
     }
 }
+
+export const modificaMensagem = texto => {
+    return ({
+        type: 'MODIFICA_MENSAGEM',
+        payload: texto
+    })
+}
+
+export const enviarMensagem = (mensagem, nome, sobrenome, email) => {
+
+    //dados do usuario (email)
+    const usuarioEmail = firebase.auth.currentUser.email;
+
+    return dispatch => {
+
+        //conversão para base 64
+        const usuarioEmailB64 = b64.encode(usuarioEmail)
+        const contatoEmailB64 = email
+
+        firebase.db.ref(`/Mensagens/${usuarioEmailB64}/${contatoEmailB64}`)
+            .push({ mensagem, tipo: 'e' })
+            .then(() => {
+                firebase.db.ref(`/Mensagens/${contatoEmailB64}/${usuarioEmailB64}`)
+                    .push({ mensagem, tipo: 'r' })
+                    .then(() => dispatch({ type: 'ENVIA_MENSAGEM_SUCESSO' }))
+            })
+            .then(() => { //armazenar o cabeçalho de conversa do usuário autenticado
+                firebase.db.ref(`/Usuario_Conversas/${usuarioEmailB64}/${contatoEmailB64}`)
+                    .set({ nome: nome, sobrenome: sobrenome, email: contatoEmail })
+
+            })
+            .then(() => { //armazenar o cabeçalho de conversa do contato
+
+                firebase.database().ref(`/Contatos/${usuarioEmailB64}`)
+                    .once("value")
+                    .then(snapshot => {
+                        firebase.db.ref(`/Usuario_Conversas/${contatoEmailB64}/${usuarioEmailB64}`)
+                            .set({ nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome, email: snapshot.val().email })
+                    })
+            })
+    }
+
+}
+
+export const conversaUsuarioFetch = contatoEmail => {
+
+    //compor os emails na base64
+    let usuarioEmailB64 = b64.encode(firebase.auth.currentUser.email)
+    let contatoEmailB64 = contatoEmail
+
+    return dispatch => {
+        firebase.db.ref(`/Mensagens/${usuarioEmailB64}/${contatoEmailB64}`)
+            .on("value", snapshot => {
+                dispatch({ type: 'LISTA_CONVERSA_USUARIO', payload: snapshot.val() })
+            })
+    }
+}
