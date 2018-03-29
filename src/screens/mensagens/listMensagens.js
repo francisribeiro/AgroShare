@@ -29,7 +29,7 @@ class ListMensagens extends Component {
     }
 
     renderRow(contato, navigate) {
-        const { nome, sobrenome, email } = contato
+        const { nome, sobrenome, email, mensagem, hora } = contato
         return (
             <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('Chat', { nome, sobrenome, email })}>
@@ -44,14 +44,15 @@ class ListMensagens extends Component {
                                     {nome} {sobrenome}
                                 </Text>
                                 <View style={{ paddingTop: 5 }}>
-                                    <Text numberOfLines={1} note>Nada para mostrar aqui ainda</Text>
+                                    <Text numberOfLines={1} note>{mensagem}</Text>
                                 </View>
                             </Body>
 
                             <Right style={{ borderBottomColor: '#fff' }}>
-                                <View style={globalStyles.tabBadgeGreen}>
+                                <Text numberOfLines={1} note style={{ fontSize: 12, paddingBottom: 5 }}>{hora}</Text>
+                                {/* <View style={globalStyles.tabBadgeGreen}>
                                     <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>1</Text>
-                                </View>
+                                </View> */}
                             </Right>
                         </ListItem>
                     </View>

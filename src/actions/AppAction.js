@@ -126,35 +126,11 @@ export const adicionaContato = email => {
             .once('value')
             .then(snapshot => {
                 if (snapshot.val()) {
-                    //email do contato que queremos adicionar
-                    //email do usuário autenticado
-                    let emailUsuarioB64 = b64.encode(firebase.auth.currentUser.email);
-
-                    firebase.db.ref(`/Contatos/${emailUsuarioB64}`)
-                        .push({ email, nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome })
-                        .then(() => adicionaContatoSucesso(dispatch, snapshot.val().nome, snapshot.val().sobrenome, email))
-                        .catch(erro => adicionaContatoErro(erro.message, dispatch))
-
-                } else {
-                    dispatch(
-                        {
-                            type: 'ADICIONA_CONTATO_ERRO',
-                            payload: 'E-mail informado não corresponde a um usuário válido!'
-                        }
-                    )
+                    adicionaContatoSucesso(dispatch, snapshot.val().nome, snapshot.val().sobrenome, email)
                 }
             })
     }
 }
-
-const adicionaContatoErro = (erro, dispatch) => (
-    dispatch(
-        {
-            type: 'ADICIONA_CONTATO_ERRO',
-            payload: erro
-        }
-    )
-)
 
 const adicionaContatoSucesso = (dispatch, nome, sobrenome, email) => {
     dispatch({ type: 'ADICIONA_CONTATO_SUCESSO', payload: true })
@@ -165,7 +141,7 @@ export const contatosUsuarioFetch = () => {
     return (dispatch) => {
         let emailUsuarioB64 = b64.encode(firebase.auth.currentUser.email);
 
-        firebase.db.ref(`/Contatos/${emailUsuarioB64}`)
+        firebase.db.ref(`/Conversas/${emailUsuarioB64}`)
             .on("value", snapshot => {
                 dispatch({ type: 'LISTA_CONTATO_USUARIO', payload: snapshot.val() })
             })
@@ -183,8 +159,17 @@ export const enviarMensagem = (mensagem, nome, sobrenome, email) => {
 
     //dados do usuario (email)
     const usuarioEmail = firebase.auth.currentUser.email;
-
     return dispatch => {
+
+        var data = new Date()
+        var hora = data.getHours()
+        var min = data.getMinutes()
+        var str_hora = ''
+
+        if (hora >= 12)
+            str_hora = hora + ':' + min + ' PM'
+        else
+            str_hora = hora + ':' + min + ' AM'
 
         //conversão para base 64
         const usuarioEmailB64 = b64.encode(usuarioEmail)
@@ -197,19 +182,16 @@ export const enviarMensagem = (mensagem, nome, sobrenome, email) => {
                     .push({ mensagem, tipo: 'r' })
                     .then(() => dispatch({ type: 'ENVIA_MENSAGEM_SUCESSO' }))
             })
-            .then(() => { //armazenar o cabeçalho de conversa do usuário autenticado
-                firebase.db.ref(`/Usuario_Conversas/${usuarioEmailB64}/${contatoEmailB64}`)
-                    .set({ nome: nome, sobrenome: sobrenome, email: contatoEmail })
 
-            })
-            .then(() => { //armazenar o cabeçalho de conversa do contato
+        firebase.db.ref(`/Conversas/${usuarioEmailB64}/${contatoEmailB64}`)
+            .set({ nome: nome, sobrenome: sobrenome, email: email, mensagem: mensagem, hora: str_hora })
 
-                firebase.database().ref(`/Contatos/${usuarioEmailB64}`)
-                    .once("value")
-                    .then(snapshot => {
-                        firebase.db.ref(`/Usuario_Conversas/${contatoEmailB64}/${usuarioEmailB64}`)
-                            .set({ nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome, email: snapshot.val().email })
-                    })
+
+        firebase.db.ref(`/Usuarios/${usuarioEmailB64}`)
+            .once("value")
+            .then(snapshot => {
+                firebase.db.ref(`/Conversas/${contatoEmailB64}/${usuarioEmailB64}`)
+                    .set({ nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome, email: usuarioEmailB64, mensagem: mensagem, hora: str_hora })
             })
     }
 

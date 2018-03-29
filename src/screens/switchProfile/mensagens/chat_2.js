@@ -7,8 +7,7 @@ import _ from 'lodash'
 import globalStyles from '../../common/globalStyles' // Global Styles
 import { modificaMensagem, enviarMensagem, conversaUsuarioFetch } from '../../../actions/AppAction'
 
-
-class Chat_2 extends Component {
+class Chat extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
@@ -41,14 +40,14 @@ class Chat_2 extends Component {
         if (texto.tipo === 'e') {
             return (
                 <View style={{ alignItems: 'flex-end', marginTop: 5, marginBottom: 5, marginLeft: 40 }}>
-                    <Text style={{ fontSize: 18, color: '#000', padding: 10, backgroundColor: '#dbf5b4', elevation: 1, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, borderTopRightRadius: 30 }}>{texto.mensagem}</Text>
+                    <Text style={{ fontSize: 16, color: '#000', padding: 10, backgroundColor: '#dbf5b4', elevation: 1, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, borderTopRightRadius: 30 }}>{texto.mensagem}</Text>
                 </View>
             )
         }
 
         return (
             <View style={{ alignItems: 'flex-start', marginTop: 5, marginBottom: 5, marginRight: 40 }}>
-                <Text style={{ fontSize: 18, color: '#000', padding: 10, backgroundColor: '#e5e5e5', elevation: 1, borderTopRightRadius: 30, borderBottomRightRadius: 30, borderTopLeftRadius: 30 }}>{texto.mensagem}</Text>
+                <Text style={{ fontSize: 16, color: '#000', padding: 10, backgroundColor: '#e5e5e5', elevation: 1, borderTopRightRadius: 30, borderBottomRightRadius: 30, borderTopLeftRadius: 30 }}>{texto.mensagem}</Text>
             </View>
         )
     }
@@ -79,15 +78,16 @@ class Chat_2 extends Component {
                 </Header>
 
                 <Content style={{ padding: 10, paddingTop: 20 }}>
-                    <ListView
+                    <ListView style={{ marginBottom: 29 }}
                         enableEmptySections
                         dataSource={this.dataSource}
                         renderRow={this.renderRow}
                     />
                 </Content>
 
-                <Footer style={{ height: 55, backgroundColor: 'transparent' }}>
+                <Footer style={{ height: 55, backgroundColor: 'transparent', marginTop: 10 }}>
                     <Input
+                        autoGrow
                         placeholder='Digite uma mensagem...'
                         placeholderTextColor='#A9A9A9'
                         value={this.props.mensagem}
@@ -122,4 +122,4 @@ mapStateToProps = state => {
     })
 }
 
-export default connect(mapStateToProps, { modificaMensagem, enviarMensagem, conversaUsuarioFetch })(Chat_2)
+export default connect(mapStateToProps, { modificaMensagem, enviarMensagem, conversaUsuarioFetch })(Chat)
