@@ -6,7 +6,7 @@ import b64 from 'base-64'
 
 import { firebase } from '../../config/firebase'
 import globalStyles from './globalStyles' // Global Styles
-import { NotificacaoAguardandoLocador } from '../../actions/AppAction'
+import { NotificacaoAguardandoLocador, NotificacaoMsg } from '../../actions/AppAction'
 
 class FooterMenu extends Component {
     // Class start state
@@ -28,6 +28,7 @@ class FooterMenu extends Component {
     componentWillMount() {
         let locador = b64.encode(firebase.auth.currentUser.email)
         this.props.NotificacaoAguardandoLocador(locador)
+        this.props.NotificacaoMsg()
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow)
         this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardWillHide)
     }
@@ -60,6 +61,26 @@ class FooterMenu extends Component {
             </Button>
         )
     }
+
+    renderMsg(navigate, qtd) {
+        if (qtd > 0)
+            return (
+                <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
+                    <Badge style={{ backgroundColor: '#00695c' }}>
+                        <Text>{qtd}</Text>
+                    </Badge>
+                    <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
+                    <Text style={globalStyles.footerTxt}>Mensagens</Text>
+                </Button>
+            )
+
+        return (
+            <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical>
+                <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
+                <Text style={globalStyles.footerTxt}>Mensagens</Text>
+            </Button>
+        )
+    }
     // FooterTab screen
     render() {
         // TabNavigator props
@@ -81,13 +102,15 @@ class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Atividade</Text>
                         </Button> */}
 
-                        <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
-                            <Badge style={globalStyles.footerBadge}>
+                        {this.renderMsg(navigate, this.props.quantidadeMsg)}
+
+                        {/* <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
+                            <Badge style={{ backgroundColor: '#00695c' }}>
                                 <Text>3</Text>
                             </Badge>
                             <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Mensagens</Text>
-                        </Button>
+                        </Button> */}
 
                         <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} badge vertical>
                             <Badge style={globalStyles.footerBadge}>
@@ -106,6 +129,7 @@ class FooterMenu extends Component {
 }
 const mapStateToProps = state => ({
     quantidadeLocador: state.NotificacaoAguardandoReducer.quantidadeLocador,
+    quantidadeMsg: state.NotificacaoAguardandoReducer.qtdMsg,
 })
 
-export default connect(mapStateToProps, { NotificacaoAguardandoLocador })(FooterMenu)
+export default connect(mapStateToProps, { NotificacaoAguardandoLocador, NotificacaoMsg })(FooterMenu)

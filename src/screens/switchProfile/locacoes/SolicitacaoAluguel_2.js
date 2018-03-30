@@ -52,8 +52,8 @@ class SolicitacaoAluguel_2 extends Component {
         return (<Text style={{ color: '#000', fontWeight: '400', fontSize: 20 }}>R$ {total},00 </Text>)
     }
 
-    _CancelarSolicitacao(locador, aluguel) {
-        this.props.CancelarSolicitacao(locador, aluguel)
+    _CancelarSolicitacao(locador, aluguel, rota) {
+        this.props.CancelarSolicitacao(locador, aluguel, rota)
     }
     // ProfileMaq screen
     render() {
@@ -130,7 +130,7 @@ class SolicitacaoAluguel_2 extends Component {
 
                     onConfirmPressed={() => {
                         this.hideAlert().then(this.showLoading())
-                        setTimeout(() => this._CancelarSolicitacao(b64.encode(firebase.auth.currentUser.email), aluguel.aluguel), 500)
+                        setTimeout(() => this._CancelarSolicitacao(b64.encode(firebase.auth.currentUser.email), aluguel.aluguel, 'TabRoutes_2'), 500)
                     }}
                 />
 

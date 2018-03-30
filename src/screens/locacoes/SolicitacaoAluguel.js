@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
 import globalStyles from '../common/globalStyles' // Global Styles
-import { AceitarAluguel } from '../../actions/AppAction'
+import { AceitarAluguel, CancelarSolicitacao } from '../../actions/AppAction'
 
 class SolicitacaoAluguel extends Component {
     // Hide the header
@@ -56,6 +56,10 @@ class SolicitacaoAluguel extends Component {
         this.props.AceitarAluguel(locatario, aluguel)
     }
 
+    _CancelarSolicitacao(locador, aluguel, rota) {
+        this.props.CancelarSolicitacao(locador, aluguel, rota)
+    }
+
     // ProfileMaq screen
     render() {
         // StackNavigator props
@@ -63,8 +67,6 @@ class SolicitacaoAluguel extends Component {
         const { params } = this.props.navigation.state
         const { tipo, marca, preco, aluguel } = params
         const { showAlertRejeitar, showAlertAceitar, showLoading } = this.state
-
-        console.log(aluguel)
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -138,7 +140,8 @@ class SolicitacaoAluguel extends Component {
                     }}
 
                     onConfirmPressed={() => {
-                        this.hideAlert()
+                        this.hideAlert().then(this.showLoading())
+                        setTimeout(() => this._CancelarSolicitacao(aluguel.locatario, aluguel.aluguel, 'TabRoutes'), 500)
                     }}
                 />
 
@@ -196,4 +199,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { AceitarAluguel })(SolicitacaoAluguel)
+export default connect(mapStateToProps, { AceitarAluguel, CancelarSolicitacao })(SolicitacaoAluguel)

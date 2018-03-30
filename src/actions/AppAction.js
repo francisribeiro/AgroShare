@@ -99,10 +99,10 @@ export const SolicitarCancelamento = (locatario, aluguel) => {
     }
 }
 
-export const CancelarSolicitacao = (locatario, aluguel) => {
+export const CancelarSolicitacao = (locatario, aluguel, rota) => {
     return dispatch => {
         firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).remove()
-            .then(value => AceitarAluguelSuccesso2(dispatch))
+            .then(value => AceitarAluguelSuccesso2(dispatch, rota))
     }
 }
 
@@ -112,9 +112,9 @@ const AceitarAluguelSuccesso = (dispatch) => {
     }))
 }
 
-const AceitarAluguelSuccesso2 = (dispatch) => {
+const AceitarAluguelSuccesso2 = (dispatch, rota) => {
     dispatch(NavigationActions.reset({
-        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes_2' })]
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
 }
 
@@ -145,6 +145,23 @@ export const contatosUsuarioFetch = () => {
             .on("value", snapshot => {
                 dispatch({ type: 'LISTA_CONTATO_USUARIO', payload: snapshot.val() })
             })
+    }
+}
+
+export const NotificacaoMsg = () => {
+    return dispatch => {
+        let userId = b64.encode(firebase.auth.currentUser.email)
+
+        firebase.db.ref(`Conversas/${userId}`).on('value', (snapshot) => {
+            let qtd = 0
+
+            if (snapshot.val() != null)
+                Object.keys(snapshot.val()).map(function (objectKey, index) {
+                    qtd++
+                })
+
+            dispatch({ type: 'quantidade_msg', payload: qtd })
+        })
     }
 }
 
