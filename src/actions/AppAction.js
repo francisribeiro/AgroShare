@@ -1,6 +1,22 @@
 import { firebase } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
+import reverse from 'reverse-object-order'
+
+export const addHistorico = (msg, icone, usuario) => {
+    let date = new Date()
+    let strMonth = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+
+    let day = date.getDate()
+    let month = date.getMonth()
+    let year = date.getFullYear()
+    var hora = date.getHours()
+    var min = date.getMinutes()
+
+    let strDate = `${day} ${strMonth[month]}, ${year} - ${hora}:${min} ${(hora > 12) ? 'PM' : 'AM'}`
+
+    firebase.db.ref(`/Historico/${usuario}`).push({ msg, lida: false, data: strDate, icone })
+}
 
 export const getUserData = () => {
     return dispatch => {
@@ -86,9 +102,10 @@ export const NotificacaoAguardandoLocador = (locador) => {
 }
 
 export const AceitarAluguel = (locatario, aluguel) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
     return dispatch => {
         firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).update({ ativo: true })
-            .then(value => AceitarAluguelSuccesso(dispatch))
+            .then(value => AceitarAluguelSuccesso(dispatch, userId, locatario))
     }
 }
 
@@ -99,20 +116,33 @@ export const SolicitarCancelamento = (locatario, aluguel) => {
     }
 }
 
-export const CancelarSolicitacao = (locatario, aluguel, rota) => {
+export const CancelarSolicitacao = (locador, aluguel, rota) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
     return dispatch => {
-        firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).remove()
-            .then(value => AceitarAluguelSuccesso2(dispatch, rota))
+        firebase.db.ref(`/Alugueis/${userId}/${aluguel}`).remove()
+            .then(value => AceitarAluguelSuccesso3(dispatch, rota, locador, userId))
     }
 }
 
-const AceitarAluguelSuccesso = (dispatch) => {
+const AceitarAluguelSuccesso = (dispatch, locador, locatario) => {
+    addHistorico(`Sua solicitação de aluguel foi aceita.`, 'md-checkmark-circle-outline', locatario)
+    addHistorico(`Você aceitou uma solicitação de aluguel.`, 'md-checkmark-circle-outline', locador)
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
 }
 
-const AceitarAluguelSuccesso2 = (dispatch, rota) => {
+const AceitarAluguelSuccesso2 = (dispatch, rota, locatario, locador) => {
+    addHistorico(`Sua solicitação de aluguel foi rejeitada.`, 'ios-warning-outline', locatario)
+    addHistorico(`Você rejeitou uma solicitação de aluguel.`, 'ios-warning-outline', locador)
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
+    }))
+}
+
+const AceitarAluguelSuccesso3 = (dispatch, rota, locador, locatario) => {
+    addHistorico(`Você cancelou sua solicitação de aluguel.`, 'ios-warning-outline', locatario)
+    addHistorico(`Uma solicitação de alguel foi cancelada pelo locatário.`, 'ios-warning-outline', locador)
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
@@ -225,5 +255,36 @@ export const conversaUsuarioFetch = contatoEmail => {
             .on("value", snapshot => {
                 dispatch({ type: 'LISTA_CONVERSA_USUARIO', payload: snapshot.val() })
             })
+    }
+}
+
+export const historicoFetch = () => {
+
+    //compor os emails na base64
+    let usuarioEmailB64 = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        firebase.db.ref(`/Historico/${usuarioEmailB64}`)
+            .on("value", snapshot => {
+                dispatch({ type: 'LISTA_HISTORICO_USUARIO', payload: reverse(snapshot.val()) })
+            })
+    }
+}
+
+export const NotificacaoHistorico = () => {
+    return dispatch => {
+        let userId = b64.encode(firebase.auth.currentUser.email)
+
+        firebase.db.ref(`Historico/${userId}`).on('value', (snapshot) => {
+            let qtd = 0
+
+            if (snapshot.val() != null)
+                Object.keys(snapshot.val()).map(function (objectKey, index) {
+                    if (snapshot.val()[objectKey].lida == false)
+                        qtd++
+                })
+
+            dispatch({ type: 'quantidade_historico', payload: qtd })
+        })
     }
 }

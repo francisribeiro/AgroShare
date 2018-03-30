@@ -68,6 +68,12 @@ export default {
     iconMenu: { fontSize: 38, paddingRight: 5, color: '#2E2E2E' },
 
     //Alinha Itens
-    itemAlign: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' }
+    itemAlign: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' },
+
+    //Historico
+    txtHistorico: { fontSize: 16, color: '#000', paddingTop: 6 },
+    iconHistorico: { fontSize: 40, paddingRight: 15, color: '#2E2E2E' },
+    alignHistorico: { flexWrap: 'wrap', alignItems: 'flex-end', flexDirection: 'row' },
+    itemHistorico: { paddingVertical: 16, marginLeft: 15, marginRight: 15, borderBottomColor: '#eaeaea', borderBottomWidth: 1 },
 
 }

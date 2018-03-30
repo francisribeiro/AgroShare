@@ -63,8 +63,6 @@ class SolicitacaoAluguel_2 extends Component {
         const { tipo, marca, preco, aluguel } = params
         const { showAlertAceitar, showLoading } = this.state
 
-        console.log(aluguel)
-
         return (
             <Container style={{ backgroundColor: '#fff' }}>
 
@@ -130,7 +128,7 @@ class SolicitacaoAluguel_2 extends Component {
 
                     onConfirmPressed={() => {
                         this.hideAlert().then(this.showLoading())
-                        setTimeout(() => this._CancelarSolicitacao(b64.encode(firebase.auth.currentUser.email), aluguel.aluguel, 'TabRoutes_2'), 500)
+                        setTimeout(() => this._CancelarSolicitacao(aluguel.locador, aluguel.aluguel, 'TabRoutes_2'), 500)
                     }}
                 />
 
