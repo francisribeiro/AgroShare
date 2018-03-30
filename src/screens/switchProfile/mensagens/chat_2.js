@@ -4,8 +4,8 @@ import { View, TouchableOpacity, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import globalStyles from '../common/globalStyles' // Global Styles
-import { modificaMensagem, enviarMensagem, conversaUsuarioFetch } from '../../actions/AppAction'
+import globalStyles from '../../common/globalStyles' // Global Styles
+import { modificaMensagem, enviarMensagem, conversaUsuarioFetch } from '../../../actions/AppAction'
 
 class Chat extends Component {
     // Hide the header
@@ -73,7 +73,7 @@ class Chat extends Component {
                     </Body>
 
                     <Right>
-                        <Thumbnail source={require('../../assets/images/avatar1.jpg')} />
+                        <Thumbnail source={require('../../../assets/images/avatar1.jpg')} />
                     </Right>
                 </Header>
 

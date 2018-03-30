@@ -16,6 +16,11 @@ import AlugueisListaReducer from './AlugueisListaReducer'
 
 import NotificacaoAguardandoReducer from './NotificacaoAguardandoReducer'
 
+import AdicionaContatoReducer from './AdicionaContatoReducer'
+import ListaContatosLocatarioReducer from './ListaContatosLocatarioReducer'
+import ListaConversaReducer from './ListaConversaReducer'
+
+
 const initialNavState = null
 
 // firebase.auth.onAuthStateChanged(function (user) {
@@ -39,9 +44,13 @@ export default combineReducers({
     CadastroUsuarioReducer,
     CadastroAnuncioReducer,
     CadastroAluguelReducer,
-    
+
     AnunciosListaReducer,
     AlugueisListaReducer,
 
     NotificacaoAguardandoReducer,
+
+    AdicionaContatoReducer,
+    ListaContatosLocatarioReducer,
+    ListaConversaReducer,
 })

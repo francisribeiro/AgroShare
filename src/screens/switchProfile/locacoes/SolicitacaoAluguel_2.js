@@ -52,8 +52,8 @@ class SolicitacaoAluguel_2 extends Component {
         return (<Text style={{ color: '#000', fontWeight: '400', fontSize: 20 }}>R$ {total},00 </Text>)
     }
 
-    _CancelarSolicitacao(locador, aluguel) {
-        this.props.CancelarSolicitacao(locador, aluguel)
+    _CancelarSolicitacao(locador, aluguel, rota) {
+        this.props.CancelarSolicitacao(locador, aluguel, rota)
     }
     // ProfileMaq screen
     render() {
@@ -90,9 +90,9 @@ class SolicitacaoAluguel_2 extends Component {
                         <Text style={globalStyles.confirmRent}>Valor: </Text>{this._preco(preco, aluguel.dataInicial, aluguel.dataFinal)}{`\n\n`}
                         <Text style={globalStyles.confirmRent}>Forma de Pagamento: </Text>{aluguel.formaPagamento}{`\n\n`}
                     </Text>
-                    <Button rounded bordered large block onPress={() => false} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
+                    {/* <Button rounded bordered large block onPress={() => false} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locador</Text>
-                    </Button>
+                    </Button> */}
 
                 </Content>
                 <View style={{ padding: 10, height: 95 }}>
@@ -130,7 +130,7 @@ class SolicitacaoAluguel_2 extends Component {
 
                     onConfirmPressed={() => {
                         this.hideAlert().then(this.showLoading())
-                        setTimeout(() => this._CancelarSolicitacao(b64.encode(firebase.auth.currentUser.email), aluguel.aluguel), 500)
+                        setTimeout(() => this._CancelarSolicitacao(b64.encode(firebase.auth.currentUser.email), aluguel.aluguel, 'TabRoutes_2'), 500)
                     }}
                 />
 

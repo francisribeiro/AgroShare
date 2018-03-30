@@ -3,29 +3,29 @@ import { Container, Header, Content, Body, Title, Button, Item, Label, Input, Le
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
-import AwesomeAlert from 'react-native-awesome-alerts'
+// import AwesomeAlert from 'react-native-awesome-alerts'
 
 import globalStyles from '../common/globalStyles' // Global Styles
-import { SolicitarCancelamento } from '../../actions/AppAction'
+import { adicionaContato } from '../../actions/AppAction'
 
 class MeusAlugueis extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
-    constructor(props) {
-        super(props)
-        this.state = { showAlertAceitar: false, showLoading: false }
-    }
+    // constructor(props) {
+    //     super(props)
+    //     this.state = { showAlertAceitar: false, showLoading: false }
+    // }
 
-    showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
-    showLoading = () => { this.setState({ showLoading: true }) }
+    // showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
+    // showLoading = () => { this.setState({ showLoading: true }) }
 
-    async hideAlert() {
-        this.setState({
-            showAlertAceitar: false,
-            showLoading: false
-        })
-    }
+    // async hideAlert() {
+    //     this.setState({
+    //         showAlertAceitar: false,
+    //         showLoading: false
+    //     })
+    // }
 
     subtractDate(i, f) {
         let dateI = i.split('/')
@@ -50,17 +50,20 @@ class MeusAlugueis extends Component {
         return (<Text style={{ color: '#000', fontWeight: '400', fontSize: 20 }}>R$ {total},00 </Text>)
     }
 
-
-    _solicitarCancelamento(locatario, aluguel) {
-        this.props.SolicitarCancelamento(locatario, aluguel)
+    _adicionaContato(email) {
+        this.props.adicionaContato(email)
     }
+
+    // _solicitarCancelamento(locatario, aluguel) {
+    //     this.props.SolicitarCancelamento(locatario, aluguel)
+    // }
     // ProfileMaq screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
         const { tipo, marca, preco, aluguel } = params
-        const { showAlertAceitar, showLoading } = this.state
+        // const { showAlertAceitar, showLoading } = this.state
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -88,18 +91,20 @@ class MeusAlugueis extends Component {
                         <Text style={globalStyles.confirmRent}>Forma de Pagamento: </Text>{aluguel.formaPagamento}{`\n\n`}
                         <Text style={globalStyles.confirmRent}>Dias Restantes: </Text>{this.days(aluguel.dataInicial, aluguel.dataFinal)} dias{`\n\n`}
                     </Text>
-                    <Button rounded bordered large block onPress={() => false} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
-                        <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locatário</Text>
-                    </Button>
 
                 </Content>
                 <View style={{ padding: 10, height: 95 }}>
+                    <Button rounded bordered large block onPress={() => this._adicionaContato(aluguel.locatario)} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
+                        <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locatário</Text>
+                    </Button>
+                </View>
+                {/* <View style={{ padding: 10, height: 95 }}>
                     <Button rounded large block onPress={() => this.showAlertAceitar()} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Solicitar Cancelamento</Text>
                     </Button>
-                </View>
+                </View> */}
 
-                <AwesomeAlert
+                {/* <AwesomeAlert
                     show={showAlertAceitar}
                     showProgress={false}
 
@@ -131,9 +136,9 @@ class MeusAlugueis extends Component {
                         this.hideAlert().then(this.showLoading())
                         setTimeout(() => this._solicitarCancelamento(aluguel.locatario, aluguel.aluguel), 500)
                     }}
-                />
+                /> */}
 
-                <AwesomeAlert
+                {/* <AwesomeAlert
                     show={showLoading}
                     closeOnTouchOutside={false}
                     closeOnHardwareBackPress={false}
@@ -143,7 +148,7 @@ class MeusAlugueis extends Component {
                     message='Aguarde um momento...'
                     messageStyle={{ color: '#585858' }}
                     overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
-                />
+                /> */}
             </Container >
         )
     }
@@ -153,4 +158,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { SolicitarCancelamento })(MeusAlugueis)
+export default connect(mapStateToProps, { adicionaContato })(MeusAlugueis)

@@ -27,6 +27,7 @@ import ProfileMaq_2 from '../../screens/switchProfile/explorar/profileMaq_2'
 
 //Chat
 import Chat from '../../screens/mensagens/chat'
+import Chat_2 from '../../screens/switchProfile/mensagens/chat_2'
 
 //Cadastro 
 import Cadastro_1 from '../../screens/anuncio/novoAnuncio/cadastro_1'
@@ -122,6 +123,7 @@ export const _Routes = StackNavigator(
         TabRoutes_2: { screen: TabRoutes_2 }, // Tabs
         ProfileMaq: { screen: ProfileMaq }, // Anuncios profile
         Chat: { screen: Chat }, //Chat
+        Chat_2: { screen: Chat_2 }, //Chat
         addMaq: { screen: _addMaq },
         load: { screen: load },
         alugar: { screen: _alugar },

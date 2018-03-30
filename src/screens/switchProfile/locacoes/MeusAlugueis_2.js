@@ -4,7 +4,8 @@ import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
 
-import globalStyles from '../../common/globalStyles' // Global Styles
+import globalStyles from '../../common/globalStyles' // Global Stylesz
+import { adicionaContato } from '../../../actions/AppAction'
 
 class MeusAlugueis_2 extends Component {
     // Hide the header
@@ -33,14 +34,16 @@ class MeusAlugueis_2 extends Component {
         return (<Text style={{ color: '#000', fontWeight: '400', fontSize: 20 }}>R$ {total},00 </Text>)
     }
 
+    _adicionaContato(email) {
+        this.props.adicionaContato(email)
+    }
+
     // ProfileMaq screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
         const { tipo, marca, preco, aluguel } = params
-
-        console.log(aluguel)
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -68,11 +71,13 @@ class MeusAlugueis_2 extends Component {
                         <Text style={globalStyles.confirmRent}>Forma de Pagamento: </Text>{aluguel.formaPagamento}{`\n\n`}
                         <Text style={globalStyles.confirmRent}>Dias Restantes: </Text>{this.days(aluguel.dataInicial, aluguel.dataFinal)} dias{`\n\n`}
                     </Text>
-                    <Button rounded bordered large block onPress={() => false} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
-                        <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locador</Text>
-                    </Button>
 
                 </Content>
+                <View style={{ padding: 10, height: 95 }}>
+                    <Button rounded bordered large block onPress={() => this._adicionaContato(aluguel.locador)} style={{ paddingHorizontal: 20, borderColor: globalStyles.bg }}>
+                        <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Conversar com Locador</Text>
+                    </Button>
+                </View>
                 {/* <View style={{ padding: 10, height: 95 }}>
                     <Button rounded large block onPress={() => false} style={{ paddingHorizontal: 20, backgroundColor: '#e53935' }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Solicitar Cancelamento</Text>
@@ -87,4 +92,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, {})(MeusAlugueis_2)
+export default connect(mapStateToProps, { adicionaContato })(MeusAlugueis_2)

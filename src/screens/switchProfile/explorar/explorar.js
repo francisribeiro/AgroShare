@@ -19,6 +19,19 @@ class Explorar extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    constructor(props) {
+        super(props)
+        this.state = { search: true, query: '' }
+    }
+
+    searchIsOn(text) {
+        if (text.length > 0)
+            this.setState({ search: true, query: text })
+        else
+            this.setState({ search: false, query: text })
+
+            this.componentWillMount()
+    }
 
     componentWillMount() {
         this.props.todosAnunciosFetch()
@@ -29,11 +42,29 @@ class Explorar extends Component {
         this.createDataSource(nextProps.todosAnuncios)
     }
 
+    search(key, myArray) {
+        var newArr = []
+        key = key.toLowerCase()
+
+        for (var i = 0; i < myArray.length; i++) {
+            if (myArray[i].ano.toLowerCase().includes(key)
+                || myArray[i].cidade.toLowerCase().includes(key)
+                || myArray[i].estado.toLowerCase().includes(key)
+                || myArray[i].marca.toLowerCase().includes(key)
+                || myArray[i].modelo.toLowerCase().includes(key)
+                || myArray[i].preco.toLowerCase().includes(key)
+                || myArray[i].tipo.toLowerCase().includes(key))
+                newArr.push(myArray[i])
+        }
+
+        return newArr
+    }
+
     createDataSource(todosAnuncios) {
         let arr = [];
 
         const result2 = todosAnuncios.reduce((b, myObj) => {
-            
+
             var t = Object.keys(myObj).forEach(e => {
                 if (typeof myObj[e] === 'object') {
                     myObj[e].locador = myObj.locador
@@ -41,7 +72,7 @@ class Explorar extends Component {
                     arr.push(myObj[e])
                 }
             })
-            
+
             // var newObj = Object.keys(myObj).reduce((c, v) => {
             //     if (typeof myObj[v] === 'object') c = Object.assign(c, { maquina: v }, myObj[v]);
             //     else c[v] = myObj[v];
@@ -51,6 +82,9 @@ class Explorar extends Component {
             // return b.concat(newObj)
             return null
         }, []);
+
+        if (this.state.search)
+            arr = this.search(this.state.query, arr)
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
         this.dataSource = ds.cloneWithRows(arr)
@@ -78,7 +112,7 @@ class Explorar extends Component {
                 <Header searchBar rounded androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Item style={{ height: 46 }}>
                         <Icon active name="ios-train-outline" />
-                        <Input placeholder="Encontre uma máquina..." placeholderTextColor='rgba(88,88,88,0.8)' />
+                        <Input placeholder="Encontre uma máquina..." placeholderTextColor='rgba(88,88,88,0.8)' onChangeText={(text) => this.searchIsOn(text)} />
                         <Icon active name="ios-search-outline" />
                     </Item>
                 </Header>

@@ -4,10 +4,10 @@ import { TouchableOpacity, View, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import globalStyles from '../common/globalStyles' // Global Styles
-import { contatosUsuarioFetch } from '../../actions/AppAction'
+import globalStyles from '../../common/globalStyles' // Global Styles
+import { contatosUsuarioFetch } from '../../../actions/AppAction'
 // Imagens dos avatares
-const avatar1 = require('../../assets/images/avatar1.jpg')
+const avatar1 = require('../../../assets/images/avatar1.jpg')
 // Dados das máquinas
 
 class ListMensagens extends Component {
@@ -32,7 +32,7 @@ class ListMensagens extends Component {
         const { nome, sobrenome, email, mensagem, hora } = contato
         return (
             <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
-                <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('Chat', { nome, sobrenome, email })}>
+                <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('Chat_2', { nome, sobrenome, email })}>
                     <View pointerEvents='none'>
                         <ListItem thumbnail>
                             <Left>

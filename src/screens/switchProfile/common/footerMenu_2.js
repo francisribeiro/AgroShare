@@ -4,7 +4,7 @@ import { Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
-import { NotificacaoAguardandoLocatario } from '../../../actions/AppAction'
+import { NotificacaoAguardandoLocatario, NotificacaoMsg } from '../../../actions/AppAction'
 
 class FooterMenu_2 extends Component {
     // Class start state
@@ -25,6 +25,7 @@ class FooterMenu_2 extends Component {
     // Métodos para esconder o footer quando o teclado estiver ativo
     componentWillMount() {
         this.props.NotificacaoAguardandoLocatario()
+        this.props.NotificacaoMsg()
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow)
         this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardWillHide)
     }
@@ -58,6 +59,26 @@ class FooterMenu_2 extends Component {
         )
     }
 
+    renderMsg(navigate, qtd) {
+        if (qtd > 0)
+            return (
+                <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens_2') }} vertical badge>
+                    <Badge style={{ backgroundColor: '#00695c' }}>
+                        <Text>{qtd}</Text>
+                    </Badge>
+                    <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
+                    <Text style={globalStyles.footerTxt}>Mensagens</Text>
+                </Button>
+            )
+
+        return (
+            <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens_2') }} vertical>
+                <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
+                <Text style={globalStyles.footerTxt}>Mensagens</Text>
+            </Button>
+        )
+    }
+
     // FooterTab screen
     render() {
         // TabNavigator props
@@ -74,13 +95,7 @@ class FooterMenu_2 extends Component {
 
                         {this.renderLocacoes(navigate, this.props.quantidadeLocatario)}
 
-                        <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); }} vertical badge>
-                            <Badge style={globalStyles.footerBadge}>
-                                <Text>3</Text>
-                            </Badge>
-                            <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
-                            <Text style={globalStyles.footerTxt}>Mensagens</Text>
-                        </Button>
+                        {this.renderMsg(navigate, this.props.quantidadeMsg)}
 
                         <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil_2') }} badge vertical>
                             <Badge style={globalStyles.footerBadge}>
@@ -100,6 +115,7 @@ class FooterMenu_2 extends Component {
 
 const mapStateToProps = state => ({
     quantidadeLocatario: state.NotificacaoAguardandoReducer.quantidadeLocatario,
+    quantidadeMsg: state.NotificacaoAguardandoReducer.qtdMsg,
 })
 
-export default connect(mapStateToProps, { NotificacaoAguardandoLocatario })(FooterMenu_2)
+export default connect(mapStateToProps, { NotificacaoAguardandoLocatario, NotificacaoMsg })(FooterMenu_2)

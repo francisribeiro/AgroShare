@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     quantidadeLocatario: '',
     quantidadeLocador: '',
+    qtdMsg : '',
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,6 +10,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, quantidadeLocatario: action.payload }
         case 'quantidade_aguardando_locador':
             return { ...state, quantidadeLocador: action.payload }
+        case 'quantidade_msg':
+            return { ...state, qtdMsg: action.payload }
         default:
             return state
     }

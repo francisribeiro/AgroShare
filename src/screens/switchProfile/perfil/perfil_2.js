@@ -4,6 +4,7 @@ import { View, TouchableOpacity } from 'react-native'
 import IconBadge from 'react-native-icon-badge'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { auth, firebase } from '../../../config/firebase'
 import { getUserData } from '../../../actions/AppAction'
@@ -15,6 +16,21 @@ const profile = require('../../../assets/images/profile.jpeg')
 class Perfil extends Component {
     // Hide the header
     static navigationOptions = { header: null }
+    
+    constructor(props) {
+        super(props)
+        this.state = { showAlertAceitar: false, showLoading: false }
+    }
+
+    showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
+    showLoading = () => { this.setState({ showLoading: true }) }
+
+    async hideAlert() {
+        this.setState({
+            showAlertAceitar: false,
+            showLoading: false
+        })
+    }
 
     componentWillMount() {
         this.props.getUserData()
@@ -31,6 +47,7 @@ class Perfil extends Component {
     render() {
         const { nome, sobrenome } = this.props
         const { navigate } = this.props.navigation
+        const { showAlertAceitar, showLoading } = this.state
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -117,7 +134,7 @@ class Perfil extends Component {
                     </View> */}
 
                     <View style={globalStyles.itemMenu}>
-                        <TouchableOpacity onPress={() => auth.doSignOut().then(() => this.reset())}>
+                        <TouchableOpacity onPress={() => this.showAlertAceitar()}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Sair</Title>
                                 <Right>
@@ -127,6 +144,52 @@ class Perfil extends Component {
                         </TouchableOpacity>
                     </View>
                 </Content>
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={showAlertAceitar}
+                    showProgress={false}
+
+                    title="Deseja realmente sair?"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
+
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={true}
+                    showConfirmButton={true}
+
+                    cancelText="Não"
+                    confirmText="Sim, eu quero"
+
+                    confirmButtonColor="#fff"
+                    cancelButtonColor="#e53935"
+                    cancelButtonTextStyle={{ fontSize: 16, color: '#fff' }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+
+                    onCancelPressed={() => {
+                        this.hideAlert()
+                    }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert().then(this.showLoading())
+                        setTimeout(() => auth.doSignOut().then(() => this.reset()), 2000)
+                    }}
+                />
+
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={showLoading}
+                    closeOnTouchOutside={false}
+                    closeOnHardwareBackPress={false}
+                    showProgress={true}
+                    progressSize={40}
+                    progressColor='#fff'
+                    message='Aguarde um momento...'
+                    messageStyle={{ color: '#fff' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+                />
             </Container >
         )
     }
