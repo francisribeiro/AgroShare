@@ -37,15 +37,16 @@ class Login extends Component {
     if (this.props.loading)
       return (
         <AwesomeAlert
+          contentContainerStyle={{ backgroundColor: '#00695c' }}
           show={true}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showProgress={true}
           progressSize={40}
-          progressColor='#00695c'
+          progressColor='#fff'
           message='Aguarde um momento...'
-          messageStyle={{ color: '#585858' }}
-          overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+          messageStyle={{ color: '#fff' }}
+          overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
         />
       )
 
