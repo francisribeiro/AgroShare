@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Spinner } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Spinner, Toast } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 import { connect } from 'react-redux'
@@ -12,9 +12,22 @@ class Cadastro_9 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    constructor(props) {
+        super(props)
+        this.state = { showAlertAceitar: false }
+    }
+
+    showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
+
+    async hideAlert() {
+        this.setState({
+            showAlertAceitar: false
+        })
+    }
+
     _cadastrarAnuncio() {
         const { tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco } = this.props
-        setTimeout(() => this.props.cadastrarAnuncio({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }), 500)
+        setTimeout(() => this.props.cadastrarAnuncio({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }), 250)
     }
 
     renderIcon() {
@@ -36,7 +49,15 @@ class Cadastro_9 extends Component {
 
         return (
             <View style={globalStyles.floatingButton2}>
-                <Button rounded onPress={() => this._cadastrarAnuncio()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                <Button rounded
+                    onPress={() => {
+                        Keyboard.dismiss()
+                        if (this.props.preco == '')
+                            Toast.show({ text: 'Informe um PREÇO para o anúncio!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                        else
+                            this.showAlertAceitar()
+                    }}
+                    style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                     <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Finalizar Anúncio</Text>
                     <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                 </Button>
@@ -48,6 +69,7 @@ class Cadastro_9 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
+        const { showAlertAceitar } = this.state
 
         return (
             <Container style={{ backgroundColor: "#fff" }}>
@@ -81,6 +103,38 @@ class Cadastro_9 extends Component {
                     </Form>
                 </Content>
                 {this.renderIcon()}
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={showAlertAceitar}
+                    showProgress={false}
+
+                    title="Deseja finalizar esse anúncio?"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
+
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={true}
+                    showConfirmButton={true}
+
+                    cancelText="Não, não quero"
+                    confirmText="Sim, eu quero"
+
+                    confirmButtonColor="#fff"
+                    cancelButtonColor="#e53935"
+                    cancelButtonTextStyle={{ fontSize: 16, color: '#fff' }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+
+                    onCancelPressed={() => {
+                        this.hideAlert()
+                    }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert().then(this._cadastrarAnuncio())
+                    }}
+                />
             </Container>
         )
     }

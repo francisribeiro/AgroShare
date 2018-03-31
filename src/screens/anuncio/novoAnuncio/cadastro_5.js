@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
+import { Container, Toast, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 import { connect } from 'react-redux'
@@ -50,7 +50,18 @@ class Cadastro_5 extends Component {
                 </Content>
 
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Cadastro_6')} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded
+                        onPress={() => {
+                            Keyboard.dismiss()
+                            if (this.props.cidade == '')
+                                Toast.show({ text: 'Informe uma CIDADE para a máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                            else
+                                if (this.props.estado == '')
+                                    Toast.show({ text: 'Informe um ESTADO para a máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                                else
+                                    navigate('Cadastro_6')
+                        }}
+                        style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>

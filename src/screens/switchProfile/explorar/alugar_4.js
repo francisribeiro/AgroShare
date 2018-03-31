@@ -13,11 +13,23 @@ class Alugar_4 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
-    _cadastrarAluguel() {
-        const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo } = this.props
-        setTimeout(() => this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }), 500)
+    constructor(props) {
+        super(props)
+        this.state = { showAlertAceitar: false }
     }
 
+    showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
+
+    async hideAlert() {
+        this.setState({
+            showAlertAceitar: false
+        })
+    }
+
+    _cadastrarAluguel() {
+        const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo } = this.props
+        setTimeout(() => this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }), 250)
+    }
 
     subtractDate() {
         let dateI = this.props.dataInicial.split('/')
@@ -42,7 +54,6 @@ class Alugar_4 extends Component {
         return (<Text style={{ color: '#cc0000', fontWeight: 'bold', fontSize: 20 }}>R$ {total},00 </Text>)
     }
 
-
     renderIcon() {
         if (this.props.loading)
             return (
@@ -62,7 +73,7 @@ class Alugar_4 extends Component {
 
         return (
             <View style={globalStyles.floatingButton2}>
-                <Button rounded onPress={() => this._cadastrarAluguel()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                <Button rounded onPress={() => this.showAlertAceitar()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                     <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Solicitar aluguel</Text>
                     <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                 </Button>
@@ -76,6 +87,7 @@ class Alugar_4 extends Component {
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
         const { tipo, marca, preco, locador, maquina } = params
+        const { showAlertAceitar } = this.state
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -113,6 +125,38 @@ class Alugar_4 extends Component {
                     </Form>
                 </Content>
                 {this.renderIcon()}
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={showAlertAceitar}
+                    showProgress={false}
+
+                    title="Deseja solicitar esse aluguel?"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
+
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={true}
+                    showConfirmButton={true}
+
+                    cancelText="Não, não quero"
+                    confirmText="Sim, eu quero"
+
+                    confirmButtonColor="#fff"
+                    cancelButtonColor="#e53935"
+                    cancelButtonTextStyle={{ fontSize: 16, color: '#fff' }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+
+                    onCancelPressed={() => {
+                        this.hideAlert()
+                    }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert().then(this._cadastrarAluguel())
+                    }}
+                />
             </Container >
         )
     }

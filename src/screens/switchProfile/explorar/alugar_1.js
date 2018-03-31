@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast, Spinner, } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast, Spinner } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
@@ -87,7 +87,16 @@ class Alugar_1 extends Component {
                 </Content>
 
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Alugar_2', { tipo, marca, preco, locador, maquina })} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded
+                        onPress={
+                            () => {
+                                if (this.props.dataInicial == '')
+                                    Toast.show({ text: 'Selecione uma DATA inicial!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                                else
+                                    navigate('Alugar_2', { tipo, marca, preco, locador, maquina })
+                            }
+                        }
+                        style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>

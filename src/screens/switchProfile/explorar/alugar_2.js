@@ -79,7 +79,16 @@ class Alugar_2 extends Component {
                 </Content>
 
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Alugar_3', { tipo, marca, preco, locador, maquina })} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded
+                        onPress={
+                            () => {
+                                if (this.props.dataFinal == '')
+                                    Toast.show({ text: 'Selecione uma DATA final!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                                else
+                                    navigate('Alugar_3', { tipo, marca, preco, locador, maquina })
+                            }
+                        }
+                        style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>

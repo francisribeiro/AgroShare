@@ -25,7 +25,7 @@ export default {
 
     floatingButton2: {
         position: 'absolute',
-        bottom: 30,
+        bottom: 55,
         right: 30
     },
 
