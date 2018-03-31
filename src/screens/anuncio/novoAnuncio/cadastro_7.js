@@ -38,7 +38,7 @@ class Cadastro_7 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Input multiline={true} numberOfLines={3} placeholder='Uma boa descrição ajudará as pessoas a decidirem se eles querem alugar sua máquina.'
-                                    placeholderTextColor='rgba(88,88,88,0.8)' selectionColor='#585858' style={globalStyles.txtDescription2} onChangeText={(texto) => this.props.modificaDescricao(texto)} />
+                                    placeholderTextColor='rgba(88,88,88,0.8)' selectionColor='#585858' style={globalStyles.txtDescription2} onChangeText={(texto) => this.props.modificaDescricao(texto)} value={this.props.descricao} />
                             </Item>
                         </View>
                     </Form>

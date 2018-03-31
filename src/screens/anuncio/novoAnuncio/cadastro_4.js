@@ -38,12 +38,12 @@ class Cadastro_4 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>MODELO</Label>
-                                <Input placeholder='ex. BH180' placeholderTextColor='rgba(88,88,88,0.6)' returnKeyType='next' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaModelo(texto)} />
+                                <Input placeholder='ex. BH180' placeholderTextColor='rgba(88,88,88,0.6)' returnKeyType='next' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaModelo(texto)} value={this.props.modelo} />
                             </Item>
 
                             <Item style={{ paddingTop: 20 }} stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>ANO</Label>
-                                <Input placeholder='ex. 2014' placeholderTextColor='rgba(88,88,88,0.6)' keyboardType='numeric' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaAno(texto)} />
+                                <Input placeholder='ex. 2014' placeholderTextColor='rgba(88,88,88,0.6)' keyboardType='numeric' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaAno(texto)} value={this.props.ano} />
                             </Item>
                         </View>
                     </Form>

@@ -71,7 +71,7 @@ class Alugar_1 extends Component {
                                             returnKeyType='next'
                                             selectionColor='#585858'
                                             style={globalStyles.input2}
-                                            value={this.state.date}
+                                            value={this.props.dataInicial}
                                         />
                                     </Item>
                                 </View>

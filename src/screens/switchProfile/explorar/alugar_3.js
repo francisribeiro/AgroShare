@@ -12,6 +12,22 @@ class Alugar_3 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    constructor(props) {
+        super(props)
+        this.state = { indice: -1 }
+    }
+
+    inicializaRadios() {
+        let opts = ['Cartão de Crédito', 'Cheque', 'Dinheiro', 'Escambo']
+
+        if (this.props.formaPagamento != '')
+            this.setState({ indice: opts.indexOf(this.props.formaPagamento) })
+    }
+
+    componentWillMount() {
+        this.inicializaRadios()
+    }
+
     // Cadastro_2 screen
     render() {
         // StackNavigator props
@@ -40,6 +56,7 @@ class Alugar_3 extends Component {
                     <Form>
                         <View style={{ paddingHorizontal: 15 }}>
                             <RadioGroup
+                                selectedIndex={this.state.indice}
                                 size={30}
                                 thickness={2}
                                 color='#585858'

@@ -38,12 +38,12 @@ class Cadastro_5 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>CIDADE</Label>
-                                <Input placeholder='ex. Piranguçu' placeholderTextColor='rgba(88,88,88,0.6)' returnKeyType='next' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaCidade(texto)} />
+                                <Input placeholder='ex. Piranguçu' placeholderTextColor='rgba(88,88,88,0.6)' returnKeyType='next' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaCidade(texto)} value={this.props.cidade} />
                             </Item>
 
                             <Item style={{ paddingTop: 20 }} stackedLabel>
                                 <Label style={globalStyles.inputLabel2}>ESTADO</Label>
-                                <Input placeholder='ex. MG' placeholderTextColor='rgba(88,88,88,0.6)' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaEstado(texto)} />
+                                <Input placeholder='ex. MG' placeholderTextColor='rgba(88,88,88,0.6)' selectionColor='#585858' style={globalStyles.input2} onChangeText={(texto) => this.props.modificaEstado(texto)} value={this.props.estado} />
                             </Item>
                         </View>
                     </Form>

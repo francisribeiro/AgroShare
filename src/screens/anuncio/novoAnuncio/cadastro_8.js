@@ -38,7 +38,7 @@ class Cadastro_8 extends Component {
                         <View style={{ paddingRight: 15 }}>
                             <Item stackedLabel>
                                 <Input multiline={true} numberOfLines={2} placeholder='Escreva um título curto, porém chamativo.'
-                                    placeholderTextColor='rgba(88,88,88,0.8)' selectionColor='#585858' style={globalStyles.txtDescription2} onChangeText={(texto) => this.props.modificaTitulo(texto)} />
+                                    placeholderTextColor='rgba(88,88,88,0.8)' selectionColor='#585858' style={globalStyles.txtDescription2} onChangeText={(texto) => this.props.modificaTitulo(texto)} value={this.props.titulo} />
                             </Item>
                         </View>
                     </Form>

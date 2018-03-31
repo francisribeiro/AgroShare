@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
     tipo: 'Trator',
-    marca: 'Valtra',
+    marca: 'Yanmar',
     modelo: 'BH180',
     ano: '2014',
     cidade: 'Piranguçu',

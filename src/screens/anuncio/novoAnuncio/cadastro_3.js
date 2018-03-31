@@ -12,6 +12,22 @@ class Cadastro_3 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    constructor(props) {
+        super(props)
+        this.state = { indice: -1 }
+    }
+
+    inicializaRadios() {
+        let opts = ['John Deere', 'Massey Ferguson', 'New Holland', 'Valtra', 'Yanmar']
+
+        if (this.props.marca != '')
+            this.setState({ indice: opts.indexOf(this.props.marca) })
+    }
+
+    componentWillMount() {
+        this.inicializaRadios()
+    }
+
     // Cadastro_2 screen
     render() {
         // StackNavigator props
@@ -38,6 +54,7 @@ class Cadastro_3 extends Component {
                     <Form>
                         <View style={{ paddingHorizontal: 15 }}>
                             <RadioGroup
+                                selectedIndex={this.state.indice}
                                 size={30}
                                 thickness={2}
                                 color='#585858'
