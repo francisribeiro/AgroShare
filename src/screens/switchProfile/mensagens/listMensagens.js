@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
-import { contatosUsuarioFetch } from '../../../actions/AppAction'
+import { contatosUsuarioFetch, visualizaMsg } from '../../../actions/AppAction'
 // Imagens dos avatares
 const avatar1 = require('../../../assets/images/avatar1.jpg')
 // Dados das máquinas
@@ -28,11 +28,25 @@ class ListMensagens extends Component {
         this.fonteDeDados = ds.cloneWithRows(contatos)
     }
 
+    renderBadge(vista) {
+        if (!vista)
+            return (
+                <View style={globalStyles.tabBadgeGreen}>
+                    <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>1</Text>
+                </View>)
+
+        return null
+    }
+
     renderRow(contato, navigate) {
-        const { nome, sobrenome, email, mensagem, hora } = contato
+        const { nome, sobrenome, email, mensagem, hora, vista } = contato
         return (
             <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
-                <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('Chat_2', { nome, sobrenome, email })}>
+                <TouchableOpacity activeOpacity={0.5}
+                    onPress={() => {
+                        this.props.visualizaMsg(email)
+                        navigate('Chat', { nome, sobrenome, email })
+                    }}>
                     <View pointerEvents='none'>
                         <ListItem thumbnail>
                             <Left>
@@ -50,9 +64,7 @@ class ListMensagens extends Component {
 
                             <Right style={{ borderBottomColor: '#fff' }}>
                                 <Text numberOfLines={1} note style={{ fontSize: 12, paddingBottom: 5 }}>{hora}</Text>
-                                {/* <View style={globalStyles.tabBadgeGreen}>
-                                    <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>1</Text>
-                                </View> */}
+                                {this.renderBadge(vista)}
                             </Right>
                         </ListItem>
                     </View>
@@ -84,4 +96,4 @@ mapStateToProps = state => {
     return { contatos }
 }
 
-export default connect(mapStateToProps, { contatosUsuarioFetch })(ListMensagens);
+export default connect(mapStateToProps, { contatosUsuarioFetch, visualizaMsg })(ListMensagens);

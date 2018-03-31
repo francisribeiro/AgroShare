@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import globalStyles from '../common/globalStyles' // Global Styles
-import { modificaMensagem, enviarMensagem, conversaUsuarioFetch } from '../../actions/AppAction'
+import { modificaMensagem, enviarMensagem, conversaUsuarioFetchz } from '../../actions/AppAction'
 
 class Chat extends Component {
     // Hide the header

@@ -188,7 +188,8 @@ export const NotificacaoMsg = () => {
 
             if (snapshot.val() != null)
                 Object.keys(snapshot.val()).map(function (objectKey, index) {
-                    qtd++
+                    if (snapshot.val()[objectKey].vista == false)
+                        qtd++
                 })
 
             dispatch({ type: 'quantidade_msg', payload: qtd })
@@ -232,14 +233,14 @@ export const enviarMensagem = (mensagem, nome, sobrenome, email) => {
             })
 
         firebase.db.ref(`/Conversas/${usuarioEmailB64}/${contatoEmailB64}`)
-            .set({ nome: nome, sobrenome: sobrenome, email: email, mensagem: mensagem, hora: str_hora })
+            .set({ nome: nome, sobrenome: sobrenome, email: email, mensagem: mensagem, hora: str_hora, vista: true })
 
 
         firebase.db.ref(`/Usuarios/${usuarioEmailB64}`)
             .once("value")
             .then(snapshot => {
                 firebase.db.ref(`/Conversas/${contatoEmailB64}/${usuarioEmailB64}`)
-                    .set({ nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome, email: usuarioEmailB64, mensagem: mensagem, hora: str_hora })
+                    .set({ nome: snapshot.val().nome, sobrenome: snapshot.val().sobrenome, email: usuarioEmailB64, mensagem: mensagem, hora: str_hora, vista: false })
             })
     }
 
@@ -304,5 +305,13 @@ export const changeHistorico = uid => {
                     firebase.db.ref(`Historico/${userId}/${e.id}`).update({ lida: true })
             })
         })
+    }
+}
+
+export const visualizaMsg = (from) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        firebase.db.ref(`Conversas/${userId}/${from}`).update({ vista: true })
     }
 }
