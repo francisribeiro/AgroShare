@@ -27,8 +27,8 @@ export const cadastrarAluguel = ({ dataInicial, dataFinal, formaPagamento, locad
 
 const cadastraAluguelSuccesso = (dispatch, locador, locatario) => {
     Keyboard.dismiss()
-    addHistorico(`Você enviou uma solicitação de aluguel.`, 'ios-information-circle-outline', locatario)
-    addHistorico(`Você recebeu uma nova solicitação de aluguel.`, 'ios-information-circle-outline', locador)
+    addHistorico(`Você enviou uma solicitação de aluguel.`, 'ios-information-circle-outline', locatario, '#0099CC')
+    addHistorico(`Você recebeu uma nova solicitação de aluguel.`, 'ios-information-circle-outline', locador, '#0099CC')
     dispatch({ type: 'sucesso_cadastro' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes_2' })]

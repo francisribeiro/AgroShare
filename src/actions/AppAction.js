@@ -3,7 +3,7 @@ import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 import reverse from 'reverse-object-order'
 
-export const addHistorico = (msg, icone, usuario) => {
+export const addHistorico = (msg, icone, usuario, cor) => {
     let date = new Date()
     let strMonth = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
 
@@ -15,7 +15,7 @@ export const addHistorico = (msg, icone, usuario) => {
 
     let strDate = `${day} ${strMonth[month]}, ${year} - ${hora}:${min} ${(hora > 12) ? 'PM' : 'AM'}`
 
-    firebase.db.ref(`/Historico/${usuario}`).push({ msg, lida: false, data: strDate, icone })
+    firebase.db.ref(`/Historico/${usuario}`).push({ msg, lida: false, data: strDate, icone, cor })
 }
 
 export const getUserData = () => {
@@ -109,40 +109,41 @@ export const AceitarAluguel = (locatario, aluguel) => {
     }
 }
 
-export const SolicitarCancelamento = (locatario, aluguel) => {
-    return dispatch => {
-        firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).update({ ativo: false })
-            .then(value => AceitarAluguelSuccesso(dispatch))
-    }
-}
-
-export const CancelarSolicitacao = (locador, aluguel, rota) => {
+export const SolicitarCancelamento = (locatario, aluguel, rota) => {
     let userId = b64.encode(firebase.auth.currentUser.email)
     return dispatch => {
         firebase.db.ref(`/Alugueis/${userId}/${aluguel}`).remove()
-            .then(value => AceitarAluguelSuccesso3(dispatch, rota, locador, userId))
+            .then(value => AceitarAluguelSuccesso3(dispatch, rota, locatario, userId))
+    }
+}
+
+export const CancelarSolicitacao = (locatario, aluguel, rota) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+    return dispatch => {
+        firebase.db.ref(`/Alugueis/${locatario}/${aluguel}`).remove()
+            .then(value => AceitarAluguelSuccesso2(dispatch, rota, locatario, userId))
     }
 }
 
 const AceitarAluguelSuccesso = (dispatch, locador, locatario) => {
-    addHistorico(`Sua solicitação de aluguel foi aceita.`, 'md-checkmark-circle-outline', locatario)
-    addHistorico(`Você aceitou uma solicitação de aluguel.`, 'md-checkmark-circle-outline', locador)
+    addHistorico(`Sua solicitação de aluguel foi aceita.`, 'md-checkmark-circle-outline', locatario, '#007E33')
+    addHistorico(`Você aceitou uma solicitação de aluguel.`, 'md-checkmark-circle-outline', locador, '#007E33')
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
 }
 
 const AceitarAluguelSuccesso2 = (dispatch, rota, locatario, locador) => {
-    addHistorico(`Sua solicitação de aluguel foi rejeitada.`, 'ios-warning-outline', locatario)
-    addHistorico(`Você rejeitou uma solicitação de aluguel.`, 'ios-warning-outline', locador)
+    addHistorico(`Sua solicitação de aluguel foi rejeitada.`, 'ios-warning-outline', locatario, '#CC0000')
+    addHistorico(`Você rejeitou uma solicitação de aluguel.`, 'ios-warning-outline', locador, '#FF8800')
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
 }
 
 const AceitarAluguelSuccesso3 = (dispatch, rota, locador, locatario) => {
-    addHistorico(`Você cancelou sua solicitação de aluguel.`, 'ios-warning-outline', locatario)
-    addHistorico(`Uma solicitação de alguel foi cancelada pelo locatário.`, 'ios-warning-outline', locador)
+    addHistorico(`Você cancelou sua solicitação de aluguel.`, 'ios-warning-outline', locatario, '#FF8800')
+    addHistorico(`Uma solicitação de alguel foi cancelada pelo locatário.`, 'ios-warning-outline', locador, '#CC0000')
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
@@ -285,6 +286,23 @@ export const NotificacaoHistorico = () => {
                 })
 
             dispatch({ type: 'quantidade_historico', payload: qtd })
+        })
+    }
+}
+
+export const changeHistorico = uid => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        firebase.db.ref(`Historico/${userId}`).once('value', (snapshot) => {
+            const notificacoes = _.map(snapshot.val(), (val, id) => {
+                return { ...val, id }
+            })
+
+            notificacoes.forEach(e => {
+                if (!e.lida)
+                    firebase.db.ref(`Historico/${userId}/${e.id}`).update({ lida: true })
+            })
         })
     }
 }

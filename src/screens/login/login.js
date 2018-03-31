@@ -51,7 +51,12 @@ class Login extends Component {
       )
 
     return (
-      <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario() }}>
+      <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton}
+        onPress={() => {
+          setTimeout(() => Keyboard.dismiss(), 500)
+          this._autenticarUsuario()
+        }}>
+
         <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
       </TouchableOpacity>
     )

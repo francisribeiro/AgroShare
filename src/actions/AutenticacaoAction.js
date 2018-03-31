@@ -1,7 +1,6 @@
 import { auth } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
-import { Keyboard } from 'react-native'
 
 export const modificaEmail = (texto) => {
     return { type: 'modifica_email', payload: texto }
@@ -21,7 +20,6 @@ export const autenticarUsuario = ({ email, senha }) => {
 }
 
 const loginUsuarioSuccesso = (dispatch) => {
-    Keyboard.dismiss()
     dispatch({ type: 'sucesso_login' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]

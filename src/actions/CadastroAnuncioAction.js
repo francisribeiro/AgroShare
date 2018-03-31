@@ -30,7 +30,7 @@ export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, des
 
 const cadastraAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
     Keyboard.dismiss()
-    addHistorico(`Você criou um novo anuncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId)
+    addHistorico(`Você criou um novo anuncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId, '#9933CC')
     dispatch({ type: 'sucesso_cadastro' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
