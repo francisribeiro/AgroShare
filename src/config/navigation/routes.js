@@ -57,7 +57,8 @@ import MeusAlugueis_2 from '../../screens/switchProfile/locacoes/MeusAlugueis_2'
 import MeusAlugueis from '../../screens/locacoes/MeusAlugueis'
 
 import Historico from '../../screens/historico/historico'
-
+import Me from '../../screens/perfil/me'
+ 
 // Routes path
 const _Main = StackNavigator(
     {
@@ -126,6 +127,7 @@ export const _Routes = StackNavigator(
         Chat: { screen: Chat }, //Chat
         Chat_2: { screen: Chat_2 }, //Chat
         Historico: { screen: Historico },
+        Me: { screen: Me },
         addMaq: { screen: _addMaq },
         load: { screen: load },
         alugar: { screen: _alugar },

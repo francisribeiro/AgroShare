@@ -2,6 +2,7 @@ import { auth, firebase } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 import { Keyboard } from 'react-native'
+import { addHistorico } from './AppAction'
 
 export const modificaNome = (texto) => {
     return { type: 'modifica_nome', payload: texto }
@@ -54,4 +55,41 @@ const cadastraUsuarioErro = (dispatch, erro) => {
     }
 
     dispatch({ type: 'erro_cadastro', payload: erro.message })
+}
+
+export const perfilFetch = () => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        firebase.db.ref(`Usuarios/${userId}`).once('value', (snapshot) => {
+            dispatch({ type: 'buscar_perfil', payload: snapshot.val() })
+        })
+    }
+}
+
+
+export const editarPerfil = ({ nome, sobrenome }) => {
+
+    let userId = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        dispatch({ type: 'editar_perfil' })
+        firebase.db.ref(`Usuarios/${userId}`)
+            .update({ nome, sobrenome })
+            .then(value => editarPerfilSuccesso(dispatch, userId))
+            .catch(erro => editarPerfilErro(dispatch, erro))
+    }
+}
+
+const editarPerfilSuccesso = (dispatch, userId) => {
+    addHistorico(`Você alterou seu perfil.`, 'ios-person-outline', userId, '#2BBBAD')
+    dispatch({ type: 'sucesso_editar' })
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
+    // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
+}
+
+const editarPerfilErro = (dispatch, erro) => {
+    dispatch({ type: 'erro_editar', payload: erro.message })
 }

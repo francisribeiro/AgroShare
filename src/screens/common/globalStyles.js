@@ -7,6 +7,7 @@ export default {
     txtDescription2: { paddingLeft: 15, paddingRight: 12, paddingBottom: 25, color: '#585858', fontSize: 19 },
     input: { color: '#fff', fontSize: 28, padding: 7, marginTop: 5 },
     input2: { color: '#585858', fontSize: 28, padding: 7, marginTop: 5 },
+    input3: { color: '#585858', fontSize: 28, padding: 7},
     inputLabel: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
     inputLabel2: { color: '#585858', fontSize: 14, fontWeight: 'bold' },
     confirmRent: { fontWeight: 'bold', color: '#00695c', fontSize: 20 },

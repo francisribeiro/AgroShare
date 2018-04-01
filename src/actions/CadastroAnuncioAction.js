@@ -54,9 +54,9 @@ export const anuncioFetch = (id) => {
 }
 
 export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }) => {
-    
+
     let userId = b64.encode(firebase.auth.currentUser.email)
-    
+
     return dispatch => {
         dispatch({ type: 'cadastrar_anuncio' })
         // console.log(`Anuncios/${userId}/${id}`)
@@ -75,4 +75,19 @@ const editarAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
     // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
+}
+
+export const apagarAnuncio = (id) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+    return dispatch => {
+        firebase.db.ref(`/Anuncios/${userId}/${id}`).remove()
+            .then(value => apagarAnuncioSucesso(dispatch, userId))
+    }
+}
+
+const apagarAnuncioSucesso = (dispatch, locador) => {
+    addHistorico(`Você apagou seu anúncio.`, 'ios-trash-outline', locador, '#CC0000')
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
 }

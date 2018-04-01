@@ -1,19 +1,46 @@
 import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body, Icon, Title, Footer } from 'native-base'
-import { View, Image } from 'react-native'
+import { View, Image, TouchableOpacity } from 'react-native'
 import { Grid, Row, Col } from 'react-native-easy-grid'
+import AwesomeAlert from 'react-native-awesome-alerts'
+import { connect } from 'react-redux'
 
+import { apagarAnuncio } from '../../actions/CadastroAnuncioAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 const cardImage1 = require('../../assets/images/drawer-cover3.jpg')
 
-export default class ProfileMaq extends Component {
+class ProfileMaq extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerStyle: { backgroundColor: 'transparent', top: 0, right: 0, left: 0, position: 'absolute' },
             headerTintColor: '#00695c',
-            // headerRight: (<Icon name='md-more' style={{ color: '#00695c', fontSize: 28, paddingRight: 15 }} />)
+            headerRight: (
+                <TouchableOpacity activeOpacity={0.5} onPress={() => console.log(navigation.state.params.handleShowAlertAceitar())} >
+                    <Icon name='ios-trash-outline' style={{ color: '#00695c', fontSize: 28, paddingRight: 15 }} />
+                </TouchableOpacity>
+            )
         }
+    }
+
+    constructor(props) {
+        super(props)
+        this.state = { showAlertAceitar: false, showLoading: false }
+    }
+
+
+    showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
+    showLoading = () => { this.setState({ showLoading: true }) }
+
+    async hideAlert() {
+        this.setState({
+            showAlertAceitar: false,
+            showLoading: false
+        })
+    }
+
+    componentDidMount() {
+        this.props.navigation.setParams({ handleShowAlertAceitar: this.showAlertAceitar })
     }
 
     // ProfileMaq screen
@@ -28,6 +55,7 @@ export default class ProfileMaq extends Component {
         const descricao = params ? params.anuncio.descricao : null
         const preco = params ? params.anuncio.preco : null
         const id = params ? params.anuncio.id : null
+        const { showAlertAceitar, showLoading } = this.state
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -99,7 +127,59 @@ export default class ProfileMaq extends Component {
                         </Button>
                     </Right>
                 </Footer>
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={showAlertAceitar}
+                    showProgress={false}
+
+                    title="Deseja realmente APAGAR este anúncio?"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
+
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={true}
+                    showConfirmButton={true}
+
+                    cancelText="Não, não quero"
+                    confirmText="Sim, eu quero"
+
+                    confirmButtonColor="#fff"
+                    cancelButtonColor="#e53935"
+                    cancelButtonTextStyle={{ fontSize: 16, color: '#fff' }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+
+                    onCancelPressed={() => {
+                        this.hideAlert()
+                    }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert().then(this.showLoading())
+                        setTimeout(() => this.props.apagarAnuncio(id), 2000)
+                    }}
+                />
+
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={showLoading}
+                    closeOnTouchOutside={false}
+                    closeOnHardwareBackPress={false}
+                    showProgress={true}
+                    progressSize={40}
+                    progressColor='#fff'
+                    message='Aguarde um momento...'
+                    messageStyle={{ color: '#fff' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+                />
             </Container >
         )
     }
 }
+
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps, { apagarAnuncio })(ProfileMaq)
