@@ -54,10 +54,12 @@ export const anuncioFetch = (id) => {
 }
 
 export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }) => {
+    
     let userId = b64.encode(firebase.auth.currentUser.email)
-
+    
     return dispatch => {
-        console.log(`Anuncios/${userId}/${id}`)
+        dispatch({ type: 'cadastrar_anuncio' })
+        // console.log(`Anuncios/${userId}/${id}`)
         firebase.db.ref(`Anuncios/${userId}/${id}`)
             .update({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco })
             .then(value => editarAnuncioSuccesso(dispatch, tipo, marca, userId))

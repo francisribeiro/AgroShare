@@ -15,7 +15,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'editar_anuncio':
-            return { ...action.payload }
+            return { ...action.payload}
         case 'modifica_tipo':
             return { ...state, tipo: action.payload }
         case 'modifica_marca':
