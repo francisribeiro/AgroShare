@@ -73,8 +73,8 @@ class Anuncios extends Component {
 }
 
 const mapStateToProps = state => {
-    const anuncios = _.map(state.AnunciosListaReducer, (val) => {
-        return { ...val }
+    const anuncios = _.map(state.AnunciosListaReducer, (val, id) => {
+        return { ...val, id }
     })
 
     return {

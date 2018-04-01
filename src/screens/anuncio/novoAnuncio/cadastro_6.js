@@ -22,7 +22,10 @@ export default class Cadastro_6 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
-
+        const { params } = this.props.navigation.state
+        const edit = params ? params.edit : false
+        const id = params ? params.id : null
+        
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
@@ -46,10 +49,10 @@ export default class Cadastro_6 extends Component {
                     </Text>
 
                     <View>
-                        <Button rounded large block onPress={() => navigate('Cadastro_7')} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
+                        <Button rounded large block onPress={() => navigate('Cadastro_7', { edit, id })} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
                             <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Adicionar fotos agora</Text>
                         </Button>
-                        <Button rounded bordered large block onPress={() => navigate('Cadastro_7')} style={{ marginTop: 20, paddingHorizontal: 20, borderColor: globalStyles.bg }}>
+                        <Button rounded bordered large block onPress={() => navigate('Cadastro_7', { edit, id })} style={{ marginTop: 20, paddingHorizontal: 20, borderColor: globalStyles.bg }}>
                             <Text style={{ fontSize: 18, color: globalStyles.bg, marginBottom: 5 }}>Fazer isso mais tarde</Text>
                         </Button>
                     </View>

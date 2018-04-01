@@ -30,7 +30,7 @@ export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, des
 
 const cadastraAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
     Keyboard.dismiss()
-    addHistorico(`Você criou um novo anuncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId, '#9933CC')
+    addHistorico(`Você criou um novo anúncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId, '#9933CC')
     dispatch({ type: 'sucesso_cadastro' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
@@ -40,4 +40,37 @@ const cadastraAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
 
 const cadastraAnuncioErro = (dispatch, erro) => {
     dispatch({ type: 'erro_cadastro', payload: erro.message })
+}
+
+
+export const anuncioFetch = (id) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        firebase.db.ref(`Anuncios/${userId}/${id}`).once('value', (snapshot) => {
+            dispatch({ type: 'editar_anuncio', payload: snapshot.val() })
+        })
+    }
+}
+
+export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }) => {
+    let userId = b64.encode(firebase.auth.currentUser.email)
+
+    return dispatch => {
+        console.log(`Anuncios/${userId}/${id}`)
+        firebase.db.ref(`Anuncios/${userId}/${id}`)
+            .update({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco })
+            .then(value => editarAnuncioSuccesso(dispatch, tipo, marca, userId))
+            .catch(erro => cadastraAnuncioErro(dispatch, erro))
+    }
+}
+
+const editarAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
+    Keyboard.dismiss()
+    addHistorico(`Você alterou seu anúncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId, '#2BBBAD')
+    dispatch({ type: 'sucesso_cadastro' })
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+    }))
+    // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }

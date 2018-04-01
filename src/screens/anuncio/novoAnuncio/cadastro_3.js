@@ -32,7 +32,10 @@ class Cadastro_3 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
-
+        const { params } = this.props.navigation.state
+        const edit = params ? params.edit : false
+        const id = params ? params.id : null
+        
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
@@ -88,8 +91,8 @@ class Cadastro_3 extends Component {
                 <View style={globalStyles.floatingButton2}>
                     <Button rounded
                         onPress={() => {
-                            if (this.props.marca != '')
-                                navigate('Cadastro_4')
+                            if (this.props.marca != '' && this.props.marca != undefined && this.props.marca != null)
+                                navigate('Cadastro_4', { edit, id })
                             else
                                 Toast.show({ text: 'Selecione uma MARCA de máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                         }}

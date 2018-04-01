@@ -16,6 +16,10 @@ class Cadastro_5 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const edit = params ? params.edit : false
+        const id = params ? params.id : null
+        
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
@@ -53,13 +57,13 @@ class Cadastro_5 extends Component {
                     <Button rounded
                         onPress={() => {
                             Keyboard.dismiss()
-                            if (this.props.cidade == '')
+                            if (this.props.cidade == '' || this.props.cidade == undefined || this.props.cidade == null)
                                 Toast.show({ text: 'Informe uma CIDADE para a máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                             else
-                                if (this.props.estado == '')
+                                if (this.props.estado == '' || this.props.estado == undefined || this.props.estado == null)
                                     Toast.show({ text: 'Informe um ESTADO para a máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                                 else
-                                    navigate('Cadastro_6')
+                                    navigate('Cadastro_6', { edit, id })
                         }}
                         style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>

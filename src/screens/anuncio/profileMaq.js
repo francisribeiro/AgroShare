@@ -27,6 +27,7 @@ export default class ProfileMaq extends Component {
         const titulo = params ? params.anuncio.titulo : null
         const descricao = params ? params.anuncio.descricao : null
         const preco = params ? params.anuncio.preco : null
+        const id = params ? params.anuncio.id : null
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -40,10 +41,10 @@ export default class ProfileMaq extends Component {
                     </View>
 
                     {/* <View style={{ borderColor: '#eaeaea', borderWidth: 0.7, paddingVertical: 10, marginVertical: 20 }}> */}
-                        {/* <View style={{ paddingHorizontal: 20, paddingBottom: 6 }}>
+                    {/* <View style={{ paddingHorizontal: 20, paddingBottom: 6 }}>
                             <Text style={{ fontSize: 18, color: '#484848', fontWeight: 'bold' }}>Benefícios</Text>
                         </View> */}
-                        {/* <View style={[globalStyles.itemAlign, { paddingHorizontal: 30 }]}>
+                    {/* <View style={[globalStyles.itemAlign, { paddingHorizontal: 30 }]}>
                             <View style={{ justifyContent: 'center', alignItems: 'center', paddingRight: 37 }}>
                                 <Icon name='ios-build-outline' style={{ fontSize: 40, color: '#585858' }} />
                                 <Text style={{ color: '#585858', fontSize: 12 }}>chave</Text>
@@ -88,7 +89,10 @@ export default class ProfileMaq extends Component {
                     </Left>
 
                     <Right style={{ paddingBottom: 20, paddingRight: 20 }}>
-                        <Button elevation={0} style={{ backgroundColor: '#00796b' }}>
+                        <Button elevation={0} style={{ backgroundColor: '#00796b' }}
+                            onPress={() => {
+                                navigate('addMaq', { edit: true, id })
+                            }}>
                             <View style={{ paddingHorizontal: 16, paddingBottom: 5 }}>
                                 <Text style={{ fontSize: 18 }}>Alterar anúncio</Text>
                             </View>

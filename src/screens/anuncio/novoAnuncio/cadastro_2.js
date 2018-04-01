@@ -31,6 +31,9 @@ class Cadastro_2 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const edit = params ? params.edit : false
+        const id = params ? params.id : null
 
         return (
             <Container style={{ backgroundColor: "#fff" }}>
@@ -87,8 +90,8 @@ class Cadastro_2 extends Component {
                 <View style={globalStyles.floatingButton2}>
                     <Button rounded
                         onPress={() => {
-                            if (this.props.tipo != '')
-                                navigate('Cadastro_3')
+                            if (this.props.tipo != '' && this.props.tipo != undefined && this.props.tipo != null)
+                                navigate('Cadastro_3', { edit, id })
                             else
                                 Toast.show({ text: 'Selecione um TIPO de máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                         }}

@@ -15,7 +15,10 @@ class Cadastro_7 extends Component {
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
-
+        const { params } = this.props.navigation.state
+        const edit = params ? params.edit : false
+        const id = params ? params.id : null
+        
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
@@ -47,10 +50,10 @@ class Cadastro_7 extends Component {
                     <Button rounded
                         onPress={() => {
                             Keyboard.dismiss()
-                            if (this.props.descricao == '')
+                            if (this.props.descricao == '' || this.props.descricao == undefined || this.props.descricao == null)
                                 Toast.show({ text: 'Informe uma DESCRIÇÃO para o anúncio!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                             else
-                                navigate('Cadastro_8')
+                                navigate('Cadastro_8', { edit, id })
                         }}
                         style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
