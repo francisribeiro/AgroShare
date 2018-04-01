@@ -37,20 +37,26 @@ class Login extends Component {
     if (this.props.loading)
       return (
         <AwesomeAlert
+          contentContainerStyle={{ backgroundColor: '#00695c' }}
           show={true}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showProgress={true}
           progressSize={40}
-          progressColor='#00695c'
+          progressColor='#fff'
           message='Aguarde um momento...'
-          messageStyle={{ color: '#585858' }}
-          overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+          messageStyle={{ color: '#fff' }}
+          overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
         />
       )
 
     return (
-      <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton} onPress={() => { this._autenticarUsuario() }}>
+      <TouchableOpacity activeOpacity={0.7} style={globalStyles.floatingButton}
+        onPress={() => {
+          setTimeout(() => Keyboard.dismiss(), 500)
+          this._autenticarUsuario()
+        }}>
+
         <IconNB style={globalStyles.floatingButtonIcon} name='ios-arrow-forward' />
       </TouchableOpacity>
     )
@@ -87,12 +93,12 @@ class Login extends Component {
             <View style={{ paddingRight: 15 }}>
               <Item stackedLabel>
                 <Label style={globalStyles.inputLabel}>ENDEREÇO DE EMAIL</Label>
-                <Input autoCapitalize='none' keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaEmail(texto)} />
+                <Input autoCapitalize='none' keyboardType='email-address' returnKeyType='next' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaEmail(texto)} value={this.props.email} />
               </Item>
 
               <Item style={{ paddingTop: 20 }} stackedLabel>
                 <Label style={globalStyles.inputLabel}>SENHA</Label>
-                <Input autoCapitalize='none' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaSenha(texto)} secureTextEntry />
+                <Input autoCapitalize='none' selectionColor='#fff' style={globalStyles.input} onChangeText={texto => this.props.modificaSenha(texto)} secureTextEntry value={this.props.senha} />
               </Item>
             </View>
           </Form>

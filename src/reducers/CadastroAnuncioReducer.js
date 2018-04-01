@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
     tipo: 'Trator',
-    marca: 'Valtra',
+    marca: 'Yanmar',
     modelo: 'BH180',
     ano: '2014',
     cidade: 'Piranguçu',
@@ -14,6 +14,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case 'editar_anuncio':
+            return { ...action.payload}
         case 'modifica_tipo':
             return { ...state, tipo: action.payload }
         case 'modifica_marca':

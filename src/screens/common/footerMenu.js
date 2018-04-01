@@ -6,7 +6,7 @@ import b64 from 'base-64'
 
 import { firebase } from '../../config/firebase'
 import globalStyles from './globalStyles' // Global Styles
-import { NotificacaoAguardandoLocador, NotificacaoMsg } from '../../actions/AppAction'
+import { NotificacaoAguardandoLocador, NotificacaoMsg, NotificacaoHistorico } from '../../actions/AppAction'
 
 class FooterMenu extends Component {
     // Class start state
@@ -29,6 +29,7 @@ class FooterMenu extends Component {
         let locador = b64.encode(firebase.auth.currentUser.email)
         this.props.NotificacaoAguardandoLocador(locador)
         this.props.NotificacaoMsg()
+        this.props.NotificacaoHistorico()
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow)
         this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardWillHide)
     }
@@ -66,7 +67,7 @@ class FooterMenu extends Component {
         if (qtd > 0)
             return (
                 <Button active={this.state.tab4} onPress={() => { this.toggleTab4(); navigate('Mensagens') }} vertical badge>
-                    <Badge style={{ backgroundColor: '#00695c' }}>
+                    <Badge style={globalStyles.footerBadge}>
                         <Text>{qtd}</Text>
                     </Badge>
                     <Icon active={this.state.tab4} name='ios-chatboxes-outline' style={globalStyles.footerIcon} />
@@ -81,6 +82,27 @@ class FooterMenu extends Component {
             </Button>
         )
     }
+
+    renderHistorico(navigate, qtd) {
+        if (qtd > 0)
+            return (
+                <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} badge vertical>
+                    <Badge style={globalStyles.footerBadge}>
+                        <Text>{qtd}</Text>
+                    </Badge>
+                    <Icon active={this.state.tab5} name='ios-person-outline' style={globalStyles.footerIcon} />
+                    <Text style={globalStyles.footerTxt}>Perfil</Text>
+                </Button>
+            )
+
+        return (
+            <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} vertical>
+                <Icon active={this.state.tab5} name='ios-person-outline' style={globalStyles.footerIcon} />
+                <Text style={globalStyles.footerTxt}>Perfil</Text>
+            </Button>
+        )
+    }
+
     // FooterTab screen
     render() {
         // TabNavigator props
@@ -112,13 +134,15 @@ class FooterMenu extends Component {
                             <Text style={globalStyles.footerTxt}>Mensagens</Text>
                         </Button> */}
 
-                        <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} badge vertical>
+                        {this.renderHistorico(navigate, this.props.quantidadeHistorico)}
+
+                        {/* <Button active={this.state.tab5} onPress={() => { this.toggleTab5(); navigate('Perfil') }} badge vertical>
                             <Badge style={globalStyles.footerBadge}>
                                 <Text>2</Text>
                             </Badge>
                             <Icon active={this.state.tab5} name='ios-person-outline' style={globalStyles.footerIcon} />
                             <Text style={globalStyles.footerTxt}>Perfil</Text>
-                        </Button>
+                        </Button> */}
                     </FooterTab>
                 </Footer>
 
@@ -130,6 +154,7 @@ class FooterMenu extends Component {
 const mapStateToProps = state => ({
     quantidadeLocador: state.NotificacaoAguardandoReducer.quantidadeLocador,
     quantidadeMsg: state.NotificacaoAguardandoReducer.qtdMsg,
+    quantidadeHistorico: state.NotificacaoAguardandoReducer.qtdHistorico,
 })
 
-export default connect(mapStateToProps, { NotificacaoAguardandoLocador, NotificacaoMsg })(FooterMenu)
+export default connect(mapStateToProps, { NotificacaoAguardandoLocador, NotificacaoMsg, NotificacaoHistorico })(FooterMenu)

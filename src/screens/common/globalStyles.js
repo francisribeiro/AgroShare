@@ -7,6 +7,7 @@ export default {
     txtDescription2: { paddingLeft: 15, paddingRight: 12, paddingBottom: 25, color: '#585858', fontSize: 19 },
     input: { color: '#fff', fontSize: 28, padding: 7, marginTop: 5 },
     input2: { color: '#585858', fontSize: 28, padding: 7, marginTop: 5 },
+    input3: { color: '#585858', fontSize: 28, padding: 7},
     inputLabel: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
     inputLabel2: { color: '#585858', fontSize: 14, fontWeight: 'bold' },
     confirmRent: { fontWeight: 'bold', color: '#00695c', fontSize: 20 },
@@ -25,7 +26,7 @@ export default {
 
     floatingButton2: {
         position: 'absolute',
-        bottom: 30,
+        bottom: 55,
         right: 30
     },
 
@@ -68,6 +69,12 @@ export default {
     iconMenu: { fontSize: 38, paddingRight: 5, color: '#2E2E2E' },
 
     //Alinha Itens
-    itemAlign: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' }
+    itemAlign: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' },
+
+    //Historico
+    txtHistorico: { fontSize: 14, color: '#000', paddingTop: 6 },
+    iconHistorico: { fontSize: 40, paddingRight: 15, color: '#2E2E2E' },
+    alignHistorico: { flexWrap: 'wrap', alignItems: 'flex-end', flexDirection: 'row' },
+    itemHistorico: { paddingVertical: 16, marginLeft: 15, marginRight: 15, borderBottomColor: '#eaeaea', borderBottomWidth: 1 },
 
 }

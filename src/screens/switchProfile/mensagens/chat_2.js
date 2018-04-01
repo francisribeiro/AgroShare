@@ -40,14 +40,14 @@ class Chat extends Component {
         if (texto.tipo === 'e') {
             return (
                 <View style={{ alignItems: 'flex-end', marginTop: 5, marginBottom: 5, marginLeft: 40 }}>
-                    <Text style={{ fontSize: 16, color: '#000', padding: 10, backgroundColor: '#dbf5b4', elevation: 1, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, borderTopRightRadius: 30 }}>{texto.mensagem}</Text>
+                    <Text style={{ fontSize: 16, color: '#000', padding: 10, backgroundColor: '#dbf5b4', elevation: 1, borderTopLeftRadius: 15, borderBottomLeftRadius: 15, borderTopRightRadius: 15 }}>{texto.mensagem}</Text>
                 </View>
             )
         }
 
         return (
             <View style={{ alignItems: 'flex-start', marginTop: 5, marginBottom: 5, marginRight: 40 }}>
-                <Text style={{ fontSize: 16, color: '#000', padding: 10, backgroundColor: '#e5e5e5', elevation: 1, borderTopRightRadius: 30, borderBottomRightRadius: 30, borderTopLeftRadius: 30 }}>{texto.mensagem}</Text>
+                <Text style={{ fontSize: 16, color: '#000', padding: 10, backgroundColor: '#e5e5e5', elevation: 1, borderTopRightRadius: 15, borderBottomRightRadius: 15, borderTopLeftRadius: 15 }}>{texto.mensagem}</Text>
             </View>
         )
     }

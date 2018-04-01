@@ -112,11 +112,12 @@ class SolicitacaoAluguel extends Component {
                 </Footer>
 
                 <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
                     show={showAlertRejeitar}
                     showProgress={false}
 
                     title="Deseja realmente rejeitar essa solicitação de aluguel?"
-                    titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
 
                     closeOnTouchOutside={true}
                     closeOnHardwareBackPress={false}
@@ -127,13 +128,13 @@ class SolicitacaoAluguel extends Component {
                     cancelText="Não, cancele isso"
                     confirmText="Sim, eu quero"
 
-                    confirmButtonColor="#00695c"
+                    confirmButtonColor="#fff"
                     cancelButtonColor="#e53935"
 
                     cancelButtonTextStyle={{ fontSize: 16 }}
-                    confirmButtonTextStyle={{ fontSize: 16 }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
 
-                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
                     onCancelPressed={() => {
                         this.hideAlert()
@@ -146,11 +147,12 @@ class SolicitacaoAluguel extends Component {
                 />
 
                 <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
                     show={showAlertAceitar}
                     showProgress={false}
 
                     title="Deseja realmente aceitar essa solicitação de aluguel?"
-                    titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
 
                     closeOnTouchOutside={true}
                     closeOnHardwareBackPress={false}
@@ -161,13 +163,13 @@ class SolicitacaoAluguel extends Component {
                     cancelText="Não, cancele isso"
                     confirmText="Sim, eu quero"
 
-                    confirmButtonColor="#00695c"
+                    confirmButtonColor="#fff"
                     cancelButtonColor="#e53935"
 
                     cancelButtonTextStyle={{ fontSize: 16 }}
-                    confirmButtonTextStyle={{ fontSize: 16 }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
 
-                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
                     onCancelPressed={() => {
                         this.hideAlert()
@@ -180,15 +182,16 @@ class SolicitacaoAluguel extends Component {
                 />
 
                 <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
                     show={showLoading}
                     closeOnTouchOutside={false}
                     closeOnHardwareBackPress={false}
                     showProgress={true}
                     progressSize={40}
-                    progressColor='#00695c'
+                    progressColor='#fff'
                     message='Aguarde um momento...'
-                    messageStyle={{ color: '#585858' }}
-                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                    messageStyle={{ color: '#fff' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
                 />
             </Container>
         )

@@ -3,6 +3,7 @@ import { Container, Content, Header, Button, Text, Body, Icon, Spinner } from 'n
 import { View, TouchableOpacity, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { anunciosFetch } from '../../actions/AppAction'
 import SingleCard from './singleCard' // Card Component
@@ -17,27 +18,16 @@ class Anuncios extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
-    constructor(props) {
-        super(props)
-        this.state = { loading: false }
-    }
-
-    renderHeader() {
-        return this.state.loading ? <Spinner color={globalStyles.bg} /> : null
-    }
-
     componentWillMount() {
-        this.setState({ loading: true })
         this.props.anunciosFetch()
         this.createDataSource(this.props.anuncios)
-            .then(this.setState({ loading: false }))
     }
 
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps.anuncios)
     }
 
-    async createDataSource(anuncios) {
+    createDataSource(anuncios) {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 != r2 })
         this.dataSource = ds.cloneWithRows(anuncios)
     }
@@ -49,7 +39,6 @@ class Anuncios extends Component {
             </TouchableOpacity>
         )
     }
-
 
     // Anúncios screen
     render() {
@@ -74,7 +63,6 @@ class Anuncios extends Component {
                         <ListView
                             enableEmptySections
                             dataSource={this.dataSource}
-                            renderHeader={this.renderHeader.bind(this)}
                             renderRow={(data) => this.renderRow(data, navigate)}
                         />
                     </View>
@@ -85,8 +73,8 @@ class Anuncios extends Component {
 }
 
 const mapStateToProps = state => {
-    const anuncios = _.map(state.AnunciosListaReducer, (val) => {
-        return { ...val }
+    const anuncios = _.map(state.AnunciosListaReducer, (val, id) => {
+        return { ...val, id }
     })
 
     return {

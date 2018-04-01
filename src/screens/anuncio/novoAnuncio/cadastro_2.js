@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text } from 'native-base'
+import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast } from 'native-base'
 import { View, Keyboard, TouchableOpacity } from 'react-native'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 import { connect } from 'react-redux'
@@ -11,10 +11,29 @@ class Cadastro_2 extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
+    constructor(props) {
+        super(props)
+        this.state = { indice: -1 }
+    }
+
+    inicializaRadios() {
+        let opts = ['Trator', 'Roçadeira', 'Colheitadeira', 'Ensiladeira', 'Adubadeira']
+
+        if (this.props.tipo != '')
+            this.setState({ indice: opts.indexOf(this.props.tipo) })
+    }
+
+    componentWillMount() {
+        this.inicializaRadios()
+    }
+
     // Cadastro_2 screen
     render() {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const edit = params ? params.edit : false
+        const id = params ? params.id : null
 
         return (
             <Container style={{ backgroundColor: "#fff" }}>
@@ -37,6 +56,7 @@ class Cadastro_2 extends Component {
                     <Form>
                         <View style={{ paddingHorizontal: 15 }}>
                             <RadioGroup
+                                selectedIndex={this.state.indice}
                                 size={30}
                                 thickness={2}
                                 color='#585858'
@@ -68,7 +88,14 @@ class Cadastro_2 extends Component {
                 </Content>
 
                 <View style={globalStyles.floatingButton2}>
-                    <Button rounded onPress={() => navigate('Cadastro_3')} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                    <Button rounded
+                        onPress={() => {
+                            if (this.props.tipo != '' && this.props.tipo != undefined && this.props.tipo != null)
+                                navigate('Cadastro_3', { edit, id })
+                            else
+                                Toast.show({ text: 'Selecione um TIPO de máquina!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                        }}
+                        style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                         <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Próximo</Text>
                         <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                     </Button>

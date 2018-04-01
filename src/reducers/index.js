@@ -18,6 +18,7 @@ import NotificacaoAguardandoReducer from './NotificacaoAguardandoReducer'
 
 import AdicionaContatoReducer from './AdicionaContatoReducer'
 import ListaContatosLocatarioReducer from './ListaContatosLocatarioReducer'
+import ListaHistoricoReducer from './ListaHistoricoReducer'
 import ListaConversaReducer from './ListaConversaReducer'
 
 
@@ -53,4 +54,6 @@ export default combineReducers({
     AdicionaContatoReducer,
     ListaContatosLocatarioReducer,
     ListaConversaReducer,
+
+    ListaHistoricoReducer,
 })

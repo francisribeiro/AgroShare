@@ -24,7 +24,8 @@
     "react-navigation-redux-helpers": "^1.0.1",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "reverse-object-order": "^0.1.2"
   },
   "devDependencies": {
     "babel-jest": "22.0.4",

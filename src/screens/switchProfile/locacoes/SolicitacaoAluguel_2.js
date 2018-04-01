@@ -8,7 +8,7 @@ import b64 from 'base-64'
 
 import { firebase } from '../../../config/firebase'
 import globalStyles from '../../common/globalStyles' // Global Styles
-import { CancelarSolicitacao } from '../../../actions/AppAction'
+import { SolicitarCancelamento } from '../../../actions/AppAction'
 
 class SolicitacaoAluguel_2 extends Component {
     // Hide the header
@@ -53,7 +53,7 @@ class SolicitacaoAluguel_2 extends Component {
     }
 
     _CancelarSolicitacao(locador, aluguel, rota) {
-        this.props.CancelarSolicitacao(locador, aluguel, rota)
+        this.props.SolicitarCancelamento(locador, aluguel, rota)
     }
     // ProfileMaq screen
     render() {
@@ -62,8 +62,6 @@ class SolicitacaoAluguel_2 extends Component {
         const { params } = this.props.navigation.state
         const { tipo, marca, preco, aluguel } = params
         const { showAlertAceitar, showLoading } = this.state
-
-        console.log(aluguel)
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -101,11 +99,12 @@ class SolicitacaoAluguel_2 extends Component {
                     </Button>
                 </View>
                 <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
                     show={showAlertAceitar}
                     showProgress={false}
 
                     title="Deseja realmente cancelar a solicitação do aluguel?"
-                    titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
 
                     closeOnTouchOutside={true}
                     closeOnHardwareBackPress={false}
@@ -116,13 +115,13 @@ class SolicitacaoAluguel_2 extends Component {
                     cancelText="Não, não quero"
                     confirmText="Sim, eu quero"
 
-                    confirmButtonColor="#00695c"
+                    confirmButtonColor="#fff"
                     cancelButtonColor="#e53935"
 
-                    cancelButtonTextStyle={{ fontSize: 16 }}
-                    confirmButtonTextStyle={{ fontSize: 16 }}
+                    cancelButtonTextStyle={{ fontSize: 16, color: '#fff' }}
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
 
-                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
                     onCancelPressed={() => {
                         this.hideAlert()
@@ -130,20 +129,21 @@ class SolicitacaoAluguel_2 extends Component {
 
                     onConfirmPressed={() => {
                         this.hideAlert().then(this.showLoading())
-                        setTimeout(() => this._CancelarSolicitacao(b64.encode(firebase.auth.currentUser.email), aluguel.aluguel, 'TabRoutes_2'), 500)
+                        setTimeout(() => this._CancelarSolicitacao(aluguel.locador, aluguel.aluguel, 'TabRoutes_2'), 500)
                     }}
                 />
 
                 <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
                     show={showLoading}
                     closeOnTouchOutside={false}
                     closeOnHardwareBackPress={false}
                     showProgress={true}
                     progressSize={40}
-                    progressColor='#00695c'
+                    progressColor='#fff'
                     message='Aguarde um momento...'
-                    messageStyle={{ color: '#585858' }}
-                    overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+                    messageStyle={{ color: '#fff' }}
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
                 />
             </Container>
         )
@@ -154,4 +154,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { CancelarSolicitacao })(SolicitacaoAluguel_2)
+export default connect(mapStateToProps, { SolicitarCancelamento })(SolicitacaoAluguel_2)

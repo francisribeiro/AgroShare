@@ -7,7 +7,7 @@ import { NavigationActions } from 'react-navigation'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { auth, firebase } from '../../../config/firebase'
-import { getUserData } from '../../../actions/AppAction'
+import { getUserData, NotificacaoHistorico } from '../../../actions/AppAction'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
 // Profile Image
@@ -16,7 +16,7 @@ const profile = require('../../../assets/images/profile.jpeg')
 class Perfil extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-    
+
     constructor(props) {
         super(props)
         this.state = { showAlertAceitar: false, showLoading: false }
@@ -34,6 +34,7 @@ class Perfil extends Component {
 
     componentWillMount() {
         this.props.getUserData()
+        this.props.NotificacaoHistorico()
     }
 
     reset() {
@@ -63,7 +64,7 @@ class Perfil extends Component {
 
                 <Content>
                     <View style={globalStyles.itemMenu}>
-                        <TouchableOpacity onPress={() => false}>
+                        <TouchableOpacity onPress={() => navigate('Me')}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Visualizar e editar perfil</Title>
                                 <Right>
@@ -74,20 +75,21 @@ class Perfil extends Component {
                     </View>
 
                     <View style={globalStyles.itemMenu}>
-                        <TouchableOpacity onPress={() => false}>
+                        <TouchableOpacity onPress={() => navigate('Historico')}>
                             <View style={globalStyles.alignMenu}>
-                                <Title style={globalStyles.titleMenu}>Notificações</Title>
+                                <Title style={globalStyles.titleMenu}>Histórico de Atividades</Title>
                                 <Right>
                                     <IconBadge
                                         MainElement={<Icon name='ios-notifications-outline' style={globalStyles.iconMenu} />}
-                                        BadgeElement={<Text style={{ color: '#FFFFFF', fontSize: 11 }}>2</Text>}
+                                        BadgeElement={<Text style={{ color: '#FFFFFF', fontSize: 11 }}>{this.props.quantidadeHistorico}</Text>}
                                         IconBadgeStyle={{ height: 20, width: 18, backgroundColor: '#ff4444' }}
-                                        Hidden={false}
+                                        Hidden={(this.props.quantidadeHistorico > 0) ? false : true}
                                     />
                                 </Right>
                             </View>
                         </TouchableOpacity>
                     </View>
+
                     <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => navigate('load', { troca: 0 })}>
                             <View style={globalStyles.alignMenu}>
@@ -197,7 +199,8 @@ class Perfil extends Component {
 
 const mapStateToProps = state => ({
     nome: state.AppReducer.nome,
-    sobrenome: state.AppReducer.sobrenome
+    sobrenome: state.AppReducer.sobrenome,
+    quantidadeHistorico: state.NotificacaoAguardandoReducer.qtdHistorico,
 })
 
-export default connect(mapStateToProps, { getUserData })(Perfil)
+export default connect(mapStateToProps, { getUserData, NotificacaoHistorico })(Perfil)
