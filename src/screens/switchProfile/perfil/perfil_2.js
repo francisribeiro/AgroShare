@@ -64,7 +64,7 @@ class Perfil extends Component {
 
                 <Content>
                     <View style={globalStyles.itemMenu}>
-                        <TouchableOpacity onPress={() => false}>
+                        <TouchableOpacity onPress={() => navigate('Me')}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Visualizar e editar perfil</Title>
                                 <Right>

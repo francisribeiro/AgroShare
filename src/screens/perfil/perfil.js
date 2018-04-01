@@ -55,7 +55,7 @@ class Perfil extends Component {
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
                     <Body style={{ paddingLeft: 10 }}>
-                        <Title style={{ fontSize: 20, width: 144 }}>{nome} {sobrenome}</Title>
+                        <Title style={{ fontSize: 20, width: 200 }}>{nome} {sobrenome}</Title>
                     </Body>
 
                     <Right>
