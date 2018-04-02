@@ -20,6 +20,7 @@ import AdicionaContatoReducer from './AdicionaContatoReducer'
 import ListaContatosLocatarioReducer from './ListaContatosLocatarioReducer'
 import ListaHistoricoReducer from './ListaHistoricoReducer'
 import ListaConversaReducer from './ListaConversaReducer'
+import fotoReducer from './fotoReducer'
 
 
 const initialNavState = null
@@ -56,4 +57,5 @@ export default combineReducers({
     ListaConversaReducer,
 
     ListaHistoricoReducer,
+    fotoReducer,
 })

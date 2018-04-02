@@ -4,8 +4,9 @@ import { TouchableOpacity, View, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import { db } from '../../config/firebase/firebase'
 import globalStyles from '../common/globalStyles' // Global Styles
-import { contatosUsuarioFetch, visualizaMsg } from '../../actions/AppAction'
+import { contatosUsuarioFetch, visualizaMsg, myFoto } from '../../actions/AppAction'
 // Imagens dos avatares
 const avatar1 = require('../../assets/images/avatar1.jpg')
 // Dados das máquinas
@@ -38,8 +39,18 @@ class ListMensagens extends Component {
         return null
     }
 
+    renderThumb() {
+        if ('false' == 'false')
+            return (<Thumbnail source={avatar1} />)
+        else
+            return (<Thumbnail source={{ uri: this.props.foto }} />)
+    }
+
     renderRow(contato, navigate) {
         const { nome, sobrenome, email, mensagem, hora, vista } = contato
+
+        // this.props.myFoto(email)
+        
         return (
             <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
                 <TouchableOpacity activeOpacity={0.5}
@@ -50,7 +61,7 @@ class ListMensagens extends Component {
                     <View pointerEvents='none'>
                         <ListItem thumbnail>
                             <Left>
-                                <Thumbnail source={avatar1} />
+                                {this.renderThumb()}
                             </Left>
 
                             <Body style={{ borderBottomColor: '#fff' }}>
@@ -93,7 +104,10 @@ mapStateToProps = state => {
         return { ...val, uid }
     })
 
-    return { contatos }
+    return {
+        contatos,
+        foto: state.fotoReducer.foto
+    }
 }
 
-export default connect(mapStateToProps, { contatosUsuarioFetch, visualizaMsg })(ListMensagens);
+export default connect(mapStateToProps, { contatosUsuarioFetch, visualizaMsg, myFoto })(ListMensagens);

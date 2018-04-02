@@ -32,7 +32,7 @@ export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
             .then(user => {
                 let emailB64 = b64.encode(email)
                 firebase.db.ref(`/Usuarios/${emailB64}/`)
-                    .set({ nome, sobrenome, email, idade })
+                    .set({ nome, sobrenome, email, idade, foto: 'false' })
                     .then(value => cadastraUsuarioSuccesso(dispatch))
             })
             .catch(erro => cadastraUsuarioErro(dispatch, erro))
@@ -61,14 +61,14 @@ export const perfilFetch = () => {
     let userId = b64.encode(firebase.auth.currentUser.email)
 
     return dispatch => {
-        firebase.db.ref(`Usuarios/${userId}`).once('value', (snapshot) => {
+        firebase.db.ref(`Usuarios/${userId}`).on('value', (snapshot) => {
             dispatch({ type: 'buscar_perfil', payload: snapshot.val() })
         })
     }
 }
 
 
-export const editarPerfil = ({ nome, sobrenome }) => {
+export const editarPerfil = ({ nome, sobrenome, route }) => {
 
     let userId = b64.encode(firebase.auth.currentUser.email)
 
@@ -76,16 +76,16 @@ export const editarPerfil = ({ nome, sobrenome }) => {
         dispatch({ type: 'editar_perfil' })
         firebase.db.ref(`Usuarios/${userId}`)
             .update({ nome, sobrenome })
-            .then(value => editarPerfilSuccesso(dispatch, userId))
+            .then(value => editarPerfilSuccesso(dispatch, userId, route))
             .catch(erro => editarPerfilErro(dispatch, erro))
     }
 }
 
-const editarPerfilSuccesso = (dispatch, userId) => {
+const editarPerfilSuccesso = (dispatch, userId, route) => {
     addHistorico(`Você alterou seu perfil.`, 'ios-person-outline', userId, '#2BBBAD')
     dispatch({ type: 'sucesso_editar' })
     dispatch(NavigationActions.reset({
-        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: route })]
     }))
     // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }

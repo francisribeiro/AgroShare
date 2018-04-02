@@ -315,3 +315,12 @@ export const visualizaMsg = (from) => {
         firebase.db.ref(`Conversas/${userId}/${from}`).update({ vista: true })
     }
 }
+
+export const myFoto = (email) => {
+    return dispatch => {
+        firebase.db.ref(`Usuarios/${email}`).once('value', (snapshot) => {
+            // console.log(snapshot.val().foto)
+            dispatch({ type: 'my_foto', payload: snapshot.val().foto })
+        })
+    }
+}
