@@ -174,7 +174,16 @@ export const contatosUsuarioFetch = () => {
 
         firebase.db.ref(`/Conversas/${emailUsuarioB64}`)
             .on("value", snapshot => {
-                dispatch({ type: 'LISTA_CONTATO_USUARIO', payload: snapshot.val() })
+                let obj = snapshot.val()
+
+                if (obj != null)
+                    Object.keys(obj).map(function (objectKey, index) {
+                        firebase.db.ref(`Usuarios/${obj[objectKey].email}`).once('value', (sn) => {
+                            obj[objectKey].foto = sn.val().foto
+                        })
+                    })
+
+                dispatch({ type: 'LISTA_CONTATO_USUARIO', payload: obj })
             })
     }
 }
