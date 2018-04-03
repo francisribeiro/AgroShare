@@ -10,19 +10,20 @@ export const modificaModelo = (texto) => { return { type: 'modifica_modelo', pay
 export const modificaAno = (texto) => { return { type: 'modifica_ano', payload: texto } }
 export const modificaCidade = (texto) => { return { type: 'modifica_cidade', payload: texto } }
 export const modificaEstado = (texto) => { return { type: 'modifica_estado', payload: texto } }
+export const modificaFoto = (texto) => { return { type: 'modifica_foto', payload: texto } }
 export const modificaDescricao = (texto) => { return { type: 'modifica_descricao', payload: texto } }
 export const modificaTitulo = (texto) => { return { type: 'modifica_titulo', payload: texto } }
 export const modificaPreco = (texto) => { return { type: 'modifica_preco', payload: texto } }
 
 
-export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }) => {
+export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }) => {
     return dispatch => {
         dispatch({ type: 'cadastrar_anuncio' })
 
         let userId = b64.encode(firebase.auth.currentUser.email)
 
         firebase.db.ref(`/Anuncios/${userId}/`)
-            .push({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco })
+            .push({ tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco })
             .then(value => cadastraAnuncioSuccesso(dispatch, tipo, marca, userId))
             .catch(erro => cadastraAnuncioErro(dispatch, erro))
     }
@@ -53,7 +54,7 @@ export const anuncioFetch = (id) => {
     }
 }
 
-export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }) => {
+export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }) => {
 
     let userId = b64.encode(firebase.auth.currentUser.email)
 
@@ -61,7 +62,7 @@ export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, de
         dispatch({ type: 'cadastrar_anuncio' })
         // console.log(`Anuncios/${userId}/${id}`)
         firebase.db.ref(`Anuncios/${userId}/${id}`)
-            .update({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco })
+            .update({ tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco })
             .then(value => editarAnuncioSuccesso(dispatch, tipo, marca, userId))
             .catch(erro => cadastraAnuncioErro(dispatch, erro))
     }

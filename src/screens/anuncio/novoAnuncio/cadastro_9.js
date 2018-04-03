@@ -26,11 +26,11 @@ class Cadastro_9 extends Component {
     }
 
     _cadastrarAnuncio(edit, id) {
-        const { tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco } = this.props
+        const { tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco } = this.props
         if (edit === true && id != null)
-            setTimeout(() => this.props.editarAnuncio({ id, tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }), 250)
+            setTimeout(() => this.props.editarAnuncio({ id, tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }), 250)
         else
-            setTimeout(() => this.props.cadastrarAnuncio({ tipo, marca, modelo, ano, cidade, estado, descricao, titulo, preco }), 250)
+            setTimeout(() => this.props.cadastrarAnuncio({ tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }), 250)
     }
 
     renderIcon() {
@@ -77,7 +77,7 @@ class Cadastro_9 extends Component {
         const edit = params ? params.edit : false
         const id = params ? params.id : null
 
-        console.log(`edit: ${edit} - id: ${id}`)
+        // console.log(`edit: ${edit} - id: ${id}`)
         return (
             <Container style={{ backgroundColor: "#fff" }}>
 
@@ -154,6 +154,7 @@ const mapStateToProps = state => ({
     ano: state.CadastroAnuncioReducer.ano,
     cidade: state.CadastroAnuncioReducer.cidade,
     estado: state.CadastroAnuncioReducer.estado,
+    foto: state.CadastroAnuncioReducer.foto,
     descricao: state.CadastroAnuncioReducer.descricao,
     titulo: state.CadastroAnuncioReducer.titulo,
     preco: state.CadastroAnuncioReducer.preco,

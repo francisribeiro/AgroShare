@@ -49,7 +49,7 @@ export default class Cadastro_6 extends Component {
                     </Text>
 
                     <View>
-                        <Button rounded large block onPress={() => navigate('Cadastro_7', { edit, id })} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
+                        <Button rounded large block onPress={() => navigate('AddFoto', { edit, id })} style={{ paddingHorizontal: 20, backgroundColor: globalStyles.bg }}>
                             <Text style={{ fontSize: 18, color: '#fff', marginBottom: 5 }}>Adicionar fotos agora</Text>
                         </Button>
                         <Button rounded bordered large block onPress={() => navigate('Cadastro_7', { edit, id })} style={{ marginTop: 20, paddingHorizontal: 20, borderColor: globalStyles.bg }}>

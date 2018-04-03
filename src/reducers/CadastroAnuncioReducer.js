@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     ano: '2014',
     cidade: 'Piranguçu',
     estado: 'MG',
+    foto: 'false',
     descricao: 'asdasd asda d asda dasd',
     titulo: 'vcxvzxccx zxcz xczxc',
     preco: '25',
@@ -15,7 +16,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'editar_anuncio':
-            return { ...action.payload}
+            return { ...action.payload }
         case 'modifica_tipo':
             return { ...state, tipo: action.payload }
         case 'modifica_marca':
@@ -28,6 +29,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, cidade: action.payload }
         case 'modifica_estado':
             return { ...state, estado: action.payload }
+        case 'modifica_foto':
+            return { ...state, foto: action.payload }
         case 'modifica_descricao':
             return { ...state, descricao: action.payload }
         case 'modifica_titulo':

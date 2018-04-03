@@ -109,7 +109,7 @@ class Perfil extends Component {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={globalStyles.itemMenu}>
+                    {/* <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Configurações</Title>
@@ -118,7 +118,7 @@ class Perfil extends Component {
                                 </Right>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
 
                     {/* <View style={globalStyles.itemMenu}>
