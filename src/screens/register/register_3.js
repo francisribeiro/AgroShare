@@ -13,34 +13,34 @@ class Register_3 extends Component {
     _regexTest(senha) {
         let regexSenha = null
 
-        if (senha.length < 8) {
-            this._aviso('ERRO: A senha precisa ter ao menos 8 caracteres!')
+        if (senha.length < 6) {
+            this._aviso('ERRO: A senha precisa ter ao menos 6 caracteres!')
             return false
         }
 
-        regexSenha = /[0-9]/
-        if (!regexSenha.test(senha)) {
-            this._aviso('ERRO: A senha precisa ter ao menos 1 número (0-9)!')
-            return false
-        }
+        // regexSenha = /[0-9]/
+        // if (!regexSenha.test(senha)) {
+        //     this._aviso('ERRO: A senha precisa ter ao menos 1 número (0-9)!')
+        //     return false
+        // }
 
-        regexSenha = /[a-z]/
-        if (!regexSenha.test(senha)) {
-            this._aviso('ERRO: A senha precisa ter ao menos uma letra minúscula (a-z)!')
-            return false
-        }
+        // regexSenha = /[a-z]/
+        // if (!regexSenha.test(senha)) {
+        //     this._aviso('ERRO: A senha precisa ter ao menos uma letra minúscula (a-z)!')
+        //     return false
+        // }
 
-        regexSenha = /[A-Z]/
-        if (!regexSenha.test(senha)) {
-            this._aviso('ERRO: A senha precisa ter ao menos uma letra maiúscula (A-Z)!')
-            return false
-        }
+        // regexSenha = /[A-Z]/
+        // if (!regexSenha.test(senha)) {
+        //     this._aviso('ERRO: A senha precisa ter ao menos uma letra maiúscula (A-Z)!')
+        //     return false
+        // }
 
-        regexSenha = /[!@#\$%\^&]/
-        if (!regexSenha.test(senha)) {
-            this._aviso('Erro: A senha precisa ter ao menos um caracter especial (!, @, #, %, $, &)!')
-            return false
-        }
+        // regexSenha = /[!@#\$%\^&]/
+        // if (!regexSenha.test(senha)) {
+        //     this._aviso('Erro: A senha precisa ter ao menos um caracter especial (!, @, #, %, $, &)!')
+        //     return false
+        // }
 
         return true
     }
@@ -83,7 +83,7 @@ class Register_3 extends Component {
                     </View>
 
                     <Text style={globalStyles.txtDescription}>
-                        Sua senha tem que ter 8 caracteres ou mais. Não use senhas comuns, repetições ou sequências.
+                        Sua senha tem que ter 6 caracteres ou mais. Não use senhas comuns, repetições ou sequências.
                          Tente fazê-la mais longa ou adicionar símbolos como !, @, #, % ou $.
                     </Text>
 

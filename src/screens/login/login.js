@@ -18,7 +18,7 @@ class Login extends Component {
     if (regexEmail.test(String(email).toLowerCase())) {
       if (senha.length == 0)
         this._aviso('ERRO: Insira uma senha!')
-      else if (senha.length < 8)
+      else if (senha.length < 6)
         this._aviso('ERRO: Insira uma senha válida! ')
       else {
         this.props.autenticarUsuario({ email, senha })
