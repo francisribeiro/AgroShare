@@ -2,13 +2,20 @@ import React, { Component } from 'react'
 import { Container, Header, Content, Button, Left, Right, Text, Icon } from 'native-base'
 import { StyleSheet, View, BackHandler, Image } from 'react-native'
 import { Grid, Row } from 'react-native-easy-grid'
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 
 export default class Start extends Component {
     // Hide the header
     static navigationOptions = { header: null }
-    
+
+    async hideAlert() {
+        this.setState({
+            showAlertSucesso: false
+        })
+    }
+
     // Minimiza o App
     exitApp() { BackHandler.exitApp() }
 
@@ -16,6 +23,8 @@ export default class Start extends Component {
     render() {
         // StackNavigator props
         const { navigate } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const sucesso = params ? params.sucesso : false
 
         return (
             <Container>
@@ -51,7 +60,6 @@ export default class Start extends Component {
                             </View>
                         </Content>
                     </Row>
-
                     <Row size={2} style={{ backgroundColor: globalStyles.bg }}>
                         <Content>
                             <View style={styles.buttonPadder}>
@@ -66,6 +74,31 @@ export default class Start extends Component {
                         </Content>
                     </Row>
                 </Grid>
+                <AwesomeAlert
+                    contentContainerStyle={{ backgroundColor: '#00695c' }}
+                    show={sucesso}
+                    showProgress={false}
+
+                    title="Cadastro realizado com sucesso. Vamos acessar o AgroShare!"
+                    titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}
+
+                    closeOnTouchOutside={false}
+                    closeOnHardwareBackPress={false}
+
+                    showCancelButton={false}
+                    showConfirmButton={true}
+
+                    confirmText="Acessar o AgroShare"
+
+                    confirmButtonColor="#fff"
+                    confirmButtonTextStyle={{ fontSize: 16, color: '#00695c' }}
+
+                    overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+
+                    onConfirmPressed={() => {
+                        this.hideAlert().then(navigate('Login'))
+                    }}
+                />
             </Container>
         )
     }

@@ -43,7 +43,7 @@ const cadastraUsuarioSuccesso = (dispatch) => {
     Keyboard.dismiss()
     dispatch({ type: 'sucesso_cadastro' })
     dispatch(NavigationActions.reset({
-        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'Main' })]
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'Main', params: { sucesso: true } })]
     }))
 }
 
