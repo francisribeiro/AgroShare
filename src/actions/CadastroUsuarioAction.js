@@ -33,6 +33,10 @@ const callAlert = (titulo, msg) => {
     )
 }
 
+const sendMail = () => {
+
+}
+
 export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
     return dispatch => {
         dispatch({ type: 'cadastrar_usuario' })
@@ -51,6 +55,7 @@ export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
 const cadastraUsuarioSuccesso = (dispatch) => {
     Keyboard.dismiss()
     dispatch({ type: 'sucesso_cadastro' })
+    sendMail()
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'Main', params: { sucesso: true } })]
     }))
@@ -96,10 +101,35 @@ const editarPerfilSuccesso = (dispatch, userId, route) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: route })]
     }))
-    callAlert('Confirmação de Edição','Você editou seu perfil com sucesso!')
+    callAlert('Confirmação de Edição', 'Você editou seu perfil com sucesso!')
     // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
 
 const editarPerfilErro = (dispatch, erro) => {
     dispatch({ type: 'erro_editar', payload: erro.message })
+}
+
+export const passwordRecover = (email) => {
+    return dispatch => {
+        auth.doPasswordReset(email)
+            .then(value => sendResetEmailSucesso(dispatch))
+            .catch(erro => sendResetEmailErro(dispatch, erro))
+    }
+}
+
+const sendResetEmailSucesso = (dispatch) => {
+    dispatch(NavigationActions.reset({
+        index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'Main' })]
+    }))
+    callAlert('Recuperar Senha', 'Enviamos para você um email de recuperação de senha!')
+}
+
+const sendResetEmailErro = (dispatch, erro) => {
+    switch (erro.code) {
+        case 'auth/user-not-found':
+            erro.message = 'ERRO: Este usuário não existe!'
+            break
+    }
+
+    dispatch({ type: 'erro_login', payload: erro.message })
 }
