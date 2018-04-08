@@ -168,7 +168,7 @@ class Perfil extends Component {
                     showCancelButton={true}
                     showConfirmButton={true}
 
-                    cancelText="Não"
+                    cancelText="Não, não quero"
                     confirmText="Sim, eu quero"
 
                     confirmButtonColor="#fff"
