@@ -1,14 +1,14 @@
 const INITIAL_STATE = {
-    tipo: 'Trator',
-    marca: 'Yanmar',
-    modelo: 'BH180',
-    ano: '2014',
-    cidade: 'Piranguçu',
-    estado: 'MG',
+    tipo: '',
+    marca: '',
+    modelo: '',
+    ano: '',
+    cidade: '',
+    estado: '',
     foto: 'false',
-    descricao: 'asdasd asda d asda dasd',
-    titulo: 'vcxvzxccx zxcz xczxc',
-    preco: '25',
+    descricao: '',
+    titulo: '',
+    preco: '',
     erroCadastro: '',
     loading: false
 }
