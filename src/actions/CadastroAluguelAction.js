@@ -1,7 +1,7 @@
 import { firebase } from '../config/firebase'
 import { NavigationActions } from 'react-navigation'
 import b64 from 'base-64'
-import { Keyboard } from 'react-native'
+import { Keyboard, Alert } from 'react-native'
 import { addHistorico } from './AppAction'
 
 export const modificaDataInicial = (texto) => { return { type: 'modifica_dataInicial', payload: texto } }
@@ -10,6 +10,15 @@ export const modificaFormaPagamento = (texto) => { return { type: 'modifica_form
 export const modificaLocador = (texto) => { return { type: 'modifica_locador', payload: texto } }
 export const modificaMaquina = (texto) => { return { type: 'modifica_maquina', payload: texto } }
 export const modificaAtivo = (texto) => { return { type: 'modifica_ativo', payload: texto } }
+
+const callAlert = (titulo, msg) => {
+    Alert.alert(
+        titulo,
+        msg,
+        [{ text: 'ENTENDIDO', onPress: () => false }],
+        { cancelable: false }
+    )
+}
 
 export const cadastrarAluguel = ({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }) => {
     return dispatch => {
@@ -33,6 +42,7 @@ const cadastraAluguelSuccesso = (dispatch, locador, locatario) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes_2' })]
     }))
+    callAlert('Confirmação de Solicitação','Sua solicitação de aluguel foi enviada com sucesso!')
 }
 
 const cadastraAluguelErro = (dispatch, erro) => {

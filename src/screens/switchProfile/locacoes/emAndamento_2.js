@@ -9,9 +9,6 @@ import { firebase } from '../../../config/firebase'
 import { AlugueisFetch } from '../../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
-// Imagem do trator
-const thumb3 = require('../../../assets/images/drawer-cover3.jpg')
-
 class EmAndamento_2 extends Component {
     componentWillMount() {
         this.props.AlugueisFetch()
@@ -48,17 +45,19 @@ class EmAndamento_2 extends Component {
         let tipo = ''
         let marca = ''
         let preco = 0
+        let foto = 'false'
 
         firebase.db.ref(`Anuncios/${aluguel.locador}/${aluguel.maquina}`).on('value', (snapshot) => {
             tipo = snapshot.val().tipo
             marca = snapshot.val().marca
             preco = snapshot.val().preco
+            foto = snapshot.val().foto
         })
 
         if (aluguel.ativo && aluguel.locatario == userId)
             return (
                 <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('MeusAlugueis_2', { aluguel, tipo, marca, preco })}>
-                    <LocacoesNotificacoes img={thumb3} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
+                    <LocacoesNotificacoes img={foto} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
                 </TouchableOpacity >
             )
 

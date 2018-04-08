@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
-    email: 'pk@hotmail.com',
-    senha: '$Francis123',
+    email: 'prikondo@hotmail.com',
+    senha: '123456',
     erroLogin: '',
     loading: false
 }

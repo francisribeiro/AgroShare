@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { apagarAnuncio } from '../../actions/CadastroAnuncioAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
-const cardImage1 = require('../../assets/images/drawer-cover3.jpg')
+const avatar = require('../../assets/images/maq_avatar.jpg')
 
 class ProfileMaq extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -21,6 +21,13 @@ class ProfileMaq extends Component {
                 </TouchableOpacity>
             )
         }
+    }
+
+    renderThumb(foto) {
+        if (foto == 'false')
+            return (<Image style={{ resizeMode: 'cover', width: null, height: 240, flex: 1 }} source={avatar} />)
+        else
+            return (<Image style={{ resizeMode: 'cover', width: null, height: 240, flex: 1 }} source={{ uri: foto }} />)
     }
 
     constructor(props) {
@@ -43,6 +50,7 @@ class ProfileMaq extends Component {
         this.props.navigation.setParams({ handleShowAlertAceitar: this.showAlertAceitar })
     }
 
+
     // ProfileMaq screen
     render() {
         // StackNavigator props
@@ -52,6 +60,7 @@ class ProfileMaq extends Component {
         const marca = params ? params.anuncio.marca : null
         const modelo = params ? params.anuncio.modelo : null
         const titulo = params ? params.anuncio.titulo : null
+        const foto = params ? params.anuncio.foto : null
         const descricao = params ? params.anuncio.descricao : null
         const preco = params ? params.anuncio.preco : null
         const id = params ? params.anuncio.id : null
@@ -61,7 +70,7 @@ class ProfileMaq extends Component {
             <Container style={{ backgroundColor: '#fff' }}>
                 <Content>
                     <View>
-                        <Image style={{ resizeMode: 'cover', width: null, height: 240, flex: 1 }} source={cardImage1} />
+                        {this.renderThumb(foto)}
                     </View>
 
                     <View style={{ padding: 20, paddingBottom: 15 }}>

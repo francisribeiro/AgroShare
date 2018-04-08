@@ -4,19 +4,30 @@ import { Icon, Card, CardItem, Text, Left, Body } from 'native-base'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 
+// Imagens das máquinas
+const avatar = require('../../assets/images/maq_avatar.jpg')
+
 export default class SingleCard extends Component {
     // Card Component
+
+    renderThumb(foto) {
+        if (foto == 'false')
+            return (<Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={avatar} />)
+        else
+            return (<Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={{ uri: foto }} />)
+    }
+
     render() {
         return (
             <Card style={{ elevation: 0, marginBottom: 25, borderColor: '#fff' }}>
                 <CardItem cardBody style={{ paddingHorizontal: 12 }}>
-                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={this.props.thumb} />
+                    {this.renderThumb(this.props.thumb)}
                 </CardItem>
 
                 <CardItem cardBody style={{ paddingTop: 10, paddingRight: 12 }}>
                     <Left>
                         <Body>
-                            <Text numberOfLines={1} style={{ fontSize: 18, fontWeight: 'bold', color:'#2e2e2e' }}>
+                            <Text numberOfLines={1} style={{ fontSize: 18, fontWeight: 'bold', color: '#2e2e2e' }}>
                                 R${this.props.preco}/H <Icon name='ios-flash' style={{ fontSize: 20 }} /> {this.props.tipo} {this.props.modelo}
                             </Text>
                             <Text numberOfLines={1} note>{this.props.marca}</Text>

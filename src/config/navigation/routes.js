@@ -39,7 +39,7 @@ import Cadastro_6 from '../../screens/anuncio/novoAnuncio/cadastro_6'
 import Cadastro_7 from '../../screens/anuncio/novoAnuncio/cadastro_7'
 import Cadastro_8 from '../../screens/anuncio/novoAnuncio/cadastro_8'
 import Cadastro_9 from '../../screens/anuncio/novoAnuncio/cadastro_9'
-
+import AddFoto from '../../screens/anuncio/novoAnuncio/addFoto'
 
 //Alugar
 import Alugar_1 from '../../screens/switchProfile/explorar/alugar_1'
@@ -58,7 +58,7 @@ import MeusAlugueis from '../../screens/locacoes/MeusAlugueis'
 
 import Historico from '../../screens/historico/historico'
 import Me from '../../screens/perfil/me'
- 
+
 // Routes path
 const _Main = StackNavigator(
     {
@@ -90,6 +90,7 @@ const _addMaq = StackNavigator(
         Cadastro_7: { screen: Cadastro_7 },
         Cadastro_8: { screen: Cadastro_8 },
         Cadastro_9: { screen: Cadastro_9 },
+        AddFoto: { screen: AddFoto },
     }, {
         headerMode: 'none',
         transitionConfig: t3

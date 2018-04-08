@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
-import { modificaMensagem, enviarMensagem, conversaUsuarioFetch } from '../../../actions/AppAction'
+import { modificaMensagem, enviarMensagem, conversaUsuarioFetch, myFoto } from '../../../actions/AppAction'
 
 class Chat extends Component {
     // Hide the header
@@ -15,6 +15,7 @@ class Chat extends Component {
         const { params } = this.props.navigation.state
         const { email } = params
 
+        this.props.myFoto(email)
         this.props.conversaUsuarioFetch(email)
         this.criaFonteDeDados(this.props.conversa);
     }
@@ -34,6 +35,12 @@ class Chat extends Component {
         this.props.enviarMensagem(mensagem, nome, sobrenome, email)
     }
 
+    renderThumb() {
+        if (this.props.foto == 'false')
+            return (<Thumbnail source={require('../../../assets/images/avatar1.jpg')} />)
+        else
+            return (<Thumbnail source={{ uri: this.props.foto }} />)
+    }
 
     renderRow(texto) {
 
@@ -73,7 +80,7 @@ class Chat extends Component {
                     </Body>
 
                     <Right>
-                        <Thumbnail source={require('../../../assets/images/avatar1.jpg')} />
+                        {this.renderThumb()}
                     </Right>
                 </Header>
 
@@ -118,8 +125,9 @@ mapStateToProps = state => {
 
     return ({
         conversa,
-        mensagem: state.AdicionaContatoReducer.mensagem
+        mensagem: state.AdicionaContatoReducer.mensagem,
+        foto: state.fotoReducer.foto
     })
 }
 
-export default connect(mapStateToProps, { modificaMensagem, enviarMensagem, conversaUsuarioFetch })(Chat)
+export default connect(mapStateToProps, { modificaMensagem, enviarMensagem, conversaUsuarioFetch, myFoto })(Chat)

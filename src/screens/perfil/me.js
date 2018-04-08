@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { Container, Content, Header, Left, Right, Button, Text, Body, Icon, Title, Thumbnail, Form, Item, Label, Input, Footer } from 'native-base'
-import { View, TouchableOpacity, ListView, Keyboard } from 'react-native'
+import { View, TouchableOpacity, ListView, Keyboard, Image, ActivityIndicator } from 'react-native'
 import IconBadge from 'react-native-icon-badge'
 import { connect } from 'react-redux'
 import AwesomeAlert from 'react-native-awesome-alerts'
+import ImagePicker from 'react-native-image-crop-picker'
+import RNFetchBlob from 'react-native-fetch-blob'
+import b64 from 'base-64'
 
+import { storage, auth, db } from '../../config/firebase/firebase'
 import { perfilFetch, editarPerfil, modificaNome, modificaSobrenome } from '../../actions/CadastroUsuarioAction'
+import { addHistorico } from '../../actions/AppAction'
 import globalStyles from '../common/globalStyles' // Global Styles
 
 // Profile Image
@@ -17,9 +22,123 @@ class Me extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { showAlertAceitar: false, showLoading: false }
+        this.state = {
+            showAlertAceitar: false,
+            showLoading: false
+        }
     }
 
+    openCamera() {
+        this.setState({ showLoading: true })
+        const Blob = RNFetchBlob.polyfill.Blob
+        const fs = RNFetchBlob.fs
+        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+        window.Blob = Blob
+        const uid = b64.encode(auth.currentUser.email)
+        ImagePicker.openCamera({
+            width: 300,
+            height: 300,
+            cropping: true,
+            cropperActiveWidgetColor: '#00695c',
+            cropperStatusBarColor: '#00695c',
+            cropperToolbarColor: '#00695c',
+            cropperToolbarTitle: 'Ajuste sua foto',
+            mediaType: 'photo'
+        }).then(image => {
+            const imagePath = image.path
+            let uploadBlob = null
+            const imageRef = storage.ref(uid).child('profile.jpg')
+            let mime = 'image/jpg'
+            fs.readFile(imagePath, 'base64')
+                .then((data) => {
+                    // console.log(data)
+                    return Blob.build(data, { type: `${mime};BASE64` })
+                })
+                .then((blob) => {
+                    uploadBlob = blob
+                    return imageRef.put(blob, { contentType: mime })
+                })
+                .then(() => {
+                    uploadBlob.close()
+                    return imageRef.getDownloadURL()
+                })
+                .then((url) => {
+                    // let userData = {}
+                    // userData[dpNo] = url
+                    // firebase.database().ref('users').child(uid).update({...userData})
+                    db.ref(`Usuarios/${uid}`).update({ foto: url })
+                        .then(addHistorico(`Você atualizou sua imagem de perfil`, 'ios-image-outline', uid, '#0d47a1'))
+
+                    this.setState({ showLoading: false })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    this.setState({ showLoading: false })
+                })
+
+            // console.log(image)
+        })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ showLoading: false })
+            })
+    }
+
+    openGalery() {
+        this.setState({ showLoading: true })
+        const Blob = RNFetchBlob.polyfill.Blob
+        const fs = RNFetchBlob.fs
+        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+        window.Blob = Blob
+        const uid = b64.encode(auth.currentUser.email)
+        ImagePicker.openPicker({
+            width: 300,
+            height: 300,
+            cropping: true,
+            cropperActiveWidgetColor: '#00695c',
+            cropperStatusBarColor: '#00695c',
+            cropperToolbarColor: '#00695c',
+            cropperToolbarTitle: 'Ajuste sua foto',
+            mediaType: 'photo'
+        }).then(image => {
+            const imagePath = image.path
+            let uploadBlob = null
+            const imageRef = storage.ref(uid).child('profile.jpg')
+            let mime = 'image/jpg'
+            fs.readFile(imagePath, 'base64')
+                .then((data) => {
+                    // console.log(data)
+                    return Blob.build(data, { type: `${mime};BASE64` })
+                })
+                .then((blob) => {
+                    uploadBlob = blob
+                    return imageRef.put(blob, { contentType: mime })
+                })
+                .then(() => {
+                    uploadBlob.close()
+                    return imageRef.getDownloadURL()
+                })
+                .then((url) => {
+                    // let userData = {}
+                    // userData[dpNo] = url
+                    // firebase.database().ref('users').child(uid).update({...userData})
+                    db.ref(`Usuarios/${uid}`).update({ foto: url })
+                        .then(addHistorico(`Você atualizou sua imagem de perfil`, 'ios-image-outline', uid, '#0d47a1'))
+
+                    this.setState({ showLoading: false })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    this.setState({ showLoading: false })
+                })
+
+            // console.log(image)
+        })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ showLoading: false })
+            })
+    }
 
     showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
     showLoading = () => { this.setState({ showLoading: true }) }
@@ -33,11 +152,19 @@ class Me extends Component {
 
     componentWillMount() {
         this.props.perfilFetch()
+
     }
 
     _editarPerfil() {
         const { nome, sobrenome } = this.props
-        this.props.editarPerfil({ nome, sobrenome })
+        this.props.editarPerfil({ nome, sobrenome, route: 'TabRoutes' })
+    }
+
+    renderThumb() {
+        if (this.props.foto == 'false')
+            return (<Thumbnail small source={profile} style={{ height: 130, width: 130, borderRadius: 75 }} />)
+        else
+            return (<Thumbnail large source={{ uri: this.props.foto }} style={{ height: 130, width: 130, borderRadius: 75 }} />)
     }
 
     // Me screen
@@ -63,12 +190,14 @@ class Me extends Component {
 
                 <Content style={{ paddingHorizontal: 15, paddingTop: 20 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Thumbnail large source={profile} style={{ height: 100, width: 100, borderRadius: 50 }} />
+                        {this.renderThumb()}
+                        <View style={{ paddingTop: 10, flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row' }}>
+                            <Button iconLeft bordered rounded style={{ borderColor: '#00796b' }} onPress={() => this.openCamera()} >
+                                <Icon active name='ios-camera' style={{ color: '#00796b', paddingRight: 15, fontSize: 45 }} />
+                            </Button>
 
-                        <View style={{ paddingTop: 10 }}>
-                            <Button iconLeft bordered rounded style={{ borderColor: '#00796b' }}>
-                                <Icon active name='ios-camera-outline' style={{ color: '#00796b', paddingRight: 15, fontSize: 35 }} />
-                                <Text style={{ fontSize: 15, color: '#00796b', paddingRight: 25 }}>Alterar imagem</Text>
+                            <Button iconLeft bordered rounded style={{ borderColor: '#00796b', marginLeft: 10 }} onPress={() => this.openGalery()} >
+                                <Icon active name='ios-images' style={{ color: '#00796b', paddingRight: 15, fontSize: 35 }} />
                             </Button>
                         </View>
                     </View>
@@ -152,7 +281,8 @@ class Me extends Component {
 
 mapStateToProps = state => ({
     nome: state.AppReducer.nome,
-    sobrenome: state.AppReducer.sobrenome
+    sobrenome: state.AppReducer.sobrenome,
+    foto: state.AppReducer.foto,
 })
 
 export default connect(mapStateToProps, { perfilFetch, editarPerfil, modificaNome, modificaSobrenome })(Me)

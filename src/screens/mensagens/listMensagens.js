@@ -4,6 +4,7 @@ import { TouchableOpacity, View, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import { db } from '../../config/firebase/firebase'
 import globalStyles from '../common/globalStyles' // Global Styles
 import { contatosUsuarioFetch, visualizaMsg } from '../../actions/AppAction'
 // Imagens dos avatares
@@ -38,8 +39,16 @@ class ListMensagens extends Component {
         return null
     }
 
+    renderThumb(foto) {
+        if (foto == 'false')
+            return (<Thumbnail source={avatar1} />)
+        else
+            return (<Thumbnail source={{ uri: foto }} />)
+    }
+
     renderRow(contato, navigate) {
-        const { nome, sobrenome, email, mensagem, hora, vista } = contato
+        const { nome, sobrenome, email, mensagem, hora, vista, foto } = contato
+
         return (
             <View style={{ borderBottomColor: '#eaeaea', borderBottomWidth: 0.7 }}>
                 <TouchableOpacity activeOpacity={0.5}
@@ -50,7 +59,7 @@ class ListMensagens extends Component {
                     <View pointerEvents='none'>
                         <ListItem thumbnail>
                             <Left>
-                                <Thumbnail source={avatar1} />
+                                {this.renderThumb(foto)}
                             </Left>
 
                             <Body style={{ borderBottomColor: '#fff' }}>

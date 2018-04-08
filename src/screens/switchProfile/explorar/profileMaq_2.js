@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-native-easy-grid'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 
-const cardImage1 = require('../../../assets/images/drawer-cover3.jpg')
+const avatar = require('../../../assets/images/maq_avatar.jpg')
 
 export default class ProfileMaq extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -14,6 +14,13 @@ export default class ProfileMaq extends Component {
             headerTintColor: '#00695c',
             // headerRight: (<Icon name='md-more' style={{ color: '#00695c', fontSize: 28, paddingRight: 15 }} />)
         }
+    }
+
+    renderThumb(foto) {
+        if (foto == 'false')
+            return (<Image style={{ resizeMode: 'cover', width: null, height: 240, flex: 1 }} source={avatar} />)
+        else
+            return (<Image style={{ resizeMode: 'cover', width: null, height: 240, flex: 1 }} source={{ uri: foto }} />)
     }
 
     // ProfileMaq screen
@@ -25,6 +32,7 @@ export default class ProfileMaq extends Component {
         const marca = params ? params.anuncio.marca : null
         const modelo = params ? params.anuncio.modelo : null
         const titulo = params ? params.anuncio.titulo : null
+        const foto = params ? params.anuncio.foto : null
         const descricao = params ? params.anuncio.descricao : null
         const preco = params ? params.anuncio.preco : null
         const locador = params ? params.anuncio.locador : null
@@ -34,7 +42,7 @@ export default class ProfileMaq extends Component {
             <Container style={{ backgroundColor: '#fff' }}>
                 <Content>
                     <View>
-                        <Image style={{ resizeMode: 'cover', width: null, height: 240, flex: 1 }} source={cardImage1} />
+                        {this.renderThumb(foto)}
                     </View>
 
                     <View style={{ padding: 20, paddingBottom: 15 }}>

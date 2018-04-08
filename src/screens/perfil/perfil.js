@@ -45,6 +45,13 @@ class Perfil extends Component {
         }))
     }
 
+    renderThumb() {
+        if (this.props.foto == 'false')
+            return (<Thumbnail source={profile} />)
+        else
+            return (<Thumbnail source={{ uri: this.props.foto }} />)
+    }
+
     // Atividades screen
     render() {
         const { nome, sobrenome } = this.props
@@ -54,12 +61,12 @@ class Perfil extends Component {
         return (
             <Container style={{ backgroundColor: '#fff' }}>
                 <Header androidStatusBarColor='#00695c' style={{ backgroundColor: globalStyles.bg, height: 70 }}>
-                    <Body style={{ paddingLeft: 10 }}>
-                        <Title style={{ fontSize: 20, width: 200 }}>{nome} {sobrenome}</Title>
-                    </Body>
+                    <Left style={{ paddingLeft: 10 }}>
+                        <Text style={{ fontSize: 20, color: '#fff', width: 200, paddingLeft: 5 }}>{nome} {sobrenome}</Text>
+                    </Left>
 
                     <Right>
-                        <Thumbnail source={profile} />
+                        {this.renderThumb()}
                     </Right>
                 </Header>
 
@@ -102,7 +109,7 @@ class Perfil extends Component {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={globalStyles.itemMenu}>
+                    {/* <View style={globalStyles.itemMenu}>
                         <TouchableOpacity onPress={() => false}>
                             <View style={globalStyles.alignMenu}>
                                 <Title style={globalStyles.titleMenu}>Configurações</Title>
@@ -111,7 +118,7 @@ class Perfil extends Component {
                                 </Right>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
 
                     {/* <View style={globalStyles.itemMenu}>
@@ -202,6 +209,7 @@ class Perfil extends Component {
 const mapStateToProps = state => ({
     nome: state.AppReducer.nome,
     sobrenome: state.AppReducer.sobrenome,
+    foto: state.AppReducer.foto,
     quantidadeHistorico: state.NotificacaoAguardandoReducer.qtdHistorico,
 })
 

@@ -9,11 +9,6 @@ import { anunciosFetch } from '../../actions/AppAction'
 import SingleCard from './singleCard' // Card Component
 import globalStyles from '../common/globalStyles' // Global Styles
 
-// Imagens das máquinas
-const cardImage1 = require('../../assets/images/drawer-cover1.jpg')
-const cardImage2 = require('../../assets/images/drawer-cover2.jpg')
-const cardImage3 = require('../../assets/images/drawer-cover3.jpg')
-
 class Anuncios extends Component {
     // Hide the header
     static navigationOptions = { header: null }
@@ -35,7 +30,7 @@ class Anuncios extends Component {
     renderRow(anuncio, navigate) {
         return (
             <TouchableOpacity activeOpacity={0.8} onPress={() => navigate('ProfileMaq', { anuncio })}>
-                <SingleCard tipo={anuncio.tipo} modelo={anuncio.modelo} marca={anuncio.marca} thumb={cardImage2} preco={anuncio.preco} comments='42' />
+                <SingleCard tipo={anuncio.tipo} modelo={anuncio.modelo} marca={anuncio.marca} thumb={anuncio.foto} preco={anuncio.preco} comments='42' />
             </TouchableOpacity>
         )
     }

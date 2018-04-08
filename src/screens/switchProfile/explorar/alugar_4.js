@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast, Spinner, } from 'native-base'
-import { View, Keyboard, TouchableOpacity } from 'react-native'
+import { View, Keyboard, TouchableOpacity, Alert } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
 import AwesomeAlert from 'react-native-awesome-alerts'
+import { firebase } from '../../../config/firebase'
 
 import globalStyles from '../../common/globalStyles' // Global Styles
 
 import { cadastrarAluguel } from '../../../actions/CadastroAluguelAction'
+import { resetarParaInicio } from '../../../actions/AppAction'
 
 class Alugar_4 extends Component {
     // Hide the header
@@ -31,6 +33,10 @@ class Alugar_4 extends Component {
         setTimeout(() => this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }), 250)
     }
 
+    _resetarParaInicio(){
+        this.props.resetarParaInicio('TabRoutes_2')
+    }
+
     subtractDate() {
         let dateI = this.props.dataInicial.split('/')
         let dateF = this.props.dataFinal.split('/')
@@ -42,6 +48,73 @@ class Alugar_4 extends Component {
         let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
 
         return diffDays
+    }
+
+
+    IsoDate(date) {
+        let newDate = date.split('/')
+        let mm = newDate[1]
+        let dd = newDate[0]
+        let yyyy = newDate[2]
+
+        return `${yyyy}-${mm}-${dd}`
+    }
+
+
+    validaPeriodo(di, df, di2, df2) {
+        let d1 = +new Date(this.IsoDate(di))
+        let d2 = +new Date(this.IsoDate(df))
+
+        let d3 = +new Date(this.IsoDate(di2))
+        let d4 = +new Date(this.IsoDate(df2))
+
+        if (d3 >= d1 && d4 <= d2) // Verifica se é igual ou está entre
+            return false
+        if (d3 < d1 && d4 > d1) // Verifica se começa antes e acaba depois
+            return false
+        if (d3 < d1 && d4 == d1)// Verifica se começa antes e acaba no limite
+            return false
+        if (d3 == d2 && d4 > d2)// Verifica se começa no limite e acaba depois
+            return false
+        if (d3 <= d2 && d4 > d2) // Verifica se começa no dentro e acaba depois
+            return false
+
+        return true
+    }
+
+    aceitarSolicitacao() {
+        const { params } = this.props.navigation.state
+        const { locador, maquina } = params
+        let datas = []
+        var res = true
+
+        firebase.db.ref(`Alugueis`).once('value', (snapshot) => {
+            if (snapshot.val() != null)
+                Object.keys(snapshot.val()).map(function (objectKey, index) {
+                    Object.keys(snapshot.val()[objectKey]).map(function (o, i) {
+                        if (snapshot.val()[objectKey][o].maquina == maquina) {
+                            datas.push({ d1: snapshot.val()[objectKey][o].dataInicial, d2: snapshot.val()[objectKey][o].dataFinal })
+                        }
+                    })
+                })
+        })
+
+        datas.forEach((v) => {
+            if (!this.validaPeriodo(v.d1, v.d2, this.props.dataInicial, this.props.dataFinal)) {
+                res = false
+                return
+            }
+        })
+
+        if (res)
+            this.showAlertAceitar()
+        else
+            Alert.alert(
+                'Período Inválido',
+                'O periodo de datas que você solicitou aluguel se encontra indisponível, por favor volte e selecione outro período!',
+                [{ text: 'ENTENDIDO', onPress: () => false }],
+                { cancelable: false }
+            )
     }
 
     days() {
@@ -73,7 +146,8 @@ class Alugar_4 extends Component {
 
         return (
             <View style={globalStyles.floatingButton2}>
-                <Button rounded onPress={() => this.showAlertAceitar()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
+                {/* <Button rounded onPress={() => this.showAlertAceitar()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}> */}
+                <Button rounded onPress={() => this.aceitarSolicitacao()} style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>
                     <Text style={{ fontSize: 18, color: '#fff', marginBottom: 3 }}>Solicitar aluguel</Text>
                     <Icon name='ios-arrow-forward' style={{ fontSize: 25, color: '#fff', paddingTop: 2 }} />
                 </Button>
@@ -150,7 +224,7 @@ class Alugar_4 extends Component {
                     overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
                     onCancelPressed={() => {
-                        this.hideAlert()
+                        this.hideAlert().then(this._resetarParaInicio())
                     }}
 
                     onConfirmPressed={() => {
@@ -172,4 +246,4 @@ const mapStateToProps = state => ({
     loading: state.CadastroAluguelReducer.loading
 })
 
-export default connect(mapStateToProps, { cadastrarAluguel })(Alugar_4)
+export default connect(mapStateToProps, { cadastrarAluguel, resetarParaInicio })(Alugar_4)
