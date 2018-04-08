@@ -141,7 +141,7 @@ const AceitarAluguelSuccesso = (dispatch, locador, locatario) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
-    callAlert('Confirmação','Você aceitou uma solicitação de aluguel com sucesso!')
+    callAlert('Confirmação', 'Você aceitou uma solicitação de aluguel com sucesso!')
 }
 
 const AceitarAluguelSuccesso2 = (dispatch, rota, locatario, locador) => {
@@ -150,7 +150,7 @@ const AceitarAluguelSuccesso2 = (dispatch, rota, locatario, locador) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
-    callAlert('Confirmação','Você rejeitou uma solicitação de aluguel com sucesso!')
+    callAlert('Confirmação', 'Você rejeitou uma solicitação de aluguel com sucesso!')
 }
 
 const AceitarAluguelSuccesso3 = (dispatch, rota, locador, locatario) => {
@@ -159,7 +159,7 @@ const AceitarAluguelSuccesso3 = (dispatch, rota, locador, locatario) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
-    callAlert('Confirmação','Você cancelou uma solicitação de aluguel com sucesso!')
+    callAlert('Confirmação', 'Você cancelou uma solicitação de aluguel com sucesso!')
 }
 
 export const adicionaContato = email => {
@@ -346,3 +346,12 @@ export const myFoto = (email) => {
         })
     }
 }
+
+export const resetarParaInicio = (route) => {
+    return dispatch => {
+        dispatch(NavigationActions.reset({
+            index: 0, key: null, actions: [NavigationActions.navigate({ routeName: route })]
+        }))
+    }
+}
+

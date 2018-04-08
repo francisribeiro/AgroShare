@@ -9,6 +9,7 @@ import { firebase } from '../../../config/firebase'
 import globalStyles from '../../common/globalStyles' // Global Styles
 
 import { cadastrarAluguel } from '../../../actions/CadastroAluguelAction'
+import { resetarParaInicio } from '../../../actions/AppAction'
 
 class Alugar_4 extends Component {
     // Hide the header
@@ -30,6 +31,10 @@ class Alugar_4 extends Component {
     _cadastrarAluguel() {
         const { dataInicial, dataFinal, formaPagamento, locador, maquina, ativo } = this.props
         setTimeout(() => this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }), 250)
+    }
+
+    _resetarParaInicio(){
+        this.props.resetarParaInicio('TabRoutes_2')
     }
 
     subtractDate() {
@@ -219,7 +224,7 @@ class Alugar_4 extends Component {
                     overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
                     onCancelPressed={() => {
-                        this.hideAlert()
+                        this.hideAlert().then(this._resetarParaInicio())
                     }}
 
                     onConfirmPressed={() => {
@@ -241,4 +246,4 @@ const mapStateToProps = state => ({
     loading: state.CadastroAluguelReducer.loading
 })
 
-export default connect(mapStateToProps, { cadastrarAluguel })(Alugar_4)
+export default connect(mapStateToProps, { cadastrarAluguel, resetarParaInicio })(Alugar_4)

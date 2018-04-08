@@ -7,6 +7,7 @@ import AwesomeAlert from 'react-native-awesome-alerts'
 
 import { modificaPreco, cadastrarAnuncio, editarAnuncio } from '../../../actions/CadastroAnuncioAction'
 import globalStyles from '../../common/globalStyles' // Global Styles
+import { resetarParaInicio } from '../../../actions/AppAction'
 
 class Cadastro_9 extends Component {
     // Hide the header
@@ -31,6 +32,10 @@ class Cadastro_9 extends Component {
             setTimeout(() => this.props.editarAnuncio({ id, tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }), 250)
         else
             setTimeout(() => this.props.cadastrarAnuncio({ tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }), 250)
+    }
+
+    _resetarParaInicio() {
+        this.props.resetarParaInicio('TabRoutes')
     }
 
     renderIcon() {
@@ -135,7 +140,7 @@ class Cadastro_9 extends Component {
                     overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
                     onCancelPressed={() => {
-                        this.hideAlert()
+                        this.hideAlert().then(this._resetarParaInicio())
                     }}
 
                     onConfirmPressed={() => {
@@ -162,4 +167,4 @@ const mapStateToProps = state => ({
     loading: state.CadastroAnuncioReducer.loading
 })
 
-export default connect(mapStateToProps, { modificaPreco, cadastrarAnuncio, editarAnuncio })(Cadastro_9)
+export default connect(mapStateToProps, { modificaPreco, cadastrarAnuncio, editarAnuncio, resetarParaInicio })(Cadastro_9)
