@@ -1,7 +1,7 @@
 import { auth, firebase } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
-import { Keyboard } from 'react-native'
+import { Keyboard, Alert } from 'react-native'
 import { addHistorico } from './AppAction'
 
 export const modificaNome = (texto) => {
@@ -22,6 +22,15 @@ export const modificaSenha = (texto) => {
 
 export const modificaIdade = (texto) => {
     return { type: 'modifica_idade', payload: texto }
+}
+
+const callAlert = (titulo, msg) => {
+    Alert.alert(
+        titulo,
+        msg,
+        [{ text: 'ENTENDIDO', onPress: () => false }],
+        { cancelable: false }
+    )
 }
 
 export const cadastrarUsuario = ({ nome, sobrenome, email, senha, idade }) => {
@@ -87,6 +96,7 @@ const editarPerfilSuccesso = (dispatch, userId, route) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: route })]
     }))
+    callAlert('Confirmação de Edição','Você editou seu perfil com sucesso!')
     // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
 

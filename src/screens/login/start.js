@@ -6,14 +6,14 @@ import AwesomeAlert from 'react-native-awesome-alerts'
 
 import globalStyles from '../common/globalStyles' // Global Styles
 
+let sucesso = false
+
 export default class Start extends Component {
     // Hide the header
     static navigationOptions = { header: null }
 
     async hideAlert() {
-        this.setState({
-            showAlertSucesso: false
-        })
+        sucesso = false
     }
 
     // Minimiza o App
@@ -24,7 +24,7 @@ export default class Start extends Component {
         // StackNavigator props
         const { navigate } = this.props.navigation
         const { params } = this.props.navigation.state
-        const sucesso = params ? params.sucesso : false
+        sucesso = params ? params.sucesso : false
 
         return (
             <Container>
@@ -95,9 +95,7 @@ export default class Start extends Component {
 
                     overlayStyle={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
 
-                    onConfirmPressed={() => {
-                        this.hideAlert().then(navigate('Login'))
-                    }}
+                    onConfirmPressed={() => { this.hideAlert().then(() => { navigate('Login') }) }}
                 />
             </Container>
         )

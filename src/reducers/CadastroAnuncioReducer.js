@@ -41,7 +41,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true, erroCadastro: '' }
         case 'erro_cadastro':
             return { ...state, erroCadastro: action.payload, loading: false }
-        case 'sucesso_cadastro':
+        case 'sucesso_anuncio':
             return { ...state, ...INITIAL_STATE }
         default:
             return state

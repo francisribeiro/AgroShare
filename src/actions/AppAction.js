@@ -2,6 +2,16 @@ import { firebase } from '../config/firebase'
 import b64 from 'base-64'
 import { NavigationActions } from 'react-navigation'
 import reverse from 'reverse-object-order'
+import { Alert } from 'react-native'
+
+const callAlert = (titulo, msg) => {
+    Alert.alert(
+        titulo,
+        msg,
+        [{ text: 'ENTENDIDO', onPress: () => false }],
+        { cancelable: false }
+    )
+}
 
 export const addHistorico = (msg, icone, usuario, cor) => {
     let date = new Date()
@@ -131,6 +141,7 @@ const AceitarAluguelSuccesso = (dispatch, locador, locatario) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
+    callAlert('Confirmação','Você aceitou uma solicitação de aluguel com sucesso!')
 }
 
 const AceitarAluguelSuccesso2 = (dispatch, rota, locatario, locador) => {
@@ -139,6 +150,7 @@ const AceitarAluguelSuccesso2 = (dispatch, rota, locatario, locador) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
+    callAlert('Confirmação','Você rejeitou uma solicitação de aluguel com sucesso!')
 }
 
 const AceitarAluguelSuccesso3 = (dispatch, rota, locador, locatario) => {
@@ -147,6 +159,7 @@ const AceitarAluguelSuccesso3 = (dispatch, rota, locador, locatario) => {
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: rota })]
     }))
+    callAlert('Confirmação','Você cancelou uma solicitação de aluguel com sucesso!')
 }
 
 export const adicionaContato = email => {

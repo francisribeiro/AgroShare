@@ -1,7 +1,7 @@
 import { firebase } from '../config/firebase'
 import { NavigationActions } from 'react-navigation'
 import b64 from 'base-64'
-import { Keyboard } from 'react-native'
+import { Keyboard, Alert } from 'react-native'
 import { addHistorico } from './AppAction'
 
 export const modificaTipo = (texto) => { return { type: 'modifica_tipo', payload: texto } }
@@ -14,7 +14,16 @@ export const modificaFoto = (texto) => { return { type: 'modifica_foto', payload
 export const modificaDescricao = (texto) => { return { type: 'modifica_descricao', payload: texto } }
 export const modificaTitulo = (texto) => { return { type: 'modifica_titulo', payload: texto } }
 export const modificaPreco = (texto) => { return { type: 'modifica_preco', payload: texto } }
+// export const resetarAnuncio = () => { return { type: 'resetar_anuncio' } }
 
+const callAlert = (titulo, msg) => {
+    Alert.alert(
+        titulo,
+        msg,
+        [{ text: 'ENTENDIDO', onPress: () => false }],
+        { cancelable: false }
+    )
+}
 
 export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, foto, descricao, titulo, preco }) => {
     return dispatch => {
@@ -32,10 +41,11 @@ export const cadastrarAnuncio = ({ tipo, marca, modelo, ano, cidade, estado, fot
 const cadastraAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
     Keyboard.dismiss()
     addHistorico(`Você criou um novo anúncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId, '#9933CC')
-    dispatch({ type: 'sucesso_cadastro' })
+    dispatch({ type: 'sucesso_anuncio' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
+    callAlert('Confirmação de Cadastro','Seu Anúncio foi cadastrado com sucesso!')
     // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
 
@@ -71,10 +81,11 @@ export const editarAnuncio = ({ id, tipo, marca, modelo, ano, cidade, estado, fo
 const editarAnuncioSuccesso = (dispatch, tipo, marca, userId) => {
     Keyboard.dismiss()
     addHistorico(`Você alterou seu anúncio para o ${tipo} - ${marca}.`, 'ios-train-outline', userId, '#2BBBAD')
-    dispatch({ type: 'sucesso_cadastro' })
+    dispatch({ type: 'sucesso_anuncio' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
+    callAlert('Confirmação de Edição','Seu Anúncio foi editado com sucesso!')
     // dispatch(NavigationActions.navigate({ routeName: 'Anuncios' }))
 }
 
@@ -88,7 +99,9 @@ export const apagarAnuncio = (id) => {
 
 const apagarAnuncioSucesso = (dispatch, locador) => {
     addHistorico(`Você apagou seu anúncio.`, 'ios-trash-outline', locador, '#CC0000')
+    dispatch({ type: 'sucesso_anuncio' })
     dispatch(NavigationActions.reset({
         index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'TabRoutes' })]
     }))
+    callAlert('Confirmação de Exclusão','Seu Anúncio foi apagado com sucesso!')
 }
