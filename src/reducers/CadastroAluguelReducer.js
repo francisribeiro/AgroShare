@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
-    dataInicial: '22/05/2018',
-    dataFinal: '03/06/2018',
-    formaPagamento: 'Dinheiro',
+    dataInicial: '',
+    dataFinal: '',
+    formaPagamento: '',
     locador: '',
     maquina: '',
     ativo: false,
