@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast, Spinner, } from 'native-base'
-import { View, Keyboard, TouchableOpacity } from 'react-native'
+import { View, Keyboard, TouchableOpacity, Alert } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
 
@@ -15,12 +15,30 @@ class Alugar_2 extends Component {
     // Class start state
     constructor(props) {
         super(props)
-        this.state = { isDateTimePickerVisible: false, date: '' }
+        this.state = { isDateTimePickerVisible: false, date: '', prosseguir: false }
     }
 
     // DatePicker helpers
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
-    _hideDateTimePicker = (date) => { this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) }); this.props.modificaDataFinal(this._dateFormat(date).replace(/\s/gi, '')) }
+    _hideDateTimePicker = (date) => {
+        const { params } = this.props.navigation.state
+        const { dateStart } = params
+
+        this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) });
+        this.props.modificaDataFinal(this._dateFormat(date).replace(/\s/gi, ''))
+
+        if (!(+date > +dateStart)) {
+            Alert.alert(
+                'Período Inválido',
+                'Selecione uma data maior que a data inicial!',
+                [{ text: 'ENTENDIDO', onPress: () => false }],
+                { cancelable: false }
+            )
+            this.setState({ prosseguir: false })
+        } else {
+            this.setState({ prosseguir: true })
+        }
+    }
     _handleDatePicked = (date) => { this._hideDateTimePicker(date) }
     _dateFormat = (date) => { return (date.getDate() + ' / ' + (parseInt(date.getMonth()) + 1).toString() + ' / ' + date.getFullYear()) }
 
@@ -29,7 +47,7 @@ class Alugar_2 extends Component {
         // StackNavigator props
         const { goBack, navigate } = this.props.navigation
         const { params } = this.props.navigation.state
-        const { tipo, marca, preco, locador, maquina } = params
+        const { tipo, marca, preco, locador, maquina, dateStart } = params
 
         return (
             <Container style={{ backgroundColor: '#fff' }}>
@@ -84,6 +102,8 @@ class Alugar_2 extends Component {
                             () => {
                                 if (this.props.dataFinal == '')
                                     Toast.show({ text: 'Selecione uma DATA final!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                                else if (this.state.prosseguir == false)
+                                    Toast.show({ text: 'Selecione uma DATA válida!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                                 else
                                     navigate('Alugar_3', { tipo, marca, preco, locador, maquina })
                             }
