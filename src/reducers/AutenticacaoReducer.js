@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
-    email: '',
-    senha: '',
+    email: 'verner.pereira@honeywell.com',
+    senha: '123456',
     erroLogin: '',
     loading: false
 }
