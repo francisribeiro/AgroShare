@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Header, Content, Button, Item, Label, Input, Left, Right, Icon, Form, Text, Toast, Spinner } from 'native-base'
-import { View, Keyboard, TouchableOpacity } from 'react-native'
+import { View, Keyboard, TouchableOpacity, Alert } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { connect } from 'react-redux'
 
@@ -15,7 +15,7 @@ class Alugar_1 extends Component {
     // Class start state
     constructor(props) {
         super(props)
-        this.state = { isDateTimePickerVisible: false, date: '' }
+        this.state = { isDateTimePickerVisible: false, date: '', prosseguir: false, dateStart: null }
     }
 
     setBasicInfo(locador, maquina) {
@@ -26,7 +26,22 @@ class Alugar_1 extends Component {
 
     // DatePicker helpers
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
-    _hideDateTimePicker = (date) => { this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) }); this.props.modificaDataInicial(this._dateFormat(date).replace(/\s/gi, '')) }
+    _hideDateTimePicker = (date) => {
+        this.setState({ isDateTimePickerVisible: false, date: this._dateFormat(date) })
+        this.props.modificaDataInicial(this._dateFormat(date).replace(/\s/gi, ''))
+        let now = new Date()
+        if (!(+date > +now)) {
+            Alert.alert(
+                'Período Inválido',
+                'Você precisa solicitar o aluguel com 1 dia de antencedência!',
+                [{ text: 'ENTENDIDO', onPress: () => false }],
+                { cancelable: false }
+            )
+            this.setState({ prosseguir: false })
+        } else {
+            this.setState({ prosseguir: true, dateStart: date })
+        }
+    }
     _handleDatePicked = (date) => { this._hideDateTimePicker(date) }
     _dateFormat = (date) => { return (date.getDate() + ' / ' + (parseInt(date.getMonth()) + 1).toString() + ' / ' + date.getFullYear()) }
 
@@ -92,8 +107,10 @@ class Alugar_1 extends Component {
                             () => {
                                 if (this.props.dataInicial == '')
                                     Toast.show({ text: 'Selecione uma DATA inicial!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
+                                else if (this.state.prosseguir == false)
+                                    Toast.show({ text: 'Selecione uma DATA válida!', position: 'bottom', buttonText: 'Okay', type: 'danger', duration: 3000 })
                                 else
-                                    navigate('Alugar_2', { tipo, marca, preco, locador, maquina })
+                                    navigate('Alugar_2', { tipo, marca, preco, locador, maquina, dateStart: this.state.dateStart })
                             }
                         }
                         style={{ paddingLeft: 20, backgroundColor: globalStyles.bg }}>

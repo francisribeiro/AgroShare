@@ -17,7 +17,7 @@ class Alugar_4 extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { showAlertAceitar: false }
+        this.state = { showAlertAceitar: false, return: true }
     }
 
     showAlertAceitar = () => { this.setState({ showAlertAceitar: true }) }
@@ -33,7 +33,7 @@ class Alugar_4 extends Component {
         setTimeout(() => this.props.cadastrarAluguel({ dataInicial, dataFinal, formaPagamento, locador, maquina, ativo }), 250)
     }
 
-    _resetarParaInicio(){
+    _resetarParaInicio() {
         this.props.resetarParaInicio('TabRoutes_2')
     }
 
@@ -57,36 +57,39 @@ class Alugar_4 extends Component {
         let dd = newDate[0]
         let yyyy = newDate[2]
 
-        return `${yyyy}-${mm}-${dd}`
+        return `${yyyy}-${mm}-${dd} 00:00:00`
     }
 
+    jsCoreDateCreator = (dateString) => {
+        // dateString *HAS* to be in this format "YYYY-MM-DD HH:MM:SS"  
+        let dateParam = dateString.split(/[\s-:]/)
+        dateParam[1] = (parseInt(dateParam[1], 10) - 1).toString()
+        return +new Date(...dateParam)
+    }
 
     validaPeriodo(di, df, di2, df2) {
-        let d1 = +new Date(this.IsoDate(di))
-        let d2 = +new Date(this.IsoDate(df))
-
-        let d3 = +new Date(this.IsoDate(di2))
-        let d4 = +new Date(this.IsoDate(df2))
+        let d1 = +new Date(this.jsCoreDateCreator(this.IsoDate(di)))
+        let d2 = +new Date(this.jsCoreDateCreator(this.IsoDate(df)))
+        let d3 = +new Date(this.jsCoreDateCreator(this.IsoDate(di2)))
+        let d4 = +new Date(this.jsCoreDateCreator(this.IsoDate(df2)))
 
         if (d3 >= d1 && d4 <= d2) // Verifica se é igual ou está entre
-            return false
-        if (d3 < d1 && d4 > d1) // Verifica se começa antes e acaba depois
-            return false
-        if (d3 < d1 && d4 == d1)// Verifica se começa antes e acaba no limite
-            return false
-        if (d3 == d2 && d4 > d2)// Verifica se começa no limite e acaba depois
-            return false
-        if (d3 <= d2 && d4 > d2) // Verifica se começa no dentro e acaba depois
-            return false
-
-        return true
+            this.setState({ return: false })
+        else if (d3 < d1 && d4 > d1) // Verifica se começa antes e acaba depois
+            this.setState({ return: false })
+        else if (d3 < d1 && d4 == d1) // Verifica se começa antes e acaba no limite
+            this.setState({ return: false })
+        else if (d3 == d2 && d4 > d2) // Verifica se começa no limite e acaba depois
+            this.setState({ return: false })
+        else if (d3 <= d2 && d4 > d2)  // Verifica se começa no dentro e acaba depois
+            this.setState({ return: false })
     }
 
-    aceitarSolicitacao() {
+    componentWillMount() {
         const { params } = this.props.navigation.state
         const { locador, maquina } = params
         let datas = []
-        var res = true
+        this.setState({ return: true })
 
         firebase.db.ref(`Alugueis`).once('value', (snapshot) => {
             if (snapshot.val() != null)
@@ -99,14 +102,12 @@ class Alugar_4 extends Component {
                 })
         })
 
-        datas.forEach((v) => {
-            if (!this.validaPeriodo(v.d1, v.d2, this.props.dataInicial, this.props.dataFinal)) {
-                res = false
-                return
-            }
-        })
+        for (var i = 0; i < datas.length; i++)
+            this.validaPeriodo(datas[i].d1, datas[i].d2, this.props.dataInicial, this.props.dataFinal)
+    }
 
-        if (res)
+    aceitarSolicitacao() {
+        if (this.state.return)
             this.showAlertAceitar()
         else
             Alert.alert(
