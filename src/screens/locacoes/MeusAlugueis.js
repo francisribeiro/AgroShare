@@ -26,6 +26,21 @@ class MeusAlugueis extends Component {
     //         showLoading: false
     //     })
     // }
+    IsoDate(date) {
+        let newDate = date.split('/')
+        let mm = newDate[1]
+        let dd = newDate[0]
+        let yyyy = newDate[2]
+
+        return `${yyyy}-${mm}-${dd} 00:00:00`
+    }
+
+    jsCoreDateCreator = (dateString) => {
+        // dateString *HAS* to be in this format "YYYY-MM-DD HH:MM:SS"  
+        let dateParam = dateString.split(/[\s-:]/)
+        dateParam[1] = (parseInt(dateParam[1], 10) - 1).toString()
+        return +new Date(...dateParam)
+    }
 
     subtractDate(i, f) {
         let dateI = i.split('/')
@@ -41,6 +56,17 @@ class MeusAlugueis extends Component {
     }
 
     days(i, f) {
+        return (<Text style={[globalStyles.txtDescription2, { fontSize: 19, color: '#000' }]}>{this.subtractDate(i, f)}</Text>)
+    }
+
+    days2(i, f) {
+
+        let d1 = +new Date(this.jsCoreDateCreator(this.IsoDate(f)))
+        let d2 = +new Date();
+
+        if (d2 > d1)
+            return (<Text style={[globalStyles.txtDescription2, { fontSize: 19, color: '#000' }]}>0</Text>)
+
         return (<Text style={[globalStyles.txtDescription2, { fontSize: 19, color: '#000' }]}>{this.subtractDate(i, f)}</Text>)
     }
 
@@ -89,7 +115,7 @@ class MeusAlugueis extends Component {
                         <Text style={globalStyles.confirmRent}>Data: </Text>{aluguel.dataInicial} até {aluguel.dataFinal}{`\n\n`}
                         <Text style={globalStyles.confirmRent}>Valor: </Text>{this._preco(preco, aluguel.dataInicial, aluguel.dataFinal)}{`\n\n`}
                         <Text style={globalStyles.confirmRent}>Forma de Pagamento: </Text>{aluguel.formaPagamento}{`\n\n`}
-                        <Text style={globalStyles.confirmRent}>Dias Restantes: </Text>{this.days(aluguel.dataInicial, aluguel.dataFinal)} dias{`\n\n`}
+                        <Text style={globalStyles.confirmRent}>Dias Restantes: </Text>{this.days2(aluguel.dataInicial, aluguel.dataFinal)} dias{`\n\n`}
                     </Text>
 
                 </Content>
