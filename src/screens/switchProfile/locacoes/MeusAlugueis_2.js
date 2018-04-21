@@ -48,10 +48,16 @@ class MeusAlugueis_2 extends Component {
     days2(i, f) {
 
         let d1 = +new Date(this.jsCoreDateCreator(this.IsoDate(f)))
-        let d2 = +new Date();
+        let d2 = +new Date(this.jsCoreDateCreator(this.IsoDate(i)))
+        let hoje = +new Date();
 
-        if (d2 > d1)
+        if (hoje > d1)
             return (<Text style={[globalStyles.txtDescription2, { fontSize: 19, color: '#000' }]}>0</Text>)
+        else if (hoje > d2 && hoje < d1){
+            let hojee = new Date();
+            let newHojee = hojee.getDate() + '/' + (parseInt(hojee.getMonth()) + 1).toString() + '/' + hojee.getFullYear()
+            return (<Text style={[globalStyles.txtDescription2, { fontSize: 19, color: '#000' }]}>{this.subtractDate(newHojee, f)}</Text>)
+        }
 
         return (<Text style={[globalStyles.txtDescription2, { fontSize: 19, color: '#000' }]}>{this.subtractDate(i, f)}</Text>)
     }
