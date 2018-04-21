@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import globalStyles from '../../common/globalStyles' // Global Styles
 import EmAndamento from './emAndamento_2' // Em Andamento Component
 import Aguardando from './aguardando_2' // Aguardando Component
+import Finalizados from './finalizados_2' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 import { NotificacaoAguardandoLocatario } from '../../../actions/AppAction'
 
@@ -44,8 +45,9 @@ class Locacoes_2 extends Component {
                     tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
                     tabBarBackgroundColor='#00695c'
                     renderTabBar={() => <DefaultTabBar notifications={this.props.quantidadeLocatario} />}>
-                    <EmAndamento tabLabel='EM ANDAMENTO' navigate={navigate} />
+                    <EmAndamento tabLabel='ANDAMENTO' navigate={navigate} />
                     <Aguardando tabLabel='AGUARDANDO' navigate={navigate} />
+                    <Finalizados tabLabel='FINALIZADOS' navigate={navigate} />
                 </ScrollableTabView>
             </Container>
         )

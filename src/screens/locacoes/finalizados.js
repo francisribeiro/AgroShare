@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import b64 from 'base-64'
 
-import { firebase } from '../../../config/firebase'
-import { AlugueisFetch } from '../../../actions/AppAction'
+import { firebase } from '../../config/firebase'
+import { AlugueisFetch } from '../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
-class EmAndamento_2 extends Component {
+class Finalizados extends Component {
+
     componentWillMount() {
         this.props.AlugueisFetch()
         this.createDataSource(this.props.alugueis)
@@ -18,7 +19,6 @@ class EmAndamento_2 extends Component {
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps.alugueis)
     }
-
 
     IsoDate(date) {
         let newDate = date.split('/')
@@ -73,14 +73,16 @@ class EmAndamento_2 extends Component {
             foto = snapshot.val().foto
         })
 
-        if (aluguel.ativo && aluguel.locatario == userId && !(hoje > df))
+        if (aluguel.ativo && aluguel.locador == userId && (hoje > df))
+
             return (
-                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('MeusAlugueis_2', { aluguel, tipo, marca, preco })}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('MeusAlugueis', { aluguel, tipo, marca, preco })}>
                     <LocacoesNotificacoes img={foto} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
                 </TouchableOpacity >
             )
 
         return null
+
     }
 
     render() {
@@ -104,4 +106,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { AlugueisFetch })(EmAndamento_2)
+export default connect(mapStateToProps, { AlugueisFetch })(Finalizados)

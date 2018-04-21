@@ -9,6 +9,7 @@ import { firebase } from '../../config/firebase'
 import globalStyles from '../common/globalStyles' // Global Styles
 import EmAndamento from './emAndamento' // Em Andamento Component
 import Aguardando from './aguardando' // Aguardando Component
+import Finalizados from './finalizados' // Aguardando Component
 import DefaultTabBar from './tabBar/CustomTabBar' //TabBar customizada
 import { NotificacaoAguardandoLocador } from '../../actions/AppAction'
 
@@ -47,8 +48,9 @@ class Locacoes extends Component {
                     tabBarUnderlineStyle={{ backgroundColor: '#ffffff' }}
                     tabBarBackgroundColor='#00695c'
                     renderTabBar={() => <DefaultTabBar notifications={this.props.quantidadeLocador} />}>
-                    <EmAndamento tabLabel='EM ANDAMENTO' navigate={navigate} />
+                    <EmAndamento tabLabel='ANDAMENTO' navigate={navigate} />
                     <Aguardando tabLabel='AGUARDANDO' navigate={navigate} />
+                    <Finalizados tabLabel='FINALIZADOS' navigate={navigate} />
                 </ScrollableTabView>
             </Container>
         )

@@ -9,7 +9,7 @@ import { firebase } from '../../../config/firebase'
 import { AlugueisFetch } from '../../../actions/AppAction'
 import LocacoesNotificacoes from './locacoesNotificacoes' // Locações Notificacoes Component
 
-class EmAndamento_2 extends Component {
+class Finalizados_2 extends Component {
     componentWillMount() {
         this.props.AlugueisFetch()
         this.createDataSource(this.props.alugueis)
@@ -73,7 +73,7 @@ class EmAndamento_2 extends Component {
             foto = snapshot.val().foto
         })
 
-        if (aluguel.ativo && aluguel.locatario == userId && !(hoje > df))
+        if (aluguel.ativo && aluguel.locatario == userId && (hoje > df))
             return (
                 <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('MeusAlugueis_2', { aluguel, tipo, marca, preco })}>
                     <LocacoesNotificacoes img={foto} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
@@ -104,4 +104,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { AlugueisFetch })(EmAndamento_2)
+export default connect(mapStateToProps, { AlugueisFetch })(Finalizados_2)

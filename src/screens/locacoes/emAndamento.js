@@ -20,6 +20,22 @@ class EmAndamento extends Component {
         this.createDataSource(nextProps.alugueis)
     }
 
+    IsoDate(date) {
+        let newDate = date.split('/')
+        let mm = newDate[1]
+        let dd = newDate[0]
+        let yyyy = newDate[2]
+
+        return `${yyyy}-${mm}-${dd} 00:00:00`
+    }
+
+    jsCoreDateCreator = (dateString) => {
+        // dateString *HAS* to be in this format "YYYY-MM-DD HH:MM:SS"  
+        let dateParam = dateString.split(/[\s-:]/)
+        dateParam[1] = (parseInt(dateParam[1], 10) - 1).toString()
+        return +new Date(...dateParam)
+    }
+
     createDataSource(alugueis) {
         var arr = []
 
@@ -47,6 +63,8 @@ class EmAndamento extends Component {
         let marca = ''
         let preco = 0
         let foto = 'false'
+        let hoje = +new Date();
+        let df = +new Date(this.jsCoreDateCreator(this.IsoDate(aluguel.dataFinal)))
 
         firebase.db.ref(`Anuncios/${aluguel.locador}/${aluguel.maquina}`).on('value', (snapshot) => {
             tipo = snapshot.val().tipo
@@ -55,7 +73,8 @@ class EmAndamento extends Component {
             foto = snapshot.val().foto
         })
 
-        if (aluguel.ativo && aluguel.locador == userId)
+        if (aluguel.ativo && aluguel.locador == userId && !(hoje > df))
+
             return (
                 <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.navigate('MeusAlugueis', { aluguel, tipo, marca, preco })}>
                     <LocacoesNotificacoes img={foto} msg={`${tipo} - ${marca}`} inicio={aluguel.dataInicial} fim={aluguel.dataFinal} />
